@@ -2,9 +2,9 @@
 
 This directory contains a collection of Helm charts to deploy GreptimeDB cluster.
 
-- [greptimedb-operator](./greptimedb-operator/README.md): A Helm chart for GreptimeDB Operator.
-- [greptimedb](./greptimedb/README.md): A Helm chart for GreptimeDB cluster.
-- [etcd](./etcd/README.md): A Helm chart for etcd cluster(**NOT** production ready).
+- [greptimedb-operator](./charts/greptimedb-operator/README.md): A Helm chart for GreptimeDB Operator.
+- [greptimedb](./charts/greptimedb/README.md): A Helm chart for GreptimeDB cluster.
+- [etcd](./charts/etcd/README.md): A Helm chart for etcd cluster(**NOT** production ready).
 
 ## Prerequisites
 
