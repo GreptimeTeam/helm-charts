@@ -1,5 +1,6 @@
 base:
   main:
+    image: greptime/greptimedb:integration-paas-test # Only for testing, will be changed by release of GreptimeDB.
     resources:
       requests:
         cpu: 250m
@@ -10,19 +11,13 @@ base:
 
 frontend:
   replicas: 1
-  main:
-    image: localhost:5001/greptime/frontend:latest
 
 meta:
   replicas: 1
-  main:
-    image: localhost:5001/greptime/meta:latest
 
 datanode:
-  replicas: 1
+  replicas: 3
   storage:
     storageClassName: standard
     storageSize: 10Gi
     storageRetainPolicy: Retain
-  main:
-    image: localhost:5001/greptime/datanode:latest
