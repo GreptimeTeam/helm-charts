@@ -2,3 +2,6 @@
 .idea
 .vscode/
 .helm/
+*.tgz
+/.idea/*
+.vscode
