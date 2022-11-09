@@ -1,16 +1,25 @@
-# Charts
+# Greptime Helm Charts
 
-This directory contains a collection of Helm charts to deploy GreptimeDB cluster.
+## Overview
 
-- [greptimedb-operator](./charts/greptimedb-operator/README.md): A Helm chart for GreptimeDB Operator.
-- [greptimedb](./charts/greptimedb/README.md): A Helm chart for GreptimeDB cluster.
-- [etcd](./charts/etcd/README.md): A Helm chart for etcd cluster(**NOT** production ready).
+This is the repository that contains [Greptime](https://greptime.com/) Helm charts.
 
 ## Prerequisites
 
-- [Helm](https://helm.sh/docs/intro/install/)
+- [Helm v3](https://helm.sh/docs/intro/install/)
 
 ## Getting Started
+
+### Add chart repository
+
+You can add the chart repository with the following commands:
+
+```
+$ helm repo add gt https://greptimeteam.github.io/helm-charts/
+$ helm repo update
+```
+
+### Install the greptimedb chart
 
 If you want to deploy GreptimeDB cluster, you can use the following command:
 
@@ -24,7 +33,7 @@ If you want to deploy GreptimeDB cluster, you can use the following command:
 2. Deploy GreptimeDB cluster
 
    ```
-   $ helm install mydb greptimedb
+   $ helm install mydb greptimedb -n default
    ```
    
 3. Use kubectl port-forward to access GreptimeDB cluster
@@ -51,3 +60,10 @@ The CRDs of GreptimeDB are not deleted [by default](https://helm.sh/docs/topics/
 ```
 $ kubectl delete crds greptimedbclusters.greptime.io
 ```
+
+## List of Charts
+
+- [greptimedb](./charts/greptimedb/README.md)
+- [greptimedb-operator](./charts/greptimedb-operator/README.md)
+- [etcd](./charts/etcd/README.md)
+
