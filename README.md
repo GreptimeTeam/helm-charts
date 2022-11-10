@@ -66,4 +66,3 @@ $ kubectl delete crds greptimedbclusters.greptime.io
 - [greptimedb](./charts/greptimedb/README.md)
 - [greptimedb-operator](./charts/greptimedb-operator/README.md)
 - [etcd](./charts/etcd/README.md)
-
