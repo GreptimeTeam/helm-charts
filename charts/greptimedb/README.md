@@ -1,9 +1,5 @@
 # Overview
 
-This chart bootstrap GreptimeDB cluster.
-
-# Overview
-
 Helm chart for [GreptimeDB](https://github.com/GreptimeTeam/greptimedb) cluster.
 
 ## How to install

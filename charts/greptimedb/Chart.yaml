@@ -5,6 +5,6 @@ type: application
 version: 0.1.0 # Only for testing, will be changed by release of GreptimeDB.
 appVersion: 0.1.0 # Only for testing, will be changed by release of GreptimeDB.
 dependencies:
-  - name: etcd
+  - name: greptimedb-etcd
     version: "0.1.0"
-    repository: "file://../etcd"
+    repository: "file://../greptimedb-etcd"
