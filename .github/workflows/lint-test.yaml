@@ -1,0 +1,32 @@
+name: Lint and Test Charts
+
+on: [push, pull_request]
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.10.0
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.7
+
+      - name: Set up chart testing
+        uses: helm/chart-testing-action@v2.3.1
+
+      - name: Create Kubernetes
+        uses: helm/kind-action@v1.4.0
+        with:
+          wait: 120s
+
+      - name: Run chart-testing (install)
+        run: ct install --config ./charts
