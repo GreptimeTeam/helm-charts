@@ -16,7 +16,7 @@ meta:
   replicas: 1
 
 datanode:
-  replicas: 1
+  replicas: 3
   storage:
     storageClassName: standard
     storageSize: 10Gi
