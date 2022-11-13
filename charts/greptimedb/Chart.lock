@@ -1,6 +1,6 @@
 dependencies:
 - name: etcd
-  repository: file://../etcd
+  repository: file://../greptimedb-etcd
   version: 0.1.0
-digest: sha256:c5db9bff53b3532a78b8d8de82449a632d6cf3168c8e1591a5ed426799db8388
-generated: "2022-10-28T19:08:12.686621+08:00"
+digest: sha256:8a8aebcb09d612297345fd667535f772e37198bc014d4bf33cfcfd44ce454ee9
+generated: "2022-11-11T17:11:04.652835+08:00"

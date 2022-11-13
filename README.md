@@ -15,8 +15,14 @@ This is the repository that contains [Greptime](https://greptime.com/) Helm char
 You can add the chart repository with the following commands:
 
 ```
-$ helm repo add gt https://greptimeteam.github.io/helm-charts/
+$ helm repo add greptime https://greptimeteam.github.io/helm-charts/
 $ helm repo update
+```
+
+You can run the following command to see the charts:
+
+```
+$ helm search repo greptime
 ```
 
 ### Install the greptimedb chart
@@ -65,4 +71,4 @@ $ kubectl delete crds greptimedbclusters.greptime.io
 
 - [greptimedb](./charts/greptimedb/README.md)
 - [greptimedb-operator](./charts/greptimedb-operator/README.md)
-- [etcd](./charts/etcd/README.md)
+- [greptimedb-etcd](./charts/greptimedb-etcd/README.md)

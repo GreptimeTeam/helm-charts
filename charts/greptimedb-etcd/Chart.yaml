@@ -1,4 +1,4 @@
-name: etcd
+name: greptimedb-etcd
 apiVersion: v2
 description: A Helm chart for deploying etcd cluster in Kubernetes
 type: application
