@@ -1,6 +1,6 @@
 base:
   main:
-    image: greptime/greptimedb:integration-paas-test # Only for testing, will be changed by release of GreptimeDB.
+    image: greptime/greptimedb:integration-paas-test  # Only for testing, will be changed by release of GreptimeDB.
     resources:
       requests:
         cpu: 250m
