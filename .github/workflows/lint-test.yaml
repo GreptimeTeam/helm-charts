@@ -23,10 +23,13 @@ jobs:
       - name: Set up chart testing
         uses: helm/chart-testing-action@v2.3.1
 
+      - name: Run chart-testing (lint)
+        run: ct lint --charts charts/*
+
       - name: Create Kubernetes
         uses: helm/kind-action@v1.4.0
         with:
           wait: 120s
 
       - name: Run chart-testing (install)
-        run: ct install --config ./charts
+        run: ct install --config .github/linters/chart-testing.yaml

@@ -1,8 +1,0 @@
-# See https://github.com/helm/chart-testing#configuration
-remote: origin
-target-branch: main
-chart-dirs:
-  - charts
-chart-repos:
-  - greptimeteam=https://greptimeteam.github.io/helm-charts
-helm-extra-args: --timeout 600s
