@@ -1,3 +1,5 @@
 chart-dirs:
   - charts/greptimedb-operator
   - charts/greptimedb
+charts:
+  - charts
