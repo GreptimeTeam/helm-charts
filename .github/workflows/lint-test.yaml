@@ -24,7 +24,7 @@ jobs:
         uses: helm/chart-testing-action@v2.3.1
 
       - name: Run chart-testing (lint)
-        run: ct lint --config .github/linters/chart-testing.yaml
+        run: ct lint --config .github/linters/chart-testing.yaml --validate-maintainers=false
 
       - name: Create Kubernetes
         uses: helm/kind-action@v1.4.0
