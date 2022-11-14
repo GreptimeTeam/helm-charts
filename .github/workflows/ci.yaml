@@ -1,4 +1,4 @@
-name: Test Charts
+name: CI
 
 on: [push, pull_request]
 
