@@ -6,16 +6,27 @@ Helm chart for [GreptimeDB](https://github.com/GreptimeTeam/greptimedb) cluster.
 
 **Note**: Make sure you already install the [greptimedb-operator](../greptimedb-operator/README.md).
 
-```
-# Build the dependencies(etcd).
-$ helm dependency build greptimedb
+```console
+# Add charts repo.
+helm repo add greptime https://greptimeteam.github.io/helm-charts/
+helm repo update
 
-# Install GreptimeDB.
-$ helm install mydb greptimedb -n default
+# Install greptimedb in default namespace.
+helm install mydb greptime/greptimedb -n default --devel
+```
+
+If you want to install greptimedb from local charts, you can:
+
+```console
+# Build dependency.
+helm dependency build greptimedb.
+
+# Install greptimedb in default namespace.
+helm install mydb greptimedb -n default
 ```
 
 ## How to uninstall
 
-```
-$ helm uninstall mydb -n default
+```console
+helm uninstall mydb -n default
 ```
