@@ -33,13 +33,13 @@ If you want to deploy GreptimeDB cluster, you can use the following command:
 
    ```
    # Deploy greptimedb-operator in new namespace.
-   $ helm install gtcloud greptimedb-operator --namespace greptimedb-operator-system --create-namespace
+   $ helm install gtcloud greptime/greptimedb-operator --version CHART_VERSION --namespace greptimedb-operator-system --create-namespace
    ```
 
 2. Deploy GreptimeDB cluster
 
    ```
-   $ helm install mydb greptimedb -n default
+   $ helm install mydb greptime/greptimedb --version CHART_VERSION -n default
    ```
    
 3. Use kubectl port-forward to access GreptimeDB cluster
