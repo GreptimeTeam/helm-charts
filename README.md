@@ -14,15 +14,15 @@ This is the repository that contains [Greptime](https://greptime.com/) Helm char
 
 You can add the chart repository with the following commands:
 
-```
-$ helm repo add greptime https://greptimeteam.github.io/helm-charts/
-$ helm repo update
+```console
+helm repo add greptime https://greptimeteam.github.io/helm-charts/
+helm repo update
 ```
 
 You can run the following command to see the charts:
 
-```
-$ helm search repo greptime --devel -l
+```console
+helm search repo greptime --devel -l
 ```
 
 ### Install the greptimedb chart
@@ -31,40 +31,40 @@ If you want to deploy GreptimeDB cluster, you can use the following command:
 
 1. Deploy GreptimeDB operator
 
-   ```
+   ```console
    # Deploy greptimedb-operator in new namespace.
-   $ helm install gtcloud greptime/greptimedb-operator --version CHART_VERSION --namespace greptimedb-operator-system --create-namespace
+   helm install gtcloud greptime/greptimedb-operator --version <chart-version> --namespace greptimedb-operator-system --create-namespace
    ```
 
 2. Deploy GreptimeDB cluster
 
-   ```
-   $ helm install mydb greptime/greptimedb --version CHART_VERSION -n default
+   ```console
+   helm install mydb greptime/greptimedb --version <chart-version> -n default
    ```
    
 3. Use kubectl port-forward to access GreptimeDB cluster
 
-   ```
-   $ kubectl port-forward svc/mydb-frontend 3306:3306
+   ```console
+   kubectl port-forward svc/mydb-frontend 3306:3306
    ```
 
 You also can list the current releases by `helm` command:
 
-```
-$ helm list --all-namespaces
+```console
+helm list --all-namespaces
 ```
 
 If you want to terminate the GreptimeDB cluster, you can use the following command:
 
-```
-$ helm uninstall mydb
-$ helm uninstall gtcloud -n greptimedb-operator-system
+```console
+helm uninstall mydb
+helm uninstall gtcloud -n greptimedb-operator-system
 ```
 
 The CRDs of GreptimeDB are not deleted [by default](https://helm.sh/docs/topics/charts/#limitations-on-crds). You can delete them by the following command:
 
-```
-$ kubectl delete crds greptimedbclusters.greptime.io
+```console
+kubectl delete crds greptimedbclusters.greptime.io
 ```
 
 ## List of Charts
@@ -72,3 +72,8 @@ $ kubectl delete crds greptimedbclusters.greptime.io
 - [greptimedb](./charts/greptimedb/README.md)
 - [greptimedb-operator](./charts/greptimedb-operator/README.md)
 - [greptimedb-etcd](./charts/greptimedb-etcd/README.md)
+
+## License
+
+helm-charts uses the [Apache 2.0 license](./LICENSE) to strike a balance between
+open contributions and allowing you to use the software however you want.
