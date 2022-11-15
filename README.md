@@ -22,7 +22,7 @@ $ helm repo update
 You can run the following command to see the charts:
 
 ```
-$ helm search repo greptime
+$ helm search repo greptime --devel -l
 ```
 
 ### Install the greptimedb chart
