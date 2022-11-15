@@ -22,7 +22,7 @@ helm repo update
 You can run the following command to see the charts:
 
 ```console
-helm search repo greptime --devel -l
+helm search repo greptime -l --devel
 ```
 
 ### Install the greptimedb chart
@@ -33,19 +33,19 @@ If you want to deploy GreptimeDB cluster, you can use the following command:
 
    ```console
    # Deploy greptimedb-operator in new namespace.
-   helm install gtcloud greptime/greptimedb-operator --version <chart-version> --namespace greptimedb-operator-system --create-namespace
+   helm install gtcloud greptime/greptimedb-operator -n default --devel
    ```
 
 2. Deploy GreptimeDB cluster
 
    ```console
-   helm install mydb greptime/greptimedb --version <chart-version> -n default
+   helm install mydb greptime/greptimedb -n default --devel
    ```
    
 3. Use kubectl port-forward to access GreptimeDB cluster
 
    ```console
-   kubectl port-forward svc/mydb-frontend 3306:3306
+   kubectl port-forward svc/mydb-frontend 3306:3306 > connections.out &
    ```
 
 You also can list the current releases by `helm` command:
