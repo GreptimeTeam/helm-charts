@@ -19,7 +19,7 @@ If you want to install greptimedb from local charts, you can:
 
 ```console
 # Build dependency.
-helm dependency build greptimedb.
+helm dependency update
 
 # Install greptimedb in default namespace.
 helm install mydb greptimedb -n default
