@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: etcd
-          image:  {{ .Values.image }}
+          image: {{ .Values.etcdImage }}
           command:
             - "etcd"
             - "--name"
