@@ -21,3 +21,6 @@ datanode:
     storageClassName: standard
     storageSize: 10Gi
     storageRetainPolicy: Retain
+
+greptimedb-etcd:
+  etcdImage: greptime/etcd:v3.5.5
