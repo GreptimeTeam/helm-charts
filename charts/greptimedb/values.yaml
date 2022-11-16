@@ -1,6 +1,6 @@
 base:
   main:
-    image: greptime/greptimedb:integration-paas-test  # Only for testing, will be changed by release of GreptimeDB.
+    image: greptime/greptimedb:0.1.0-alpha-20221116
     resources:
       requests:
         cpu: 250m
@@ -24,3 +24,9 @@ datanode:
 
 greptimedb-etcd:
   etcdImage: greptime/etcd:v3.5.5
+
+httpServicePort: 4000
+grpcServicePort: 4001
+mysqlServicePort: 4002
+postgresServicePort: 4003
+openTSDBServicePort: 4242
