@@ -29,3 +29,8 @@ spec:
       storageSize: {{ .Values.datanode.storage.storageSize }}
       storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
   enablePrometheusMonitor: false
+  httpServicePort: {{ .Values.httpServicePort }}
+  grpcServicePort: {{ .Values.grpcServicePort }}
+  mysqlServicePort: {{ .Values.mysqlServicePort }}
+  postgresServicePort: {{ .Values.postgresServicePort }}
+  openTSDBServicePort: {{ .Values.openTSDBServicePort }}

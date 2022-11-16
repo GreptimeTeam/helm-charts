@@ -45,7 +45,7 @@ If you want to deploy GreptimeDB cluster, you can use the following command:
 3. Use kubectl port-forward to access GreptimeDB cluster
 
    ```console
-   kubectl port-forward svc/mydb-frontend 3306:3306 > connections.out &
+   kubectl port-forward svc/mydb-frontend 4002:4002 > connections.out &
    ```
 
 You also can list the current releases by `helm` command:
