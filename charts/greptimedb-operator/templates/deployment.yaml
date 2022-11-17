@@ -21,7 +21,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: manager
-        image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+        image: {{ .Values.image }}
         imagePullPolicy: {{ .Values.imagePullPolicy | default "IfNotPresent" }}
         livenessProbe:
           httpGet:
