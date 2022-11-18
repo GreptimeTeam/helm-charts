@@ -29,8 +29,7 @@ datanode:
 greptimedb-etcd:
   etcdImage: greptime/etcd:v3.5.5
 
-initializerImage:
-  registry: docker.io
+initializer:
   repository: greptime/greptimedb-initializer
   tag: latest
 

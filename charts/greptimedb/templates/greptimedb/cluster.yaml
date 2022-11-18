@@ -28,4 +28,4 @@ spec:
   postgresServicePort: {{ .Values.postgresServicePort }}
   openTSDBServicePort: {{ .Values.openTSDBServicePort }}
   initializer:
-    image: '{{ .Values.initializerImage.registry }}/{{ .Values.initializerImage.repository }}:{{ .Values.initializerImage.tag }}'
+    image: '{{ .Values.image.registry }}/{{ .Values.initializer.repository }}:{{ .Values.initializer.tag }}'
