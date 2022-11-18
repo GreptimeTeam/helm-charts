@@ -22,8 +22,10 @@ spec:
       storageSize: {{ .Values.datanode.storage.storageSize }}
       storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
   enablePrometheusMonitor: {{ .Values.enablePrometheusMonitor }}
-  httpServicePort: {{ .Values.port.httpServicePort }}
-  grpcServicePort: {{ .Values.port.grpcServicePort }}
-  mysqlServicePort: {{ .Values.port.mysqlServicePort }}
-  postgresServicePort: {{ .Values.port.postgresServicePort }}
-  openTSDBServicePort: {{ .Values.port.openTSDBServicePort }}
+  httpServicePort: {{ .Values.httpServicePort }}
+  grpcServicePort: {{ .Values.grpcServicePort }}
+  mysqlServicePort: {{ .Values.mysqlServicePort }}
+  postgresServicePort: {{ .Values.postgresServicePort }}
+  openTSDBServicePort: {{ .Values.openTSDBServicePort }}
+  initializer:
+    image: '{{ .Values.initializerImage.registry }}/{{ .Values.initializerImage.repository }}:{{ .Values.initializerImage.tag }}'

@@ -29,11 +29,15 @@ datanode:
 greptimedb-etcd:
   etcdImage: greptime/etcd:v3.5.5
 
-port:
-  httpServicePort: 4000
-  grpcServicePort: 4001
-  mysqlServicePort: 4002
-  postgresServicePort: 4003
-  openTSDBServicePort: 4242
+initializerImage:
+  registry: docker.io
+  repository: greptime/greptimedb-initializer
+  tag: latest
+
+httpServicePort: 4000
+grpcServicePort: 4001
+mysqlServicePort: 4002
+postgresServicePort: 4003
+openTSDBServicePort: 4242
 
 enablePrometheusMonitor: false
