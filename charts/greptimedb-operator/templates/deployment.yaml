@@ -21,8 +21,8 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: manager
-        image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
-        imagePullPolicy: {{ .Values.imagePullPolicy | default "IfNotPresent" }}
+        image: '{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+        imagePullPolicy: {{ .Values.image.imagePullPolicy | default "IfNotPresent" }}
         livenessProbe:
           httpGet:
             path: /healthz
