@@ -6,16 +6,9 @@ metadata:
 spec:
   base:
     main:
-      {{- if .Values.base.main.image }}
-      image: {{ .Values.base.main.image }}
-      {{- end }}
+      image: '{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}'
       resources:
-        requests:
-          memory: {{ .Values.base.main.resources.requests.memory }}
-          cpu: {{ .Values.base.main.resources.requests.cpu }}
-        limits:
-          memory:  {{ .Values.base.main.resources.limits.memory }}
-          cpu: {{ .Values.base.main.resources.limits.cpu }}
+{{ toYaml .Values.resources | indent 8 }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
   meta:
@@ -28,9 +21,11 @@ spec:
       storageClassName: {{ .Values.datanode.storage.storageClassName }}
       storageSize: {{ .Values.datanode.storage.storageSize }}
       storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
-  enablePrometheusMonitor: false
+  enablePrometheusMonitor: {{ .Values.enablePrometheusMonitor }}
   httpServicePort: {{ .Values.httpServicePort }}
   grpcServicePort: {{ .Values.grpcServicePort }}
   mysqlServicePort: {{ .Values.mysqlServicePort }}
   postgresServicePort: {{ .Values.postgresServicePort }}
   openTSDBServicePort: {{ .Values.openTSDBServicePort }}
+  initializer:
+    image: '{{ .Values.image.registry }}/{{ .Values.initializer.repository }}:{{ .Values.initializer.tag }}'
