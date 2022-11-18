@@ -14,7 +14,7 @@ spec:
   meta:
     replicas: {{ .Values.meta.replicas }}
     etcdEndpoints:
-      - "{{ .Release.Name }}-etcd-svc.{{ .Release.Namespace }}:2379"
+      - {{ .Values.etcdEndpoints }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
     storage:

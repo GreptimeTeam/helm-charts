@@ -12,17 +12,14 @@ helm repo add greptime https://greptimeteam.github.io/helm-charts/
 helm repo update
 
 # Install greptimedb in default namespace.
-helm install mydb greptime/greptimedb -n default --devel
+helm install mydb greptime/greptimedb --set etcdEndpoints=<etcd-release-name>-etcd-svc.<etcd-release-namespace>:2379 -n default --devel
 ```
 
 If you want to install greptimedb from local charts, you can:
 
 ```console
-# Build dependency.
-helm dependency build
-
 # Install greptimedb in default namespace.
-helm install mydb greptimedb -n default
+helm install mydb greptimedb --set etcdEndpoints=<etcd-release-name>-etcd-svc.<etcd-release-namespace>:2379 -n default
 ```
 
 ## How to uninstall
