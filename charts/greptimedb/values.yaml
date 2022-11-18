@@ -1,13 +1,17 @@
-base:
-  main:
-    image: greptime/greptimedb:0.1.0-alpha-20221116
-    resources:
-      requests:
-        cpu: 250m
-        memory: 64Mi
-      limits:
-        cpu: 500m
-        memory: 128Mi
+image:
+  registry: docker.io
+  # The image repository
+  repository: greptime/greptimedb
+  # The image tag
+  tag: 0.1.0-alpha-20221116
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 64Mi
+  limits:
+    cpu: 500m
+    memory: 128Mi
 
 frontend:
   replicas: 1
@@ -25,8 +29,11 @@ datanode:
 greptimedb-etcd:
   etcdImage: greptime/etcd:v3.5.5
 
-httpServicePort: 4000
-grpcServicePort: 4001
-mysqlServicePort: 4002
-postgresServicePort: 4003
-openTSDBServicePort: 4242
+port:
+  httpServicePort: 4000
+  grpcServicePort: 4001
+  mysqlServicePort: 4002
+  postgresServicePort: 4003
+  openTSDBServicePort: 4242
+
+enablePrometheusMonitor: false
