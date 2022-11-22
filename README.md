@@ -39,16 +39,13 @@ If you want to deploy GreptimeDB cluster, you can use the following command:
 2. Deploy etcd cluster
 
    ```console
-   helm install gt greptime/greptimedb-etcd -n default --devel
+   helm install mydb-etcd greptime/greptimedb-etcd -n default --devel
    ```
 
 3. Deploy GreptimeDB cluster
 
    ```console
-   helm install mydb greptime/greptimedb --set etcdEndpoints=<etcd-release-name>-etcd-svc.<etcd-release-namespace>:2379 -n default --devel
-   ```
-   ```example
-   helm install mydb greptime/greptimedb --set etcdEndpoints=gt-etcd-svc.default:2379 -n default --devel
+   helm install mydb greptime/greptimedb --set etcdEndpoints=mydb-etcd-svc.default:2379 -n default --devel
    ```
    
 4. Use kubectl port-forward to access GreptimeDB cluster
@@ -67,7 +64,7 @@ If you want to terminate the GreptimeDB cluster, you can use the following comma
 
 ```console
 helm uninstall mydb
-helm uninstall gt
+helm uninstall mydb-etcd
 helm uninstall gtcloud -n greptimedb-operator-system
 ```
 
@@ -79,9 +76,9 @@ kubectl delete crds greptimedbclusters.greptime.io
 
 ## List of Charts
 
-- [greptimedb](./charts/greptimedb/README.md)
 - [greptimedb-operator](./charts/greptimedb-operator/README.md)
 - [greptimedb-etcd](./charts/greptimedb-etcd/README.md)
+- [greptimedb](./charts/greptimedb/README.md)
 
 ## License
 
