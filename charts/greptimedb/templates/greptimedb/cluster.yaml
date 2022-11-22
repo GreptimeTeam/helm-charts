@@ -13,8 +13,13 @@ spec:
     replicas: {{ .Values.frontend.replicas }}
   meta:
     replicas: {{ .Values.meta.replicas }}
+{{- if .Values.etcdEndpoints }}
     etcdEndpoints:
       - {{ .Values.etcdEndpoints }}
+{{- else }}
+    etcdEndpoints:
+      - mydb-etcd-svc.default:2379
+{{- end }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
     storage:

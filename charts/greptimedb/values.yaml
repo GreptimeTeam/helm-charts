@@ -30,7 +30,7 @@ initializer:
   repository: greptime/greptimedb-initializer
   tag: latest
 
-etcdEndpoints: mydb-etcd-svc.default:2379
+etcdEndpoints: ""
 
 httpServicePort: 4000
 grpcServicePort: 4001
