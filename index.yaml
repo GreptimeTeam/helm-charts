@@ -29,6 +29,16 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-0.1.0-alpha-20221116/greptimedb-0.1.0-alpha-20221116.tgz
     version: 0.1.0-alpha-20221116
+  - apiVersion: v2
+    appVersion: 0.1.0-alpha-20221116
+    created: "2022-11-23T06:18:22.230981145Z"
+    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
+    digest: 3cbc01173666c987219cad4019ff10b741e98aa12478d99ec24e2bedeaae3063
+    name: greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-0.1.0-alpha-20221116/greptimedb-0.1.0-alpha-20221116.tgz
+    version: 0.1.0-alpha-20221116
   greptimedb-etcd:
   - apiVersion: v2
     appVersion: 0.1.0
@@ -157,6 +167,29 @@ entries:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-operator-0.1.0-alpha.5/greptimedb-operator-0.1.0-alpha.5.tgz
     version: 0.1.0-alpha.5
   - apiVersion: v2
+    appVersion: 0.1.0-alpha.5
+    created: "2022-11-23T06:18:22.509802309Z"
+    description: The greptimedb-operator Helm chart for Kubernetes
+    digest: cbb8bee85e2ca1aa7a5a106825574263ae62a376e46b27c885f5bc91b0ed2688
+    home: https://github.com/GreptimeTeam/greptimedb-operator
+    keywords:
+    - operator
+    - database
+    - greptimedb
+    kubeVersion: '>=1.19.0-0'
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+    name: greptimedb-operator
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb-operator
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-operator-0.1.0-alpha.5/greptimedb-operator-0.1.0-alpha.5.tgz
+    version: 0.1.0-alpha.5
+  - apiVersion: v2
     appVersion: 0.1.0-alpha.4
     created: "2022-11-14T12:54:16.510872298Z"
     description: The greptimedb-operator Helm chart for Kubernetes
@@ -202,4 +235,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-operator-0.1.0-alpha.2/greptimedb-operator-0.1.0-alpha.2.tgz
     version: 0.1.0-alpha.2
-generated: "2022-11-18T08:55:56.639718798Z"
+generated: "2022-11-23T06:18:22.509864009Z"
