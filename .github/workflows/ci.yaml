@@ -32,4 +32,4 @@ jobs:
           wait: 120s
 
       - name: Run chart-testing (install)
-        run: ct install ----helm-extra-set-args etcdEndpoints=mydb-etcd-svc.default:2379 --config .github/linters/chart-testing.yaml
+        run: ct install --helm-extra-set-args etcdEndpoints=mydb-etcd-svc.default:2379 --config .github/linters/chart-testing.yaml
