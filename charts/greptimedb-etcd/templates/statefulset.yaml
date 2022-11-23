@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Release.Name }}-etcd
+  name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ .Release.Name }}-etcd
+    app: {{ .Release.Name }}
 spec:
-  serviceName: {{ .Release.Name }}-etcd-svc
+  serviceName: {{ .Release.Name }}-svc
   replicas: 3
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-etcd
+      app: {{ .Release.Name }}
   volumeClaimTemplates:
   - metadata:
       name: etcd-storage
@@ -23,7 +23,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-etcd
+        app: {{ .Release.Name }}
     spec:
       containers:
       - name: etcd
@@ -44,7 +44,7 @@ spec:
           - "--listen-client-urls"
           - "http://0.0.0.0:{{ .Values.servicePorts.client }}"
           - "--initial-cluster"
-          - "{{ .Release.Name }}-etcd-0=http://{{ .Release.Name }}-etcd-0.{{ .Release.Name }}-etcd-svc:{{ .Values.servicePorts.peer }},{{ .Release.Name }}-etcd-1=http://{{ .Release.Name }}-etcd-1.{{ .Release.Name }}-etcd-svc:{{ .Values.servicePorts.peer }},{{ .Release.Name }}-etcd-2=http://{{ .Release.Name }}-etcd-2.{{ .Release.Name }}-etcd-svc:{{ .Values.servicePorts.peer }}"
+          - "{{ .Release.Name }}-0=http://{{ .Release.Name }}-0.{{ .Release.Name }}-svc:{{ .Values.servicePorts.peer }},{{ .Release.Name }}-1=http://{{ .Release.Name }}-1.{{ .Release.Name }}-svc:{{ .Values.servicePorts.peer }},{{ .Release.Name }}-2=http://{{ .Release.Name }}-2.{{ .Release.Name }}-svc:{{ .Values.servicePorts.peer }}"
           - "--initial-cluster-state"
           - "new"
           - "--initial-cluster-token"

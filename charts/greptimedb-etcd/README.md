@@ -12,7 +12,7 @@ helm repo add greptime https://greptimeteam.github.io/helm-charts/
 helm repo update
 
 # Deploy greptimedb-etcd in default namespace.
-helm install mydb greptime/greptimedb-etcd -n default --devel
+helm install mydb-etcd greptime/greptimedb-etcd -n default --devel
 ```
 
 You can use the following commands to access etcd cluster:
@@ -31,5 +31,5 @@ kubectl exec etcd-client -- etcdctl --endpoints=mydb-etcd-0.mydb-etcd-svc:2379,m
 ## How to uninstall
 
 ```console
-helm uninstall mydb
+helm uninstall mydb-etcd
 ```

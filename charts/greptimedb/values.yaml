@@ -26,12 +26,11 @@ datanode:
     storageSize: 10Gi
     storageRetainPolicy: Retain
 
-greptimedb-etcd:
-  etcdImage: greptime/etcd:v3.5.5
-
 initializer:
   repository: greptime/greptimedb-initializer
   tag: latest
+
+etcdEndpoints: ""
 
 httpServicePort: 4000
 grpcServicePort: 4001

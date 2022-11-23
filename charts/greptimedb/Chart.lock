@@ -1,6 +1,0 @@
-dependencies:
-- name: greptimedb-etcd
-  repository: file://../greptimedb-etcd
-  version: 0.1.0
-digest: sha256:a2aa952930e65508ad841822c5e4c55441927154d563c6bb9dbdf4bbbe90c682
-generated: "2022-11-13T18:38:17.330151+08:00"
