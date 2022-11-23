@@ -17,8 +17,7 @@ spec:
     etcdEndpoints:
       - {{ .Values.etcdEndpoints }}
 {{- else }}
-    etcdEndpoints:
-      - mydb-etcd-svc.default:2379
+{{- fail "etcdEndpoints must be set"}}
 {{- end }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
