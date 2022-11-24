@@ -19,7 +19,7 @@ jobs:
       - name: Testing add greptime repo
         run: |
           helm repo add greptime https://greptimeteam.github.io/helm-charts/
-          helm search repo greptime -l --devel
+          helm search repo greptime --devel
 
       - uses: actions/setup-python@v4
         with:
