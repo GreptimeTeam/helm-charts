@@ -16,6 +16,11 @@ jobs:
         with:
           version: v3.10.0
 
+      - name: Testing add greptime repo
+        run: |
+          helm repo add greptime https://greptimeteam.github.io/helm-charts/
+          helm search repo greptime -l --devel
+
       - uses: actions/setup-python@v4
         with:
           python-version: 3.7
