@@ -16,7 +16,7 @@ jobs:
         with:
           version: v3.10.0
 
-      - name: Testing add greptime repo
+      - name: Testing add greptime helm repo
         run: |
           helm repo add greptime https://greptimeteam.github.io/helm-charts/
           helm search repo greptime --devel
