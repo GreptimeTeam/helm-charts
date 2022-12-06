@@ -7,10 +7,14 @@ spec:
   base:
     main:
       image: '{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}'
-      resources:
-{{ toYaml .Values.resources | indent 8 }}
+      {{- if .Values.resources }}
+      resources: {{- toYaml .Values.resources | nindent 8 }}
+      {{- end }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
+    {{- if .Values.frontend.service }}
+    service: {{- toYaml .Values.frontend.service | nindent 6 }}
+    {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}
 {{- if .Values.etcdEndpoints }}
