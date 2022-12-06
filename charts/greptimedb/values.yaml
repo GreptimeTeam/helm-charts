@@ -3,7 +3,7 @@ image:
   # The image repository
   repository: greptime/greptimedb
   # The image tag
-  tag: 0.1.0-alpha-20221128-weekly
+  tag: 0.1.0-alpha-20221205-weekly
 
 resources:
   requests:
@@ -15,6 +15,7 @@ resources:
 
 frontend:
   replicas: 1
+  service: {}
 
 meta:
   replicas: 1
@@ -28,7 +29,7 @@ datanode:
 
 initializer:
   repository: greptime/greptimedb-initializer
-  tag: latest
+  tag: 0.1.0-alpha.8
 
 etcdEndpoints: ""
 
