@@ -28,6 +28,7 @@ datanode:
     storageRetainPolicy: Retain
 
 initializer:
+  registry: docker.io
   repository: greptime/greptimedb-initializer
   tag: 0.1.0-alpha.8
 
