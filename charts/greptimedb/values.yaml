@@ -3,7 +3,7 @@ image:
   # The image repository
   repository: greptime/greptimedb
   # The image tag
-  tag: 0.1.0-alpha-20221205-weekly
+  tag: 0.1.0-alpha-20221212-weekly
 
 resources:
   requests:
