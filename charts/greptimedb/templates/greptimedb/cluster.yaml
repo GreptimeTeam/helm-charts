@@ -15,6 +15,9 @@ spec:
     {{- if .Values.frontend.service }}
     service: {{- toYaml .Values.frontend.service | nindent 6 }}
     {{- end }}
+    {{- if .Values.frontend.componentSpec }}
+    template: {{- toYaml .Values.frontend.componentSpec | nindent 6 }}
+    {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}
 {{- if .Values.etcdEndpoints }}
@@ -37,3 +40,6 @@ spec:
   openTSDBServicePort: {{ .Values.openTSDBServicePort }}
   initializer:
     image: '{{ .Values.initializer.registry }}/{{ .Values.initializer.repository }}:{{ .Values.initializer.tag }}'
+  {{- if .Values.storage }}
+  storage: {{- toYaml .Values.storage | nindent 4 }}
+  {{- end }}
