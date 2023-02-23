@@ -3,7 +3,7 @@ image:
   # The image repository
   repository: greptime/greptimedb
   # The image tag
-  tag: 0.1.0-alpha-20221212-weekly
+  tag: 0.1.0-alpha-20230220-weekly
 
 resources:
   requests:
@@ -16,6 +16,11 @@ resources:
 frontend:
   replicas: 1
   service: {}
+  componentSpec: {}
+
+  tls: {}
+    # secretName:
+    # certificateMountPath:
 
 meta:
   replicas: 1
@@ -30,7 +35,7 @@ datanode:
 initializer:
   registry: docker.io
   repository: greptime/greptimedb-initializer
-  tag: 0.1.0-alpha.8
+  tag: 0.1.0-alpha.9
 
 etcdEndpoints: ""
 
@@ -41,3 +46,10 @@ postgresServicePort: 4003
 openTSDBServicePort: 4242
 
 enablePrometheusMonitor: false
+
+storage: {}
+  # s3:
+  #  bucket: ""
+  #  region: ""
+  #  secretName: ""
+  #  prefix: ""
