@@ -12,6 +12,9 @@ spec:
       {{- end }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
+    {{- if .Values.frontend.tls }}
+    tls: {{- toYaml .Values.frontend.tls  | nindent 6 }}
+    {{- end }}
     {{- if .Values.frontend.service }}
     service: {{- toYaml .Values.frontend.service | nindent 6 }}
     {{- end }}

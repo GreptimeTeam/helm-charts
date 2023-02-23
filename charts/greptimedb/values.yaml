@@ -18,6 +18,10 @@ frontend:
   service: {}
   componentSpec: {}
 
+  tls: {}
+    # secretName:
+    # certificateMountPath:
+
 meta:
   replicas: 1
 
