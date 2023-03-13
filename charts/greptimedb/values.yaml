@@ -59,6 +59,10 @@ openTSDBServicePort: 4242
 enablePrometheusMonitor: false
 
 storage:
+  # configure to use local storage.
+  local: {}
+#    directory: /tmp/greptimedb
+
   # configure to use s3 storage.
   s3: {}
 #    bucket: "greptimedb"

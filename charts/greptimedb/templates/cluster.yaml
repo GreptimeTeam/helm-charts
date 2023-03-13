@@ -49,11 +49,16 @@ spec:
   openTSDBServicePort: {{ .Values.openTSDBServicePort }}
   initializer:
     image: '{{ .Values.initializer.registry }}/{{ .Values.initializer.repository }}:{{ .Values.initializer.tag }}'
-  {{- if .Values.storage.s3 }}
   storage:
+    {{- if .Values.storage.s3 }}
     s3:
       bucket: {{ .Values.storage.s3.bucket }}
       region: {{ .Values.storage.s3.region }}
       prefix: {{ .Values.storage.s3.prefix }}
       secretName: {{ .Values.storage.s3.credentials.secretName }}
-  {{- end }}
+    {{- else if .Values.storage.local }}
+    local:
+      directory: {{ .Values.storage.local.directory }}
+    {{- else }}
+    {}
+    {{- end }}
