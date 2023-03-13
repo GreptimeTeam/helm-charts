@@ -16,7 +16,7 @@ helm repo update
 helm install etcd greptime/greptimedb-etcd -n default --devel
 
 # Install greptimedb in default namespace.
-helm install greptimedb greptime/greptimedb --set etcdEndpoints=greptimedb-etcd-svc.default:2379 -n default --devel
+helm install greptimedb greptime/greptimedb -n default --devel
 ```
 
 ## How to uninstall
