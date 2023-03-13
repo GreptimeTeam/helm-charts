@@ -21,8 +21,16 @@ frontend:
   componentSpec: {}
 
   tls: {}
-    # secretName:
-    # certificateMountPath:
+#    certificates:
+#      mountPath: /etc/greptimedb-frontend-tls
+#      secretName: greptimedb-frontend-tls
+#      secretCreation:
+#        enabled: true
+#        enableEncryption: false
+#        data:
+#          ca.crt: ""
+#          tls.crt: ""
+#          tls.key: ""
 
 meta:
   replicas: 1
@@ -50,9 +58,20 @@ openTSDBServicePort: 4242
 
 enablePrometheusMonitor: false
 
-storage: {}
-  # s3:
-  #  bucket: ""
-  #  region: ""
-  #  secretName: ""
-  #  prefix: ""
+storage:
+  # configure to use s3 storage.
+  s3: {}
+#    bucket: "greptimedb"
+#    region: "us-west-2"
+#    prefix: "/data"
+#    credentials:
+#      secretName: "s3-credentials"
+#      secretCreation:
+#        # Create the raw secret.
+#        enabled: true
+#        # Create the sealed secret.
+#        # If enableEncryption is true, the credentials should be encrypted.
+#        enableEncryption: false
+#        data:
+#          access-key-id: ""
+#          secret-access-key: ""

@@ -19,7 +19,9 @@ spec:
   frontend:
     replicas: {{ .Values.frontend.replicas }}
     {{- if .Values.frontend.tls }}
-    tls: {{- toYaml .Values.frontend.tls  | nindent 6 }}
+    tls:
+      secretName: {{ .Values.frontend.tls.certificates.secretName }}
+      certificateMountPath: {{ .Values.frontend.tls.certificates.mountPath }}
     {{- end }}
     {{- if .Values.frontend.service }}
     service: {{- toYaml .Values.frontend.service | nindent 6 }}
@@ -47,6 +49,11 @@ spec:
   openTSDBServicePort: {{ .Values.openTSDBServicePort }}
   initializer:
     image: '{{ .Values.initializer.registry }}/{{ .Values.initializer.repository }}:{{ .Values.initializer.tag }}'
-  {{- if .Values.storage }}
-  storage: {{- toYaml .Values.storage | nindent 4 }}
+  {{- if .Values.storage.s3 }}
+  storage:
+    s3:
+      bucket: {{ .Values.storage.s3.bucket }}
+      region: {{ .Values.storage.s3.region }}
+      prefix: {{ .Values.storage.s3.prefix }}
+      secretName: {{ .Values.storage.s3.credentials.secretName }}
   {{- end }}
