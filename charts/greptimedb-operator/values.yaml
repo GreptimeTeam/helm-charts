@@ -8,6 +8,8 @@ image:
   imagePullPolicy: IfNotPresent
   # The image tag
   tag: 0.1.0-alpha.9
+  # The image pull secrets.
+  pullSecrets: []
 
 serviceAccount:
   # Specifies whether a service account should be created
