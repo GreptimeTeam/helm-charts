@@ -11,19 +11,14 @@ Helm chart for [GreptimeDB](https://github.com/GreptimeTeam/greptimedb) cluster.
 helm repo add greptime https://greptimeteam.github.io/helm-charts/
 helm repo update
 
-# Install greptimedb in default namespace.
-helm install mydb greptime/greptimedb --set etcdEndpoints=mydb-etcd-svc.default:2379 -n default --devel
-```
+# Optional: Install etcd cluster.
 
-If you want to install greptimedb from local charts, you can:
-
-```console
 # Install greptimedb in default namespace.
-helm install mydb greptimedb --set etcdEndpoints=mydb-etcd-svc.default:2379 -n default
+helm install greptimedb greptime/greptimedb --set etcdEndpoints=greptimedb-etcd-svc.default:2379 -n default --devel
 ```
 
 ## How to uninstall
 
 ```console
-helm uninstall mydb -n default
+helm uninstall greptimedb -n default
 ```

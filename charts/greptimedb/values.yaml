@@ -4,6 +4,8 @@ image:
   repository: greptime/greptimedb
   # The image tag
   tag: 0.1.0-alpha-20230220-weekly
+  # The image pull secrets.
+  pullSecrets: []
 
 resources:
   requests:
@@ -37,7 +39,8 @@ initializer:
   repository: greptime/greptimedb-initializer
   tag: 0.1.0-alpha.9
 
-etcdEndpoints: ""
+# The etcdEndpoints need be modified to the actual etcd cluster.
+etcdEndpoints: "etcd.default.svc.cluster.local:2379"
 
 httpServicePort: 4000
 grpcServicePort: 4001

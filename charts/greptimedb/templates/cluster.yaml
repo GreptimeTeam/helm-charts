@@ -10,6 +10,12 @@ spec:
       {{- if .Values.resources }}
       resources: {{- toYaml .Values.resources | nindent 8 }}
       {{- end }}
+    {{- if .Values.image.pullSecrets }}
+    imagePullSecrets:
+    {{- range .Values.image.pullSecrets }}
+      - name: {{ . }}
+    {{- end }}
+    {{- end }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
     {{- if .Values.frontend.tls }}
@@ -26,8 +32,6 @@ spec:
 {{- if .Values.etcdEndpoints }}
     etcdEndpoints:
       - {{ .Values.etcdEndpoints }}
-{{- else }}
-{{- fail "etcdEndpoints must be set"}}
 {{- end }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
