@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Release.Name }}
 spec:
-  serviceName: {{ .Release.Name }}-svc
+  serviceName: {{ .Release.Name }}
   replicas: 3
   selector:
     matchLabels:
@@ -44,7 +44,7 @@ spec:
           - "--listen-client-urls"
           - "http://0.0.0.0:{{ .Values.servicePorts.client }}"
           - "--initial-cluster"
-          - "{{ .Release.Name }}-0=http://{{ .Release.Name }}-0.{{ .Release.Name }}-svc:{{ .Values.servicePorts.peer }},{{ .Release.Name }}-1=http://{{ .Release.Name }}-1.{{ .Release.Name }}-svc:{{ .Values.servicePorts.peer }},{{ .Release.Name }}-2=http://{{ .Release.Name }}-2.{{ .Release.Name }}-svc:{{ .Values.servicePorts.peer }}"
+          - "{{ .Release.Name }}-0=http://{{ .Release.Name }}-0.{{ .Release.Name }}:{{ .Values.servicePorts.peer }},{{ .Release.Name }}-1=http://{{ .Release.Name }}-1.{{ .Release.Name }}:{{ .Values.servicePorts.peer }},{{ .Release.Name }}-2=http://{{ .Release.Name }}-2.{{ .Release.Name }}:{{ .Values.servicePorts.peer }}"
           - "--initial-cluster-state"
           - "new"
           - "--initial-cluster-token"
