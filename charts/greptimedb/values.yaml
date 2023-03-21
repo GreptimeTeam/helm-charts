@@ -4,6 +4,8 @@ image:
   repository: greptime/greptimedb
   # The image tag
   tag: 0.1.0-alpha-20230220-weekly
+  # The image pull secrets.
+  pullSecrets: []
 
 resources:
   requests:
@@ -19,8 +21,16 @@ frontend:
   componentSpec: {}
 
   tls: {}
-    # secretName:
-    # certificateMountPath:
+#    certificates:
+#      mountPath: /etc/greptimedb-frontend-tls
+#      secretName: greptimedb-frontend-tls
+#      secretCreation:
+#        enabled: true
+#        enableEncryption: false
+#        data:
+#          ca.crt: ""
+#          tls.crt: ""
+#          tls.key: ""
 
 meta:
   replicas: 1
@@ -37,7 +47,8 @@ initializer:
   repository: greptime/greptimedb-initializer
   tag: 0.1.0-alpha.9
 
-etcdEndpoints: ""
+# The etcdEndpoints need be modified to the actual etcd cluster.
+etcdEndpoints: "etcd.default.svc.cluster.local:2379"
 
 httpServicePort: 4000
 grpcServicePort: 4001
@@ -47,9 +58,24 @@ openTSDBServicePort: 4242
 
 enablePrometheusMonitor: false
 
-storage: {}
-  # s3:
-  #  bucket: ""
-  #  region: ""
-  #  secretName: ""
-  #  prefix: ""
+storage:
+  # configure to use local storage.
+  local: {}
+#    directory: /tmp/greptimedb
+
+  # configure to use s3 storage.
+  s3: {}
+#    bucket: "greptimedb"
+#    region: "us-west-2"
+#    prefix: "/data"
+#    credentials:
+#      secretName: "s3-credentials"
+#      secretCreation:
+#        # Create the raw secret.
+#        enabled: true
+#        # Create the sealed secret.
+#        # If enableEncryption is true, the credentials should be encrypted.
+#        enableEncryption: false
+#        data:
+#          access-key-id: ""
+#          secret-access-key: ""

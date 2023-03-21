@@ -10,10 +10,18 @@ spec:
       {{- if .Values.resources }}
       resources: {{- toYaml .Values.resources | nindent 8 }}
       {{- end }}
+    {{- if .Values.image.pullSecrets }}
+    imagePullSecrets:
+    {{- range .Values.image.pullSecrets }}
+      - name: {{ . }}
+    {{- end }}
+    {{- end }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
     {{- if .Values.frontend.tls }}
-    tls: {{- toYaml .Values.frontend.tls  | nindent 6 }}
+    tls:
+      secretName: {{ .Values.frontend.tls.certificates.secretName }}
+      certificateMountPath: {{ .Values.frontend.tls.certificates.mountPath }}
     {{- end }}
     {{- if .Values.frontend.service }}
     service: {{- toYaml .Values.frontend.service | nindent 6 }}
@@ -26,8 +34,6 @@ spec:
 {{- if .Values.etcdEndpoints }}
     etcdEndpoints:
       - {{ .Values.etcdEndpoints }}
-{{- else }}
-{{- fail "etcdEndpoints must be set"}}
 {{- end }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
@@ -43,6 +49,16 @@ spec:
   openTSDBServicePort: {{ .Values.openTSDBServicePort }}
   initializer:
     image: '{{ .Values.initializer.registry }}/{{ .Values.initializer.repository }}:{{ .Values.initializer.tag }}'
-  {{- if .Values.storage }}
-  storage: {{- toYaml .Values.storage | nindent 4 }}
-  {{- end }}
+  storage:
+    {{- if .Values.storage.s3 }}
+    s3:
+      bucket: {{ .Values.storage.s3.bucket }}
+      region: {{ .Values.storage.s3.region }}
+      prefix: {{ .Values.storage.s3.prefix }}
+      secretName: {{ .Values.storage.s3.credentials.secretName }}
+    {{- else if .Values.storage.local }}
+    local:
+      directory: {{ .Values.storage.local.directory }}
+    {{- else }}
+    {}
+    {{- end }}
