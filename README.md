@@ -27,23 +27,23 @@ helm search repo greptime -l --devel
 
 **Note**: Since our charts are still in development, we don't release the stable release version, and the `--devel` option is required.
 
-### Install the greptimedb chart
+### Install the GreptimeDB cluster
 
 If you want to deploy the GreptimeDB cluster, you can use the following command:
 
-1. Deploy GreptimeDB operator
+1. **Deploy GreptimeDB operator**
 
    ```console
    helm install greptimedb-operator greptime/greptimedb-operator -n default --devel
    ```
 
-2. Deploy etcd cluster
+2. **Deploy etcd cluster**
 
    ```console
    helm install etcd greptime/greptimedb-etcd -n default --devel
    ```
 
-3. Deploy GreptimeDB cluster
+3. **Deploy GreptimeDB cluster**
 
    ```console
    helm install mycluster greptime/greptimedb -n default --devel
@@ -56,21 +56,25 @@ If you want to deploy the GreptimeDB cluster, you can use the following command:
    -n default --devel
    ```
 
-4. Use kubectl port-forward to access the GreptimeDB cluster
+   You also can list the current releases by `helm` command:
 
    ```console
-   # You can use MySQL client to connect the cluster, for example: 'mysql -h 127.0.0.1 -P 4002'.
+   helm list -n default
+   ```
+
+4. **Use `kubectl port-forward` to access the GreptimeDB cluster**
+
+   ```console
+   # You can use the MySQL client to connect the cluster, for example: 'mysql -h 127.0.0.1 -P 4002'.
    kubectl port-forward svc/mycluster-frontend 4002:4002 > connections.out &
-   
-   # You can use PostgreSQL client to connect the cluster, for example: 'psql -h 127.0.0.1 -p 4003 -d public'.
+
+   # You can use the PostgreSQL client to connect the cluster, for example: 'psql -h 127.0.0.1 -p 4003 -d public'.
    kubectl port-forward svc/mycluster-frontend 4003:4003 > connections.out &
    ```
 
-You also can list the current releases by `helm` command:
+   You also can read and write data by [reference](https://docs.greptime.com/getting-started/distributed).
 
-```console
-helm list -n default
-```
+### Uninstallation
 
 If you want to terminate the GreptimeDB cluster, you can use the following command:
 
