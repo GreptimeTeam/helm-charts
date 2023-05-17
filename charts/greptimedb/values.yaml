@@ -3,7 +3,7 @@ image:
   # The image repository
   repository: greptime/greptimedb
   # The image tag
-  tag: 0.1.2
+  tag: 0.3.0-20230515-nightly
   # The image pull secrets.
   pullSecrets: []
 
@@ -45,7 +45,7 @@ datanode:
 initializer:
   registry: docker.io
   repository: greptime/greptimedb-initializer
-  tag: 0.1.0-alpha.9
+  tag: 0.1.0-alpha.11
 
 # The etcdEndpoints need be modified to the actual etcd cluster.
 etcdEndpoints: "etcd.default.svc.cluster.local:2379"
@@ -56,7 +56,15 @@ mysqlServicePort: 4002
 postgresServicePort: 4003
 openTSDBServicePort: 4242
 
-enablePrometheusMonitor: false
+# configure to prometheus podmonitor
+prometheusMonitor: {}
+#  enabled: true
+#  path: "/metrics"
+#  port: "http"
+#  interval: "30s"
+#  honorLabels: true
+#  labelsSelector:
+#    release: prometheus
 
 storage:
   # configure to use local storage.
