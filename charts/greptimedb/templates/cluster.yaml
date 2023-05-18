@@ -41,7 +41,9 @@ spec:
       storageClassName: {{ .Values.datanode.storage.storageClassName }}
       storageSize: {{ .Values.datanode.storage.storageSize }}
       storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
-  enablePrometheusMonitor: {{ .Values.enablePrometheusMonitor }}
+  {{- if (and .Values.prometheusMonitor .Values.prometheusMonitor.enabled )}}
+  prometheusMonitor: {{- toYaml .Values.prometheusMonitor | nindent 4 }}
+  {{- end }}
   httpServicePort: {{ .Values.httpServicePort }}
   grpcServicePort: {{ .Values.grpcServicePort }}
   mysqlServicePort: {{ .Values.mysqlServicePort }}
