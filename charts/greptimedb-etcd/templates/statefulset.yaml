@@ -51,7 +51,7 @@ spec:
           - "{{ .Release.Name }}"
         volumeMounts:
           - name: etcd-storage
-            mountPath: {{ .Values.storage.dataDir }}
+            mountPath: ma{{ .Values.storage.dataDir }}
         ports:
           - name: client
             containerPort: {{ .Values.servicePorts.client }}
