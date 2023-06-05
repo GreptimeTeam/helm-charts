@@ -52,7 +52,7 @@ If you want to deploy the GreptimeDB cluster, you can use the following command:
    If you already have the etcd cluster, you can configure the etcd cluster:
 
    ```console
-   helm install mycluster greptime/greptimedb -set etcdEndpoints=<your-etcd-cluster-endpoints> \
+   helm install mycluster greptime/greptimedb --set etcdEndpoints=<your-etcd-cluster-endpoints> \
    -n default --devel
    ```
 
