@@ -21,7 +21,6 @@ spec:
     {{- if .Values.frontend.tls }}
     tls:
       secretName: {{ .Values.frontend.tls.certificates.secretName }}
-      certificateMountPath: {{ .Values.frontend.tls.certificates.mountPath }}
     {{- end }}
     {{- if .Values.frontend.service }}
     service: {{- toYaml .Values.frontend.service | nindent 6 }}
@@ -31,12 +30,18 @@ spec:
     {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}
-{{- if .Values.etcdEndpoints }}
+    {{- if .Values.etcdEndpoints }}
     etcdEndpoints:
       - {{ .Values.etcdEndpoints }}
-{{- end }}
+    {{- end }}
+    {{- if .Values.meta.componentSpec }}
+    template: {{- toYaml .Values.meta.componentSpec | nindent 6 }}
+    {{- end }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
+    {{- if .Values.datanode.componentSpec }}
+    template: {{- toYaml .Values.datanode.componentSpec | nindent 6 }}
+    {{- end }}
     storage:
       storageClassName: {{ .Values.datanode.storage.storageClassName }}
       storageSize: {{ .Values.datanode.storage.storageSize }}
@@ -56,7 +61,7 @@ spec:
     s3:
       bucket: {{ .Values.storage.s3.bucket }}
       region: {{ .Values.storage.s3.region }}
-      prefix: {{ .Values.storage.s3.prefix }}
+      root: {{ .Values.storage.s3.root }}
       secretName: {{ .Values.storage.s3.credentials.secretName }}
     {{- else if .Values.storage.local }}
     local:

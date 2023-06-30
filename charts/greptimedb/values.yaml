@@ -3,7 +3,7 @@ image:
   # The image repository
   repository: greptime/greptimedb
   # The image tag
-  tag: 0.3.0-20230515-nightly
+  tag: 0.4.0-20230626-nightly
   # The image pull secrets.
   pullSecrets: []
 
@@ -22,7 +22,6 @@ frontend:
 
   tls: {}
 #    certificates:
-#      mountPath: /etc/greptimedb-frontend-tls
 #      secretName: greptimedb-frontend-tls
 #      secretCreation:
 #        enabled: true
@@ -34,9 +33,11 @@ frontend:
 
 meta:
   replicas: 1
+  componentSpec: {}
 
 datanode:
   replicas: 3
+  componentSpec: {}
   storage:
     storageClassName: standard
     storageSize: 10Gi
@@ -45,7 +46,7 @@ datanode:
 initializer:
   registry: docker.io
   repository: greptime/greptimedb-initializer
-  tag: 0.1.0-alpha.11
+  tag: 0.1.0-alpha.12
 
 # The etcdEndpoints need be modified to the actual etcd cluster.
 etcdEndpoints: "etcd.default.svc.cluster.local:2379"
@@ -75,7 +76,7 @@ storage:
   s3: {}
 #    bucket: "greptimedb"
 #    region: "us-west-2"
-#    prefix: "/data"
+#    root: "/data"
 #    credentials:
 #      secretName: "s3-credentials"
 #      secretCreation:
