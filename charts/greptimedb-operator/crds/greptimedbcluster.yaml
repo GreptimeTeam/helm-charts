@@ -30,6 +30,9 @@ spec:
     - jsonPath: .status.clusterPhase
       name: PHASE
       type: string
+    - jsonPath: .status.version
+      name: VERSION
+      type: string
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
@@ -8012,8 +8015,6 @@ spec:
                     type: object
                   tls:
                     properties:
-                      certificateMountPath:
-                        type: string
                       secretName:
                         type: string
                     type: object
@@ -8035,6 +8036,8 @@ spec:
                 properties:
                   config:
                     type: string
+                  enableCheckEtcdService:
+                    type: boolean
                   etcdEndpoints:
                     items:
                       type: string
@@ -10712,6 +10715,9 @@ spec:
                   port:
                     type: string
                 type: object
+              prometheusServicePort:
+                format: int32
+                type: integer
               storage:
                 properties:
                   local:
@@ -10725,9 +10731,9 @@ spec:
                         type: string
                       endpoint:
                         type: string
-                      prefix:
-                        type: string
                       region:
+                        type: string
+                      root:
                         type: string
                       secretName:
                         type: string
@@ -10802,6 +10808,8 @@ spec:
                 - readyReplicas
                 - replicas
                 type: object
+              version:
+                type: string
             type: object
         type: object
     served: true
