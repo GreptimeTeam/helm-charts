@@ -74,10 +74,13 @@ storage:
 
   # configure to use s3 storage.
   s3: {}
-#    bucket: "greptimedb"
+#    bucket: "mycluster"
 #    region: "us-west-2"
-#    root: "/data"
-#    endpoint: ""
+#
+#    # The root directory of the cluster.
+#    # The data directory in S3 will be: 's3://<bucket>/<root>/data/...'.
+#    root: "mycluster"
+#    endpoint: "s3.us-west-2.amazonaws.com"
 #    credentials:
 #      secretName: "s3-credentials"
 #      secretCreation:
@@ -86,6 +89,8 @@ storage:
 #        # Create the sealed secret.
 #        # If enableEncryption is true, the credentials should be encrypted.
 #        enableEncryption: false
+#
+#        # If the enableEncryption is true, the data should be set as encrypted data.
 #        data:
-#          access-key-id: ""
-#          secret-access-key: ""
+#          access-key-id: "you-should-set-the-access-key-id-here"
+#          secret-access-key: "you-should-set-the-secret-access-key-here"
