@@ -63,6 +63,7 @@ spec:
       region: {{ .Values.storage.s3.region }}
       root: {{ .Values.storage.s3.root }}
       secretName: {{ .Values.storage.s3.credentials.secretName }}
+      endpoint: {{ .Values.storage.s3.endpoint }}
     {{- else if .Values.storage.local }}
     local:
       directory: {{ .Values.storage.local.directory }}
