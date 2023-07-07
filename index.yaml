@@ -3,6 +3,16 @@ entries:
   greptimedb:
   - apiVersion: v2
     appVersion: 0.3.2
+    created: "2023-07-07T08:14:04.171394237Z"
+    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
+    digest: d95c100e9bb7fa47ed201cb23f99be68d2dac32e257f688903945f7445c6fea5
+    name: greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-0.1.1-alpha.11/greptimedb-0.1.1-alpha.11.tgz
+    version: 0.1.1-alpha.11
+  - apiVersion: v2
+    appVersion: 0.3.2
     created: "2023-07-06T09:36:54.004969739Z"
     description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
     digest: e4ebd682f831b2e8648ac8fde728085497c659e843402fefc5e39f5b3604d527
@@ -274,4 +284,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-operator-0.1.1-alpha.1/greptimedb-operator-0.1.1-alpha.1.tgz
     version: 0.1.1-alpha.1
-generated: "2023-07-06T10:56:23.713865849Z"
+generated: "2023-07-07T08:14:04.171481238Z"
