@@ -32,3 +32,15 @@ jobs:
         env:
           CR_SKIP_EXISTING: true
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_CN_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_CN_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_RELEASE_BUCKET_REGION }}
+
+      - name: Release charts to S3
+        shell: bash
+        run: |
+          .github/scripts/release-charts-to-s3.sh ${{ vars.AWS_RELEASE_BUCKET }}
