@@ -3,7 +3,7 @@
 set -ue
 
 GREPTIME_RELEASE_BUCKET=$1
-RELEASE_DIR=charts
+RELEASE_DIR=releases/charts
 
 function update_greptime_charts() {
   helm repo add greptime https://greptimeteam.github.io/helm-charts/
