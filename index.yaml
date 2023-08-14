@@ -3,6 +3,16 @@ entries:
   greptimedb:
   - apiVersion: v2
     appVersion: 0.3.2
+    created: "2023-08-14T02:46:36.41643675Z"
+    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
+    digest: 028ff6bb3c825bebf5d679bbe697f32945b1186bed72cfee54da3bbd8ffc6352
+    name: greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-0.1.1-alpha.13/greptimedb-0.1.1-alpha.13.tgz
+    version: 0.1.1-alpha.13
+  - apiVersion: v2
+    appVersion: 0.3.2
     created: "2023-07-07T09:07:56.706804865Z"
     description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
     digest: 940e3c105fd93d6b60c1ac991c17cc7d90c922e4fcc6198422252f4f2c721635
@@ -133,6 +143,29 @@ entries:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-etcd-0.1.1-alpha.1/greptimedb-etcd-0.1.1-alpha.1.tgz
     version: 0.1.1-alpha.1
   greptimedb-operator:
+  - apiVersion: v2
+    appVersion: 0.1.0-alpha.14
+    created: "2023-08-14T02:46:36.608014873Z"
+    description: The greptimedb-operator Helm chart for Kubernetes
+    digest: 59034f1233120ed4aa58e6c172b964336dbb9bc2690817d964082c5bfc36488e
+    home: https://github.com/GreptimeTeam/greptimedb-operator
+    keywords:
+    - operator
+    - database
+    - greptimedb
+    kubeVersion: '>=1.18.0-0'
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+    name: greptimedb-operator
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb-operator
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-operator-0.1.1-alpha.11/greptimedb-operator-0.1.1-alpha.11.tgz
+    version: 0.1.1-alpha.11
   - apiVersion: v2
     appVersion: 0.1.0-alpha.12
     created: "2023-08-10T12:39:10.079499776Z"
@@ -340,4 +373,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-operator-0.1.1-alpha.1/greptimedb-operator-0.1.1-alpha.1.tgz
     version: 0.1.1-alpha.1
-generated: "2023-08-10T12:39:10.079593878Z"
+generated: "2023-08-14T02:46:36.608215874Z"
