@@ -27,21 +27,28 @@ helm search repo greptime -l --devel
 
 **Note**: Since our charts are still in development, we don't release the stable release version, and the `--devel` option is required.
 
-### Install the GreptimeDB cluster
+### Install the GreptimeDB Cluster
 
-If you want to deploy the GreptimeDB cluster, you can use the following command:
+If you want to deploy the GreptimeDB cluster, you can use the following command(use the `default` namespace):
 
-1. **Deploy GreptimeDB operator**
+1. **Deploy etcd cluster**
+
+   We recommend using the Bitnami etcd [chart](https://github.com/bitnami/charts/blob/main/bitnami/etcd/README.md) to deploy the etcd cluster:
+
+   ```
+   helm install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
+   --set replicaCount=3 \
+   --set auth.rbac.create=false \
+   --set auth.rbac.token.enabled=false \
+   -n default
+   ```
+
+2. **Deploy GreptimeDB operator**
 
    ```console
    helm install greptimedb-operator greptime/greptimedb-operator -n default --devel
    ```
 
-2. **Deploy etcd cluster**
-
-   ```console
-   helm install etcd greptime/greptimedb-etcd -n default --devel
-   ```
 
 3. **Deploy GreptimeDB cluster**
 
@@ -49,10 +56,11 @@ If you want to deploy the GreptimeDB cluster, you can use the following command:
    helm install mycluster greptime/greptimedb -n default --devel
    ```
 
-   If you already have the etcd cluster, you can configure the etcd cluster:
+   If you already have the etcd cluster, you can configure the `etcdEndpoints`：
 
    ```console
-   helm install mycluster greptime/greptimedb --set etcdEndpoints=<your-etcd-cluster-endpoints> \
+   helm install mycluster greptime/greptimedb \
+   --set etcdEndpoints=etcd.default:2379 \
    -n default --devel
    ```
 
@@ -67,12 +75,26 @@ If you want to deploy the GreptimeDB cluster, you can use the following command:
    ```console
    # You can use the MySQL client to connect the cluster, for example: 'mysql -h 127.0.0.1 -P 4002'.
    kubectl port-forward svc/mycluster-frontend 4002:4002 > connections.out &
-
+   
    # You can use the PostgreSQL client to connect the cluster, for example: 'psql -h 127.0.0.1 -p 4003 -d public'.
    kubectl port-forward svc/mycluster-frontend 4003:4003 > connections.out &
    ```
 
    You also can read and write data by [Cluster](https://docs.greptime.com/user-guide/cluster).
+
+### Upgrade
+
+If you want to re-deploy the service because the configurations changed, you can:
+
+```
+helm upgrade <your-release> <chart> --values <your-values-file> -n <namespace>
+```
+
+For example:
+
+```
+helm upgrade mycluster greptime/greptimedb --values ./values.yaml
+```
 
 ### Uninstallation
 
@@ -94,7 +116,6 @@ kubectl delete crds greptimedbclusters.greptime.io
 
 - [greptimedb](./charts/greptimedb/README.md)
 - [greptimedb-operator](./charts/greptimedb-operator/README.md)
-- [greptimedb-etcd](./charts/greptimedb-etcd/README.md)
 
 ## License
 
