@@ -35,7 +35,7 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
 
    We recommend using the Bitnami etcd [chart](https://github.com/bitnami/charts/blob/main/bitnami/etcd/README.md) to deploy the etcd cluster:
 
-   ```
+   ```console
    helm install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
    --set replicaCount=3 \
    --set auth.rbac.create=false \
@@ -86,13 +86,13 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
 
 If you want to re-deploy the service because the configurations changed, you can:
 
-```
+```console
 helm upgrade <your-release> <chart> --values <your-values-file> -n <namespace>
 ```
 
 For example:
 
-```
+```console
 helm upgrade mycluster greptime/greptimedb --values ./values.yaml
 ```
 
