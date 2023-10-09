@@ -27,10 +27,10 @@ replicas: 1
 resources:
   limits:
     cpu: 500m
-    memory: 128Mi
+    memory: 256Mi
   requests:
     cpu: 250m
-    memory: 64Mi
+    memory: 128Mi
 
 rbac:
   # install Role Based Access Control
