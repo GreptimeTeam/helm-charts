@@ -43,6 +43,9 @@ datanode:
     storageSize: 10Gi
     storageRetainPolicy: Retain
 
+#    # The wal directory of the storage, default is "/tmp/greptimedb/wal".
+#    walDir: "/tmp/greptimedb/wal"
+
 initializer:
   registry: docker.io
   repository: greptime/greptimedb-initializer

@@ -46,7 +46,10 @@ spec:
       storageClassName: {{ .Values.datanode.storage.storageClassName }}
       storageSize: {{ .Values.datanode.storage.storageSize }}
       storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
-  {{- if (and .Values.prometheusMonitor .Values.prometheusMonitor.enabled )}}
+      {{- if .Values.datanode.storage.walDir }}
+      walDir: {{ .Values.datanode.storage.walDir }}
+      {{- end }}
+  {{- if (and .Values.prometheusMonitor (eq .Values.prometheusMonitor.enabled true ))}}
   prometheusMonitor: {{- toYaml .Values.prometheusMonitor | nindent 4 }}
   {{- end }}
   httpServicePort: {{ .Values.httpServicePort }}
