@@ -87,7 +87,7 @@ storage:
 #    directory: /tmp/greptimedb
 
   # configure to use s3 storage.
-  s3:
+  s3: {}
 #    bucket: "bucket-name"
 #    region: "us-west-2"
 
