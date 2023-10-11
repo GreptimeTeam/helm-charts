@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "greptimedb-standalone.fullname" . }}
+  labels:
+    {{- include "greptimedb-standalone.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: http
+      port: 4000
+      targetPort: 4000
+      protocol: TCP
+    - name: grpc
+      port: 4001
+      targetPort: 4001
+      protocol: TCP
+    - name: mysql
+      port: 4002
+      targetPort: 4002
+      protocol: TCP
+    - name: postgres
+      port: 4003
+      targetPort: 4003
+      protocol: TCP
+    - name: prom
+      port: 4004
+      targetPort: 4004
+      protocol: TCP
+  selector:
+    {{- include "greptimedb-standalone.selectorLabels" . | nindent 4 }}

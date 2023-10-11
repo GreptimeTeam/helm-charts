@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "greptimedb-standalone.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "greptimedb-standalone.labels" . | nindent 4 }}
+spec:
+  # Always set to 1.
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "greptimedb-standalone.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "greptimedb-standalone.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- if .Values.image.pullSecrets }}
+      imagePullSecrets:
+      {{- range .Values.image.pullSecrets }}
+        - name: {{ . }}
+      {{- end }}
+      {{- end }}
+      serviceAccountName: {{ include "greptimedb-standalone.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: greptimedb-host-volume
+          hostPath:
+            path: /var/greptimedb/standalone-test
+            type: DirectoryOrCreate
+      containers:
+        - name: greptimedb
+          image: {{ printf "%s/%s:%s" .Values.image.registry .Values.image.repository .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- with .Values.command }}
+          command:
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with .Values.args }}
+          args:
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          env:
+            {{- range $key, $val := .Values.env }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+            {{- end }}
+          ports:
+            - containerPort: 4000
+              name: http
+              protocol: TCP
+            - containerPort: 4001
+              name: grpc
+              protocol: TCP
+            - containerPort: 4002
+              name: mysql
+              protocol: TCP
+            - containerPort: 4003
+              name: postgres
+              protocol: TCP
+            - containerPort: 4004
+              name: prom
+              protocol: TCP
+          volumeMounts:
+            - name: greptimedb-host-volume
+              mountPath: /data
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
