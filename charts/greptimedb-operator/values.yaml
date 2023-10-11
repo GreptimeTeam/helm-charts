@@ -7,7 +7,7 @@ image:
   # The image pull policy for the controller
   imagePullPolicy: IfNotPresent
   # The image tag
-  tag: 0.1.0-alpha.15
+  tag: 0.1.0-alpha.16
   # The image pull secrets.
   pullSecrets: []
 
@@ -26,11 +26,11 @@ replicas: 1
 # Default resources for greptimedb operator
 resources:
   limits:
-    cpu: 500m
-    memory: 128Mi
+    cpu: 200m
+    memory: 256Mi
   requests:
-    cpu: 250m
-    memory: 64Mi
+    cpu: 100m
+    memory: 128Mi
 
 rbac:
   # install Role Based Access Control
