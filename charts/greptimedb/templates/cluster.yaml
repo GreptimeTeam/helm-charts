@@ -46,9 +46,6 @@ spec:
       storageClassName: {{ .Values.datanode.storage.storageClassName }}
       storageSize: {{ .Values.datanode.storage.storageSize }}
       storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
-      {{- if .Values.datanode.storage.walDir }}
-      walDir: {{ .Values.datanode.storage.walDir }}
-      {{- end }}
   {{- if (and .Values.prometheusMonitor (eq .Values.prometheusMonitor.enabled true ))}}
   prometheusMonitor: {{- toYaml .Values.prometheusMonitor | nindent 4 }}
   {{- end }}
@@ -70,13 +67,6 @@ spec:
     {{- else if .Values.storage.local }}
     local:
       directory: {{ .Values.storage.local.directory }}
-    {{- else if .Values.storage.oss }}
-    oss:
-      bucket: {{ .Values.storage.oss.bucket }}
-      region: {{ .Values.storage.oss.region }}
-      root: {{ .Values.storage.oss.root }}
-      secretName: {{ .Values.storage.oss.secretName }}
-      endpoint: {{ .Values.storage.oss.endpoint }}
     {{- else }}
     {}
     {{- end }}
