@@ -46,7 +46,7 @@ spec:
       storageClassName: {{ .Values.datanode.storage.storageClassName }}
       storageSize: {{ .Values.datanode.storage.storageSize }}
       storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
-  {{- if (and .Values.prometheusMonitor .Values.prometheusMonitor.enabled )}}
+  {{- if (and .Values.prometheusMonitor (eq .Values.prometheusMonitor.enabled true ))}}
   prometheusMonitor: {{- toYaml .Values.prometheusMonitor | nindent 4 }}
   {{- end }}
   httpServicePort: {{ .Values.httpServicePort }}
@@ -62,7 +62,7 @@ spec:
       bucket: {{ .Values.storage.s3.bucket }}
       region: {{ .Values.storage.s3.region }}
       root: {{ .Values.storage.s3.root }}
-      secretName: {{ .Values.storage.s3.credentials.secretName }}
+      secretName: {{ .Values.storage.s3.secretName }}
       endpoint: {{ .Values.storage.s3.endpoint }}
     {{- else if .Values.storage.local }}
     local:
