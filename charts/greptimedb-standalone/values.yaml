@@ -33,9 +33,32 @@ command: [
 args: []
 
 # Environment variables
-env: []
-#  - name: DEMO_GREETING
-#    value: "Hello from the environment"
+env:
+  GREPTIMEDB_STANDALONE__HTTP_OPTIONS__ADDR: "0.0.0.0:4000"
+  GREPTIMEDB_STANDALONE__HTTP_OPTIONS__TIMEOUT: "120s"
+  GREPTIMEDB_STANDALONE__PROM_OPTIONS__ADDR: "0.0.0.0:4004"
+  GREPTIMEDB_STANDALONE__WAL__FILE_SIZE: "128MB"
+  GREPTIMEDB_STANDALONE__WAL__PURGE_THRESHOLD: "2GB"
+  GREPTIMEDB_STANDALONE__STORAGE__TYPE: "File"
+  # Temporary put this in another directory to clear the database's data.
+  GREPTIMEDB_STANDALONE__STORAGE__DATA_HOME: "/tmp/greptimedb/data"
+  # GREPTIMEDB_STANDALONE__STORAGE__TYPE: "S3"
+  # GREPTIMEDB_STANDALONE__STORAGE__BUCKET: "bucket-name"
+  # GREPTIMEDB_STANDALONE__STORAGE__ROOT: "/data"
+  # GREPTIMEDB_STANDALONE__STORAGE__REGION: "ap-southeast-1"
+  GREPTIMEDB_STANDALONE__STORAGE__CACHE_PATH: "/tmp/greptimedb/s3cache"
+  GREPTIMEDB_STANDALONE__STORAGE__GLOBAL_TTL: "1d"
+  GREPTIMEDB_STANDALONE__STORAGE__MANIFEST__CHECKPOINT_ON_STARTUP: "true"
+  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__REGION_WRITE_BUFFER_SIZE: "256MB"
+  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__REGION_WRITE_BUFFER_SIZE: "1MB"
+  GREPTIMEDB_STANDALONE__STORAGE__FLUSH__GLOBAL_WRITE_BUFFER_SIZE: "512MB"
+  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__GLOBAL_WRITE_BUFFER_SIZE: "300MB"
+  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__GLOBAL_WRITE_BUFFER_SIZE: "100MB"
+  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__AUTO_FLUSH_INTERVAL: "5m"
+  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__MAX_FLUSH_TASKS: "2"
+  # GREPTIMEDB_STANDALONE__STORAGE__COMPACTION__MAX_INFLIGHT_TASKS: "2"
+  MALLOC_CONF: "prof:true"
+  # GREPTIMEDB_STANDALONE__STORAGE__SKIP_WAL: "true"
 
 # Environment variables
 envFrom: {}
@@ -64,10 +87,6 @@ securityContext: {}
 #  runAsGroup: 3000
 #  fsGroup: 2000
 
-service:
-  type: ClusterIP
-
-
 # Resource requests and limits for the container
 resources: {}
 #  limits:
@@ -77,11 +96,9 @@ resources: {}
 #    cpu: 200m
 #    memory: 512Mi
 
-
 # The node selector
 nodeSelector: {}
 #  disktype: ssd
-
 
 # The tolerations
 tolerations: {}
@@ -89,7 +106,6 @@ tolerations: {}
 #    operator: "Equal"
 #    value: "value1"
 #    effect: "NoSchedule"
-
 
 # The affinity rules
 affinity: {}
@@ -121,23 +137,32 @@ dnsConfig: {}
 #    - name: ndots
 #      value: "2"
 
-
 # Grace period to allow the single binary to shutdown before it is killed
 terminationGracePeriodSeconds: 30
-
 
 persistence:
   # Enable persistent disk
   enabled: true
-
   # Enable StatefulSetAutoDeletePVC feature
   enableStatefulSetAutoDeletePVC: false
-
   # Size of persistent disk
   size: 10Gi
-
   # Storage class name
   storageClass: null
-
   # Selector for persistent disk
   selector: null
+
+monitoring:
+  enabled: true
+  # PodMonitor annotations
+  annotations: {}
+  # PodMonitor labels
+  labels:
+    release: prometheus
+  # PodMonitor scrape interval
+  interval: 15s
+
+service:
+  type: ClusterIP
+  # Annotations for Service
+  annotations: {}
