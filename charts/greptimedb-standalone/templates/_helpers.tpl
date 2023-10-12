@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "greptimedb-standalone.name" -}}
+{{- define "greptimedb.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "greptimedb-standalone.fullname" -}}
+{{- define "greptimedb.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "greptimedb-standalone.chart" -}}
+{{- define "greptimedb.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "greptimedb-standalone.labels" -}}
-helm.sh/chart: {{ include "greptimedb-standalone.chart" . }}
-{{ include "greptimedb-standalone.selectorLabels" . }}
+{{- define "greptimedb.labels" -}}
+helm.sh/chart: {{ include "greptimedb.chart" . }}
+{{ include "greptimedb.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "greptimedb-standalone.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "greptimedb-standalone.name" . }}
+{{- define "greptimedb.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "greptimedb.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "greptimedb-standalone.serviceAccountName" -}}
+{{- define "greptimedb.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "greptimedb-standalone.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "greptimedb.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
