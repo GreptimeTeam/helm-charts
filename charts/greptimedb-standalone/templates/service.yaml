@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "greptimedb.fullname" . }}
+  name: {{ include "greptimedb-standalone.fullname" . }}
   labels:
-    {{- include "greptimedb.labels" . | nindent 4 }}
+    {{- include "greptimedb-standalone.labels" . | nindent 4 }}
   {{- with .Values.service.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -27,9 +27,5 @@ spec:
       port: {{ .Values.postgresPort }}
       targetPort: {{ .Values.postgresPort }}
       protocol: TCP
-    - name: prom
-      port: {{ .Values.promPort }}
-      targetPort: {{ .Values.promPort }}
-      protocol: TCP
   selector:
-    {{- include "greptimedb.selectorLabels" . | nindent 4 }}
+    {{- include "greptimedb-standalone.selectorLabels" . | nindent 4 }}

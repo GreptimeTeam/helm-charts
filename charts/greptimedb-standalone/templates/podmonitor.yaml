@@ -2,7 +2,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: {{ include "greptimedb.fullname" . }}
+  name: {{ include "greptimedb-standalone.fullname" . }}
   namespace: {{ .Release.Namespace }}
   {{- with .Values.monitoring.labels }}
   labels:
@@ -22,5 +22,5 @@ spec:
       - {{ .Release.Namespace }}
   selector:
     matchLabels:
-      {{- include "greptimedb.selectorLabels" . | nindent 6 }}
+      {{- include "greptimedb-standalone.selectorLabels" . | nindent 6 }}
 {{- end }}

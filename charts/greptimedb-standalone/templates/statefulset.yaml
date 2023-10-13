@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "greptimedb.fullname" . }}
+  name: {{ include "greptimedb-standalone.fullname" . }}
   namespace: {{ $.Release.Namespace }}
   labels:
-    {{- include "greptimedb.labels" . | nindent 4 }}
+    {{- include "greptimedb-standalone.labels" . | nindent 4 }}
   {{- if not (empty .Values.annotations) }}
   annotations:
     {{- with .Values.annotations }}
@@ -16,7 +16,7 @@ spec:
   updateStrategy:
     rollingUpdate:
       partition: 0
-  serviceName: {{ include "greptimedb.fullname" . }}
+  serviceName: {{ include "greptimedb-standalone.fullname" . }}
   {{- if and (semverCompare ">= 1.23-0" .Capabilities.KubeVersion.Version) (.Values.persistence.enableStatefulSetAutoDeletePVC) (.Values.persistence.enabled) }}
   persistentVolumeClaimRetentionPolicy:
     whenDeleted: Delete
@@ -24,7 +24,7 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "greptimedb.selectorLabels" . | nindent 6 }}
+      {{- include "greptimedb-standalone.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
@@ -32,12 +32,12 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
       labels:
-        {{- include "greptimedb.selectorLabels" . | nindent 8 }}
+        {{- include "greptimedb-standalone.selectorLabels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      serviceAccountName: {{ include "greptimedb.serviceAccountName" . }}
+      serviceAccountName: {{ include "greptimedb-standalone.serviceAccountName" . }}
       {{- if .Values.image.pullSecrets }}
       imagePullSecrets:
       {{- range .Values.image.pullSecrets }}
@@ -50,16 +50,19 @@ spec:
       {{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       containers:
-        - name: {{ include "greptimedb.fullname" . }}
+        - name: {{ include "greptimedb-standalone.fullname" . }}
           image: {{ printf "%s/%s:%s" .Values.image.registry .Values.image.repository .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- with .Values.command }}
           command:
-            {{- toYaml . | nindent 10 }}
+            - greptime
+            - standalone
+            - start
+          {{- if .Values.command }}
+            {{- toYaml .Values.command | nindent 12 }}
           {{- end }}
-          {{- with .Values.args }}
+          {{- if .Values.args }}
           args:
-            {{- toYaml . | nindent 10 }}
+            {{- toYaml .Values.args | nindent 12 }}
           {{- end }}
           ports:
             - containerPort: {{ .Values.httpPort }}
@@ -73,9 +76,6 @@ spec:
               protocol: TCP
             - containerPort: {{ .Values.postgresPort }}
               name: postgres
-              protocol: TCP
-            - containerPort: {{ .Values.promPort }}
-              name: prom
               protocol: TCP
           {{- if .Values.env }}
           env:

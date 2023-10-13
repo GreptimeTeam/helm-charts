@@ -24,16 +24,14 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-command: [
-  "greptime", "standalone", "start"
-]
+command: []
 
 args: []
 
 env:
-  GREPTIMEDB_STANDALONE__HTTP_OPTIONS__ADDR: "0.0.0.0:4000"
-  GREPTIMEDB_STANDALONE__HTTP_OPTIONS__TIMEOUT: "120s"
-  GREPTIMEDB_STANDALONE__PROM_OPTIONS__ADDR: "0.0.0.0:4004"
+  GREPTIMEDB_STANDALONE__HTTP__ADDR: "0.0.0.0:4000"
+  GREPTIMEDB_STANDALONE__HTTP__TIMEOUT: "120s"
+#  GREPTIMEDB_STANDALONE__PROM_OPTIONS__ADDR: "0.0.0.0:4004"
 
 #  GREPTIMEDB_STANDALONE__WAL__FILE_SIZE: "128MB"
 #  GREPTIMEDB_STANDALONE__WAL__PURGE_THRESHOLD: "2GB"
@@ -154,12 +152,11 @@ persistence:
   selector: null
 
 monitoring:
-  enabled: true
+  enabled: false
   # PodMonitor annotations
   annotations: {}
   # PodMonitor labels
-  labels:
-    release: prometheus
+  labels: {}
   # PodMonitor scrape interval
   interval: 15s
 
@@ -167,7 +164,6 @@ httpPort: 4000
 grpcPort: 4001
 mysqlPort: 4002
 postgresPort: 4003
-promPort: 4004
 
 service:
   type: ClusterIP
