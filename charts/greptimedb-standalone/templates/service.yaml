@@ -12,24 +12,24 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - name: http
-      port: 4000
-      targetPort: 4000
+      port: {{ .Values.httpPort }}
+      targetPort: {{ .Values.httpPort }}
       protocol: TCP
     - name: grpc
-      port: 4001
-      targetPort: 4001
+      port: {{ .Values.grpcPort }}
+      targetPort: {{ .Values.grpcPort }}
       protocol: TCP
     - name: mysql
-      port: 4002
-      targetPort: 4002
+      port: {{ .Values.mysqlPort }}
+      targetPort: {{ .Values.mysqlPort }}
       protocol: TCP
     - name: postgres
-      port: 4003
-      targetPort: 4003
+      port: {{ .Values.postgresPort }}
+      targetPort: {{ .Values.postgresPort }}
       protocol: TCP
     - name: prom
-      port: 4004
-      targetPort: 4004
+      port: {{ .Values.promPort }}
+      targetPort: {{ .Values.promPort }}
       protocol: TCP
   selector:
     {{- include "greptimedb.selectorLabels" . | nindent 4 }}

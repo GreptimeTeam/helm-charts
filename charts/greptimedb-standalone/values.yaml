@@ -24,43 +24,44 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-# Command to execute instead of defined in Docker image
 command: [
   "greptime", "standalone", "start"
 ]
 
-# Additional cli args
 args: []
 
-# Environment variables
-env: []
-#  GREPTIMEDB_STANDALONE__HTTP_OPTIONS__ADDR: "0.0.0.0:4000"
-#  GREPTIMEDB_STANDALONE__HTTP_OPTIONS__TIMEOUT: "120s"
-#  GREPTIMEDB_STANDALONE__PROM_OPTIONS__ADDR: "0.0.0.0:4004"
+env:
+  GREPTIMEDB_STANDALONE__HTTP_OPTIONS__ADDR: "0.0.0.0:4000"
+  GREPTIMEDB_STANDALONE__HTTP_OPTIONS__TIMEOUT: "120s"
+  GREPTIMEDB_STANDALONE__PROM_OPTIONS__ADDR: "0.0.0.0:4004"
+
 #  GREPTIMEDB_STANDALONE__WAL__FILE_SIZE: "128MB"
 #  GREPTIMEDB_STANDALONE__WAL__PURGE_THRESHOLD: "2GB"
+#
 #  GREPTIMEDB_STANDALONE__STORAGE__TYPE: "File"
 #  # Temporary put this in another directory to clear the database's data.
 #  GREPTIMEDB_STANDALONE__STORAGE__DATA_HOME: "/tmp/greptimedb/data"
+#
 #  # GREPTIMEDB_STANDALONE__STORAGE__TYPE: "S3"
 #  # GREPTIMEDB_STANDALONE__STORAGE__BUCKET: "bucket-name"
 #  # GREPTIMEDB_STANDALONE__STORAGE__ROOT: "/data"
 #  # GREPTIMEDB_STANDALONE__STORAGE__REGION: "ap-southeast-1"
+#
 #  GREPTIMEDB_STANDALONE__STORAGE__CACHE_PATH: "/tmp/greptimedb/s3cache"
+#  GREPTIMEDB_DATANODE__WAL__DIR: "/tmp/greptimedb/wal"
 #  GREPTIMEDB_STANDALONE__STORAGE__GLOBAL_TTL: "1d"
 #  GREPTIMEDB_STANDALONE__STORAGE__MANIFEST__CHECKPOINT_ON_STARTUP: "true"
-#  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__REGION_WRITE_BUFFER_SIZE: "256MB"
-#  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__REGION_WRITE_BUFFER_SIZE: "1MB"
 #  GREPTIMEDB_STANDALONE__STORAGE__FLUSH__GLOBAL_WRITE_BUFFER_SIZE: "512MB"
-#  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__GLOBAL_WRITE_BUFFER_SIZE: "300MB"
-#  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__GLOBAL_WRITE_BUFFER_SIZE: "100MB"
+#  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__REGION_WRITE_BUFFER_SIZE: "256MB"
 #  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__AUTO_FLUSH_INTERVAL: "5m"
 #  # GREPTIMEDB_STANDALONE__STORAGE__FLUSH__MAX_FLUSH_TASKS: "2"
 #  # GREPTIMEDB_STANDALONE__STORAGE__COMPACTION__MAX_INFLIGHT_TASKS: "2"
 #  MALLOC_CONF: "prof:true"
 #  # GREPTIMEDB_STANDALONE__STORAGE__SKIP_WAL: "true"
+#  # GREPTIMEDB_DATANODE__STORAGE__MANIFEST__CHECKPOINT_MARGIN: "100"
+#  # GREPTIMEDB_DATANODE__STORAGE__MANIFEST__GC_DURATION: "5m"
 
-# Environment variables
+
 envFrom: {}
 #  - secretRef:
 #      name: config
@@ -153,13 +154,20 @@ persistence:
   selector: null
 
 monitoring:
-  enabled: false
+  enabled: true
   # PodMonitor annotations
   annotations: {}
   # PodMonitor labels
-  labels: {}
+  labels:
+    release: prometheus
   # PodMonitor scrape interval
   interval: 15s
+
+httpPort: 4000
+grpcPort: 4001
+mysqlPort: 4002
+postgresPort: 4003
+promPort: 4004
 
 service:
   type: ClusterIP
