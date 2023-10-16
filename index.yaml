@@ -449,4 +449,15 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-operator-0.1.1-alpha.1/greptimedb-operator-0.1.1-alpha.1.tgz
     version: 0.1.1-alpha.1
-generated: "2023-10-11T08:53:14.216236001Z"
+  greptimedb-standalone:
+  - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2023-10-16T12:10:29.877693389Z"
+    description: A Helm chart for deploying standalone greptimedb.
+    digest: 5ea40b4e1119ad62ee5a50f8d772312c4bcdded388f5bf20d3749033b501e4bc
+    name: greptimedb-standalone
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
+    version: 0.1.0-alpha.1
+generated: "2023-10-16T12:10:29.878579235Z"
