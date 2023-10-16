@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "greptimedb-standalone.fullname" . }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "greptimedb-standalone.labels" . | nindent 4 }}
+  {{- if not (empty .Values.annotations) }}
+  annotations:
+    {{- with .Values.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  replicas: 1
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+  serviceName: {{ include "greptimedb-standalone.fullname" . }}
+  {{- if and (semverCompare ">= 1.23-0" .Capabilities.KubeVersion.Version) (.Values.persistence.enableStatefulSetAutoDeletePVC) (.Values.persistence.enabled) }}
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Delete
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "greptimedb-standalone.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "greptimedb-standalone.selectorLabels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ include "greptimedb-standalone.serviceAccountName" . }}
+      {{- if .Values.image.pullSecrets }}
+      imagePullSecrets:
+      {{- range .Values.image.pullSecrets }}
+        - name: {{ . }}
+      {{- end }}
+      {{- end }}
+      {{- if .Values.securityContext }}
+      securityContext:
+        {{- toYaml .Values.securityContext | nindent 8 }}
+      {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      containers:
+        - name: {{ include "greptimedb-standalone.fullname" . }}
+          image: {{ printf "%s/%s:%s" .Values.image.registry .Values.image.repository .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - greptime
+            - standalone
+            - start
+          {{- if .Values.command }}
+            {{- toYaml .Values.command | nindent 12 }}
+          {{- end }}
+          {{- if .Values.args }}
+          args:
+            {{- toYaml .Values.args | nindent 12 }}
+          {{- end }}
+          ports:
+            - containerPort: {{ .Values.httpPort }}
+              name: http
+              protocol: TCP
+            - containerPort: {{ .Values.grpcPort }}
+              name: grpc
+              protocol: TCP
+            - containerPort: {{ .Values.mysqlPort }}
+              name: mysql
+              protocol: TCP
+            - containerPort: {{ .Values.postgresPort }}
+              name: postgres
+              protocol: TCP
+          {{- if .Values.env }}
+          env:
+            {{- range $key, $val := .Values.env }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+            {{- end }}
+          {{- end }}
+          {{- with .Values.envFrom }}
+          envFrom:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.podSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: data
+              mountPath: /tmp/greptimedb
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.dnsConfig }}
+      dnsConfig:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  {{- if .Values.persistence.enabled }}
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        {{- with .Values.persistence.storageClass }}
+        storageClassName: {{ if (eq "-" .) }}""{{ else }}{{ . }}{{ end }}
+        {{- end }}
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size | quote }}
+        {{- with .Values.persistence.selector }}
+        selector:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+  {{- end }}

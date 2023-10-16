@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "greptimedb-standalone.fullname" . }}
+  labels:
+    {{- include "greptimedb-standalone.labels" . | nindent 4 }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: http
+      port: {{ .Values.httpPort }}
+      targetPort: {{ .Values.httpPort }}
+      protocol: TCP
+    - name: grpc
+      port: {{ .Values.grpcPort }}
+      targetPort: {{ .Values.grpcPort }}
+      protocol: TCP
+    - name: mysql
+      port: {{ .Values.mysqlPort }}
+      targetPort: {{ .Values.mysqlPort }}
+      protocol: TCP
+    - name: postgres
+      port: {{ .Values.postgresPort }}
+      targetPort: {{ .Values.postgresPort }}
+      protocol: TCP
+  selector:
+    {{- include "greptimedb-standalone.selectorLabels" . | nindent 4 }}

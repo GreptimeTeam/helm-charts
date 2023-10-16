@@ -3,3 +3,4 @@ chart-dirs:
 charts:
   - charts/greptimedb-operator
   - charts/greptimedb
+  - charts/greptimedb-standalone

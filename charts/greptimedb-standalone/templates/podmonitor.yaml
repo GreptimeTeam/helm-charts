@@ -1,0 +1,26 @@
+{{- if .Values.monitoring.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "greptimedb-standalone.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  {{- with .Values.monitoring.labels }}
+  labels:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.monitoring.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  podMetricsEndpoints:
+    - interval: {{ .Values.monitoring.interval }}
+      port: http
+      path: /metrics
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "greptimedb-standalone.selectorLabels" . | nindent 6 }}
+{{- end }}

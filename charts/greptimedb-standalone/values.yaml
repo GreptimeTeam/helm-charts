@@ -1,0 +1,170 @@
+image:
+  registry: docker.io
+  # The image repository
+  repository: greptime/greptimedb
+  # The image tag
+  tag: "v0.4.0"
+  # The image pull policy for the controller
+  pullPolicy: IfNotPresent
+  # The image pull secrets.
+  pullSecrets: []
+
+# Overrides the chart's name
+nameOverride: ""
+
+# Provide a name to substitute for the full names of resources
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+command: []
+
+args: []
+
+env:
+  GREPTIMEDB_STANDALONE__HTTP__ADDR: "0.0.0.0:4000"
+#  GREPTIMEDB_STANDALONE__HTTP__TIMEOUT: "120s"
+
+#  GREPTIMEDB_STANDALONE__WAL__FILE_SIZE: "128MB"
+#  GREPTIMEDB_STANDALONE__WAL__PURGE_THRESHOLD: "2GB"
+#  GREPTIMEDB_DATANODE__WAL__DIR: "/tmp/greptimedb/wal"
+
+#  # configure to use local storage.
+#  GREPTIMEDB_STANDALONE__STORAGE__TYPE: "File"
+#  GREPTIMEDB_STANDALONE__STORAGE__DATA_HOME: "/tmp/greptimedb"
+
+#  # configure to use s3 storage.
+#  GREPTIMEDB_STANDALONE__STORAGE__TYPE: "S3"
+#  GREPTIMEDB_STANDALONE__STORAGE__BUCKET: "bucket-name"
+#  GREPTIMEDB_STANDALONE__STORAGE__ROOT: "/data"
+#  GREPTIMEDB_STANDALONE__STORAGE__REGION: "ap-southeast-1"
+#  GREPTIMEDB_STANDALONE__STORAGE__ACCESS_KEY_ID: "access_key_id"
+#  GREPTIMEDB_STANDALONE__STORAGE__SECRET_ACCESS_KEY: "secret_access_key"
+#  GREPTIMEDB_STANDALONE__STORAGE__CACHE__CACHE_PATH: "/tmp/greptimedb/s3cache"
+
+#  GREPTIMEDB_STANDALONE__STORAGE__GLOBAL_TTL: "1d"
+#  GREPTIMEDB_STANDALONE__STORAGE__FLUSH__GLOBAL_WRITE_BUFFER_SIZE: "512MB"
+#  GREPTIMEDB_STANDALONE__STORAGE__FLUSH__REGION_WRITE_BUFFER_SIZE: "256MB"
+#  GREPTIMEDB_STANDALONE__STORAGE__FLUSH__AUTO_FLUSH_INTERVAL: "5m"
+#  GREPTIMEDB_STANDALONE__STORAGE__FLUSH__MAX_FLUSH_TASKS: "2"
+#  GREPTIMEDB_STANDALONE__STORAGE__COMPACTION__MAX_INFLIGHT_TASKS: "2"
+#  GREPTIMEDB_DATANODE__STORAGE__MANIFEST__CHECKPOINT_MARGIN: "100"
+#  GREPTIMEDB_DATANODE__STORAGE__MANIFEST__GC_DURATION: "5m"
+
+
+envFrom: {}
+#  - secretRef:
+#      name: config
+
+# The pod annotations
+podAnnotations: {}
+
+# The pod labels
+podLabels: {}
+
+# The pod security context
+podSecurityContext: {}
+#  runAsUser: 1000
+#  runAsGroup: 3000
+#  fsGroup: 2000
+
+# The annotations
+annotations: {}
+#  imageregistry: "https://hub.docker.com/"
+
+# The security context
+securityContext: {}
+#  runAsUser: 1000
+#  runAsGroup: 3000
+#  fsGroup: 2000
+
+# Resource requests and limits for the container
+resources: {}
+#  limits:
+#    cpu: 800m
+#    memory: 1Gi
+#  requests:
+#    cpu: 200m
+#    memory: 512Mi
+
+# The node selector
+nodeSelector: {}
+#  disktype: ssd
+
+# The tolerations
+tolerations: {}
+#  - key: "key1"
+#    operator: "Equal"
+#    value: "value1"
+#    effect: "NoSchedule"
+
+# The affinity rules
+affinity: {}
+#  nodeAffinity:
+#    requiredDuringSchedulingIgnoredDuringExecution:
+#      nodeSelectorTerms:
+#        - matchExpressions:
+#            - key: topology.kubernetes.io/zone
+#              operator: In
+#              values:
+#                - antarctica-east1
+#                - antarctica-west1
+#    preferredDuringSchedulingIgnoredDuringExecution:
+#      - weight: 1
+#        preference:
+#          matchExpressions:
+#            - key: another-node-label-key
+#              operator: In
+#              values:
+#                - another-node-label-value
+
+# DNS config for pods
+dnsConfig: {}
+#  nameservers:
+#    - 10.0.0.1
+#  searches:
+#    - mydomain.local
+#  options:
+#    - name: ndots
+#      value: "2"
+
+# Grace period to allow the single binary to shutdown before it is killed
+terminationGracePeriodSeconds: 30
+
+persistence:
+  # Enable persistent disk
+  enabled: true
+  # Enable StatefulSetAutoDeletePVC feature
+  enableStatefulSetAutoDeletePVC: false
+  # Size of persistent disk
+  size: 10Gi
+  # Storage class name
+  storageClass: null
+  # Selector for persistent disk
+  selector: null
+
+monitoring:
+  enabled: false
+  # PodMonitor annotations
+  annotations: {}
+  # PodMonitor labels
+  labels: {}
+  # PodMonitor scrape interval
+  interval: 15s
+
+httpPort: 4000
+grpcPort: 4001
+mysqlPort: 4002
+postgresPort: 4003
+
+service:
+  type: ClusterIP
+  # Annotations for Service
+  annotations: {}
