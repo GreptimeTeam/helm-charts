@@ -116,6 +116,7 @@ kubectl delete crds greptimedbclusters.greptime.io
 
 - [greptimedb](./charts/greptimedb/README.md)
 - [greptimedb-operator](./charts/greptimedb-operator/README.md)
+- [greptimedb-standalone](./charts/greptimedb-standalone/README.md)
 
 ## License
 
