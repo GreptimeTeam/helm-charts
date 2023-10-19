@@ -13,16 +13,6 @@ entries:
     version: 0.1.1-alpha.18
   - apiVersion: v2
     appVersion: 0.4.0
-    created: "2023-10-17T08:18:48.743253136Z"
-    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
-    digest: 697f1a387d74b9b658999627f8f26856651cdeb23d65d3987af2d1e835abce9e
-    name: greptimedb
-    type: application
-    urls:
-    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-0.1.1-alpha.17/greptimedb-0.1.1-alpha.17.tgz
-    version: 0.1.1-alpha.17
-  - apiVersion: v2
-    appVersion: 0.4.0
     created: "2023-10-19T09:31:39.901127423Z"
     description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
     digest: c229276db0ee77a9c3caf733efc6cd8d43ba8a34e0c6989b656f035cc7fe8fe8
@@ -181,16 +171,6 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-0.1.1-alpha.1/greptimedb-0.1.1-alpha.1.tgz
     version: 0.1.1-alpha.1
-  - apiVersion: v2
-    appVersion: 0.4.1
-    created: "2023-10-19T12:30:36.360308682Z"
-    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
-    digest: e29ba68f06444ec6efdd05e6c4a560103908f5c75768d7af231de4713c96462b
-    name: greptimedb
-    type: application
-    urls:
-    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-0.1.0/greptimedb-0.1.0.tgz
-    version: 0.1.0
   greptimedb-cluster:
   - apiVersion: v2
     appVersion: 0.4.1
@@ -202,27 +182,6 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-cluster-0.1.0/greptimedb-cluster-0.1.0.tgz
     version: 0.1.0
-  greptimedb-etcd:
-  - apiVersion: v2
-    appVersion: 3.5.5
-    created: "2023-03-23T04:23:47.315183Z"
-    description: A Helm chart for deploying etcd cluster in Kubernetes
-    digest: 38b753502f96a61bd2d66d5cd16a37d492f25ee308e735d74f8e9b9af6a955b6
-    name: greptimedb-etcd
-    type: application
-    urls:
-    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-etcd-0.1.1-alpha.3/greptimedb-etcd-0.1.1-alpha.3.tgz
-    version: 0.1.1-alpha.3
-  - apiVersion: v2
-    appVersion: 3.5.5
-    created: "2022-11-29T11:38:31.084776811Z"
-    description: A Helm chart for deploying etcd cluster in Kubernetes
-    digest: fe4e302b05478bb5104598faf4ee2127f96136af6c32c2b9b7ccf0a9696f41b9
-    name: greptimedb-etcd
-    type: application
-    urls:
-    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-etcd-0.1.1-alpha.1/greptimedb-etcd-0.1.1-alpha.1.tgz
-    version: 0.1.1-alpha.1
   greptimedb-operator:
   - apiVersion: v2
     appVersion: 0.1.0-alpha.17
