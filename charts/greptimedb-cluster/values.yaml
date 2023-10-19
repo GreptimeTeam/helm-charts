@@ -33,6 +33,7 @@ frontend:
 
 meta:
   replicas: 1
+  etcdEndpoints: "etcd.default.svc.cluster.local:2379"
   componentSpec: {}
 
 datanode:
@@ -51,9 +52,6 @@ initializer:
   repository: greptime/greptimedb-initializer
   tag: 0.1.0-alpha.17
 
-# The etcdEndpoints need be modified to the actual etcd cluster.
-etcdEndpoints: "etcd.default.svc.cluster.local:2379"
-
 httpServicePort: 4000
 grpcServicePort: 4001
 mysqlServicePort: 4002
@@ -62,7 +60,7 @@ openTSDBServicePort: 4242
 
 # configure to prometheus podmonitor
 prometheusMonitor: {}
-#  enabled: true
+#  enabled: false
 #  path: "/metrics"
 #  port: "http"
 #  interval: "30s"

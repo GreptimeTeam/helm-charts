@@ -30,9 +30,9 @@ spec:
     {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}
-    {{- if .Values.etcdEndpoints }}
+    {{- if .Values.meta.etcdEndpoints }}
     etcdEndpoints:
-      - {{ .Values.etcdEndpoints }}
+      - {{ .Values.meta.etcdEndpoints }}
     {{- end }}
     {{- if .Values.meta.componentSpec }}
     template: {{- toYaml .Values.meta.componentSpec | nindent 6 }}

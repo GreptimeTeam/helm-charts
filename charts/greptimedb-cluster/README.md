@@ -10,7 +10,9 @@ Helm chart for [GreptimeDB](https://github.com/GreptimeTeam/greptimedb) cluster.
 # Add charts repo.
 helm repo add greptime https://greptimeteam.github.io/helm-charts/
 helm repo update
+```
 
+```console
 # Optional: Install etcd cluster.
 # You also can use your own etcd cluster.
 helm install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
@@ -18,7 +20,9 @@ helm install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
     --set auth.rbac.create=false \
     --set auth.rbac.token.enabled=false \
     -n default
+```
 
+```console
 # Install greptimedb in default namespace.
 helm install greptimedb-cluster greptime/greptimedb-cluster -n default --devel
 ```
@@ -33,22 +37,22 @@ helm uninstall greptimedb-cluster -n default
 
 ### Common parameters
 
-| Name                               | Description                                                 | Value                             |
-|------------------------------------|-------------------------------------------------------------|-----------------------------------|
-| `image.registry`                   | GreptimeDB image registry                                   | `docker.io`                       |
-| `image.repository`                 | GreptimeDB image name                                       | `greptime/greptimedb`             |
-| `image.tag`                        | GreptimeDB image tag                                        | `v0.4.1`                          |
-| `image.pullSecrets`                | Docker registry secret names as an array                    | `[]`                              |
-| `resources.limits`                 | The resources limits for the container                      | `{}`                              |
-| `resources.requests`               | The requested resources for the container                   | `{}`                              |
-| `initializer.registry`             | Initializer image registry                                  | `docker.io`                       |
-| `initializer.repository`           | Initializer image repository                                | `greptime/greptimedb-initializer` |
-| `initializer.tag`                  | Initializer image tag                                       | `0.1.0-alpha.17`                  |
-| `httpServicePort`                  | GreptimeDB http port                                        | `4000`                            |
-| `grpcServicePort`                  | GreptimeDB grpc port                                        | `4001`                            |
-| `mysqlServicePort`                 | GreptimeDB mysql port                                       | `4002`                            |
-| `postgresServicePort`              | GreptimeDB postgres port                                    | `4003`                            |
-| `openTSDBServicePort`              | GreptimeDB opentsdb port                                    | `4242`                            |
+| Name                               | Description                               | Value                             |
+|------------------------------------|-------------------------------------------|-----------------------------------|
+| `image.registry`                   | Image registry                            | `docker.io`                       |
+| `image.repository`                 | Image name                                | `greptime/greptimedb`             |
+| `image.tag`                        | Image tag                                 | `v0.4.1`                          |
+| `image.pullSecrets`                | Docker registry secret names as an array  | `[]`                              |
+| `resources.limits`                 | The resources limits for the container    | `{}`                              |
+| `resources.requests`               | The requested resources for the container | `{}`                              |
+| `initializer.registry`             | Initializer image registry                | `docker.io`                       |
+| `initializer.repository`           | Initializer image repository              | `greptime/greptimedb-initializer` |
+| `initializer.tag`                  | Initializer image tag                     | `0.1.0-alpha.17`                  |
+| `httpServicePort`                  | GreptimeDB http port                      | `4000`                            |
+| `grpcServicePort`                  | GreptimeDB grpc port                      | `4001`                            |
+| `mysqlServicePort`                 | GreptimeDB mysql port                     | `4002`                            |
+| `postgresServicePort`              | GreptimeDB postgres port                  | `4003`                            |
+| `openTSDBServicePort`              | GreptimeDB opentsdb port                  | `4242`                            |
 
 
 ### Frontend parameters
