@@ -191,6 +191,17 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-0.1.0/greptimedb-0.1.0.tgz
     version: 0.1.0
+  greptimedb-cluster:
+  - apiVersion: v2
+    appVersion: 0.4.1
+    created: "2023-10-19T12:43:20.565601583Z"
+    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
+    digest: 4b414e9a53317a43d6949f97959d9c30eb3a6118a8e7e03cb21b473ff294f6a7
+    name: greptimedb-cluster
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-cluster-0.1.0/greptimedb-cluster-0.1.0.tgz
+    version: 0.1.0
   greptimedb-etcd:
   - apiVersion: v2
     appVersion: 3.5.5
@@ -533,4 +544,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2023-10-19T12:30:36.36042778Z"
+generated: "2023-10-19T12:43:20.565716882Z"
