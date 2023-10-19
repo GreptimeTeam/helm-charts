@@ -33,7 +33,7 @@ resources:
     memory: 128Mi
 
 rbac:
-  # install Role Based Access Control
+  # Install Role Based Access Control
   create: true
 
 nameOverride: ""

@@ -157,7 +157,7 @@ monitoring:
   # PodMonitor labels
   labels: {}
   # PodMonitor scrape interval
-  interval: 15s
+  interval: 30s
 
 httpPort: 4000
 grpcPort: 4001
