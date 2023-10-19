@@ -53,13 +53,13 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
 3. **Deploy GreptimeDB cluster**
 
    ```console
-   helm install mycluster greptime/greptimedb -n default --devel
+   helm install mycluster greptime/greptimedb-cluster -n default --devel
    ```
 
    If you already have the etcd cluster, you can configure the `etcdEndpoints`：
 
    ```console
-   helm install mycluster greptime/greptimedb \
+   helm install mycluster greptime/greptimedb-cluster \
    --set etcdEndpoints=etcd.default:2379 \
    -n default --devel
    ```
@@ -114,9 +114,10 @@ kubectl delete crds greptimedbclusters.greptime.io
 
 ## List of Charts
 
-- [greptimedb](./charts/greptimedb/README.md)
 - [greptimedb-operator](./charts/greptimedb-operator/README.md)
 - [greptimedb-standalone](./charts/greptimedb-standalone/README.md)
+- [greptimedb-cluster](./charts/greptimedb-cluster/README.md)
+- **Deprecated**: [greptimedb](./charts/greptimedb/README.md)
 
 ## License
 
