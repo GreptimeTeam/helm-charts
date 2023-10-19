@@ -3,6 +3,16 @@ entries:
   greptimedb:
   - apiVersion: v2
     appVersion: 0.4.0
+    created: "2023-10-19T09:31:39.901127423Z"
+    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
+    digest: c229276db0ee77a9c3caf733efc6cd8d43ba8a34e0c6989b656f035cc7fe8fe8
+    name: greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-0.1.1-alpha.17/greptimedb-0.1.1-alpha.17.tgz
+    version: 0.1.1-alpha.17
+  - apiVersion: v2
+    appVersion: 0.4.0
     created: "2023-10-17T08:18:48.743253136Z"
     description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
     digest: 697f1a387d74b9b658999627f8f26856651cdeb23d65d3987af2d1e835abce9e
@@ -183,6 +193,29 @@ entries:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-etcd-0.1.1-alpha.1/greptimedb-etcd-0.1.1-alpha.1.tgz
     version: 0.1.1-alpha.1
   greptimedb-operator:
+  - apiVersion: v2
+    appVersion: 0.1.0-alpha.17
+    created: "2023-10-19T09:31:40.088068245Z"
+    description: The greptimedb-operator Helm chart for Kubernetes
+    digest: bc2eb6ad68b65d8003b9e3e9d1890b528350cec8b37609a8d78f0df659eddd4d
+    home: https://github.com/GreptimeTeam/greptimedb-operator
+    keywords:
+    - operator
+    - database
+    - greptimedb
+    kubeVersion: '>=1.18.0-0'
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+    name: greptimedb-operator
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb-operator
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-operator-0.1.1-alpha.14/greptimedb-operator-0.1.1-alpha.14.tgz
+    version: 0.1.1-alpha.14
   - apiVersion: v2
     appVersion: 0.1.0-alpha.16
     created: "2023-10-11T06:38:55.037847669Z"
@@ -470,4 +503,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2023-10-17T08:18:48.743695738Z"
+generated: "2023-10-19T09:31:40.089039953Z"
