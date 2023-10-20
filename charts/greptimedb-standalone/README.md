@@ -1,6 +1,8 @@
-# Overview
+# greptimedb-standalone
 
-Helm chart for [GreptimeDB](https://github.com/GreptimeTeam/greptimedb) standalone mode.
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.1](https://img.shields.io/badge/AppVersion-0.4.1-informational?style=flat-square)
+
+A Helm chart for deploying standalone greptimedb.
 
 ## How to install
 
@@ -10,7 +12,7 @@ helm repo add greptime https://greptimeteam.github.io/helm-charts/
 helm repo update
 
 # Install greptimedb standalone in default namespace.
-helm install greptimedb-standalone greptime/greptimedb-standalone -n default --devel
+helm install greptimedb-standalone greptime/greptimedb-standalone -n default
 ```
 
 ## How to uninstall
@@ -19,58 +21,50 @@ helm install greptimedb-standalone greptime/greptimedb-standalone -n default --d
 helm uninstall greptimedb-standalone -n default
 ```
 
-## Parameters
+## Values
 
-### Common parameters
-| Name                            | Description                                                         | Value                 |
-|---------------------------------|---------------------------------------------------------------------|-----------------------|
-| `nameOverride`                  | String to partially override release template name                  | `""`                  |
-| `fullnameOverride`              | String to fully override release template name                      | `""`                  |      
-| `image.registry`                | Image registry                                                      | `docker.io`           |
-| `image.repository`              | Image name                                                          | `greptime/greptimedb` |
-| `image.tag`                     | Image tag                                                           | `v0.4.1`              |
-| `image.pullPolicy`              | Image pull policy                                                   | `IfNotPresent`        |
-| `image.pullSecrets`             | Docker registry secret names as an array                            | `[]`                  |
-| `resources.limits`              | The resources limits for the container                              | `{}`                  |
-| `resources.requests`            | The requested resources for the container                           | `{}`                  |
-| `serviceAccount.create`         | Create service account                                              | `true`                |
-| `serviceAccount.annotations`    | Service account annotations                                         | `{}`                  |
-| `serviceAccount.name`           | Service account name                                                | `""`                  |
-| `command`                       | Container command                                                   | `[]`                  |
-| `args`                          | Container args                                                      | `[]`                  |
-| `env`                           | Environment variables                                               | `[]`                  |
-| `envFrom`                       | Maps all the keys on a configmap or secret as environment variables | `{}`                  |
-| `podAnnotations`                | Extra pod annotations to add                                        | `{}`                  |
-| `podLabels`                     | Extra pod labels to add                                             | `{}`                  |
-| `podSecurityContext`            | Security context to apply to the pod                                | `{}`                  |
-| `annotations`                   | Container args                                                      | `{}`                  |
-| `securityContext`               | Security context to apply to the container                          | `{}`                  |
-| `nodeSelector`                  | NodeSelector to apply pod                                           | `{}`                  |
-| `tolerations`                   | Tolerations to apply pod                                            | `{}`                  |
-| `affinity`                      | Affinity configuration for pod                                      | `{}`                  |
-| `dnsConfig`                     | DNS configuration for pod                                           | `{}`                  |
-| `terminationGracePeriodSeconds` | Amount of time given to the pod to shutdown normally                | `30`                  |
-| `httpPort`                      | GreptimeDB http port                                                | `4000`                |
-| `grpcPort`                      | GreptimeDB grpc port                                                | `4001`                |
-| `mysqlPort`                     | GreptimeDB mysql port                                               | `4002`                |
-| `postgresPort`                  | GreptimeDB postgres port                                            | `4003`                |
-| `service.type`                  | Service type                                                        | `ClusterIP`           |
-| `service.annotations`           | Service annotations                                                 | `{}`                  |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| affinity | object | `{}` | Affinity configuration for pod |
+| annotations | object | `{}` | The annotations |
+| args | list | `[]` | The container args |
+| command | list | `[]` | The container command |
+| dnsConfig | object | `{}` | DNS configuration for pod |
+| env | object | `{"GREPTIMEDB_STANDALONE__HTTP__ADDR":"0.0.0.0:4000"}` | Environment variables |
+| envFrom | object | `{}` | Maps all the keys on a configmap or secret as environment variables |
+| fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
+| grpcPort | int | `4001` | GreptimeDB grpc port |
+| httpPort | int | `4000` | GreptimeDB http port |
+| image.pullPolicy | string | `"IfNotPresent"` | The image pull policy for the controller |
+| image.pullSecrets | list | `[]` | The image pull secrets. |
+| image.registry | string | `"docker.io"` | The image registry |
+| image.repository | string | `"greptime/greptimedb"` | The image repository |
+| image.tag | string | `"v0.4.1"` | The image tag |
+| monitoring.annotations | object | `{}` | PodMonitor annotations |
+| monitoring.enabled | bool | `false` | Enable prometheus podmonitor |
+| monitoring.interval | string | `"30s"` | PodMonitor scrape interval |
+| monitoring.labels | object | `{}` | PodMonitor labels |
+| mysqlPort | int | `4002` | GreptimeDB mysql port |
+| nameOverride | string | `""` | Overrides the chart's name |
+| nodeSelector | object | `{}` | NodeSelector to apply pod |
+| persistence.enableStatefulSetAutoDeletePVC | bool | `false` | Enable StatefulSetAutoDeletePVC feature |
+| persistence.enabled | bool | `true` | Enable persistent disk |
+| persistence.selector | string | `nil` | Selector for persistent disk |
+| persistence.size | string | `"10Gi"` | Size of persistent disk |
+| persistence.storageClass | string | `nil` | Storage class name |
+| podAnnotations | object | `{}` | Extra pod annotations to add |
+| podLabels | object | `{}` | Extra pod labels to add |
+| podSecurityContext | object | `{}` | Security context to apply to the pod |
+| postgresPort | int | `4003` | GreptimeDB postgres port |
+| resources | object | `{}` | Resource requests and limits for the container |
+| securityContext | object | `{}` | Security context to apply to the container |
+| service.annotations | object | `{}` | Annotations for Service |
+| service.type | string | `"ClusterIP"` | Service type |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `""` | Service account name |
+| terminationGracePeriodSeconds | int | `30` | Grace period to allow the single binary to shutdown before it is killed |
+| tolerations | object | `{}` | Tolerations to apply pod |
 
-### Volume parameters
-
-| Name                                         | Description                                                                      | Value   |
-|----------------------------------------------|----------------------------------------------------------------------------------|---------|
-| `persistence.enabled`                        | Create persistent volume claim                                                   | `true`  |
-| `persistence.enableStatefulSetAutoDeletePVC` | Whether to enable automatic deletion of stale PVCs due to a scale down operation | `false` |
-| `persistence.size`                           | PVC storage Request for data volume                                              | `10Gi`  |
-| `persistence.storageClass`                   | Persistent volume storage class                                                  | `null`  |
-| `persistence.selector`                       | Selector to match an existing persistent volume                                  | `null`  |
-
-### Metrics parameters
-| Name                          | Description                     | Value   |
-|-------------------------------|---------------------------------|---------|
-| `monitoring.enabled`          | Enable prometheus podmonitor    | `false` |
-| `monitoring.annotations`      | HTTP path to scrape for metrics | `{}`    |
-| `monitoring.labels`           | Prometheus podmonitor labels    | `{}`    |
-| `monitoring.interval`         | Scraped interval                | `30s`   |
+----------------------------------------------
+Autogenerated from chart metadata using [helm-docs v1.11.3](https://github.com/norwoodj/helm-docs/releases/v1.11.3)

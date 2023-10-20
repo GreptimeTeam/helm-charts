@@ -1,6 +1,8 @@
-# Overview
+# greptimedb-cluster
 
-Helm chart for [GreptimeDB](https://github.com/GreptimeTeam/greptimedb) cluster.
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.1](https://img.shields.io/badge/AppVersion-0.4.1-informational?style=flat-square)
+
+A Helm chart for deploying GreptimeDB cluster in Kubernetes
 
 ## How to install
 
@@ -24,7 +26,7 @@ helm install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
 
 ```console
 # Install greptimedb in default namespace.
-helm install greptimedb-cluster greptime/greptimedb-cluster -n default --devel
+helm install greptimedb-cluster greptime/greptimedb-cluster -n default
 ```
 
 ## How to uninstall
@@ -33,88 +35,39 @@ helm install greptimedb-cluster greptime/greptimedb-cluster -n default --devel
 helm uninstall greptimedb-cluster -n default
 ```
 
-## Parameters
+## Values
 
-### Common parameters
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| datanode.componentSpec | object | `{}` | Datanode componentSpec |
+| datanode.replicas | int | `3` | Datanode replicas |
+| datanode.storage.storageClassName | string | `nil` | Storage class for datanode persistent volume |
+| datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
+| datanode.storage.storageSize | string | `"10Gi"` | Storage size for datanode persistent volume |
+| datanode.storage.walDir | string | `"/tmp/greptimedb/wal"` | The wal directory of the storage, default is "/tmp/greptimedb/wal". |
+| frontend.componentSpec | object | `{}` | Frontend componentSpec |
+| frontend.replicas | int | `1` | Frontend replicas |
+| frontend.service | object | `{}` | Frontend service |
+| frontend.tls | object | `{}` | Frontend tls Configure |
+| grpcServicePort | int | `4001` | GreptimeDB grpc service port |
+| httpServicePort | int | `4000` | GreptimeDB http service port |
+| image.pullSecrets | list | `[]` | The image pull secrets. |
+| image.registry | string | `"docker.io"` | The image registry |
+| image.repository | string | `"greptime/greptimedb"` | The image repository |
+| image.tag | string | `"v0.4.1"` | The image tag |
+| initializer.registry | string | `"docker.io"` | Initializer image registry |
+| initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
+| initializer.tag | string | `"0.1.0-alpha.17"` | Initializer image tag |
+| meta.componentSpec | object | `{}` | Meta componentSpec |
+| meta.etcdEndpoints | string | `"etcd.default.svc.cluster.local:2379"` | Meta etcd endpoints |
+| meta.replicas | int | `1` | Meta replicas |
+| mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
+| openTSDBServicePort | int | `4242` | GreptimeDB opentsdb service port |
+| postgresServicePort | int | `4003` | GreptimeDB postgres service port |
+| prometheusMonitor | object | `{}` | Configure to prometheus podmonitor |
+| resources.limits | object | `{"cpu":"500m","memory":"512Mi"}` | The resources limits for the container |
+| resources.requests | object | `{"cpu":"500m","memory":"512Mi"}` | The requested resources for the container |
+| storage | object | `{"local":{},"oss":{},"s3":{}}` | Configure to Storage |
 
-| Name                               | Description                               | Value                             |
-|------------------------------------|-------------------------------------------|-----------------------------------|
-| `image.registry`                   | Image registry                            | `docker.io`                       |
-| `image.repository`                 | Image name                                | `greptime/greptimedb`             |
-| `image.tag`                        | Image tag                                 | `v0.4.1`                          |
-| `image.pullSecrets`                | Docker registry secret names as an array  | `[]`                              |
-| `resources.limits`                 | The resources limits for the container    | `{}`                              |
-| `resources.requests`               | The requested resources for the container | `{}`                              |
-| `initializer.registry`             | Initializer image registry                | `docker.io`                       |
-| `initializer.repository`           | Initializer image repository              | `greptime/greptimedb-initializer` |
-| `initializer.tag`                  | Initializer image tag                     | `0.1.0-alpha.17`                  |
-| `httpServicePort`                  | GreptimeDB http port                      | `4000`                            |
-| `grpcServicePort`                  | GreptimeDB grpc port                      | `4001`                            |
-| `mysqlServicePort`                 | GreptimeDB mysql port                     | `4002`                            |
-| `postgresServicePort`              | GreptimeDB postgres port                  | `4003`                            |
-| `openTSDBServicePort`              | GreptimeDB opentsdb port                  | `4242`                            |
-
-
-### Frontend parameters
-
-| Name                                                        | Description                              | Value   |
-|-------------------------------------------------------------|------------------------------------------|---------|
-| `frontend.replicas`                                         | Frontend replicas                        | `1`     |
-| `frontend.service`                                          | Frontend service                         | `{}`    |
-| `frontend.componentSpec`                                    | Frontend componentSpec                   | `{}`    |
-| `frontend.tls.certificates.secretName`                      | Frontend tls certificates secret name    | `""`    |
-| `frontend.tls.certificates.secretCreation.enabled`          | Create frontend tls certificates secret  | `true`  |
-| `frontend.tls.certificates.secretCreation.enableEncryption` | Encrypt frontend tls certificates secret | `false` |
-| `frontend.tls.certificates.secretCreation.data.ca.crt`      | Frontend tls certificates ca.crt         | `""`    |
-| `frontend.tls.certificates.secretCreation.data.tls.crt`     | Frontend tls certificates tls.crt        | `""`    |
-| `frontend.tls.certificates.secretCreation.data.tls.key`     | Frontend tls certificates tls.key        | `""`    |
-
-### Meta parameters
-
-| Name                 | Description         | Value                                    |
-|----------------------|---------------------|------------------------------------------|
-| `meta.replicas`      | Meta replicas       | `1`                                      |
-| `meta.etcdEndpoints` | Meta etcd endpoints | `etcd.default.svc.cluster.local:2379`    |
-| `meta.componentSpec` | Meta componentSpec  | `{}`                                     |
-
-### Datanode parameters
-
-| Name                            | Description                                          | Value    |
-|---------------------------------|------------------------------------------------------|----------|
-| `datanode.replicas`             | Datanode replicas                                    | `1`      |
-| `datanode.componentSpec`        | Datanode componentSpec                               | `{}`     |
-| `datanode.storageClassName`     | Storage class for datanode persistent volume         | `null`   |
-| `datanode.storageSize`          | Storage size for datanode persistent volume          | `10Gi`   |
-| `datanode.storageRetainPolicy`  | Storage retain policy for datanode persistent volume | `Retain` |
-
-### Storage parameters
-
-| Name                                                        | Description                              | Value             |
-|-------------------------------------------------------------|------------------------------------------|-------------------|
-| `storage.credentials.secretName`                            | Storage credentials secret name          | `credentials`     |
-| `storage.credentials.secretCreation.enabled`                | Create frontend tls certificates secret  | `true`            |
-| `storage.credentials.secretCreation.enableEncryption`       | Encrypt frontend tls certificates secret | `false`           |
-| `storage.credentials.secretCreation.data.access-key-id`     | Storage credentials access key id        | `""`              |
-| `storage.credentials.secretCreation.data.secret-access-key` | Storage credentials secret access key    | `""`              |
-| `storage.local.directory`                                   | Local storage directory                  | `/tmp/greptimedb` |
-| `storage.s3.bucket`                                         | S3 storage bucket name                   | `""`              |
-| `storage.s3.region`                                         | S3 storage bucket region                 | `""`              |
-| `storage.s3.root`                                           | S3 storage bucket root                   | `""`              |
-| `storage.s3.endpoint`                                       | S3 storage bucket endpoint               | `""`              |
-| `storage.s3.secretName`                                     | S3 storage credentials secret            | `""`              |
-| `storage.oss.bucket`                                        | OSS storage bucket name                  | `""`              |
-| `storage.oss.region`                                        | OSS storage bucket region                | `""`              |
-| `storage.oss.root`                                          | OSS storage bucket root                  | `""`              |
-| `storage.oss.endpoint`                                      | OSS storage bucket endpoint              | `""`              |
-| `storage.oss.secretName`                                    | OSS storage bucket credentials secret    | `""`              |
-
-### Metrics parameters
-
-| Name                               | Description                                                 | Value      |
-|------------------------------------|-------------------------------------------------------------|------------|
-| `prometheusMonitor.enabled`        | Enable prometheus podmonitor                                | `false`    |
-| `prometheusMonitor.path`           | HTTP path to scrape for metrics                             | `/metrics` |
-| `prometheusMonitor.port`           | Target metrics port                                         | `http`     |
-| `prometheusMonitor.interval`       | Scraped interval                                            | `30s`      |
-| `prometheusMonitor.honorLabels`    | Chooses the metrics labels on collisions with target labels | `true`     |
-| `prometheusMonitor.labelsSelector` | Prometheus podmonitor labels                                | `{}`       |
+----------------------------------------------
+Autogenerated from chart metadata using [helm-docs v1.11.3](https://github.com/norwoodj/helm-docs/releases/v1.11.3)
