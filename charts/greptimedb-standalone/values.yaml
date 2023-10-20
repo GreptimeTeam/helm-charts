@@ -1,33 +1,38 @@
 image:
+  # -- The image registry
   registry: docker.io
-  # The image repository
+  # -- The image repository
   repository: greptime/greptimedb
-  # The image tag
+  # -- The image tag
   tag: "v0.4.1"
-  # The image pull policy for the controller
+  # -- The image pull policy for the controller
   pullPolicy: IfNotPresent
-  # The image pull secrets.
+  # -- The image pull secrets.
   pullSecrets: []
 
-# Overrides the chart's name
+# -- Overrides the chart's name
 nameOverride: ""
 
-# Provide a name to substitute for the full names of resources
+# -- Provide a name to substitute for the full names of resources
 fullnameOverride: ""
 
 serviceAccount:
-  # Specifies whether a service account should be created
+  # -- Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
+  # -- Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
+  # -- Service account name
   name: ""
 
+# -- The container command
 command: []
 
+# -- The container args
 args: []
 
+# -- Environment variables
 env:
   GREPTIMEDB_STANDALONE__HTTP__ADDR: "0.0.0.0:4000"
 #  GREPTIMEDB_STANDALONE__HTTP__TIMEOUT: "120s"
@@ -58,34 +63,34 @@ env:
 #  GREPTIMEDB_DATANODE__STORAGE__MANIFEST__CHECKPOINT_MARGIN: "100"
 #  GREPTIMEDB_DATANODE__STORAGE__MANIFEST__GC_DURATION: "5m"
 
-
+# -- Maps all the keys on a configmap or secret as environment variables
 envFrom: {}
 #  - secretRef:
 #      name: config
 
-# The pod annotations
+# -- Extra pod annotations to add
 podAnnotations: {}
 
-# The pod labels
+# -- Extra pod labels to add
 podLabels: {}
 
-# The pod security context
+# -- Security context to apply to the pod
 podSecurityContext: {}
 #  runAsUser: 1000
 #  runAsGroup: 3000
 #  fsGroup: 2000
 
-# The annotations
+# -- The annotations
 annotations: {}
 #  imageregistry: "https://hub.docker.com/"
 
-# The security context
+# -- Security context to apply to the container
 securityContext: {}
 #  runAsUser: 1000
 #  runAsGroup: 3000
 #  fsGroup: 2000
 
-# Resource requests and limits for the container
+# -- Resource requests and limits for the container
 resources: {}
 #  limits:
 #    cpu: 800m
@@ -94,18 +99,18 @@ resources: {}
 #    cpu: 200m
 #    memory: 512Mi
 
-# The node selector
+# -- NodeSelector to apply pod
 nodeSelector: {}
 #  disktype: ssd
 
-# The tolerations
+# -- Tolerations to apply pod
 tolerations: {}
 #  - key: "key1"
 #    operator: "Equal"
 #    value: "value1"
 #    effect: "NoSchedule"
 
-# The affinity rules
+# -- Affinity configuration for pod
 affinity: {}
 #  nodeAffinity:
 #    requiredDuringSchedulingIgnoredDuringExecution:
@@ -125,7 +130,7 @@ affinity: {}
 #              values:
 #                - another-node-label-value
 
-# DNS config for pods
+# -- DNS configuration for pod
 dnsConfig: {}
 #  nameservers:
 #    - 10.0.0.1
@@ -135,36 +140,43 @@ dnsConfig: {}
 #    - name: ndots
 #      value: "2"
 
-# Grace period to allow the single binary to shutdown before it is killed
+# -- Grace period to allow the single binary to shutdown before it is killed
 terminationGracePeriodSeconds: 30
 
+
 persistence:
-  # Enable persistent disk
+  # -- Enable persistent disk
   enabled: true
-  # Enable StatefulSetAutoDeletePVC feature
+  # -- Enable StatefulSetAutoDeletePVC feature
   enableStatefulSetAutoDeletePVC: false
-  # Size of persistent disk
+  # -- Size of persistent disk
   size: 10Gi
-  # Storage class name
+  # -- Storage class name
   storageClass: null
-  # Selector for persistent disk
+  # -- Selector for persistent disk
   selector: null
 
 monitoring:
+  # -- Enable prometheus podmonitor
   enabled: false
-  # PodMonitor annotations
+  # -- PodMonitor annotations
   annotations: {}
-  # PodMonitor labels
+  # -- PodMonitor labels
   labels: {}
-  # PodMonitor scrape interval
-  interval: 15s
+  # -- PodMonitor scrape interval
+  interval: 30s
 
+# -- GreptimeDB http port
 httpPort: 4000
+# -- GreptimeDB grpc port
 grpcPort: 4001
+# -- GreptimeDB mysql port
 mysqlPort: 4002
+# -- GreptimeDB postgres port
 postgresPort: 4003
 
 service:
+  # -- Service type
   type: ClusterIP
-  # Annotations for Service
+  # -- Annotations for Service
   annotations: {}

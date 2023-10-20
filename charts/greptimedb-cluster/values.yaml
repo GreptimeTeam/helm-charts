@@ -1,25 +1,32 @@
 image:
+  # -- The image registry
   registry: docker.io
-  # The image repository
+  # -- The image repository
   repository: greptime/greptimedb
-  # The image tag
+  # -- The image tag
   tag: "v0.4.1"
-  # The image pull secrets.
+  # -- The image pull secrets.
   pullSecrets: []
 
 resources:
+  # -- The requested resources for the container
   requests:
     cpu: 500m
     memory: 512Mi
+  # -- The resources limits for the container
   limits:
     cpu: 500m
     memory: 512Mi
 
 frontend:
+  # -- Frontend replicas
   replicas: 1
+  # -- Frontend service
   service: {}
+  # -- Frontend componentSpec
   componentSpec: {}
 
+  # -- Frontend tls Configure
   tls: {}
 #    certificates:
 #      secretName: greptimedb-frontend-tls
@@ -32,37 +39,54 @@ frontend:
 #          tls.key: ""
 
 meta:
+  # -- Meta replicas
   replicas: 1
+  # -- Meta etcd endpoints
+  etcdEndpoints: "etcd.default.svc.cluster.local:2379"
+  # -- Meta componentSpec
   componentSpec: {}
 
 datanode:
+  # -- Datanode replicas
   replicas: 3
+  # -- Datanode componentSpec
   componentSpec: {}
   storage:
+    # -- Storage class for datanode persistent volume
     storageClassName: null
+    # -- Storage size for datanode persistent volume
     storageSize: 10Gi
+    # -- Storage retain policy for datanode persistent volume
     storageRetainPolicy: Retain
-
-#    # The wal directory of the storage, default is "/tmp/greptimedb/wal".
-#    walDir: "/tmp/greptimedb/wal"
+    # -- The wal directory of the storage, default is "/tmp/greptimedb/wal".
+    walDir: "/tmp/greptimedb/wal"
 
 initializer:
+  # -- Initializer image registry
   registry: docker.io
+  # -- Initializer image repository
   repository: greptime/greptimedb-initializer
+  # -- Initializer image tag
   tag: 0.1.0-alpha.17
 
-# The etcdEndpoints need be modified to the actual etcd cluster.
-etcdEndpoints: "etcd.default.svc.cluster.local:2379"
-
+# -- GreptimeDB http service port
 httpServicePort: 4000
+
+# -- GreptimeDB grpc service port
 grpcServicePort: 4001
+
+# -- GreptimeDB mysql service port
 mysqlServicePort: 4002
+
+# -- GreptimeDB postgres service port
 postgresServicePort: 4003
+
+# -- GreptimeDB opentsdb service port
 openTSDBServicePort: 4242
 
-# configure to prometheus podmonitor
+# -- Configure to prometheus podmonitor
 prometheusMonitor: {}
-#  enabled: true
+#  enabled: false
 #  path: "/metrics"
 #  port: "http"
 #  interval: "30s"
@@ -70,12 +94,15 @@ prometheusMonitor: {}
 #  labelsSelector:
 #    release: prometheus
 
+# -- Configure to Storage
 storage:
 #  credentials:
 #    secretName: "credentials"
+
 #    secretCreation:
-#    # Create the raw secret.
+#      # Create the raw secret.
 #      enabled: true
+
 #      # Create the sealed secret.
 #      # If enableEncryption is true, the credentials should be encrypted.
 #      enableEncryption: false
@@ -94,7 +121,6 @@ storage:
 #    bucket: "bucket-name"
 #    region: "us-west-2"
 
-#    # The root directory of the cluster.
 #    # The data directory in S3 will be: 's3://<bucket>/<root>/data/...'.
 #    root: "mycluster"
 #    endpoint: "s3.us-west-2.amazonaws.com"
@@ -105,7 +131,6 @@ storage:
 #    bucket: "bucket-name"
 #    region: "cn-hangzhou"
 
-#    # The root directory of the cluster.
 #    # The data directory in OSS will be: 'oss://<bucket>/<root>/data/...'.
 #    root: "mycluster"
 #    endpoint: "oss-cn-hangzhou.aliyuncs.com"
