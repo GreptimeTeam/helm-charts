@@ -12,20 +12,20 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - name: http
-      port: {{ .Values.httpPort }}
-      targetPort: {{ .Values.httpPort }}
+      port: {{ .Values.httpServicePort }}
+      targetPort: {{ .Values.httpServicePort }}
       protocol: TCP
     - name: grpc
-      port: {{ .Values.grpcPort }}
-      targetPort: {{ .Values.grpcPort }}
+      port: {{ .Values.grpcServicePort }}
+      targetPort: {{ .Values.grpcServicePort }}
       protocol: TCP
     - name: mysql
-      port: {{ .Values.mysqlPort }}
-      targetPort: {{ .Values.mysqlPort }}
+      port: {{ .Values.mysqlServicePort }}
+      targetPort: {{ .Values.mysqlServicePort }}
       protocol: TCP
     - name: postgres
-      port: {{ .Values.postgresPort }}
-      targetPort: {{ .Values.postgresPort }}
+      port: {{ .Values.postgresServicePort }}
+      targetPort: {{ .Values.postgresServicePort }}
       protocol: TCP
   selector:
     {{- include "greptimedb-standalone.selectorLabels" . | nindent 4 }}
