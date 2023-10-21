@@ -1,4 +1,7 @@
-Helm chart for [GreptimeDB](https://github.com/GreptimeTeam/greptimedb) cluster.
+{{ template "chart.header" . }}
+{{ template "chart.description" . }}
+
+{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}{{ template "chart.appVersionBadge" . }}
 
 ## How to install
 
@@ -30,3 +33,7 @@ helm install greptimedb-cluster greptime/greptimedb-cluster -n default
 ```console
 helm uninstall greptimedb-cluster -n default
 ```
+
+{{ template "chart.requirementsSection" . }}
+
+{{ template "chart.valuesSection" . }}

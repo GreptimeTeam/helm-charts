@@ -65,16 +65,16 @@ spec:
             {{- toYaml .Values.args | nindent 12 }}
           {{- end }}
           ports:
-            - containerPort: {{ .Values.httpPort }}
+            - containerPort: {{ .Values.httpServicePort }}
               name: http
               protocol: TCP
-            - containerPort: {{ .Values.grpcPort }}
+            - containerPort: {{ .Values.grpcServicePort }}
               name: grpc
               protocol: TCP
-            - containerPort: {{ .Values.mysqlPort }}
+            - containerPort: {{ .Values.mysqlServicePort }}
               name: mysql
               protocol: TCP
-            - containerPort: {{ .Values.postgresPort }}
+            - containerPort: {{ .Values.postgresServicePort }}
               name: postgres
               protocol: TCP
           {{- if .Values.env }}
