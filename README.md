@@ -47,7 +47,6 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
    helm install greptimedb-operator greptime/greptimedb-operator -n default
    ```
 
-
 3. **Deploy GreptimeDB cluster**
 
    - **Default Installation**
@@ -63,7 +62,7 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
      Before installation, you must create the AWS S3 bucket, and the cluster will use the bucket as backend storage:
      
      ```console
-     helm template mycluster greptime/greptimedb-cluster -n default \
+     helm install mycluster greptime/greptimedb-cluster -n default \
        --set storage.s3.bucket=<your-bucket> \
        --set storage.s3.region=<region-of-bucket> \
        --set storage.s3.root=<root-directory-of-data> \
@@ -74,7 +73,6 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
        --set storage.credentials.secretCreation.data.access-key-id=<your-access-key-id> \
        --set storage.credentials.secretCreation.data.secret-access-key=<your-secret-access-key>
      ```
-
 
 4. **Use `kubectl port-forward` to access the GreptimeDB cluster**
 
