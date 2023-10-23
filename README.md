@@ -22,10 +22,8 @@ helm repo update
 You can run the following command to see the charts:
 
 ```console
-helm search repo greptime -l --devel
+helm search repo greptime
 ```
-
-**Note**: Since our charts are still in development, we don't release the stable release version, and the `--devel` option is required.
 
 ### Install the GreptimeDB Cluster
 
@@ -37,10 +35,10 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
 
    ```console
    helm install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
-   --set replicaCount=3 \
-   --set auth.rbac.create=false \
-   --set auth.rbac.token.enabled=false \
-   -n default
+     --set replicaCount=3 \
+     --set auth.rbac.create=false \
+     --set auth.rbac.token.enabled=false \
+     -n default
    ```
 
 2. **Deploy GreptimeDB operator**
@@ -52,23 +50,31 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
 
 3. **Deploy GreptimeDB cluster**
 
-   ```console
-   helm install mycluster greptime/greptimedb-cluster -n default
-   ```
+   - **Default Installation**
 
-   If you already have the etcd cluster, you can configure the `etcdEndpoints`：
+     The default installation will use the local storage:
+     
+     ```console
+     helm install mycluster greptime/greptimedb-cluster -n default
+     ```
 
-   ```console
-   helm install mycluster greptime/greptimedb-cluster \
-   --set etcdEndpoints=etcd.default:2379 \
-   -n default
-   ```
+   - **Use AWS S3 as backend storage**
 
-   You also can list the current releases by `helm` command:
+     Before installation, you must create the AWS S3 bucket, and the cluster will use the bucket as backend storage:
+     
+     ```console
+     helm template mycluster greptime/greptimedb-cluster -n default \
+       --set storage.s3.bucket=<your-bucket> \
+       --set storage.s3.region=<region-of-bucket> \
+       --set storage.s3.root=<root-directory-of-data> \
+       --set storage.s3.secretName=s3-credentials \
+       --set storage.credentials.secretName=s3-credentials \
+       --set storage.credentials.secretCreation.enabled=true \
+       --set storage.credentials.secretCreation.enableEncryption=false \
+       --set storage.credentials.secretCreation.data.access-key-id=<your-access-key-id> \
+       --set storage.credentials.secretCreation.data.secret-access-key=<your-secret-access-key>
+     ```
 
-   ```console
-   helm list -n default
-   ```
 
 4. **Use `kubectl port-forward` to access the GreptimeDB cluster**
 
