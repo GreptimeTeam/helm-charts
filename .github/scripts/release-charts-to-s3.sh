@@ -17,12 +17,7 @@ function release_charts_to_s3() {
   mkdir "$chart"
   echo "Pulling chart from '$repo/$chart'..."
 
-  if [ "$repo" = "greptime" ]; then
-    # Add '-l devel' to pull the latest development version of greptime.
-    helm pull "$repo"/"$chart" -d "$chart" --devel
-  else
-    helm pull "$repo"/"$chart" -d "$chart"
-  fi
+  helm pull "$repo"/"$chart" -d "$chart"
 
   package=$(ls ./"$chart")
 
