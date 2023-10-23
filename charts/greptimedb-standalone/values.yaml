@@ -166,17 +166,17 @@ monitoring:
   # -- PodMonitor scrape interval
   interval: 30s
 
-# -- GreptimeDB http port
-httpPort: 4000
-# -- GreptimeDB grpc port
-grpcPort: 4001
-# -- GreptimeDB mysql port
-mysqlPort: 4002
-# -- GreptimeDB postgres port
-postgresPort: 4003
+# -- GreptimeDB http service port
+httpServicePort: 4000
+# -- GreptimeDB grpc service port
+grpcServicePort: 4001
+# -- GreptimeDB mysql service port
+mysqlServicePort: 4002
+# -- GreptimeDB postgres service port
+postgresServicePort: 4003
 
 service:
   # -- Service type
   type: ClusterIP
-  # -- Annotations for Service
+  # -- Annotations for service
   annotations: {}

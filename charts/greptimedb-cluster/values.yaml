@@ -5,7 +5,7 @@ image:
   repository: greptime/greptimedb
   # -- The image tag
   tag: "v0.4.1"
-  # -- The image pull secrets.
+  # -- The image pull secrets
   pullSecrets: []
 
 resources:
@@ -26,7 +26,7 @@ frontend:
   # -- Frontend componentSpec
   componentSpec: {}
 
-  # -- Frontend tls Configure
+  # -- Frontend tls configure
   tls: {}
 #    certificates:
 #      secretName: greptimedb-frontend-tls
@@ -58,7 +58,7 @@ datanode:
     storageSize: 10Gi
     # -- Storage retain policy for datanode persistent volume
     storageRetainPolicy: Retain
-    # -- The wal directory of the storage, default is "/tmp/greptimedb/wal".
+    # -- The wal directory of the storage, default is "/tmp/greptimedb/wal"
     walDir: "/tmp/greptimedb/wal"
 
 initializer:
@@ -94,7 +94,7 @@ prometheusMonitor: {}
 #  labelsSelector:
 #    release: prometheus
 
-# -- Configure to Storage
+# -- Configure to storage
 storage:
 #  credentials:
 #    secretName: "credentials"

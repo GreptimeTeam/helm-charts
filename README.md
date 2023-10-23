@@ -61,7 +61,7 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
    ```console
    helm install mycluster greptime/greptimedb-cluster \
    --set etcdEndpoints=etcd.default:2379 \
-   -n default --devel
+   -n default
    ```
 
    You also can list the current releases by `helm` command:

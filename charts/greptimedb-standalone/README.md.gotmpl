@@ -1,6 +1,10 @@
-# Overview
+{{ template "chart.header" . }}
+{{ template "chart.description" . }}
 
-Helm chart for [GreptimeDB](https://github.com/GreptimeTeam/greptimedb) standalone mode.
+{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}{{ template "chart.appVersionBadge" . }}
+
+## Source Code
+- https://github.com/GreptimeTeam/greptimedb
 
 ## How to install
 
@@ -18,3 +22,7 @@ helm install greptimedb-standalone greptime/greptimedb-standalone -n default
 ```console
 helm uninstall greptimedb-standalone -n default
 ```
+
+{{ template "chart.requirementsSection" . }}
+
+{{ template "chart.valuesSection" . }}
