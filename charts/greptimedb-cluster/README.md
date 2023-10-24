@@ -82,7 +82,7 @@ helm uninstall greptimedb-cluster -n default
 | image.pullSecrets | list | `[]` | The image pull secrets |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
-| image.tag | string | `"v0.4.1"` | The image tag |
+| image.tag | string | `"v0.4.2"` | The image tag |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
 | initializer.tag | string | `"0.1.0-alpha.17"` | Initializer image tag |
