@@ -33,7 +33,7 @@ helm uninstall greptimedb-standalone -n default
 | args | list | `[]` | The container args |
 | command | list | `[]` | The container command |
 | dnsConfig | object | `{}` | DNS configuration for pod |
-| env | object | `{"GREPTIMEDB_STANDALONE__GRPC__ADDR":"0.0.0.0:4001","GREPTIMEDB_STANDALONE__HTTP__ADDR":"0.0.0.0:4000","GREPTIMEDB_STANDALONE__MYSQL__ADDR":"0.0.0.0:4002","GREPTIMEDB_STANDALONE__POSTGRES__ADDR":"0.0.0.0:4003"}` | Environment variables |
+| env | object | `{"GREPTIMEDB_STANDALONE__GRPC__ADDR":"0.0.0.0:4001","GREPTIMEDB_STANDALONE__HTTP__ADDR":"0.0.0.0:4000","GREPTIMEDB_STANDALONE__MYSQL__ADDR":"0.0.0.0:4002","GREPTIMEDB_STANDALONE__OPENTSDB__ADDR":"0.0.0.0:4242","GREPTIMEDB_STANDALONE__POSTGRES__ADDR":"0.0.0.0:4003"}` | Environment variables |
 | envFrom | object | `{}` | Maps all the keys on a configmap or secret as environment variables |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
 | grpcServicePort | int | `4001` | GreptimeDB grpc service port |
@@ -50,6 +50,7 @@ helm uninstall greptimedb-standalone -n default
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | nameOverride | string | `""` | Overrides the chart's name |
 | nodeSelector | object | `{}` | NodeSelector to apply pod |
+| opentsdbServicePort | int | `4242` | GreptimeDB opentsdb service port |
 | persistence.enableStatefulSetAutoDeletePVC | bool | `false` | Enable StatefulSetAutoDeletePVC feature |
 | persistence.enabled | bool | `true` | Enable persistent disk |
 | persistence.selector | string | `nil` | Selector for persistent disk |
