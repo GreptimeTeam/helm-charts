@@ -38,6 +38,7 @@ env:
   GREPTIMEDB_STANDALONE__GRPC__ADDR: "0.0.0.0:4001"
   GREPTIMEDB_STANDALONE__MYSQL__ADDR: "0.0.0.0:4002"
   GREPTIMEDB_STANDALONE__POSTGRES__ADDR: "0.0.0.0:4003"
+  GREPTIMEDB_STANDALONE__OPENTSDB__ADDR: "0.0.0.0:4242"
 #  GREPTIMEDB_STANDALONE__HTTP__TIMEOUT: "120s"
 
 #  GREPTIMEDB_STANDALONE__WAL__FILE_SIZE: "128MB"
@@ -177,6 +178,8 @@ grpcServicePort: 4001
 mysqlServicePort: 4002
 # -- GreptimeDB postgres service port
 postgresServicePort: 4003
+# -- GreptimeDB opentsdb service port
+opentsdbServicePort: 4242
 
 service:
   # -- Service type

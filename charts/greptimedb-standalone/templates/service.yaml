@@ -27,5 +27,9 @@ spec:
       port: {{ .Values.postgresServicePort }}
       targetPort: {{ .Values.postgresServicePort }}
       protocol: TCP
+    - name: opentsdb
+      port: {{ .Values.opentsdbServicePort }}
+      targetPort: {{ .Values.opentsdbServicePort }}
+      protocol: TCP
   selector:
     {{- include "greptimedb-standalone.selectorLabels" . | nindent 4 }}
