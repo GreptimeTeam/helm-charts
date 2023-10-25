@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.2](https://img.shields.io/badge/AppVersion-0.4.2-informational?style=flat-square)
+![Version: 0.1.3](https://img.shields.io/badge/Version-0.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.2](https://img.shields.io/badge/AppVersion-0.4.2-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -33,7 +33,7 @@ helm uninstall greptimedb-standalone -n default
 | args | list | `[]` | The container args |
 | command | list | `[]` | The container command |
 | dnsConfig | object | `{}` | DNS configuration for pod |
-| env | object | `{"GREPTIMEDB_STANDALONE__HTTP__ADDR":"0.0.0.0:4000"}` | Environment variables |
+| env | object | `{"GREPTIMEDB_STANDALONE__GRPC__ADDR":"0.0.0.0:4001","GREPTIMEDB_STANDALONE__HTTP__ADDR":"0.0.0.0:4000","GREPTIMEDB_STANDALONE__MYSQL__ADDR":"0.0.0.0:4002","GREPTIMEDB_STANDALONE__POSTGRES__ADDR":"0.0.0.0:4003"}` | Environment variables |
 | envFrom | object | `{}` | Maps all the keys on a configmap or secret as environment variables |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
 | grpcServicePort | int | `4001` | GreptimeDB grpc service port |
