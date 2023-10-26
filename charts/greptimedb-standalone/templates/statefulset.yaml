@@ -77,6 +77,9 @@ spec:
             - containerPort: {{ .Values.postgresServicePort }}
               name: postgres
               protocol: TCP
+            - containerPort: {{ .Values.opentsdbServicePort }}
+              name: opentsdb
+              protocol: TCP
           {{- if .Values.env }}
           env:
             {{- range $key, $val := .Values.env }}
