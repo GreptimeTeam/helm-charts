@@ -1,0 +1,10 @@
+{{- if .Values.configToml -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  namespace: {{ .Release.Namespace }}
+data:
+  config.toml: |
+{{ .Values.configToml | indent 4 }}
+{{- end -}}

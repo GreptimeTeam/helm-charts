@@ -54,14 +54,19 @@ spec:
           image: {{ printf "%s/%s:%s" .Values.image.registry .Values.image.repository .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
-            - greptime
-            - standalone
-            - start
           {{- if .Values.command }}
             {{- toYaml .Values.command | nindent 12 }}
+          {{- else }}
+            - "greptime"
+            - "standalone"
+            - "start"
           {{- end }}
-          {{- if .Values.args }}
           args:
+            {{- if .Values.configToml }}
+            - "--config-file"
+            - "/etc/greptimedb/config.toml"
+            {{- end }}
+          {{- if .Values.args }}
             {{- toYaml .Values.args | nindent 12 }}
           {{- end }}
           ports:
@@ -97,11 +102,22 @@ spec:
           {{- end }}
           volumeMounts:
             - name: data
-              mountPath: /tmp/greptimedb
+              mountPath: {{ .Values.persistence.mountPath }}
+            {{- if .Values.configToml }}
+            - name: config
+              mountPath: /etc/greptimedb
+              readOnly: true
+            {{- end }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+      {{- if .Values.configToml }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Release.Name }}-config
+      {{- end }}
       {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
