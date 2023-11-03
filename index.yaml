@@ -590,6 +590,16 @@ entries:
   greptimedb-standalone:
   - apiVersion: v2
     appVersion: 0.4.2
+    created: "2023-11-03T12:53:38.335143945Z"
+    description: A Helm chart for deploying standalone greptimedb
+    digest: 0b35ddf6e05dd1ab29a546e2fd2b9c356b807052c0a849e92ac2a0d9d053813b
+    name: greptimedb-standalone
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.4/greptimedb-standalone-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 0.4.2
     created: "2023-10-26T08:05:47.385363853Z"
     description: A Helm chart for deploying standalone greptimedb
     digest: a9bc5d51224e77d2c9fceb64e13b464ed57aff8036de6271dde022f8e484d567
@@ -648,4 +658,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2023-11-01T12:39:01.113626206Z"
+generated: "2023-11-03T12:53:38.33530276Z"
