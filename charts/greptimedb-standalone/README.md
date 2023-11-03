@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.1.3](https://img.shields.io/badge/Version-0.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.2](https://img.shields.io/badge/AppVersion-0.4.2-informational?style=flat-square)
+![Version: 0.1.4](https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.2](https://img.shields.io/badge/AppVersion-0.4.2-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -32,6 +32,7 @@ helm uninstall greptimedb-standalone -n default
 | annotations | object | `{}` | The annotations |
 | args | list | `[]` | The container args |
 | command | list | `[]` | The container command |
+| configToml | string | `"mode = 'standalone'\n"` | The extra configuration for greptimedb. |
 | dnsConfig | object | `{}` | DNS configuration for pod |
 | env | object | `{"GREPTIMEDB_STANDALONE__HTTP__ADDR":"0.0.0.0:4000"}` | Environment variables |
 | envFrom | object | `{}` | Maps all the keys on a configmap or secret as environment variables |
@@ -53,6 +54,7 @@ helm uninstall greptimedb-standalone -n default
 | opentsdbServicePort | int | `4242` | GreptimeDB opentsdb service port |
 | persistence.enableStatefulSetAutoDeletePVC | bool | `false` | Enable StatefulSetAutoDeletePVC feature |
 | persistence.enabled | bool | `true` | Enable persistent disk |
+| persistence.mountPath | string | `"/data/greptimedb"` | Mount path of persistent disk. |
 | persistence.selector | string | `nil` | Selector for persistent disk |
 | persistence.size | string | `"10Gi"` | Size of persistent disk |
 | persistence.storageClass | string | `nil` | Storage class name |
