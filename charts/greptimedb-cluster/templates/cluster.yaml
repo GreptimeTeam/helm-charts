@@ -18,6 +18,10 @@ spec:
     {{- end }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
+    {{- if .Values.frontend.config }}
+    config: |-
+      {{ .Values.frontend.config | nindent 6 }}
+    {{- end }}
     {{- if .Values.frontend.tls }}
     tls:
       secretName: {{ .Values.frontend.tls.certificates.secretName }}
@@ -25,22 +29,30 @@ spec:
     {{- if .Values.frontend.service }}
     service: {{- toYaml .Values.frontend.service | nindent 6 }}
     {{- end }}
-    {{- if .Values.frontend.componentSpec }}
-    template: {{- toYaml .Values.frontend.componentSpec | nindent 6 }}
+    {{- if .Values.frontend.podTemplate }}
+    template: {{- toYaml .Values.frontend.podTemplate | nindent 6 }}
     {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}
+    {{- if .Values.meta.config }}
+    config: |-
+      {{ .Values.meta.config | nindent 6 }}
+    {{- end }}
     {{- if .Values.meta.etcdEndpoints }}
     etcdEndpoints:
       - {{ .Values.meta.etcdEndpoints }}
     {{- end }}
-    {{- if .Values.meta.componentSpec }}
-    template: {{- toYaml .Values.meta.componentSpec | nindent 6 }}
+    {{- if .Values.meta.podTemplate }}
+    template: {{- toYaml .Values.meta.podTemplate | nindent 6 }}
     {{- end }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
-    {{- if .Values.datanode.componentSpec }}
-    template: {{- toYaml .Values.datanode.componentSpec | nindent 6 }}
+    {{- if .Values.datanode.config }}
+    config: |-
+      {{ .Values.datanode.config | nindent 6 }}
+    {{- end }}
+    {{- if .Values.datanode.podTemplate }}
+    template: {{- toYaml .Values.datanode.podTemplate | nindent 6 }}
     {{- end }}
     storage:
       storageClassName: {{ .Values.datanode.storage.storageClassName }}

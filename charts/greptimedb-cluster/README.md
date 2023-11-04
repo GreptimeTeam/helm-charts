@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes
 
-![Version: 0.1.3](https://img.shields.io/badge/Version-0.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.2](https://img.shields.io/badge/AppVersion-0.4.2-informational?style=flat-square)
+![Version: 0.1.4](https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.2](https://img.shields.io/badge/AppVersion-0.4.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -67,13 +67,15 @@ helm uninstall greptimedb-cluster -n default
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| datanode.componentSpec | object | `{}` | Datanode componentSpec |
+| datanode.config | string | `""` | Extra datanode config in toml format. |
+| datanode.podTemplate | object | `{}` | The pod template for datanode. |
 | datanode.replicas | int | `3` | Datanode replicas |
 | datanode.storage.storageClassName | string | `nil` | Storage class for datanode persistent volume |
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
 | datanode.storage.storageSize | string | `"10Gi"` | Storage size for datanode persistent volume |
 | datanode.storage.walDir | string | `"/tmp/greptimedb/wal"` | The wal directory of the storage, default is "/tmp/greptimedb/wal" |
-| frontend.componentSpec | object | `{}` | Frontend componentSpec |
+| frontend.config | string | `""` | Extra frontend config in toml format. |
+| frontend.podTemplate | object | `{}` | The pod template for frontend. |
 | frontend.replicas | int | `1` | Frontend replicas |
 | frontend.service | object | `{}` | Frontend service |
 | frontend.tls | object | `{}` | Frontend tls configure |
@@ -86,8 +88,9 @@ helm uninstall greptimedb-cluster -n default
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
 | initializer.tag | string | `"0.1.0-alpha.17"` | Initializer image tag |
-| meta.componentSpec | object | `{}` | Meta componentSpec |
+| meta.config | string | `""` | Extra Meta config in toml format. |
 | meta.etcdEndpoints | string | `"etcd.default.svc.cluster.local:2379"` | Meta etcd endpoints |
+| meta.podTemplate | object | `{}` | The pod template for Meta. |
 | meta.replicas | int | `1` | Meta replicas |
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | openTSDBServicePort | int | `4242` | GreptimeDB opentsdb service port |

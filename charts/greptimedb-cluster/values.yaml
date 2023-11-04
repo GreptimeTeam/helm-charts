@@ -21,10 +21,15 @@ resources:
 frontend:
   # -- Frontend replicas
   replicas: 1
+
+  # -- Extra frontend config in toml format.
+  config: ""
+
+  # -- The pod template for frontend.
+  podTemplate: {}
+
   # -- Frontend service
   service: {}
-  # -- Frontend componentSpec
-  componentSpec: {}
 
   # -- Frontend tls configure
   tls: {}
@@ -41,16 +46,26 @@ frontend:
 meta:
   # -- Meta replicas
   replicas: 1
+
+  # -- Extra Meta config in toml format.
+  config: ""
+
+  # -- The pod template for Meta.
+  podTemplate: {}
+
   # -- Meta etcd endpoints
   etcdEndpoints: "etcd.default.svc.cluster.local:2379"
-  # -- Meta componentSpec
-  componentSpec: {}
 
 datanode:
   # -- Datanode replicas
   replicas: 3
-  # -- Datanode componentSpec
-  componentSpec: {}
+
+  # -- Extra datanode config in toml format.
+  config: ""
+
+  # -- The pod template for datanode.
+  podTemplate: {}
+
   storage:
     # -- Storage class for datanode persistent volume
     storageClassName: null
