@@ -33,15 +33,7 @@ frontend:
 
   # -- Frontend tls configure
   tls: {}
-#    certificates:
-#      secretName: greptimedb-frontend-tls
-#      secretCreation:
-#        enabled: true
-#        enableEncryption: false
-#        data:
-#          ca.crt: ""
-#          tls.crt: ""
-#          tls.key: ""
+#    secretName: greptimedb-frontend-tls
 
 meta:
   # -- Meta replicas
@@ -113,19 +105,8 @@ prometheusMonitor: {}
 storage:
 #  credentials:
 #    secretName: "credentials"
-
-#    secretCreation:
-#      # Create the raw secret.
-#      enabled: true
-
-#      # Create the sealed secret.
-#      # If enableEncryption is true, the credentials should be encrypted.
-#      enableEncryption: false
-#
-#      # If the enableEncryption is true, the data should be set as encrypted data.
-#      data:
-#        access-key-id: "you-should-set-the-access-key-id-here"
-#        secret-access-key: "you-should-set-the-secret-access-key-here"
+#    accessKeyId: "you-should-set-the-access-key-id-here"
+#    secretAccessKey: "you-should-set-the-secret-access-key-here"
 
   # configure to use local storage.
   local: {}
@@ -138,8 +119,7 @@ storage:
 
 #    # The data directory in S3 will be: 's3://<bucket>/<root>/data/...'.
 #    root: "mycluster"
-#    endpoint: "s3.us-west-2.amazonaws.com"
-#    secretName: "credentials"
+#    endpoint: "s3.us-west-2.amazonaws.com"   # See more detail: https://docs.aws.amazon.com/general/latest/gr/s3.html
 
   # configure to use oss storage.
   oss: {}
@@ -149,4 +129,3 @@ storage:
 #    # The data directory in OSS will be: 'oss://<bucket>/<root>/data/...'.
 #    root: "mycluster"
 #    endpoint: "oss-cn-hangzhou.aliyuncs.com"
-#    secretName: "credentials"

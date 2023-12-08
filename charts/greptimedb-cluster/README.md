@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes
 
-![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.4](https://img.shields.io/badge/AppVersion-0.4.4-informational?style=flat-square)
+![Version: 0.1.6](https://img.shields.io/badge/Version-0.1.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.4](https://img.shields.io/badge/AppVersion-0.4.4-informational?style=flat-square)
 
 ## Source Code
 
@@ -29,7 +29,7 @@ A Helm chart for deploying GreptimeDB cluster in Kubernetes
 The default installation will use the local storage:
 
 ```console
-helm install greptimedb-cluster greptime/greptimedb-cluster -n default
+helm install mycluster greptime/greptimedb-cluster -n default
 ```
 
 ### Use AWS S3 as backend storage
@@ -41,12 +41,10 @@ helm install mycluster greptime/greptimedb-cluster \
   --set storage.s3.bucket=<your-bucket> \
   --set storage.s3.region=<region-of-bucket> \
   --set storage.s3.root=<root-directory-of-data> \
-  --set storage.s3.secretName=s3-credentials \
+  --set storage.s3.endpoint=<s3-endpoint> \
   --set storage.credentials.secretName=s3-credentials \
-  --set storage.credentials.secretCreation.enabled=true \
-  --set storage.credentials.secretCreation.enableEncryption=false \
-  --set storage.credentials.secretCreation.data.access-key-id=<your-access-key-id> \
-  --set storage.credentials.secretCreation.data.secret-access-key=<your-secret-access-key>
+  --set storage.credentials.accessKeyId=<your-access-key-id> \
+  --set storage.credentials.secretAccessKey=<your-secret-access-key>
 ```
 
 If you set `storage.s3.root` as `mycluser`, then the data layout will be:
@@ -60,7 +58,7 @@ If you set `storage.s3.root` as `mycluser`, then the data layout will be:
 ## How to uninstall
 
 ```console
-helm uninstall greptimedb-cluster -n default
+helm uninstall mycluster -n default
 ```
 
 ## Values

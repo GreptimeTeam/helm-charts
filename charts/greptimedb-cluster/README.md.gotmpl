@@ -29,7 +29,7 @@
 The default installation will use the local storage:
 
 ```console
-helm install greptimedb-cluster greptime/greptimedb-cluster -n default
+helm install mycluster greptime/greptimedb-cluster -n default
 ```
 
 ### Use AWS S3 as backend storage
@@ -41,12 +41,10 @@ helm install mycluster greptime/greptimedb-cluster \
   --set storage.s3.bucket=<your-bucket> \
   --set storage.s3.region=<region-of-bucket> \
   --set storage.s3.root=<root-directory-of-data> \
-  --set storage.s3.secretName=s3-credentials \
+  --set storage.s3.endpoint=<s3-endpoint> \
   --set storage.credentials.secretName=s3-credentials \
-  --set storage.credentials.secretCreation.enabled=true \
-  --set storage.credentials.secretCreation.enableEncryption=false \
-  --set storage.credentials.secretCreation.data.access-key-id=<your-access-key-id> \
-  --set storage.credentials.secretCreation.data.secret-access-key=<your-secret-access-key>
+  --set storage.credentials.accessKeyId=<your-access-key-id> \
+  --set storage.credentials.secretAccessKey=<your-secret-access-key>
 ```
 
 If you set `storage.s3.root` as `mycluser`, then the data layout will be:
@@ -60,7 +58,7 @@ If you set `storage.s3.root` as `mycluser`, then the data layout will be:
 ## How to uninstall
 
 ```console
-helm uninstall greptimedb-cluster -n default
+helm uninstall mycluster -n default
 ```
 
 {{ template "chart.requirementsSection" . }}

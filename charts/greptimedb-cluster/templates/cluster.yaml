@@ -24,7 +24,7 @@ spec:
     {{- end }}
     {{- if .Values.frontend.tls }}
     tls:
-      secretName: {{ .Values.frontend.tls.certificates.secretName }}
+      secretName: {{ .Values.frontend.tls.secretName }}
     {{- end }}
     {{- if .Values.frontend.service }}
     service: {{- toYaml .Values.frontend.service | nindent 6 }}
@@ -77,7 +77,7 @@ spec:
       bucket: {{ .Values.storage.s3.bucket }}
       region: {{ .Values.storage.s3.region }}
       root: {{ .Values.storage.s3.root }}
-      secretName: {{ .Values.storage.s3.secretName }}
+      secretName: {{ .Values.storage.credentials.secretName }}
       endpoint: {{ .Values.storage.s3.endpoint }}
     {{- else if .Values.storage.local }}
     local:
@@ -87,7 +87,7 @@ spec:
       bucket: {{ .Values.storage.oss.bucket }}
       region: {{ .Values.storage.oss.region }}
       root: {{ .Values.storage.oss.root }}
-      secretName: {{ .Values.storage.oss.secretName }}
+      secretName: {{ .Values.storage.credentials.secretName }}
       endpoint: {{ .Values.storage.oss.endpoint }}
     {{- else }}
     {}
