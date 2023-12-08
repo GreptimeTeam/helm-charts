@@ -38,13 +38,12 @@ Before installation, you must create the AWS S3 bucket, and the cluster will use
 
 ```console
 helm install mycluster greptime/greptimedb-cluster \
-  --set storage.s3.bucket=<your-bucket> \
-  --set storage.s3.region=<region-of-bucket> \
-  --set storage.s3.root=<root-directory-of-data> \
-  --set storage.s3.endpoint=<s3-endpoint> \
-  --set storage.credentials.secretName=s3-credentials \
-  --set storage.credentials.accessKeyId=<your-access-key-id> \
-  --set storage.credentials.secretAccessKey=<your-secret-access-key>
+  --set storage.s3.bucket="your-bucket" \
+  --set storage.s3.region="region-of-bucket" \
+  --set storage.s3.root="root-directory-of-data" \
+  --set storage.credentials.secretName="s3-credentials" \
+  --set storage.credentials.accessKeyId="your-access-key-id" \
+  --set storage.credentials.secretAccessKey="your-secret-access-key"
 ```
 
 If you set `storage.s3.root` as `mycluser`, then the data layout will be:
