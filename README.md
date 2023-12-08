@@ -63,15 +63,12 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
      
      ```console
      helm install mycluster greptime/greptimedb-cluster -n default \
-       --set storage.s3.bucket=<your-bucket> \
-       --set storage.s3.region=<region-of-bucket> \
-       --set storage.s3.root=<root-directory-of-data> \
-       --set storage.s3.secretName=s3-credentials \
-       --set storage.credentials.secretName=s3-credentials \
-       --set storage.credentials.secretCreation.enabled=true \
-       --set storage.credentials.secretCreation.enableEncryption=false \
-       --set storage.credentials.secretCreation.data.access-key-id=<your-access-key-id> \
-       --set storage.credentials.secretCreation.data.secret-access-key=<your-secret-access-key>
+       --set storage.s3.bucket="your-bucket" \
+       --set storage.s3.region="region-of-bucket" \
+       --set storage.s3.root="root-directory-of-data" \
+       --set storage.credentials.secretName="s3-credentials" \
+       --set storage.credentials.accessKeyId="your-access-key-id" \
+       --set storage.credentials.secretAccessKey="your-secret-access-key"
      ```
 
 4. **Use `kubectl port-forward` to access the GreptimeDB cluster**
