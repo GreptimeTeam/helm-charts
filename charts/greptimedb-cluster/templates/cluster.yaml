@@ -16,6 +16,9 @@ spec:
       - name: {{ . }}
     {{- end }}
     {{- end }}
+    {{- if .Values.serviceAccount.create }}
+    serviceAccountName: {{ .Values.serviceAccount.name }}
+    {{- end }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
     {{- if .Values.frontend.config }}

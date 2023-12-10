@@ -95,4 +95,7 @@ helm uninstall mycluster -n default
 | prometheusMonitor | object | `{}` | Configure to prometheus podmonitor |
 | resources.limits | object | `{"cpu":"500m","memory":"512Mi"}` | The resources limits for the container |
 | resources.requests | object | `{"cpu":"500m","memory":"512Mi"}` | The requested resources for the container |
+| serviceAccount.annotations | object | `{}` | The annotations for serviceaccount |
+| serviceAccount.create | bool | `true` | Create a service account |
+| serviceAccount.name | string | `"greptimedb-cluster"` | The serviceaccount name |
 | storage | object | `{"local":{},"oss":{},"s3":{}}` | Configure to storage |

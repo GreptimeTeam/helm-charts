@@ -18,6 +18,14 @@ resources:
     cpu: 500m
     memory: 512Mi
 
+serviceAccount:
+  # -- Create a service account
+  create: true
+  # -- The serviceaccount name
+  name: greptimedb-cluster
+  # -- The annotations for serviceaccount
+  annotations: {}
+
 frontend:
   # -- Frontend replicas
   replicas: 1
