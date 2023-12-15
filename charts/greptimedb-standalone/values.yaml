@@ -38,6 +38,7 @@ configToml: |
 
 # -- Environment variables
 env:
+  GREPTIMEDB_STANDALONE__STORAGE__DATA_HOME: "/data/greptimedb"
   GREPTIMEDB_STANDALONE__HTTP__ADDR: "0.0.0.0:4000"
 #  GREPTIMEDB_STANDALONE__GRPC__ADDR: "0.0.0.0:4001"
 #  GREPTIMEDB_STANDALONE__MYSQL__ADDR: "0.0.0.0:4002"
@@ -47,20 +48,29 @@ env:
 
 #  GREPTIMEDB_STANDALONE__WAL__FILE_SIZE: "128MB"
 #  GREPTIMEDB_STANDALONE__WAL__PURGE_THRESHOLD: "2GB"
-#  GREPTIMEDB_DATANODE__WAL__DIR: "/tmp/greptimedb/wal"
+#  GREPTIMEDB_DATANODE__WAL__DIR: "/data/greptimedb/wal"
 
 #  # configure to use local storage.
 #  GREPTIMEDB_STANDALONE__STORAGE__TYPE: "File"
-#  GREPTIMEDB_STANDALONE__STORAGE__DATA_HOME: "/tmp/greptimedb"
 
-#  # configure to use s3 storage.
+#  # configure to use aws s3 storage.
 #  GREPTIMEDB_STANDALONE__STORAGE__TYPE: "S3"
-#  GREPTIMEDB_STANDALONE__STORAGE__BUCKET: "bucket-name"
+#  GREPTIMEDB_STANDALONE__STORAGE__BUCKET: "aws_s3_name"
 #  GREPTIMEDB_STANDALONE__STORAGE__ROOT: "/data"
-#  GREPTIMEDB_STANDALONE__STORAGE__REGION: "ap-southeast-1"
-#  GREPTIMEDB_STANDALONE__STORAGE__ACCESS_KEY_ID: "access_key_id"
-#  GREPTIMEDB_STANDALONE__STORAGE__SECRET_ACCESS_KEY: "secret_access_key"
-#  GREPTIMEDB_STANDALONE__STORAGE__CACHE__CACHE_PATH: "/tmp/greptimedb/s3cache"
+#  GREPTIMEDB_STANDALONE__STORAGE__REGION: "aws_s3_region"
+#  GREPTIMEDB_STANDALONE__STORAGE__ACCESS_KEY_ID: "aws_access_key_id"
+#  GREPTIMEDB_STANDALONE__STORAGE__SECRET_ACCESS_KEY: "aws_secret_access_key"
+#  GREPTIMEDB_STANDALONE__STORAGE__CACHE__CACHE_PATH: "/data/greptimedb/s3cache"
+
+#  # configure to use alicloud oss storage.
+#  GREPTIMEDB_STANDALONE__STORAGE__TYPE: "Oss"
+#  GREPTIMEDB_STANDALONE__STORAGE__BUCKET: "alicloud_oss_name"
+#  GREPTIMEDB_STANDALONE__STORAGE__ROOT: "/data"
+#  GREPTIMEDB_STANDALONE__STORAGE__REGION: "alicloud_oss_region"
+#  GREPTIMEDB_STANDALONE__STORAGE__ACCESS_KEY_ID: "alicloud_access_key_id"
+#  GREPTIMEDB_STANDALONE__STORAGE__ACCESS_KEY_SECRET: "alicloud_access_key_secret"
+#  GREPTIMEDB_STANDALONE__STORAGE__ENDPOINT: "alicloud_oss_endpoint" # For example: oss-cn-hangzhou.aliyuncs.com, more detail see https://www.alibabacloud.com/help/en/oss/user-guide/regions-and-endpoints
+#  GREPTIMEDB_STANDALONE__STORAGE__CACHE__CACHE_PATH: "/data/greptimedb/s3cache"
 
 #  GREPTIMEDB_STANDALONE__STORAGE__GLOBAL_TTL: "1d"
 #  GREPTIMEDB_STANDALONE__STORAGE__FLUSH__GLOBAL_WRITE_BUFFER_SIZE: "512MB"
@@ -138,17 +148,7 @@ affinity: {}
 #              values:
 #                - another-node-label-value
 
-# -- DNS configuration for pod
-dnsConfig: {}
-#  nameservers:
-#    - 10.0.0.1
-#  searches:
-#    - mydomain.local
-#  options:
-#    - name: ndots
-#      value: "2"
-
-# -- Grace period to allow the single binary to shutdown before it is killed
+# -- Grace period to allow the single binary to shut down before it is killed
 terminationGracePeriodSeconds: 30
 
 persistence:
