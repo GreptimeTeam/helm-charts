@@ -20,7 +20,7 @@ resources:
 
 frontend:
   # -- Frontend replicas
-  replicas: 1
+  replicas: 2
 
   # -- Extra frontend config in toml format.
   config: ""
