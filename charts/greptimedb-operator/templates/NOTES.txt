@@ -4,4 +4,7 @@
  GreptimeDB Operator version: {{ .Chart.AppVersion }}
 ***********************************************************************
 
+Installed components:
+* greptimedb-operator
+
 The greptimedb-operator is starting, use `kubectl get deployments {{ include "greptimedb-operator.fullname" . }} -n {{ .Release.Namespace }}` to check its status.
