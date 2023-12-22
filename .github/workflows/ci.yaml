@@ -11,6 +11,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Check docs
+        run: |
+          make check-docs    
+
       - name: Install Helm
         uses: azure/setup-helm@v3
         with:
