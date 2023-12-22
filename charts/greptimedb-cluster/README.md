@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes
 
-![Version: 0.1.7](https://img.shields.io/badge/Version-0.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.4](https://img.shields.io/badge/AppVersion-0.4.4-informational?style=flat-square)
+![Version: 0.1.8](https://img.shields.io/badge/Version-0.1.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.4](https://img.shields.io/badge/AppVersion-0.4.4-informational?style=flat-square)
 
 ## Source Code
 
@@ -65,14 +65,42 @@ helm uninstall mycluster -n default
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | datanode.config | string | `""` | Extra datanode config in toml format. |
-| datanode.podTemplate | object | `{}` | The pod template for datanode. |
+| datanode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceaccount":{"annotations":{},"create":false,"name":"datanode-sa"},"tolerations":[]}` | The pod template for datanode |
+| datanode.podTemplate.affinity | object | `{}` | The pod affinity |
+| datanode.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
+| datanode.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
+| datanode.podTemplate.main | object | `{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}}` | The spec of main container |
+| datanode.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
+| datanode.podTemplate.main.command | list | `[]` | The command to be executed in the container |
+| datanode.podTemplate.main.env | list | `[]` | The environment variables for the container |
+| datanode.podTemplate.main.image | string | `""` | The datanode image. |
+| datanode.podTemplate.main.resources.limits | object | `{}` | The resources limits for the container |
+| datanode.podTemplate.main.resources.requests | object | `{}` | The requested resources for the container |
+| datanode.podTemplate.nodeSelector | object | `{}` | The pod node selector |
+| datanode.podTemplate.serviceaccount.annotations | object | `{}` | The annotations for datanode serviceaccount |
+| datanode.podTemplate.serviceaccount.create | bool | `false` | Create a service account |
+| datanode.podTemplate.serviceaccount.name | string | `"datanode-sa"` | The serviceaccount name |
+| datanode.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | datanode.replicas | int | `3` | Datanode replicas |
 | datanode.storage.storageClassName | string | `nil` | Storage class for datanode persistent volume |
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
 | datanode.storage.storageSize | string | `"10Gi"` | Storage size for datanode persistent volume |
 | datanode.storage.walDir | string | `"/tmp/greptimedb/wal"` | The wal directory of the storage, default is "/tmp/greptimedb/wal" |
 | frontend.config | string | `""` | Extra frontend config in toml format. |
-| frontend.podTemplate | object | `{}` | The pod template for frontend. |
+| frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for datanode |
+| frontend.podTemplate.affinity | object | `{}` | The pod affinity |
+| frontend.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
+| frontend.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
+| frontend.podTemplate.main | object | `{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}}` | The spec of main container |
+| frontend.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
+| frontend.podTemplate.main.command | list | `[]` | The command to be executed in the container |
+| frontend.podTemplate.main.env | list | `[]` | The environment variables for the container |
+| frontend.podTemplate.main.image | string | `""` | The datanode image. |
+| frontend.podTemplate.main.resources.limits | object | `{}` | The resources limits for the container |
+| frontend.podTemplate.main.resources.requests | object | `{}` | The requested resources for the container |
+| frontend.podTemplate.nodeSelector | object | `{}` | The pod node selector |
+| frontend.podTemplate.serviceAccountName | string | `""` | The service account for frontend |
+| frontend.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | frontend.replicas | int | `1` | Frontend replicas |
 | frontend.service | object | `{}` | Frontend service |
 | frontend.tls | object | `{}` | Frontend tls configure |
@@ -87,7 +115,20 @@ helm uninstall mycluster -n default
 | initializer.tag | string | `"0.1.0-alpha.17"` | Initializer image tag |
 | meta.config | string | `""` | Extra Meta config in toml format. |
 | meta.etcdEndpoints | string | `"etcd.default.svc.cluster.local:2379"` | Meta etcd endpoints |
-| meta.podTemplate | object | `{}` | The pod template for Meta. |
+| meta.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for datanode |
+| meta.podTemplate.affinity | object | `{}` | The pod affinity |
+| meta.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
+| meta.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
+| meta.podTemplate.main | object | `{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}}` | The spec of main container |
+| meta.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
+| meta.podTemplate.main.command | list | `[]` | The command to be executed in the container |
+| meta.podTemplate.main.env | list | `[]` | The environment variables for the container |
+| meta.podTemplate.main.image | string | `""` | The datanode image. |
+| meta.podTemplate.main.resources.limits | object | `{}` | The resources limits for the container |
+| meta.podTemplate.main.resources.requests | object | `{}` | The requested resources for the container |
+| meta.podTemplate.nodeSelector | object | `{}` | The pod node selector |
+| meta.podTemplate.serviceAccountName | string | `""` | The service account for meta |
+| meta.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | meta.replicas | int | `1` | Meta replicas |
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | openTSDBServicePort | int | `4242` | GreptimeDB opentsdb service port |
@@ -95,7 +136,4 @@ helm uninstall mycluster -n default
 | prometheusMonitor | object | `{}` | Configure to prometheus podmonitor |
 | resources.limits | object | `{"cpu":"500m","memory":"512Mi"}` | The resources limits for the container |
 | resources.requests | object | `{"cpu":"500m","memory":"512Mi"}` | The requested resources for the container |
-| serviceAccount.annotations | object | `{}` | The annotations for serviceaccount |
-| serviceAccount.create | bool | `true` | Create a service account |
-| serviceAccount.name | string | `"greptimedb-cluster"` | The serviceaccount name |
 | storage | object | `{"local":{},"oss":{},"s3":{}}` | Configure to storage |

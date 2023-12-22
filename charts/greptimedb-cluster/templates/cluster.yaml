@@ -16,9 +16,6 @@ spec:
       - name: {{ . }}
     {{- end }}
     {{- end }}
-    {{- if .Values.serviceAccount.create }}
-    serviceAccountName: {{ .Values.serviceAccount.name }}
-    {{- end }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
     {{- if .Values.frontend.config }}
@@ -32,9 +29,41 @@ spec:
     {{- if .Values.frontend.service }}
     service: {{- toYaml .Values.frontend.service | nindent 6 }}
     {{- end }}
-    {{- if .Values.frontend.podTemplate }}
-    template: {{- toYaml .Values.frontend.podTemplate | nindent 6 }}
-    {{- end }}
+    template:
+      main:
+        {{- if .Values.frontend.podTemplate.main.image }}
+        image: {{ .Values.frontend.podTemplate.main.image }}
+        {{- end }}
+        {{- if .Values.frontend.podTemplate.main.command }}
+        command: {{ .Values.frontend.podTemplate.main.command }}
+        {{- end }}
+        {{- if .Values.frontend.podTemplate.main.args }}
+        args: {{ .Values.frontend.podTemplate.main.args }}
+        {{- end }}
+        {{- if .Values.frontend.podTemplate.main.env }}
+        env: {{- toYaml .Values.frontend.podTemplate.main.env | nindent 8 }}
+        {{- end }}
+        resources:
+          requests: {{ .Values.frontend.podTemplate.main.resources.requests | toYaml | nindent 12 }}
+          limits: {{ .Values.frontend.podTemplate.main.resources.limits | toYaml | nindent 12 }}
+      {{- if .Values.frontend.podTemplate.annotations }}
+      annotations: {{ .Values.frontend.podTemplate.annotations | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.frontend.podTemplate.labels }}
+      labels: {{ .Values.frontend.podTemplate.labels | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.frontend.podTemplate.serviceAccountName }}
+      serviceAccountName: {{ .Values.frontend.podTemplate.serviceAccountName }}
+      {{- end }}
+      {{- if .Values.frontend.podTemplate.tolerations }}
+      tolerations: {{ .Values.frontend.podTemplate.tolerations | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.frontend.podTemplate.affinity }}
+      affinity: {{ .Values.frontend.podTemplate.affinity | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.frontend.podTemplate.nodeSelector }}
+      nodeSelector: {{ .Values.frontend.podTemplate.nodeSelector | toYaml | nindent 8 }}
+      {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}
     {{- if .Values.meta.config }}
@@ -45,18 +74,82 @@ spec:
     etcdEndpoints:
       - {{ .Values.meta.etcdEndpoints }}
     {{- end }}
-    {{- if .Values.meta.podTemplate }}
-    template: {{- toYaml .Values.meta.podTemplate | nindent 6 }}
-    {{- end }}
+    template:
+      main:
+        {{- if .Values.meta.podTemplate.main.image }}
+        image: {{ .Values.meta.podTemplate.main.image }}
+        {{- end }}
+        {{- if .Values.meta.podTemplate.main.command }}
+        command: {{ .Values.meta.podTemplate.main.command }}
+        {{- end }}
+        {{- if .Values.meta.podTemplate.main.args }}
+        args: {{ .Values.meta.podTemplate.main.args }}
+        {{- end }}
+        {{- if .Values.meta.podTemplate.main.env }}
+        env: {{- toYaml .Values.meta.podTemplate.main.env | nindent 8 }}
+        {{- end }}
+        resources:
+          requests: {{ .Values.meta.podTemplate.main.resources.requests | toYaml | nindent 12 }}
+          limits: {{ .Values.meta.podTemplate.main.resources.limits | toYaml | nindent 12 }}
+      {{- if .Values.meta.podTemplate.annotations }}
+      annotations: {{ .Values.meta.podTemplate.annotations | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.meta.podTemplate.labels }}
+      labels: {{ .Values.meta.podTemplate.labels | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.meta.podTemplate.serviceAccountName }}
+      serviceAccountName: {{ .Values.meta.podTemplate.serviceAccountName }}
+      {{- end }}
+      {{- if .Values.meta.podTemplate.tolerations }}
+      tolerations: {{ .Values.meta.podTemplate.tolerations | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.meta.podTemplate.affinity }}
+      affinity: {{ .Values.meta.podTemplate.affinity | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.meta.podTemplate.nodeSelector }}
+      nodeSelector: {{ .Values.meta.podTemplate.nodeSelector | toYaml | nindent 8 }}
+      {{- end }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
     {{- if .Values.datanode.config }}
     config: |-
       {{ .Values.datanode.config | nindent 6 }}
     {{- end }}
-    {{- if .Values.datanode.podTemplate }}
-    template: {{- toYaml .Values.datanode.podTemplate | nindent 6 }}
-    {{- end }}
+    template:
+      main:
+        {{- if .Values.datanode.podTemplate.main.image }}
+        image: {{ .Values.datanode.podTemplate.main.image }}
+        {{- end }}
+        {{- if .Values.datanode.podTemplate.main.command }}
+        command: {{ .Values.datanode.podTemplate.main.command }}
+        {{- end }}
+        {{- if .Values.datanode.podTemplate.main.args }}
+        args: {{ .Values.datanode.podTemplate.main.args }}
+        {{- end }}
+        {{- if .Values.datanode.podTemplate.main.env }}
+        env: {{- toYaml .Values.datanode.podTemplate.main.env | nindent 8 }}
+        {{- end }}
+        resources:
+          requests: {{ .Values.datanode.podTemplate.main.resources.requests | toYaml | nindent 12 }}
+          limits: {{ .Values.datanode.podTemplate.main.resources.limits | toYaml | nindent 12 }}
+      {{- if .Values.datanode.podTemplate.annotations }}
+      annotations: {{ .Values.datanode.podTemplate.annotations | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.datanode.podTemplate.labels }}
+      labels: {{ .Values.datanode.podTemplate.labels | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.datanode.podTemplate.serviceaccount.create }}
+      serviceAccountName: {{ .Values.datanode.podTemplate.serviceaccount.name }}
+      {{- end }}
+      {{- if .Values.datanode.podTemplate.tolerations }}
+      tolerations: {{ .Values.datanode.podTemplate.tolerations | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.datanode.podTemplate.affinity }}
+      affinity: {{ .Values.datanode.podTemplate.affinity | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.datanode.podTemplate.nodeSelector }}
+      nodeSelector: {{ .Values.datanode.podTemplate.nodeSelector | toYaml | nindent 8 }}
+      {{- end }}
     storage:
       storageClassName: {{ .Values.datanode.storage.storageClassName }}
       storageSize: {{ .Values.datanode.storage.storageSize }}
