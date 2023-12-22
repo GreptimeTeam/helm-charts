@@ -72,7 +72,7 @@ env:
 #  GREPTIMEDB_STANDALONE__STORAGE__ACCESS_KEY_ID: "alicloud_access_key_id"
 #  GREPTIMEDB_STANDALONE__STORAGE__ACCESS_KEY_SECRET: "alicloud_access_key_secret"
 #  GREPTIMEDB_STANDALONE__STORAGE__ENDPOINT: "alicloud_oss_endpoint" # For example: oss-cn-hangzhou.aliyuncs.com, more detail see https://www.alibabacloud.com/help/en/oss/user-guide/regions-and-endpoints
-#  GREPTIMEDB_STANDALONE__STORAGE__CACHE__CACHE_PATH: "/data/greptimedb/s3cache"
+#  GREPTIMEDB_STANDALONE__STORAGE__CACHE__CACHE_PATH: "/data/greptimedb/osscache"
 
 #  GREPTIMEDB_STANDALONE__STORAGE__GLOBAL_TTL: "1d"
 #  GREPTIMEDB_STANDALONE__STORAGE__FLUSH__GLOBAL_WRITE_BUFFER_SIZE: "512MB"
