@@ -66,6 +66,10 @@ spec:
             - "--config-file"
             - "/etc/greptimedb/config.toml"
             {{- end }}
+            {{- if .Values.dataHome }}
+            - "--data-home"
+            - {{ .Values.dataHome }}
+            {{- end }}
           {{- if .Values.args }}
             {{- toYaml .Values.args | nindent 12 }}
           {{- end }}

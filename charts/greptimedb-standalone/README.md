@@ -32,8 +32,9 @@ helm uninstall greptimedb-standalone -n default
 | annotations | object | `{}` | The annotations |
 | args | list | `[]` | The container args |
 | command | list | `[]` | The container command |
-| configToml | string | `"mode = 'standalone'\n"` | The extra configuration for greptimedb. |
-| env | object | `{"GREPTIMEDB_STANDALONE__HTTP__ADDR":"0.0.0.0:4000","GREPTIMEDB_STANDALONE__STORAGE__DATA_HOME":"/data/greptimedb"}` | Environment variables |
+| configToml | string | `"mode = 'standalone'\n"` | The extra configuration for greptimedb |
+| dataHome | string | `"/data/greptimedb/"` | Storage root directory |
+| env | object | `{"GREPTIMEDB_STANDALONE__HTTP__ADDR":"0.0.0.0:4000","GREPTIMEDB_STANDALONE__STORAGE__ACCESS_KEY_ID":"aws_access_key_id","GREPTIMEDB_STANDALONE__STORAGE__BUCKET":"aws_s3_name","GREPTIMEDB_STANDALONE__STORAGE__CACHE__CACHE_PATH":"/data/greptimedb/s3cache","GREPTIMEDB_STANDALONE__STORAGE__REGION":"aws_s3_region","GREPTIMEDB_STANDALONE__STORAGE__ROOT":"/data","GREPTIMEDB_STANDALONE__STORAGE__SECRET_ACCESS_KEY":"aws_secret_access_key","GREPTIMEDB_STANDALONE__STORAGE__TYPE":"S3"}` | Environment variables |
 | envFrom | object | `{}` | Maps all the keys on a configmap or secret as environment variables |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
 | grpcServicePort | int | `4001` | GreptimeDB grpc service port |
