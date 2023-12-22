@@ -11,8 +11,14 @@ endif
 install-helm-docs: ## Install helm-docs tool
 	go install github.com/norwoodj/helm-docs/cmd/helm-docs@${HELM_DOCS_VERSION}
 
-.PHONY: update-docs
-update-docs: install-helm-docs ## Run helm-docs
+.PHONY: docs
+docs: install-helm-docs ## Run helm-docs
 	$(GOBIN)/helm-docs -c charts/greptimedb-cluster --chart-search-root=charts/greptimedb-cluster --template-files=README.md.gotmpl
 	$(GOBIN)/helm-docs -c charts/greptimedb-operator --chart-search-root=charts/greptimedb-operator --template-files=README.md.gotmpl
 	$(GOBIN)/helm-docs -c charts/greptimedb-standalone --chart-search-root=charts/greptimedb-standalone --template-files=README.md.gotmpl
+
+.PHONY: check-docs
+check-docs: docs ## Check docs
+	@git diff --quiet || \
+    (echo "Need to update documentation, please run 'make docs'"; \
+	exit 1)
