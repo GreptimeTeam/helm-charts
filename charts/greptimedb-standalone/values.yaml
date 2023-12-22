@@ -50,7 +50,7 @@ env:
 
 #  GREPTIMEDB_STANDALONE__WAL__FILE_SIZE: "128MB"
 #  GREPTIMEDB_STANDALONE__WAL__PURGE_THRESHOLD: "2GB"
-#  GREPTIMEDB_DATANODE__WAL__DIR: "/data/greptimedb/wal"
+#  GREPTIMEDB_STANDALONE__WAL__DIR: "/data/greptimedb/wal"
 
 #  # configure to use local storage.
 #  GREPTIMEDB_STANDALONE__STORAGE__TYPE: "File"
@@ -62,7 +62,7 @@ env:
 #  GREPTIMEDB_STANDALONE__STORAGE__REGION: "aws_s3_region"
 #  GREPTIMEDB_STANDALONE__STORAGE__ACCESS_KEY_ID: "aws_access_key_id"
 #  GREPTIMEDB_STANDALONE__STORAGE__SECRET_ACCESS_KEY: "aws_secret_access_key"
-#  GREPTIMEDB_STANDALONE__STORAGE__CACHE__CACHE_PATH: "/data/greptimedb/s3cache"
+#  GREPTIMEDB_STANDALONE__STORAGE__CACHE_PATH: "/data/greptimedb/s3cache"
 
 #  # configure to use alicloud oss storage.
 #  GREPTIMEDB_STANDALONE__STORAGE__TYPE: "Oss"
@@ -72,7 +72,7 @@ env:
 #  GREPTIMEDB_STANDALONE__STORAGE__ACCESS_KEY_ID: "alicloud_access_key_id"
 #  GREPTIMEDB_STANDALONE__STORAGE__ACCESS_KEY_SECRET: "alicloud_access_key_secret"
 #  GREPTIMEDB_STANDALONE__STORAGE__ENDPOINT: "alicloud_oss_endpoint" # For example: oss-cn-hangzhou.aliyuncs.com, more detail see https://www.alibabacloud.com/help/en/oss/user-guide/regions-and-endpoints
-#  GREPTIMEDB_STANDALONE__STORAGE__CACHE__CACHE_PATH: "/data/greptimedb/osscache"
+#  GREPTIMEDB_STANDALONE__STORAGE__CACHE_PATH: "/data/greptimedb/osscache"
 
 #  GREPTIMEDB_STANDALONE__STORAGE__GLOBAL_TTL: "1d"
 #  GREPTIMEDB_STANDALONE__STORAGE__FLUSH__GLOBAL_WRITE_BUFFER_SIZE: "512MB"
