@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.4](https://img.shields.io/badge/AppVersion-0.4.4-informational?style=flat-square)
+![Version: 0.1.6](https://img.shields.io/badge/Version-0.1.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.4](https://img.shields.io/badge/AppVersion-0.4.4-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -32,8 +32,8 @@ helm uninstall greptimedb-standalone -n default
 | annotations | object | `{}` | The annotations |
 | args | list | `[]` | The container args |
 | command | list | `[]` | The container command |
-| configToml | string | `"mode = 'standalone'\n"` | The extra configuration for greptimedb. |
-| dnsConfig | object | `{}` | DNS configuration for pod |
+| configToml | string | `"mode = 'standalone'\n"` | The extra configuration for greptimedb |
+| dataHome | string | `"/data/greptimedb/"` | Storage root directory |
 | env | object | `{"GREPTIMEDB_STANDALONE__HTTP__ADDR":"0.0.0.0:4000"}` | Environment variables |
 | envFrom | object | `{}` | Maps all the keys on a configmap or secret as environment variables |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
@@ -69,5 +69,5 @@ helm uninstall greptimedb-standalone -n default
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | Service account name |
-| terminationGracePeriodSeconds | int | `30` | Grace period to allow the single binary to shutdown before it is killed |
+| terminationGracePeriodSeconds | int | `30` | Grace period to allow the single binary to shut down before it is killed |
 | tolerations | object | `{}` | Tolerations to apply pod |

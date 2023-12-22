@@ -1,0 +1,12 @@
+***********************************************************************
+ Welcome to use greptimedb-cluster
+ Chart version: {{ .Chart.Version }}
+ GreptimeDB Cluster version: {{ .Chart.AppVersion }}
+***********************************************************************
+
+Installed components:
+* greptimedb-frontend
+* greptimedb-datanode
+* greptimedb-meta
+
+The greptimedb-cluster is starting, use `kubectl get pod -n {{ .Release.Namespace }}` to check its status.

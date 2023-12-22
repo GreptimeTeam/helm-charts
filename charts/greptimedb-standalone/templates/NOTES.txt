@@ -1,0 +1,10 @@
+***********************************************************************
+ Welcome to use greptimedb-standalone
+ Chart version: {{ .Chart.Version }}
+ GreptimeDB Standalone version: {{ .Chart.AppVersion }}
+***********************************************************************
+
+Installed components:
+* greptimedb-standalone
+
+The greptimedb-standalone is starting, use `kubectl get statefulsets {{ include "greptimedb-standalone.fullname" . }} -n {{ .Release.Namespace }}` to check its status.
