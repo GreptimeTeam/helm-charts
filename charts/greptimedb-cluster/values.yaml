@@ -25,7 +25,7 @@ frontend:
   # -- Extra frontend config in toml format.
   config: ""
 
-  # -- The pod template for datanode
+  # -- The pod template for frontend
   podTemplate:
     # -- The spec of main container
     main:
@@ -37,6 +37,7 @@ frontend:
         requests: {}
         #  cpu: "1"
         #  memory: "2Gi"
+
         # -- The resources limits for the container
         limits: {}
         #  cpu: "1"
@@ -78,7 +79,7 @@ meta:
   # -- Extra Meta config in toml format.
   config: ""
 
-  # -- The pod template for datanode
+  # -- The pod template for meta
   podTemplate:
     # -- The spec of main container
     main:
@@ -90,6 +91,7 @@ meta:
         requests: {}
         #  cpu: "1"
         #  memory: "2Gi"
+
         # -- The resources limits for the container
         limits: {}
         #  cpu: "1"
@@ -139,6 +141,7 @@ datanode:
         requests: {}
         #  cpu: "1"
         #  memory: "2Gi"
+
         # -- The resources limits for the container
         limits: {}
         #  cpu: "1"

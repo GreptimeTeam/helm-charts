@@ -87,7 +87,7 @@ helm uninstall mycluster -n default
 | datanode.storage.storageSize | string | `"10Gi"` | Storage size for datanode persistent volume |
 | datanode.storage.walDir | string | `"/tmp/greptimedb/wal"` | The wal directory of the storage, default is "/tmp/greptimedb/wal" |
 | frontend.config | string | `""` | Extra frontend config in toml format. |
-| frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for datanode |
+| frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for frontend |
 | frontend.podTemplate.affinity | object | `{}` | The pod affinity |
 | frontend.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
 | frontend.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
@@ -115,7 +115,7 @@ helm uninstall mycluster -n default
 | initializer.tag | string | `"0.1.0-alpha.17"` | Initializer image tag |
 | meta.config | string | `""` | Extra Meta config in toml format. |
 | meta.etcdEndpoints | string | `"etcd.default.svc.cluster.local:2379"` | Meta etcd endpoints |
-| meta.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for datanode |
+| meta.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for meta |
 | meta.podTemplate.affinity | object | `{}` | The pod affinity |
 | meta.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
 | meta.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
