@@ -25,8 +25,45 @@ frontend:
   # -- Extra frontend config in toml format.
   config: ""
 
-  # -- The pod template for frontend.
-  podTemplate: {}
+  # -- The pod template for frontend
+  podTemplate:
+    # -- The spec of main container
+    main:
+      # -- The frontend image.
+      image: ""
+
+      resources:
+        # -- The requested resources for the container
+        requests: {}
+        #  cpu: "1"
+        #  memory: "2Gi"
+
+        # -- The resources limits for the container
+        limits: {}
+        #  cpu: "1"
+        #  memory: "2Gi"
+
+      # -- The environment variables for the container
+      env: []
+
+      # -- The command to be executed in the container
+      command: []
+
+      # -- The arguments to be passed to the command
+      args: []
+
+    # -- The annotations to be created to the pod.
+    annotations: {}
+    # -- The labels to be created to the pod.
+    labels: {}
+    # -- The pod node selector
+    nodeSelector: {}
+    # -- The pod tolerations
+    tolerations: []
+    # -- The pod affinity
+    affinity: {}
+    # -- The service account for frontend
+    serviceAccountName: ""
 
   # -- Frontend service
   service: {}
@@ -42,8 +79,45 @@ meta:
   # -- Extra Meta config in toml format.
   config: ""
 
-  # -- The pod template for Meta.
-  podTemplate: {}
+  # -- The pod template for meta
+  podTemplate:
+    # -- The spec of main container
+    main:
+      # -- The meta image.
+      image: ""
+
+      resources:
+        # -- The requested resources for the container
+        requests: {}
+        #  cpu: "1"
+        #  memory: "2Gi"
+
+        # -- The resources limits for the container
+        limits: {}
+        #  cpu: "1"
+        #  memory: "2Gi"
+
+      # -- The environment variables for the container
+      env: []
+
+      # -- The command to be executed in the container
+      command: []
+
+      # -- The arguments to be passed to the command
+      args: []
+
+    # -- The annotations to be created to the pod.
+    annotations: {}
+    # -- The labels to be created to the pod.
+    labels: {}
+    # -- The pod node selector
+    nodeSelector: {}
+    # -- The pod tolerations
+    tolerations: []
+    # -- The pod affinity
+    affinity: {}
+    # -- The service account for meta
+    serviceAccountName: ""
 
   # -- Meta etcd endpoints
   etcdEndpoints: "etcd.default.svc.cluster.local:2379"
@@ -55,8 +129,50 @@ datanode:
   # -- Extra datanode config in toml format.
   config: ""
 
-  # -- The pod template for datanode.
-  podTemplate: {}
+  # -- The pod template for datanode
+  podTemplate:
+    # -- The spec of main container
+    main:
+      # -- The datanode image.
+      image: ""
+
+      resources:
+        # -- The requested resources for the container
+        requests: {}
+        #  cpu: "1"
+        #  memory: "2Gi"
+
+        # -- The resources limits for the container
+        limits: {}
+        #  cpu: "1"
+        #  memory: "2Gi"
+
+      # -- The environment variables for the container
+      env: []
+
+      # -- The command to be executed in the container
+      command: []
+
+      # -- The arguments to be passed to the command
+      args: []
+
+    # -- The annotations to be created to the pod.
+    annotations: {}
+    # -- The labels to be created to the pod.
+    labels: {}
+    # -- The pod node selector
+    nodeSelector: {}
+    # -- The pod tolerations
+    tolerations: []
+    # -- The pod affinity
+    affinity: {}
+    serviceaccount:
+      # -- Create a service account
+      create: false
+      # -- The serviceaccount name
+      name: datanode-sa
+      # -- The annotations for datanode serviceaccount
+      annotations: {}
 
   storage:
     # -- Storage class for datanode persistent volume
