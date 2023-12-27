@@ -29,7 +29,7 @@ frontend:
   podTemplate:
     # -- The spec of main container
     main:
-      # -- The datanode image.
+      # -- The frontend image.
       image: ""
 
       resources:
@@ -83,7 +83,7 @@ meta:
   podTemplate:
     # -- The spec of main container
     main:
-      # -- The datanode image.
+      # -- The meta image.
       image: ""
 
       resources:

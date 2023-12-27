@@ -95,7 +95,7 @@ helm uninstall mycluster -n default
 | frontend.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
 | frontend.podTemplate.main.command | list | `[]` | The command to be executed in the container |
 | frontend.podTemplate.main.env | list | `[]` | The environment variables for the container |
-| frontend.podTemplate.main.image | string | `""` | The datanode image. |
+| frontend.podTemplate.main.image | string | `""` | The frontend image. |
 | frontend.podTemplate.main.resources.limits | object | `{}` | The resources limits for the container |
 | frontend.podTemplate.main.resources.requests | object | `{}` | The requested resources for the container |
 | frontend.podTemplate.nodeSelector | object | `{}` | The pod node selector |
@@ -123,7 +123,7 @@ helm uninstall mycluster -n default
 | meta.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
 | meta.podTemplate.main.command | list | `[]` | The command to be executed in the container |
 | meta.podTemplate.main.env | list | `[]` | The environment variables for the container |
-| meta.podTemplate.main.image | string | `""` | The datanode image. |
+| meta.podTemplate.main.image | string | `""` | The meta image. |
 | meta.podTemplate.main.resources.limits | object | `{}` | The resources limits for the container |
 | meta.podTemplate.main.resources.requests | object | `{}` | The requested resources for the container |
 | meta.podTemplate.nodeSelector | object | `{}` | The pod node selector |

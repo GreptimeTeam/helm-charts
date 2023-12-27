@@ -139,7 +139,7 @@ spec:
       labels: {{ .Values.datanode.podTemplate.labels | toYaml | nindent 8 }}
       {{- end }}
       {{- if .Values.datanode.podTemplate.serviceaccount.create }}
-      serviceAccountName: {{ .Values.datanode.podTemplate.serviceaccount.name }}
+      serviceAccountName: {{ .Release.Name }}-datanode
       {{- end }}
       {{- if .Values.datanode.podTemplate.tolerations }}
       tolerations: {{ .Values.datanode.podTemplate.tolerations | toYaml | nindent 8 }}
