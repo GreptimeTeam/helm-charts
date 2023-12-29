@@ -34,7 +34,7 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
    We recommend using the Bitnami etcd [chart](https://github.com/bitnami/charts/blob/main/bitnami/etcd/README.md) to deploy the etcd cluster:
 
    ```console
-   helm install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
+   helm upgrade --install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
      --set replicaCount=3 \
      --set auth.rbac.create=false \
      --set auth.rbac.token.enabled=false \
@@ -44,7 +44,7 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
 2. **Deploy GreptimeDB operator**
 
    ```console
-   helm install greptimedb-operator greptime/greptimedb-operator -n default
+   helm upgrade --install greptimedb-operator greptime/greptimedb-operator -n default
    ```
 
 3. **Deploy GreptimeDB cluster**
@@ -54,7 +54,7 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
      The default installation will use the local storage:
      
      ```console
-     helm install mycluster greptime/greptimedb-cluster -n default
+     helm upgrade --install mycluster greptime/greptimedb-cluster -n default
      ```
 
    - **Use AWS S3 as backend storage**
@@ -62,23 +62,24 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
      Before installation, you must create the AWS S3 bucket, and the cluster will use the bucket as backend storage:
      
      ```console
-     helm install mycluster greptime/greptimedb-cluster -n default \
-       --set storage.s3.bucket="your-bucket" \
-       --set storage.s3.region="region-of-bucket" \
-       --set storage.s3.root="root-directory-of-data" \
-       --set storage.credentials.secretName="s3-credentials" \
-       --set storage.credentials.accessKeyId="your-access-key-id" \
-       --set storage.credentials.secretAccessKey="your-secret-access-key"
+     helm upgrade --install mycluster greptime/greptimedb-cluster -n default \
+       --set objectStorage.s3.bucket="your-bucket" \
+       --set objectStorage.s3.region="region-of-bucket" \
+       --set objectStorage.s3.root="root-directory-of-data" \
+       --set objectStorage.credentials.secretName="s3-credentials" \
+       --set objectStorage.credentials.accessKeyId="your-access-key-id" \
+       --set objectStorage.credentials.secretAccessKey="your-secret-access-key" \
+       -n default
      ```
 
 4. **Use `kubectl port-forward` to access the GreptimeDB cluster**
 
    ```console
    # You can use the MySQL client to connect the cluster, for example: 'mysql -h 127.0.0.1 -P 4002'.
-   kubectl port-forward svc/mycluster-frontend 4002:4002 > connections.out &
+   kubectl port-forward -n default svc/mycluster-frontend 4002:4002 > connections.out &
    
    # You can use the PostgreSQL client to connect the cluster, for example: 'psql -h 127.0.0.1 -p 4003 -d public'.
-   kubectl port-forward svc/mycluster-frontend 4003:4003 > connections.out &
+   kubectl port-forward -n default svc/mycluster-frontend 4003:4003 > connections.out &
    ```
 
    You also can read and write data by [Cluster](https://docs.greptime.com/user-guide/cluster).
@@ -88,13 +89,13 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
 If you want to re-deploy the service because the configurations changed, you can:
 
 ```console
-helm upgrade <your-release> <chart> --values <your-values-file> -n <namespace>
+helm upgrade --install <your-release> <chart> --values <your-values-file> -n <namespace>
 ```
 
 For example:
 
 ```console
-helm upgrade mycluster greptime/greptimedb --values ./values.yaml
+helm upgrade --install mycluster greptime/greptimedb --values ./values.yaml
 ```
 
 ### Uninstallation

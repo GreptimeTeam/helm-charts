@@ -2695,6 +2695,8 @@ spec:
                     type: integer
                   storage:
                     properties:
+                      dataHome:
+                        type: string
                       mountPath:
                         type: string
                       name:
@@ -2702,7 +2704,6 @@ spec:
                       storageClassName:
                         type: string
                       storageRetainPolicy:
-                        default: Retain
                         enum:
                         - Retain
                         - Delete
@@ -10690,43 +10691,12 @@ spec:
               mysqlServicePort:
                 format: int32
                 type: integer
-              openTSDBServicePort:
-                format: int32
-                type: integer
-              postgresServicePort:
-                format: int32
-                type: integer
-              prometheusMonitor:
-                properties:
-                  enabled:
-                    type: boolean
-                  honorLabels:
-                    type: boolean
-                  interval:
-                    type: string
-                  labelsSelector:
-                    additionalProperties:
-                      type: string
-                    type: object
-                  path:
-                    type: string
-                  port:
-                    type: string
-                type: object
-              prometheusServicePort:
-                format: int32
-                type: integer
-              storage:
+              objectStorage:
                 properties:
                   cacheCapacity:
                     type: string
                   cachePath:
                     type: string
-                  local:
-                    properties:
-                      directory:
-                        type: string
-                    type: object
                   oss:
                     properties:
                       bucket:
@@ -10754,6 +10724,26 @@ spec:
                         type: string
                     type: object
                 type: object
+              openTSDBServicePort:
+                format: int32
+                type: integer
+              postgresServicePort:
+                format: int32
+                type: integer
+              prometheusMonitor:
+                properties:
+                  enabled:
+                    type: boolean
+                  interval:
+                    type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    type: object
+                type: object
+              prometheusServicePort:
+                format: int32
+                type: integer
               version:
                 type: string
             type: object

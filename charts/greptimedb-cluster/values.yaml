@@ -4,9 +4,17 @@ image:
   # -- The image repository
   repository: greptime/greptimedb
   # -- The image tag
-  tag: "v0.4.4"
+  tag: "v0.5.0"
   # -- The image pull secrets
   pullSecrets: []
+
+initializer:
+  # -- Initializer image registry
+  registry: docker.io
+  # -- Initializer image repository
+  repository: greptime/greptimedb-initializer
+  # -- Initializer image tag
+  tag: 0.1.0-alpha.19
 
 resources:
   # -- The requested resources for the container
@@ -169,8 +177,6 @@ datanode:
     serviceaccount:
       # -- Create a service account
       create: false
-      # -- The serviceaccount name
-      name: datanode-sa
       # -- The annotations for datanode serviceaccount
       annotations: {}
 
@@ -181,16 +187,10 @@ datanode:
     storageSize: 10Gi
     # -- Storage retain policy for datanode persistent volume
     storageRetainPolicy: Retain
-    # -- The wal directory of the storage, default is "/tmp/greptimedb/wal"
-    walDir: "/tmp/greptimedb/wal"
-
-initializer:
-  # -- Initializer image registry
-  registry: docker.io
-  # -- Initializer image repository
-  repository: greptime/greptimedb-initializer
-  # -- Initializer image tag
-  tag: 0.1.0-alpha.17
+    # -- The dataHome directory, default is "/data/greptimedb/"
+    dataHome: "/data/greptimedb"
+    # -- The wal directory of the storage, default is "/data/greptimedb/wal"
+    walDir: "/data/greptimedb/wal"
 
 # -- GreptimeDB http service port
 httpServicePort: 4000
@@ -207,26 +207,22 @@ postgresServicePort: 4003
 # -- GreptimeDB opentsdb service port
 openTSDBServicePort: 4242
 
-# -- Configure to prometheus podmonitor
-prometheusMonitor: {}
-#  enabled: false
-#  path: "/metrics"
-#  port: "http"
-#  interval: "30s"
-#  honorLabels: true
-#  labelsSelector:
-#    release: prometheus
+# -- Configure to prometheus PodMonitor
+prometheusMonitor:
+  # -- Create PodMonitor resource for scraping metrics using PrometheusOperator
+  enabled: false
+  # -- Interval at which metrics should be scraped
+  interval: "30s"
+  # -- Add labels to the PodMonitor
+  labels:
+    release: prometheus
 
-# -- Configure to storage
-storage:
+# -- Configure to object storage
+objectStorage:
 #  credentials:
 #    secretName: "credentials"
 #    accessKeyId: "you-should-set-the-access-key-id-here"
 #    secretAccessKey: "you-should-set-the-secret-access-key-here"
-
-  # configure to use local storage.
-  local: {}
-#    directory: /tmp/greptimedb
 
   # configure to use s3 storage.
   s3: {}
