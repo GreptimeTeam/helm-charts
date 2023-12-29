@@ -166,7 +166,7 @@ spec:
   openTSDBServicePort: {{ .Values.openTSDBServicePort }}
   initializer:
     image: '{{ .Values.initializer.registry }}/{{ .Values.initializer.repository }}:{{ .Values.initializer.tag }}'
-  storage:
+  objectStorage:
     {{- if .Values.objectStorage.s3 }}
     s3:
       bucket: {{ .Values.objectStorage.s3.bucket }}
