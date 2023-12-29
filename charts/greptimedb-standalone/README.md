@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.1.6](https://img.shields.io/badge/Version-0.1.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.4](https://img.shields.io/badge/AppVersion-0.4.4-informational?style=flat-square)
+![Version: 0.1.7](https://img.shields.io/badge/Version-0.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.0](https://img.shields.io/badge/AppVersion-0.5.0-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -15,7 +15,17 @@ helm repo add greptime https://greptimeteam.github.io/helm-charts/
 helm repo update
 
 # Install greptimedb standalone in default namespace.
-helm install greptimedb-standalone greptime/greptimedb-standalone -n default
+helm upgrade --install greptimedb-standalone greptime/greptimedb-standalone -n default
+```
+
+## Connection
+
+```console
+# You can use the MySQL client to connect the greptimedb, for example: 'mysql -h 127.0.0.1 -P 4002'.
+kubectl port-forward -n default svc/greptimedb-standalone 4002:4002 > connections.out &
+
+# You can use the PostgreSQL client to connect the greptimedb, for example: 'psql -h 127.0.0.1 -p 4003 -d public'.
+kubectl port-forward -n default svc/greptimedb-standalone 4003:4003 > connections.out &
 ```
 
 ## How to uninstall
@@ -43,7 +53,7 @@ helm uninstall greptimedb-standalone -n default
 | image.pullSecrets | list | `[]` | The image pull secrets. |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
-| image.tag | string | `"v0.4.4"` | The image tag |
+| image.tag | string | `"v0.5.0"` | The image tag |
 | monitoring.annotations | object | `{}` | PodMonitor annotations |
 | monitoring.enabled | bool | `false` | Enable prometheus podmonitor |
 | monitoring.interval | string | `"30s"` | PodMonitor scrape interval |

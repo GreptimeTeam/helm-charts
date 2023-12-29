@@ -16,7 +16,7 @@
 2. Install the etcd cluster:
 
    ```console
-   helm install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
+   helm upgrade --install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
      --set replicaCount=3 \
      --set auth.rbac.create=false \
      --set auth.rbac.token.enabled=false \
@@ -29,7 +29,7 @@
 The default installation will use the local storage:
 
 ```console
-helm install mycluster greptime/greptimedb-cluster -n default
+helm upgrade --install mycluster greptime/greptimedb-cluster -n default
 ```
 
 ### Use AWS S3 as backend storage
@@ -37,13 +37,14 @@ helm install mycluster greptime/greptimedb-cluster -n default
 Before installation, you must create the AWS S3 bucket, and the cluster will use the bucket as backend storage:
 
 ```console
-helm install mycluster greptime/greptimedb-cluster \
-  --set storage.s3.bucket="your-bucket" \
-  --set storage.s3.region="region-of-bucket" \
-  --set storage.s3.root="root-directory-of-data" \
-  --set storage.credentials.secretName="s3-credentials" \
-  --set storage.credentials.accessKeyId="your-access-key-id" \
-  --set storage.credentials.secretAccessKey="your-secret-access-key"
+helm upgrade --install mycluster greptime/greptimedb-cluster \
+  --set objectStorage.s3.bucket="your-bucket" \
+  --set objectStorage.s3.region="region-of-bucket" \
+  --set objectStorage.s3.root="root-directory-of-data" \
+  --set objectStorage.credentials.secretName="s3-credentials" \
+  --set objectStorage.credentials.accessKeyId="your-access-key-id" \
+  --set objectStorage.credentials.secretAccessKey="your-secret-access-key" \
+  -n default
 ```
 
 If you set `storage.s3.root` as `mycluser`, then the data layout will be:

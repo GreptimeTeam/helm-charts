@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes
 
-![Version: 0.1.8](https://img.shields.io/badge/Version-0.1.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.4](https://img.shields.io/badge/AppVersion-0.4.4-informational?style=flat-square)
+![Version: 0.1.9](https://img.shields.io/badge/Version-0.1.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.0](https://img.shields.io/badge/AppVersion-0.5.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -17,7 +17,7 @@ A Helm chart for deploying GreptimeDB cluster in Kubernetes
 2. Install the etcd cluster:
 
    ```console
-   helm install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
+   helm upgrade --install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
      --set replicaCount=3 \
      --set auth.rbac.create=false \
      --set auth.rbac.token.enabled=false \
@@ -29,7 +29,7 @@ A Helm chart for deploying GreptimeDB cluster in Kubernetes
 The default installation will use the local storage:
 
 ```console
-helm install mycluster greptime/greptimedb-cluster -n default
+helm upgrade --install mycluster greptime/greptimedb-cluster -n default
 ```
 
 ### Use AWS S3 as backend storage
@@ -37,13 +37,14 @@ helm install mycluster greptime/greptimedb-cluster -n default
 Before installation, you must create the AWS S3 bucket, and the cluster will use the bucket as backend storage:
 
 ```console
-helm install mycluster greptime/greptimedb-cluster \
-  --set storage.s3.bucket="your-bucket" \
-  --set storage.s3.region="region-of-bucket" \
-  --set storage.s3.root="root-directory-of-data" \
-  --set storage.credentials.secretName="s3-credentials" \
-  --set storage.credentials.accessKeyId="your-access-key-id" \
-  --set storage.credentials.secretAccessKey="your-secret-access-key"
+helm upgrade --install mycluster greptime/greptimedb-cluster \
+  --set objectStorage.s3.bucket="your-bucket" \
+  --set objectStorage.s3.region="region-of-bucket" \
+  --set objectStorage.s3.root="root-directory-of-data" \
+  --set objectStorage.credentials.secretName="s3-credentials" \
+  --set objectStorage.credentials.accessKeyId="your-access-key-id" \
+  --set objectStorage.credentials.secretAccessKey="your-secret-access-key" \
+  -n default
 ```
 
 If you set `storage.s3.root` as `mycluser`, then the data layout will be:
@@ -65,7 +66,7 @@ helm uninstall mycluster -n default
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | datanode.config | string | `""` | Extra datanode config in toml format. |
-| datanode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceaccount":{"annotations":{},"create":false,"name":"datanode-sa"},"tolerations":[]}` | The pod template for datanode |
+| datanode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceaccount":{"annotations":{},"create":false},"tolerations":[]}` | The pod template for datanode |
 | datanode.podTemplate.affinity | object | `{}` | The pod affinity |
 | datanode.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
 | datanode.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
@@ -79,13 +80,13 @@ helm uninstall mycluster -n default
 | datanode.podTemplate.nodeSelector | object | `{}` | The pod node selector |
 | datanode.podTemplate.serviceaccount.annotations | object | `{}` | The annotations for datanode serviceaccount |
 | datanode.podTemplate.serviceaccount.create | bool | `false` | Create a service account |
-| datanode.podTemplate.serviceaccount.name | string | `"datanode-sa"` | The serviceaccount name |
 | datanode.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | datanode.replicas | int | `3` | Datanode replicas |
+| datanode.storage.dataHome | string | `"/data/greptimedb"` | The dataHome directory, default is "/data/greptimedb/" |
 | datanode.storage.storageClassName | string | `nil` | Storage class for datanode persistent volume |
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
 | datanode.storage.storageSize | string | `"10Gi"` | Storage size for datanode persistent volume |
-| datanode.storage.walDir | string | `"/tmp/greptimedb/wal"` | The wal directory of the storage, default is "/tmp/greptimedb/wal" |
+| datanode.storage.walDir | string | `"/data/greptimedb/wal"` | The wal directory of the storage, default is "/data/greptimedb/wal" |
 | frontend.config | string | `""` | Extra frontend config in toml format. |
 | frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for frontend |
 | frontend.podTemplate.affinity | object | `{}` | The pod affinity |
@@ -109,10 +110,10 @@ helm uninstall mycluster -n default
 | image.pullSecrets | list | `[]` | The image pull secrets |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
-| image.tag | string | `"v0.4.4"` | The image tag |
+| image.tag | string | `"v0.5.0"` | The image tag |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"0.1.0-alpha.17"` | Initializer image tag |
+| initializer.tag | string | `"0.1.0-alpha.19"` | Initializer image tag |
 | meta.config | string | `""` | Extra Meta config in toml format. |
 | meta.etcdEndpoints | string | `"etcd.default.svc.cluster.local:2379"` | Meta etcd endpoints |
 | meta.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for meta |
@@ -131,9 +132,12 @@ helm uninstall mycluster -n default
 | meta.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | meta.replicas | int | `1` | Meta replicas |
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
+| objectStorage | object | `{"oss":{},"s3":{}}` | Configure to object storage |
 | openTSDBServicePort | int | `4242` | GreptimeDB opentsdb service port |
 | postgresServicePort | int | `4003` | GreptimeDB postgres service port |
-| prometheusMonitor | object | `{}` | Configure to prometheus podmonitor |
+| prometheusMonitor | object | `{"enabled":false,"interval":"30s","labels":{"release":"prometheus"}}` | Configure to prometheus PodMonitor |
+| prometheusMonitor.enabled | bool | `false` | Create PodMonitor resource for scraping metrics using PrometheusOperator |
+| prometheusMonitor.interval | string | `"30s"` | Interval at which metrics should be scraped |
+| prometheusMonitor.labels | object | `{"release":"prometheus"}` | Add labels to the PodMonitor |
 | resources.limits | object | `{"cpu":"500m","memory":"512Mi"}` | The resources limits for the container |
 | resources.requests | object | `{"cpu":"500m","memory":"512Mi"}` | The requested resources for the container |
-| storage | object | `{"local":{},"oss":{},"s3":{}}` | Configure to storage |

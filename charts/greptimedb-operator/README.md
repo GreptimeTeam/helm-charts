@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes
 
-![Version: 0.1.4](https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.17](https://img.shields.io/badge/AppVersion-0.1.0--alpha.17-informational?style=flat-square)
+![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.19](https://img.shields.io/badge/AppVersion-0.1.0--alpha.19-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb-operator
@@ -20,10 +20,10 @@ helm repo update
 helm search repo greptime -l --devel
 
 # Deploy greptimedb-operator in default namespace.
-helm install greptimedb-operator greptime/greptimedb-operator -n default
+helm upgrade --install greptimedb-operator greptime/greptimedb-operator -n default
 
 # Specifiy the chart version.
-helm install greptimedb-operator greptime/greptimedb-operator -n default --version <chart-version>
+helm upgrade --install greptimedb-operator greptime/greptimedb-operator -n default --version <chart-version>
 ```
 
 ## How to uninstall
@@ -45,7 +45,7 @@ Kubernetes: `>=1.18.0-0`
 | image.pullSecrets | list | `[]` | The image pull secrets |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb-operator"` | The image repository |
-| image.tag | string | `"0.1.0-alpha.17"` | The image tag |
+| image.tag | string | `"0.1.0-alpha.19"` | The image tag |
 | nameOverride | string | `""` | String to partially override release template name |
 | nodeSelector | object | `{}` | The operator node selector |
 | rbac.create | bool | `true` | Install role based access control |

@@ -19,10 +19,10 @@ helm repo update
 helm search repo greptime -l --devel
 
 # Deploy greptimedb-operator in default namespace.
-helm install greptimedb-operator greptime/greptimedb-operator -n default
+helm upgrade --install greptimedb-operator greptime/greptimedb-operator -n default
 
 # Specifiy the chart version.
-helm install greptimedb-operator greptime/greptimedb-operator -n default --version <chart-version>
+helm upgrade --install greptimedb-operator greptime/greptimedb-operator -n default --version <chart-version>
 ```
 
 ## How to uninstall

@@ -14,7 +14,17 @@ helm repo add greptime https://greptimeteam.github.io/helm-charts/
 helm repo update
 
 # Install greptimedb standalone in default namespace.
-helm install greptimedb-standalone greptime/greptimedb-standalone -n default
+helm upgrade --install greptimedb-standalone greptime/greptimedb-standalone -n default
+```
+
+## Connection
+
+```console
+# You can use the MySQL client to connect the greptimedb, for example: 'mysql -h 127.0.0.1 -P 4002'.
+kubectl port-forward -n default svc/greptimedb-standalone 4002:4002 > connections.out &
+
+# You can use the PostgreSQL client to connect the greptimedb, for example: 'psql -h 127.0.0.1 -p 4003 -d public'.
+kubectl port-forward -n default svc/greptimedb-standalone 4003:4003 > connections.out &
 ```
 
 ## How to uninstall
