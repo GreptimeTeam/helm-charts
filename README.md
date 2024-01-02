@@ -62,7 +62,7 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
      Before installation, you must create the AWS S3 bucket, and the cluster will use the bucket as backend storage:
      
      ```console
-     helm upgrade --install mycluster greptime/greptimedb-cluster -n default \
+     helm upgrade --install mycluster greptime/greptimedb-cluster \
        --set objectStorage.s3.bucket="your-bucket" \
        --set objectStorage.s3.region="region-of-bucket" \
        --set objectStorage.s3.root="root-directory-of-data" \
