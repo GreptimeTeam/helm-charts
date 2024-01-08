@@ -23,9 +23,13 @@ resources:
     memory: 512Mi
   # -- The resources limits for the container
   limits:
-    cpu: 500m
-    memory: 512Mi
+    cpu: "1"
+    memory: "1Gi"
 
+# -- Enable configure reloading. This option need to be supported by the Reloader(https://github.com/stakater/Reloader).
+reloadWhenConfigChange: false
+
+# -- Frontend configure
 frontend:
   # -- Frontend replicas
   replicas: 1
@@ -80,6 +84,7 @@ frontend:
   tls: {}
 #    secretName: greptimedb-frontend-tls
 
+# -- Meta configure
 meta:
   # -- Meta replicas
   replicas: 1
@@ -133,6 +138,7 @@ meta:
   # -- Meta will store data with this key prefix
   storeKeyPrefix: ""
 
+# -- Datanode configure
 datanode:
   # -- Datanode replicas
   replicas: 3
@@ -197,16 +203,12 @@ datanode:
 
 # -- GreptimeDB http service port
 httpServicePort: 4000
-
 # -- GreptimeDB grpc service port
 grpcServicePort: 4001
-
 # -- GreptimeDB mysql service port
 mysqlServicePort: 4002
-
 # -- GreptimeDB postgres service port
 postgresServicePort: 4003
-
 # -- GreptimeDB opentsdb service port
 openTSDBServicePort: 4242
 
