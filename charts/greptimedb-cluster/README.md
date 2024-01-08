@@ -65,6 +65,7 @@ helm uninstall mycluster -n default
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| datanode | object | `{"config":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceaccount":{"annotations":{},"create":false},"tolerations":[]},"replicas":3,"storage":{"dataHome":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"10Gi","walDir":"/data/greptimedb/wal"}}` | Datanode configure |
 | datanode.config | string | `""` | Extra datanode config in toml format. |
 | datanode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceaccount":{"annotations":{},"create":false},"tolerations":[]}` | The pod template for datanode |
 | datanode.podTemplate.affinity | object | `{}` | The pod affinity |
@@ -87,6 +88,7 @@ helm uninstall mycluster -n default
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
 | datanode.storage.storageSize | string | `"10Gi"` | Storage size for datanode persistent volume |
 | datanode.storage.walDir | string | `"/data/greptimedb/wal"` | The wal directory of the storage, default is "/data/greptimedb/wal" |
+| frontend | object | `{"config":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]},"replicas":1,"service":{},"tls":{}}` | Frontend configure |
 | frontend.config | string | `""` | Extra frontend config in toml format. |
 | frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for frontend |
 | frontend.podTemplate.affinity | object | `{}` | The pod affinity |
@@ -114,6 +116,7 @@ helm uninstall mycluster -n default
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
 | initializer.tag | string | `"0.1.0-alpha.19"` | Initializer image tag |
+| meta | object | `{"config":"","etcdEndpoints":"etcd.default.svc.cluster.local:2379","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]},"replicas":1,"storeKeyPrefix":""}` | Meta configure |
 | meta.config | string | `""` | Extra Meta config in toml format. |
 | meta.etcdEndpoints | string | `"etcd.default.svc.cluster.local:2379"` | Meta etcd endpoints |
 | meta.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for meta |
@@ -140,5 +143,6 @@ helm uninstall mycluster -n default
 | prometheusMonitor.enabled | bool | `false` | Create PodMonitor resource for scraping metrics using PrometheusOperator |
 | prometheusMonitor.interval | string | `"30s"` | Interval at which metrics should be scraped |
 | prometheusMonitor.labels | object | `{"release":"prometheus"}` | Add labels to the PodMonitor |
-| resources.limits | object | `{"cpu":"500m","memory":"512Mi"}` | The resources limits for the container |
+| reloadWhenConfigChange | bool | `false` | Enable configure reloading. This option need to be supported by the Reloader(https://github.com/stakater/Reloader). |
+| resources.limits | object | `{"cpu":"1","memory":"1Gi"}` | The resources limits for the container |
 | resources.requests | object | `{"cpu":"500m","memory":"512Mi"}` | The requested resources for the container |
