@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes
 
-![Version: 0.1.9](https://img.shields.io/badge/Version-0.1.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.0](https://img.shields.io/badge/AppVersion-0.5.0-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.0](https://img.shields.io/badge/AppVersion-0.5.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -131,6 +131,7 @@ helm uninstall mycluster -n default
 | meta.podTemplate.serviceAccountName | string | `""` | The service account for meta |
 | meta.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | meta.replicas | int | `1` | Meta replicas |
+| meta.storeKeyPrefix | string | `""` | Meta will store data with this key prefix |
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | objectStorage | object | `{"oss":{},"s3":{}}` | Configure to object storage |
 | openTSDBServicePort | int | `4242` | GreptimeDB opentsdb service port |

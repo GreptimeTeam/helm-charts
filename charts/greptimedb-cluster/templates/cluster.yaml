@@ -74,6 +74,9 @@ spec:
     etcdEndpoints:
       - {{ .Values.meta.etcdEndpoints }}
     {{- end }}
+    {{- if .Values.meta.storeKeyPrefix }}
+    storeKeyPrefix: {{ .Values.meta.storeKeyPrefix }}
+    {{- end }}
     template:
       main:
         {{- if .Values.meta.podTemplate.main.image }}

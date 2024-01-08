@@ -9,4 +9,4 @@ Installed components:
 * greptimedb-datanode
 * greptimedb-meta
 
-The greptimedb-cluster is starting, use `kubectl get pod -n {{ .Release.Namespace }}` to check its status.
+The greptimedb-cluster is starting, use `kubectl get pods -n {{ .Release.Namespace }}` to check its status.

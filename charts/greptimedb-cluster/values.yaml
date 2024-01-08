@@ -130,6 +130,9 @@ meta:
   # -- Meta etcd endpoints
   etcdEndpoints: "etcd.default.svc.cluster.local:2379"
 
+  # -- Meta will store data with this key prefix
+  storeKeyPrefix: ""
+
 datanode:
   # -- Datanode replicas
   replicas: 3
