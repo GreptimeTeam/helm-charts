@@ -16,6 +16,7 @@ spec:
       - name: {{ . }}
     {{- end }}
     {{- end }}
+  reloadWhenConfigChange: {{ .Values.reloadWhenConfigChange }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
     {{- if .Values.frontend.config }}
@@ -73,6 +74,9 @@ spec:
     {{- if .Values.meta.etcdEndpoints }}
     etcdEndpoints:
       - {{ .Values.meta.etcdEndpoints }}
+    {{- end }}
+    {{- if .Values.meta.storeKeyPrefix }}
+    storeKeyPrefix: {{ .Values.meta.storeKeyPrefix }}
     {{- end }}
     template:
       main:
