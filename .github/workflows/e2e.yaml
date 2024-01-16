@@ -1,0 +1,40 @@
+name: E2E Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      chart:
+        type: choice
+        description: Chart Name
+        required: true
+        options:
+          - greptimedb-cluster
+          - greptimedb-standalone
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.12.1
+
+      - name: Setup e2e environment
+        run: |
+          make setup-e2e    
+
+      - name: Deploy greptimedb-cluster chart
+        if: ${{ github.event.inputs.chart == 'greptimedb-cluster' }}
+        shell: bash
+        run: |
+          .github/scripts/deploy-greptimedb-cluster.sh
+
+      - name: Deploy greptimedb-standalone chart
+        if: ${{ github.event.inputs.chart == 'greptimedb-standalone' }}
+        shell: bash
+        run: |
+          .github/scripts/deploy-greptimedb-standalone.sh
