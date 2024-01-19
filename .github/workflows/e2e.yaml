@@ -24,8 +24,9 @@ jobs:
           version: v3.12.1
 
       - name: Setup e2e environment
+        shell: bash
         run: |
-          make setup-e2e    
+          .github/scripts/setup-e2e-env.sh
 
       - name: Deploy greptimedb-cluster chart
         if: ${{ github.event.inputs.chart == 'greptimedb-cluster' }}

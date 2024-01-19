@@ -22,7 +22,3 @@ check-docs: docs ## Check docs
 	@git diff --quiet || \
     (echo "Need to update documentation, please run 'make docs'"; \
 	exit 1)
-
-.PHONY: setup-e2e
-setup-e2e: ## Setup e2e test environment.
-	./.github/scripts/setup-e2e-env.sh

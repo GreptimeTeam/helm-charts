@@ -2,23 +2,96 @@
 
 set -e
 
-function deploy_greptimedb_standalone() {
-  helm repo add greptime https://greptimeteam.github.io/helm-charts/
-  helm repo update
-  cd charts
-  helm upgrade --install greptimedb-standalone greptimedb-standalone -n default
+DB_HOST="127.0.0.1"
+DB_PORT="4002"
+TABLE_NAME="greptimedb_standalone_test"
+
+CreateTableSQL="CREATE TABLE %s (
+                        ts TIMESTAMP DEFAULT current_timestamp(),
+                        n INT,
+    					          row_id INT,
+                        TIME INDEX (ts),
+                        PRIMARY KEY(n)
+               )
+               PARTITION BY RANGE COLUMNS (n) (
+    				 	     PARTITION r0 VALUES LESS THAN (5),
+    					     PARTITION r1 VALUES LESS THAN (9),
+    					     PARTITION r2 VALUES LESS THAN (MAXVALUE)
+					     )"
+
+InsertDataSQL="INSERT INTO %s(n, row_id) VALUES (%d, %d)"
+
+SelectDataSQL="SELECT * FROM %s"
+
+DropTableSQL="DROP TABLE %s"
+
+TestRowIDNum=1
+
+function create_table() {
+  local table_name=$1
+  local sql=$(printf "$CreateTableSQL" "$table_name")
+  mysql -h "$DB_HOST" -P "$DB_PORT" -e "$sql"
 }
 
-function sql_test_greptimedb_standalone() {
-  kubectl port-forward -n default svc/greptimedb-standalone 4002:4002 > connections.out &
+function insert_data() {
+  local table_name=$1
+  local sql=$(printf "$InsertDataSQL" "$table_name" "$TestRowIDNum" "$TestRowIDNum")
+  mysql -h "$DB_HOST" -P "$DB_PORT" -e "$sql"
+}
+
+function select_data() {
+  local table_name=$1
+  local sql=$(printf "$SelectDataSQL" "$table_name")
+  mysql -h "$DB_HOST" -P "$DB_PORT" -e "$sql"
+}
+
+function drop_table() {
+  local table_name=$1
+  local sql=$(printf "$DropTableSQL" "$table_name")
+  mysql -h "$DB_HOST" -P "$DB_PORT" -e "$sql"
+}
+
+function deploy_greptimedb_standalone() {
+  cd charts
+  helm upgrade --install greptimedb-standalone greptimedb-standalone -n default
+  kubectl rollout status statefulset/greptimedb-standalone -n default
+}
+
+function mysql_test_greptimedb_standalone() {
+  kubectl port-forward -n default svc/greptimedb-standalone \
+    4000:4000 \
+    4001:4001 \
+    4002:4002 \
+    4003:4003 > /tmp/connections.out &
+
+  local exit_code=$?
+  if [ $exit_code -ne 0 ]; then
+    echo "Failed to execute 'kubectl port-forward'. Exiting..."
+    exit 1
+  fi
+
+  sleep 5
+
+  create_table "$TABLE_NAME"
+  insert_data "$TABLE_NAME"
+  select_data "$TABLE_NAME"
+  drop_table "$TABLE_NAME"
+}
+
+function cleanup() {
+  echo "Cleaning up..."
+  pkill -f "kubectl port-forward"
 }
 
 function main() {
   # Deploy the greptimedb-standalone helm chart.
   deploy_greptimedb_standalone
 
-  # Add sql test with greptimedb standalone
-  sql_test_greptimedb_standalone
+  # Add mysql test with greptimedb standalone
+  mysql_test_greptimedb_standalone
+
+  # clean resource
+  cleanup
 }
 
 main
