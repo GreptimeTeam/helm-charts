@@ -54,7 +54,9 @@ function drop_table() {
 function deploy_greptimedb_standalone() {
   cd charts
   helm upgrade --install greptimedb-standalone greptimedb-standalone -n default
-  kubectl rollout status statefulset/greptimedb-standalone -n default
+
+  # Wait for greptimedb standalone to be ready
+  kubectl rollout status --timeout=60s statefulset/greptimedb-standalone -n default
 }
 
 function mysql_test_greptimedb_standalone() {
@@ -64,13 +66,7 @@ function mysql_test_greptimedb_standalone() {
     4002:4002 \
     4003:4003 > /tmp/connections.out &
 
-  local exit_code=$?
-  if [ $exit_code -ne 0 ]; then
-    echo "Failed to execute 'kubectl port-forward'. Exiting..."
-    exit 1
-  fi
-
-  sleep 5
+  sleep 3
 
   create_table "$TABLE_NAME"
   insert_data "$TABLE_NAME"
@@ -84,7 +80,7 @@ function cleanup() {
 }
 
 function main() {
-  # Deploy the greptimedb-standalone helm chart.
+  # Deploy the greptimedb-standalone helm chart
   deploy_greptimedb_standalone
 
   # Add mysql test with greptimedb standalone

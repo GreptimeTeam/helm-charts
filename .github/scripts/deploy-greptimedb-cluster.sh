@@ -54,7 +54,7 @@ function drop_table() {
 function deploy_greptimedb_cluster() {
   helm upgrade --install mycluster greptimedb-cluster -n default
 
-  # Wait for greptimedb cluster to be ready.
+  # Wait for greptimedb cluster to be ready
   while true; do
     PHASE=$(kubectl -n default get gtc mycluster -o jsonpath='{.status.clusterPhase}')
     if [ "$PHASE" == "Running" ]; then
@@ -62,7 +62,7 @@ function deploy_greptimedb_cluster() {
       break
     else
       echo "Cluster is not ready yet: Current phase: $PHASE"
-      sleep 5 # wait for 5 seconds before check again.
+      sleep 5 # wait for 5 seconds before check again
     fi
   done
 }
@@ -71,8 +71,8 @@ function deploy_greptimedb_operator() {
   cd charts
   helm upgrade --install greptimedb-operator greptimedb-operator -n default
 
-  # Wait for greptimedb-operator to be ready.
-  kubectl rollout status deployment/greptimedb-operator -n default
+  # Wait for greptimedb operator to be ready
+  kubectl rollout status --timeout=60s deployment/greptimedb-operator -n default
 }
 
 function deploy_etcd() {
@@ -82,23 +82,16 @@ function deploy_etcd() {
     --set auth.rbac.token.enabled=false \
     -n default
 
-  # Wait for etcd to be ready.
-  kubectl rollout status statefulset/etcd -n default
+  # Wait for etcd to be ready
+  kubectl rollout status --timeout=120s statefulset/etcd -n default
 }
 
 function mysql_test_greptimedb_cluster() {
-  # Expose greptimedb cluster to local access.
   kubectl port-forward -n default svc/mycluster-frontend \
     4000:4000 \
     4001:4001 \
     4002:4002 \
     4003:4003 > /tmp/connections.out &
-
-  local exit_code=$?
-  if [ $exit_code -ne 0 ]; then
-    echo "Failed to execute 'kubectl port-forward'. Exiting..."
-    exit 1
-  fi
 
   sleep 5
 
@@ -114,13 +107,13 @@ function cleanup() {
 }
 
 function main() {
-  # Deploy the bitnami etcd helm chart.
+  # Deploy the bitnami etcd helm chart
   deploy_etcd
 
-  # Deploy the greptimedb-operator helm chart.
+  # Deploy the greptimedb-operator helm chart
   deploy_greptimedb_operator
 
-  # Deploy the greptimedb-cluster helm chart.
+  # Deploy the greptimedb-cluster helm chart
   deploy_greptimedb_cluster
 
   # Add mysql test with greptimedb cluster
