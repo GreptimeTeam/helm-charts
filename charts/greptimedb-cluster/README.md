@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes
 
-![Version: 0.1.12](https://img.shields.io/badge/Version-0.1.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
+![Version: 0.1.13](https://img.shields.io/badge/Version-0.1.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -115,7 +115,7 @@ helm uninstall mycluster -n default
 | image.tag | string | `"v0.6.0"` | The image tag |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"0.1.0-alpha.19"` | Initializer image tag |
+| initializer.tag | string | `"0.1.0-alpha.22"` | Initializer image tag |
 | meta | object | `{"config":"","etcdEndpoints":"etcd.default.svc.cluster.local:2379","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]},"replicas":1,"storeKeyPrefix":""}` | Meta configure |
 | meta.config | string | `""` | Extra Meta config in toml format. |
 | meta.etcdEndpoints | string | `"etcd.default.svc.cluster.local:2379"` | Meta etcd endpoints |
@@ -143,6 +143,5 @@ helm uninstall mycluster -n default
 | prometheusMonitor.enabled | bool | `false` | Create PodMonitor resource for scraping metrics using PrometheusOperator |
 | prometheusMonitor.interval | string | `"30s"` | Interval at which metrics should be scraped |
 | prometheusMonitor.labels | object | `{"release":"prometheus"}` | Add labels to the PodMonitor |
-| reloadWhenConfigChange | bool | `false` | Enable configure reloading. This option need to be supported by the Reloader(https://github.com/stakater/Reloader). |
 | resources.limits | object | `{"cpu":"1","memory":"1Gi"}` | The resources limits for the container |
 | resources.requests | object | `{"cpu":"500m","memory":"512Mi"}` | The requested resources for the container |

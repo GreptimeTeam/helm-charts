@@ -10746,8 +10746,6 @@ spec:
               prometheusServicePort:
                 format: int32
                 type: integer
-              reloadWhenConfigChange:
-                type: boolean
               version:
                 type: string
             type: object
@@ -10817,6 +10815,9 @@ spec:
                 - readyReplicas
                 - replicas
                 type: object
+              observedGeneration:
+                format: int64
+                type: integer
               version:
                 type: string
             type: object

@@ -16,7 +16,6 @@ spec:
       - name: {{ . }}
     {{- end }}
     {{- end }}
-  reloadWhenConfigChange: {{ .Values.reloadWhenConfigChange }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
     {{- if .Values.frontend.config }}

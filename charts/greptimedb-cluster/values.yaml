@@ -14,7 +14,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: 0.1.0-alpha.19
+  tag: 0.1.0-alpha.22
 
 resources:
   # -- The requested resources for the container
@@ -25,9 +25,6 @@ resources:
   limits:
     cpu: "1"
     memory: "1Gi"
-
-# -- Enable configure reloading. This option need to be supported by the Reloader(https://github.com/stakater/Reloader).
-reloadWhenConfigChange: false
 
 # -- Frontend configure
 frontend:
