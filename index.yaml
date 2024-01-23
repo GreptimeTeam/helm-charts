@@ -174,6 +174,23 @@ entries:
   greptimedb-cluster:
   - apiVersion: v2
     appVersion: 0.6.0
+    created: "2024-01-23T09:32:04.859155288Z"
+    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
+    digest: 4c5c72b118c5b600dc628d8d29b4351b92104399eba7e5e1869f1e76c38132e9
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-cluster
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-cluster-0.1.13/greptimedb-cluster-0.1.13.tgz
+    version: 0.1.13
+  - apiVersion: v2
+    appVersion: 0.6.0
     created: "2024-01-15T11:07:45.361713959Z"
     description: A Helm chart for deploying GreptimeDB cluster in Kubernetes
     digest: 2ed31e9840d55a98a3186218754dc596028fb56c4cd426feb0e737411f2f8138
@@ -303,6 +320,31 @@ entries:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-cluster-0.1.0/greptimedb-cluster-0.1.0.tgz
     version: 0.1.0
   greptimedb-operator:
+  - apiVersion: v2
+    appVersion: 0.1.0-alpha.22
+    created: "2024-01-23T09:32:05.146080451Z"
+    description: The greptimedb-operator Helm chart for Kubernetes
+    digest: a535a42cf62c1087b3e8ed37a01c44e40852f8143381b0dea5d2baae2ba5d797
+    home: https://github.com/GreptimeTeam/greptimedb-operator
+    keywords:
+    - operator
+    - database
+    - greptimedb
+    kubeVersion: '>=1.18.0-0'
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-operator
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb-operator
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-operator-0.1.8/greptimedb-operator-0.1.8.tgz
+    version: 0.1.8
   - apiVersion: v2
     appVersion: 0.1.0-alpha.20
     created: "2024-01-11T12:25:00.577125984Z"
@@ -898,4 +940,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2024-01-15T11:07:45.547216468Z"
+generated: "2024-01-23T09:32:05.146406659Z"
