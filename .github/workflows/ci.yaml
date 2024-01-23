@@ -52,7 +52,7 @@ jobs:
 
       - name: Run chart-testing (install)
         if: steps.list-changed.outputs.changed == 'true'
-        run: ｜
+        run: |
           ct install --chart-dirs charts --charts greptimedb-operator --namespace default --skip-clean-up
           ct install --chart-dirs charts --charts greptimedb-cluster --namespace default --skip-clean-up
           ct install --chart-dirs charts --charts greptimedb-standalone --namespace default --skip-clean-up
