@@ -23,10 +23,10 @@ jobs:
         with:
           version: v3.12.1
 
-      - name: Setup e2e environment
-        shell: bash
-        run: |
-          .github/scripts/setup-e2e-env.sh
+      - name: Create kind cluster
+        uses: helm/kind-action@v1.8.0
+        with:
+          wait: 120s
 
       - name: Deploy greptimedb-cluster chart
         if: ${{ github.event.inputs.chart == 'greptimedb-cluster' }}
