@@ -50,7 +50,7 @@ jobs:
         with:
           wait: 120s
 
-      - name: Run chart-testing (install)
+      - name: Run e2e
         if: steps.list-changed.outputs.changed == 'true'
         run: |
           make e2e
