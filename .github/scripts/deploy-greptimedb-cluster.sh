@@ -54,16 +54,24 @@ function drop_table() {
 function deploy_greptimedb_cluster() {
   helm upgrade --install mycluster greptimedb-cluster -n default
 
+  timeout=300
+  sleep_interval=5
+  elapsed_time=0
+
   # Wait for greptimedb cluster to be ready
   while true; do
     PHASE=$(kubectl -n default get gtc mycluster -o jsonpath='{.status.clusterPhase}')
     if [ "$PHASE" == "Running" ]; then
       echo "Cluster is ready"
       break
+    elif [ $elapsed_time -ge $timeout ]; then
+      echo "Timed out waiting for cluster to be ready"
+      exit 1
     else
       echo "Cluster is not ready yet: Current phase: $PHASE"
-      sleep 5 # wait for 5 seconds before check again
+      sleep $sleep_interval # wait for 5 seconds before check again
     fi
+    elapsed_time=$((elapsed_time + sleep_interval))
   done
 }
 
