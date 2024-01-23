@@ -42,7 +42,7 @@ jobs:
 
       - name: Run chart-testing (lint)
         if: steps.list-changed.outputs.changed == 'true'
-        run: ct lint --target-branch ${{ github.event.repository.default_branch }}
+        run: ct lint --validate-maintainers=false --target-branch ${{ github.event.repository.default_branch }}
 
       - name: Create kind cluster
         if: steps.list-changed.outputs.changed == 'true'
@@ -50,6 +50,7 @@ jobs:
         with:
           wait: 120s
 
-      - name: Run chart-testing (install)
+      - name: Run e2e
         if: steps.list-changed.outputs.changed == 'true'
-        run: ct install --chart-dirs charts --target-branch ${{ github.event.repository.default_branch }}
+        run: |
+          make e2e

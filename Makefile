@@ -22,3 +22,8 @@ check-docs: docs ## Check docs
 	@git diff --quiet || \
     (echo "Need to update documentation, please run 'make docs'"; \
 	exit 1)
+
+.PHONY: e2e
+e2e: ## Run e2e tests.
+	.github/scripts/deploy-greptimedb-cluster.sh
+	.github/scripts/deploy-greptimedb-standalone.sh
