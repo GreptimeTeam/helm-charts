@@ -16,15 +16,42 @@ initializer:
   # -- Initializer image tag
   tag: 0.1.0-alpha.22
 
-resources:
-  # -- The requested resources for the container
-  requests:
-    cpu: 500m
-    memory: 512Mi
-  # -- The resources limits for the container
-  limits:
-    cpu: "1"
-    memory: "1Gi"
+base:
+  # -- The pod template for base
+  podTemplate:
+    # -- The base spec of main container
+    main:
+      resources:
+        # -- The requested resources for the container
+        requests:
+          cpu: 500m
+          memory: 512Mi
+        # -- The resources limits for the container
+        limits:
+          cpu: "1"
+          memory: "1Gi"
+
+      # -- The environment variables for the container
+      env: []
+
+      # -- The command to be executed in the container
+      command: []
+
+      # -- The arguments to be passed to the command
+      args: []
+
+    # -- The annotations to be created to the pod.
+    annotations: {}
+    # -- The labels to be created to the pod.
+    labels: {}
+    # -- The pod node selector
+    nodeSelector: {}
+    # -- The pod tolerations
+    tolerations: []
+    # -- The pod affinity
+    affinity: {}
+    # -- The global service account
+    serviceAccountName: ""
 
 # -- Frontend configure
 frontend:

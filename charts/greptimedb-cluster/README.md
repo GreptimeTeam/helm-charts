@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes
 
-![Version: 0.1.13](https://img.shields.io/badge/Version-0.1.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
+![Version: 0.1.14](https://img.shields.io/badge/Version-0.1.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -65,6 +65,19 @@ helm uninstall mycluster -n default
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| base.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"resources":{"limits":{"cpu":"1","memory":"1Gi"},"requests":{"cpu":"500m","memory":"512Mi"}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for base |
+| base.podTemplate.affinity | object | `{}` | The pod affinity |
+| base.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
+| base.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
+| base.podTemplate.main | object | `{"args":[],"command":[],"env":[],"resources":{"limits":{"cpu":"1","memory":"1Gi"},"requests":{"cpu":"500m","memory":"512Mi"}}}` | The base spec of main container |
+| base.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
+| base.podTemplate.main.command | list | `[]` | The command to be executed in the container |
+| base.podTemplate.main.env | list | `[]` | The environment variables for the container |
+| base.podTemplate.main.resources.limits | object | `{"cpu":"1","memory":"1Gi"}` | The resources limits for the container |
+| base.podTemplate.main.resources.requests | object | `{"cpu":"500m","memory":"512Mi"}` | The requested resources for the container |
+| base.podTemplate.nodeSelector | object | `{}` | The pod node selector |
+| base.podTemplate.serviceAccountName | string | `""` | The global service account |
+| base.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | datanode | object | `{"config":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceaccount":{"annotations":{},"create":false},"tolerations":[]},"replicas":3,"storage":{"dataHome":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"10Gi","walDir":"/data/greptimedb/wal"}}` | Datanode configure |
 | datanode.config | string | `""` | Extra datanode config in toml format. |
 | datanode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceaccount":{"annotations":{},"create":false},"tolerations":[]}` | The pod template for datanode |
@@ -143,5 +156,3 @@ helm uninstall mycluster -n default
 | prometheusMonitor.enabled | bool | `false` | Create PodMonitor resource for scraping metrics using PrometheusOperator |
 | prometheusMonitor.interval | string | `"30s"` | Interval at which metrics should be scraped |
 | prometheusMonitor.labels | object | `{"release":"prometheus"}` | Add labels to the PodMonitor |
-| resources.limits | object | `{"cpu":"1","memory":"1Gi"}` | The resources limits for the container |
-| resources.requests | object | `{"cpu":"500m","memory":"512Mi"}` | The requested resources for the container |

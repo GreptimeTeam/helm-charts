@@ -7,8 +7,35 @@ spec:
   base:
     main:
       image: '{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}'
-      {{- if .Values.resources }}
-      resources: {{- toYaml .Values.resources | nindent 8 }}
+      {{- if .Values.base.podTemplate.main.resources }}
+      resources: {{- toYaml .Values.base.podTemplate.main.resources | nindent 8 }}
+      {{- end }}
+      {{- if .Values.base.podTemplate.main.command }}
+      command: {{ .Values.base.podTemplate.main.command | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.base.podTemplate.main.args }}
+      args: {{ .Values.base.podTemplate.main.args | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.base.podTemplate.main.env }}
+      env: {{- toYaml .Values.base.podTemplate.main.env | nindent 8 }}
+      {{- end }}
+      {{- if .Values.base.podTemplate.annotations }}
+      annotations: {{ .Values.base.podTemplate.annotations | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.base.podTemplate.labels }}
+      labels: {{ .Values.base.podTemplate.labels | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.base.podTemplate.serviceAccountName }}
+      serviceAccountName: {{ .Values.base.podTemplate.serviceAccountName }}
+      {{- end }}
+      {{- if .Values.base.podTemplate.tolerations }}
+      tolerations: {{ .Values.base.podTemplate.tolerations | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.base.podTemplate.affinity }}
+      affinity: {{ .Values.base.podTemplate.affinity | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.base.podTemplate.nodeSelector }}
+      nodeSelector: {{ .Values.base.podTemplate.nodeSelector | toYaml | nindent 8 }}
       {{- end }}
     {{- if .Values.image.pullSecrets }}
     imagePullSecrets:
@@ -35,10 +62,10 @@ spec:
         image: {{ .Values.frontend.podTemplate.main.image }}
         {{- end }}
         {{- if .Values.frontend.podTemplate.main.command }}
-        command: {{ .Values.frontend.podTemplate.main.command }}
+        command: {{ .Values.frontend.podTemplate.main.command | toYaml | nindent 8 }}
         {{- end }}
         {{- if .Values.frontend.podTemplate.main.args }}
-        args: {{ .Values.frontend.podTemplate.main.args }}
+        args: {{ .Values.frontend.podTemplate.main.args | toYaml | nindent 8 }}
         {{- end }}
         {{- if .Values.frontend.podTemplate.main.env }}
         env: {{- toYaml .Values.frontend.podTemplate.main.env | nindent 8 }}
@@ -83,10 +110,10 @@ spec:
         image: {{ .Values.meta.podTemplate.main.image }}
         {{- end }}
         {{- if .Values.meta.podTemplate.main.command }}
-        command: {{ .Values.meta.podTemplate.main.command }}
+        command: {{ .Values.meta.podTemplate.main.command | toYaml | nindent 8 }}
         {{- end }}
         {{- if .Values.meta.podTemplate.main.args }}
-        args: {{ .Values.meta.podTemplate.main.args }}
+        args: {{ .Values.meta.podTemplate.main.args | toYaml | nindent 8 }}
         {{- end }}
         {{- if .Values.meta.podTemplate.main.env }}
         env: {{- toYaml .Values.meta.podTemplate.main.env | nindent 8 }}
@@ -124,10 +151,10 @@ spec:
         image: {{ .Values.datanode.podTemplate.main.image }}
         {{- end }}
         {{- if .Values.datanode.podTemplate.main.command }}
-        command: {{ .Values.datanode.podTemplate.main.command }}
+        command: {{ .Values.datanode.podTemplate.main.command | toYaml | nindent 8 }}
         {{- end }}
         {{- if .Values.datanode.podTemplate.main.args }}
-        args: {{ .Values.datanode.podTemplate.main.args }}
+        args: {{ .Values.datanode.podTemplate.main.args | toYaml | nindent 8 }}
         {{- end }}
         {{- if .Values.datanode.podTemplate.main.env }}
         env: {{- toYaml .Values.datanode.podTemplate.main.env | nindent 8 }}
