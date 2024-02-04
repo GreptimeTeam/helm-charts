@@ -44,6 +44,7 @@ rules:
       - create
       - get
       - list
+      - patch
       - update
       - watch
   - apiGroups:
@@ -95,6 +96,7 @@ rules:
       - list
       - update
       - watch
+      - patch
   - apiGroups:
       - greptime.io
     resources:
