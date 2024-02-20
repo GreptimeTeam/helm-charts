@@ -24,6 +24,16 @@ check-docs: docs ## Check docs
 	exit 1)
 
 .PHONY: e2e
-e2e: ## Run e2e tests.
+e2e: ## Run e2e tests
 	.github/scripts/deploy-greptimedb-cluster.sh
 	.github/scripts/deploy-greptimedb-standalone.sh
+
+.PHONY: crds
+crds: ## Run update crd
+	.github/scripts/update-crds.sh
+
+.PHONY: check-crds
+check-crds: crds ## Check crd
+	@git diff --quiet || \
+    (echo "Need to update crds, please run 'make crds'"; \
+	exit 1)
