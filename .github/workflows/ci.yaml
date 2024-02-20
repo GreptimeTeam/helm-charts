@@ -13,7 +13,11 @@ jobs:
 
       - name: Check docs
         run: |
-          make check-docs    
+          make check-docs
+
+      - name: Check crds
+        run: |
+          make check-crds    
 
       - name: Install Helm
         uses: azure/setup-helm@v3
