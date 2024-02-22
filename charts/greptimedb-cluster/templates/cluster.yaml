@@ -168,7 +168,7 @@ spec:
       {{- if .Values.datanode.podTemplate.labels }}
       labels: {{ .Values.datanode.podTemplate.labels | toYaml | nindent 8 }}
       {{- end }}
-      {{- if .Values.datanode.podTemplate.serviceaccount.create }}
+      {{- if .Values.datanode.podTemplate.serviceAccount.create }}
       serviceAccountName: {{ .Release.Name }}-datanode
       {{- end }}
       {{- if .Values.datanode.podTemplate.tolerations }}
