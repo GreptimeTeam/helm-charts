@@ -70,6 +70,9 @@ spec:
         {{- if .Values.frontend.podTemplate.main.env }}
         env: {{- toYaml .Values.frontend.podTemplate.main.env | nindent 8 }}
         {{- end }}
+        {{- if .Values.frontend.podTemplate.main.volumeMounts }}
+        volumeMounts: {{- toYaml .Values.frontend.podTemplate.main.volumeMounts | nindent 8 }}
+        {{- end }}
         resources:
           requests: {{ .Values.frontend.podTemplate.main.resources.requests | toYaml | nindent 12 }}
           limits: {{ .Values.frontend.podTemplate.main.resources.limits | toYaml | nindent 12 }}
@@ -90,6 +93,9 @@ spec:
       {{- end }}
       {{- if .Values.frontend.podTemplate.nodeSelector }}
       nodeSelector: {{ .Values.frontend.podTemplate.nodeSelector | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.frontend.podTemplate.volumes}}
+      volumes: {{ .Values.frontend.podTemplate.volumes | toYaml | nindent 8 }}
       {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}
@@ -118,6 +124,9 @@ spec:
         {{- if .Values.meta.podTemplate.main.env }}
         env: {{- toYaml .Values.meta.podTemplate.main.env | nindent 8 }}
         {{- end }}
+        {{- if .Values.meta.podTemplate.main.volumeMounts }}
+        volumeMounts: {{- toYaml .Values.meta.podTemplate.main.volumeMounts | nindent 8 }}
+        {{- end }}
         resources:
           requests: {{ .Values.meta.podTemplate.main.resources.requests | toYaml | nindent 12 }}
           limits: {{ .Values.meta.podTemplate.main.resources.limits | toYaml | nindent 12 }}
@@ -139,6 +148,9 @@ spec:
       {{- if .Values.meta.podTemplate.nodeSelector }}
       nodeSelector: {{ .Values.meta.podTemplate.nodeSelector | toYaml | nindent 8 }}
       {{- end }}
+      {{- if .Values.meta.podTemplate.volumes}}
+      volumes: {{ .Values.meta.podTemplate.volumes | toYaml | nindent 8 }}
+      {{- end }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
     {{- if .Values.datanode.config }}
@@ -158,6 +170,9 @@ spec:
         {{- end }}
         {{- if .Values.datanode.podTemplate.main.env }}
         env: {{- toYaml .Values.datanode.podTemplate.main.env | nindent 8 }}
+        {{- end }}
+        {{- if .Values.datanode.podTemplate.main.volumeMounts }}
+        volumeMounts: {{- toYaml .Values.datanode.podTemplate.main.volumeMounts | nindent 8 }}
         {{- end }}
         resources:
           requests: {{ .Values.datanode.podTemplate.main.resources.requests | toYaml | nindent 12 }}
@@ -179,6 +194,9 @@ spec:
       {{- end }}
       {{- if .Values.datanode.podTemplate.nodeSelector }}
       nodeSelector: {{ .Values.datanode.podTemplate.nodeSelector | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.datanode.podTemplate.volumes}}
+      volumes: {{ .Values.datanode.podTemplate.volumes | toYaml | nindent 8 }}
       {{- end }}
     storage:
       storageClassName: {{ .Values.datanode.storage.storageClassName }}
