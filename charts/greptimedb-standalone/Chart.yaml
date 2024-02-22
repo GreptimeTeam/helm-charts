@@ -2,5 +2,18 @@ apiVersion: v2
 name: greptimedb-standalone
 description: A Helm chart for deploying standalone greptimedb
 type: application
-version: 0.1.9
+version: 0.1.10
 appVersion: 0.6.0
+home: https://github.com/GreptimeTeam/greptimedb
+sources:
+  - https://github.com/GreptimeTeam/greptimedb
+keywords:
+  - database
+  - greptimedb
+maintainers:
+  - name: daviderli614
+    email: liyang@greptime.com
+    url: https://github.com/daviderli614
+  - name: zyy17
+    email: zyy@greptime.com
+    url: https://github.com/zyy17
