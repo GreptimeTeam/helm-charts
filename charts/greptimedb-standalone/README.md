@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.1.9](https://img.shields.io/badge/Version-0.1.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
+![Version: 0.1.10](https://img.shields.io/badge/Version-0.1.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -16,6 +16,18 @@ helm repo update
 
 # Install greptimedb standalone in default namespace.
 helm upgrade --install greptimedb-standalone greptime/greptimedb-standalone -n default
+```
+
+**Use AWS S3 as backend storage**
+```console
+helm upgrade --install greptimedb-standalone greptime/greptimedb-standalone \
+  --set objectStorage.credentials.accessKeyId="your-access-key-id" \
+  --set objectStorage.credentials.secretAccessKey="your-secret-access-key" \
+  --set objectStorage.s3.bucket="your-bucket-name" \
+  --set objectStorage.s3.region="region-of-bucket" \
+  --set objectStorage.s3.endpoint="s3-endpoint" \
+  --set objectStorage.s3.root="root-directory-of-data" \
+  -n default
 ```
 
 ## Connection
@@ -45,7 +57,6 @@ helm uninstall greptimedb-standalone -n default
 | configToml | string | `"mode = 'standalone'\n"` | The extra configuration for greptimedb |
 | dataHome | string | `"/data/greptimedb/"` | Storage root directory |
 | env | object | `{"GREPTIMEDB_STANDALONE__HTTP__ADDR":"0.0.0.0:4000"}` | Environment variables |
-| envFrom | object | `{}` | Maps all the keys on a configmap or secret as environment variables |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
 | grpcServicePort | int | `4001` | GreptimeDB grpc service port |
 | httpServicePort | int | `4000` | GreptimeDB http service port |
@@ -61,6 +72,7 @@ helm uninstall greptimedb-standalone -n default
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | nameOverride | string | `""` | Overrides the chart's name |
 | nodeSelector | object | `{}` | NodeSelector to apply pod |
+| objectStorage | object | `{"oss":{},"s3":{}}` | Configure to object storage |
 | opentsdbServicePort | int | `4242` | GreptimeDB opentsdb service port |
 | persistence.enableStatefulSetAutoDeletePVC | bool | `false` | Enable StatefulSetAutoDeletePVC feature |
 | persistence.enabled | bool | `true` | Enable persistent disk |

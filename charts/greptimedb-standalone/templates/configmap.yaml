@@ -4,6 +4,8 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-config
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "greptimedb-standalone.labels" . | nindent 4 }}
 data:
   config.toml: |
 {{ .Values.configToml | indent 4 }}

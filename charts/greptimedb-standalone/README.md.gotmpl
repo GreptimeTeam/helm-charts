@@ -17,6 +17,18 @@ helm repo update
 helm upgrade --install greptimedb-standalone greptime/greptimedb-standalone -n default
 ```
 
+**Use AWS S3 as backend storage**
+```console
+helm upgrade --install greptimedb-standalone greptime/greptimedb-standalone \
+  --set objectStorage.credentials.accessKeyId="your-access-key-id" \
+  --set objectStorage.credentials.secretAccessKey="your-secret-access-key" \
+  --set objectStorage.s3.bucket="your-bucket-name" \
+  --set objectStorage.s3.region="region-of-bucket" \
+  --set objectStorage.s3.endpoint="s3-endpoint" \
+  --set objectStorage.s3.root="root-directory-of-data" \
+  -n default
+```
+
 ## Connection
 
 ```console

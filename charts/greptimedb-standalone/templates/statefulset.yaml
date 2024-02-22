@@ -96,9 +96,12 @@ spec:
               value: {{ $val | quote }}
             {{- end }}
           {{- end }}
-          {{- with .Values.envFrom }}
+          {{- if .Values.objectStorage }}
+          {{- if .Values.objectStorage.credentials }}
           envFrom:
-            {{- toYaml . | nindent 12 }}
+            - secretRef:
+                name: {{ .Release.Name }}-secret
+          {{- end }}
           {{- end }}
           {{- with .Values.securityContext }}
           securityContext:
