@@ -202,14 +202,14 @@ spec:
       bucket: {{ .Values.objectStorage.s3.bucket }}
       region: {{ .Values.objectStorage.s3.region }}
       root: {{ .Values.objectStorage.s3.root }}
-      secretName: {{ .Release.Name }}-secret
+      secretName: {{ .Values.objectStorage.credentials.secretName }}
       endpoint: {{ .Values.objectStorage.s3.endpoint }}
     {{- else if .Values.objectStorage.oss }}
     oss:
       bucket: {{ .Values.objectStorage.oss.bucket }}
       region: {{ .Values.objectStorage.oss.region }}
       root: {{ .Values.objectStorage.oss.root }}
-      secretName: {{ .Release.Name }}-secret
+      secretName: {{ .Values.objectStorage.credentials.secretName }}
       endpoint: {{ .Values.objectStorage.oss.endpoint }}
     {{- else }}
     {}

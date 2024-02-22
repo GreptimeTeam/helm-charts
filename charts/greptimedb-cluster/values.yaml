@@ -249,6 +249,7 @@ prometheusMonitor:
 # -- Configure to object storage
 objectStorage:
 #  credentials:
+#    secretName: "credentials"
 #    accessKeyId: "you-should-set-the-access-key-id-here"
 #    secretAccessKey: "you-should-set-the-secret-access-key-here"
 
