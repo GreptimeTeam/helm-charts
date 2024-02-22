@@ -66,7 +66,6 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
        --set objectStorage.s3.bucket="your-bucket" \
        --set objectStorage.s3.region="region-of-bucket" \
        --set objectStorage.s3.root="root-directory-of-data" \
-       --set objectStorage.credentials.secretName="s3-credentials" \
        --set objectStorage.credentials.accessKeyId="your-access-key-id" \
        --set objectStorage.credentials.secretAccessKey="your-secret-access-key" \
        -n default

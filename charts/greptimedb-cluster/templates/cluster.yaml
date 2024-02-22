@@ -168,7 +168,7 @@ spec:
       {{- if .Values.datanode.podTemplate.labels }}
       labels: {{ .Values.datanode.podTemplate.labels | toYaml | nindent 8 }}
       {{- end }}
-      {{- if .Values.datanode.podTemplate.serviceaccount.create }}
+      {{- if .Values.datanode.podTemplate.serviceAccount.create }}
       serviceAccountName: {{ .Release.Name }}-datanode
       {{- end }}
       {{- if .Values.datanode.podTemplate.tolerations }}
@@ -202,14 +202,14 @@ spec:
       bucket: {{ .Values.objectStorage.s3.bucket }}
       region: {{ .Values.objectStorage.s3.region }}
       root: {{ .Values.objectStorage.s3.root }}
-      secretName: {{ .Values.objectStorage.credentials.secretName }}
+      secretName: {{ .Release.Name }}-secret
       endpoint: {{ .Values.objectStorage.s3.endpoint }}
     {{- else if .Values.objectStorage.oss }}
     oss:
       bucket: {{ .Values.objectStorage.oss.bucket }}
       region: {{ .Values.objectStorage.oss.region }}
       root: {{ .Values.objectStorage.oss.root }}
-      secretName: {{ .Values.objectStorage.credentials.secretName }}
+      secretName: {{ .Release.Name }}-secret
       endpoint: {{ .Values.objectStorage.oss.endpoint }}
     {{- else }}
     {}
