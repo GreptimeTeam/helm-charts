@@ -88,6 +88,9 @@ frontend:
       # -- The arguments to be passed to the command
       args: []
 
+      # -- The pod volumeMounts
+      volumeMounts: []
+
     # -- The annotations to be created to the pod.
     annotations: {}
     # -- The labels to be created to the pod.
@@ -100,6 +103,8 @@ frontend:
     affinity: {}
     # -- The service account for frontend
     serviceAccountName: ""
+    # -- The pod volumes
+    volumes: []
 
   # -- Frontend service
   service: {}
@@ -143,6 +148,9 @@ meta:
       # -- The arguments to be passed to the command
       args: []
 
+      # -- The pod volumeMounts
+      volumeMounts: []
+
     # -- The annotations to be created to the pod.
     annotations: {}
     # -- The labels to be created to the pod.
@@ -155,6 +163,8 @@ meta:
     affinity: {}
     # -- The service account for meta
     serviceAccountName: ""
+    # -- The pod volumes
+    volumes: []
 
   # -- Meta etcd endpoints
   etcdEndpoints: "etcd.default.svc.cluster.local:2379"
@@ -197,6 +207,9 @@ datanode:
       # -- The arguments to be passed to the command
       args: []
 
+      # -- The pod volumeMounts
+      volumeMounts: []
+
     # -- The annotations to be created to the pod.
     annotations: {}
     # -- The labels to be created to the pod.
@@ -207,6 +220,9 @@ datanode:
     tolerations: []
     # -- The pod affinity
     affinity: {}
+    # -- The pod volumes
+    volumes: []
+
     serviceAccount:
       # -- Create a service account
       create: false
