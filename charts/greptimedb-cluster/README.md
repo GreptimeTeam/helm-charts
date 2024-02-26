@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes
 
-![Version: 0.1.18](https://img.shields.io/badge/Version-0.1.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
+![Version: 0.1.19](https://img.shields.io/badge/Version-0.1.19-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -64,16 +64,16 @@ helm uninstall mycluster -n default
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| base.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"resources":{"limits":{"cpu":"1","memory":"1Gi"},"requests":{"cpu":"500m","memory":"512Mi"}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for base |
+| base.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for base |
 | base.podTemplate.affinity | object | `{}` | The pod affinity |
 | base.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
 | base.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
-| base.podTemplate.main | object | `{"args":[],"command":[],"env":[],"resources":{"limits":{"cpu":"1","memory":"1Gi"},"requests":{"cpu":"500m","memory":"512Mi"}}}` | The base spec of main container |
+| base.podTemplate.main | object | `{"args":[],"command":[],"env":[],"resources":{"limits":{},"requests":{}}}` | The base spec of main container |
 | base.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
 | base.podTemplate.main.command | list | `[]` | The command to be executed in the container |
 | base.podTemplate.main.env | list | `[]` | The environment variables for the container |
-| base.podTemplate.main.resources.limits | object | `{"cpu":"1","memory":"1Gi"}` | The resources limits for the container |
-| base.podTemplate.main.resources.requests | object | `{"cpu":"500m","memory":"512Mi"}` | The requested resources for the container |
+| base.podTemplate.main.resources.limits | object | `{}` | The resources limits for the container |
+| base.podTemplate.main.resources.requests | object | `{}` | The requested resources for the container |
 | base.podTemplate.nodeSelector | object | `{}` | The pod node selector |
 | base.podTemplate.serviceAccountName | string | `""` | The global service account |
 | base.podTemplate.tolerations | list | `[]` | The pod tolerations |
