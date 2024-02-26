@@ -268,6 +268,7 @@ objectStorage:
 #  credentials:
 #    accessKeyId: "you-should-set-the-access-key-id-here"
 #    secretAccessKey: "you-should-set-the-secret-access-key-here"
+#    secretName: ""
 
   # configure to use s3 storage.
   s3: {}
