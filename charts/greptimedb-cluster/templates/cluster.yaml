@@ -219,14 +219,22 @@ spec:
     s3: {{- toYaml .Values.objectStorage.s3 | nindent 6 }}
       {{- if .Values.objectStorage }}
       {{- if .Values.objectStorage.credentials }}
+      {{- if .Values.objectStorage.credentials.secretName }}
       secretName: {{ .Values.objectStorage.credentials.secretName }}
+      {{- else }}
+      secretName: greptimedb-credentials
+      {{- end }}
       {{- end }}
       {{- end }}
     {{- else if .Values.objectStorage.oss }}
     oss: {{- toYaml .Values.objectStorage.oss | nindent 6 }}
       {{- if .Values.objectStorage }}
       {{- if .Values.objectStorage.credentials }}
+      {{- if .Values.objectStorage.credentials.secretName }}
       secretName: {{ .Values.objectStorage.credentials.secretName }}
+      {{- else }}
+      secretName: greptimedb-credentials
+      {{- end }}
       {{- end }}
       {{- end }}
     {{- else }}
