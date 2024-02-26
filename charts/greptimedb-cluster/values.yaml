@@ -23,13 +23,14 @@ base:
     main:
       resources:
         # -- The requested resources for the container
-        requests:
-          cpu: 500m
-          memory: 512Mi
+        requests: {}
+        #  cpu: 500m
+        #  memory: 512Mi
+
         # -- The resources limits for the container
-        limits:
-          cpu: "1"
-          memory: "1Gi"
+        limits: {}
+        #  cpu: "1"
+        #  memory: "1Gi"
 
       # -- The environment variables for the container
       env: []
