@@ -41,6 +41,7 @@ helm upgrade --install mycluster greptime/greptimedb-cluster \
   --set objectStorage.s3.bucket="your-bucket" \
   --set objectStorage.s3.region="region-of-bucket" \
   --set objectStorage.s3.root="root-directory-of-data" \
+  --set objectStorage.credentials.secretName="greptimedb-cluster-secret" \
   --set objectStorage.credentials.accessKeyId="your-access-key-id" \
   --set objectStorage.credentials.secretAccessKey="your-secret-access-key" \
   -n default

@@ -216,19 +216,19 @@ spec:
     image: '{{ .Values.initializer.registry }}/{{ .Values.initializer.repository }}:{{ .Values.initializer.tag }}'
   objectStorage:
     {{- if .Values.objectStorage.s3 }}
-    s3:
-      bucket: {{ .Values.objectStorage.s3.bucket }}
-      region: {{ .Values.objectStorage.s3.region }}
-      root: {{ .Values.objectStorage.s3.root }}
-      secretName: {{ .Release.Name }}-secret
-      endpoint: {{ .Values.objectStorage.s3.endpoint }}
+    s3: {{- toYaml .Values.objectStorage.s3 | nindent 6 }}
+      {{- if .Values.objectStorage }}
+      {{- if .Values.objectStorage.credentials }}
+      secretName: {{ .Values.objectStorage.credentials.secretName }}
+      {{- end }}
+      {{- end }}
     {{- else if .Values.objectStorage.oss }}
-    oss:
-      bucket: {{ .Values.objectStorage.oss.bucket }}
-      region: {{ .Values.objectStorage.oss.region }}
-      root: {{ .Values.objectStorage.oss.root }}
-      secretName: {{ .Release.Name }}-secret
-      endpoint: {{ .Values.objectStorage.oss.endpoint }}
+    oss: {{- toYaml .Values.objectStorage.oss | nindent 6 }}
+      {{- if .Values.objectStorage }}
+      {{- if .Values.objectStorage.credentials }}
+      secretName: {{ .Values.objectStorage.credentials.secretName }}
+      {{- end }}
+      {{- end }}
     {{- else }}
     {}
     {{- end }}
