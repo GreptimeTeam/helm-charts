@@ -16,7 +16,7 @@ CreateTableSQL="CREATE TABLE %s (
                PARTITION ON COLUMNS (n) (
                    n < 5,
                    n < 9,
-                   n < 1000
+                   n >= 9
 					     )"
 
 InsertDataSQL="INSERT INTO %s(n, row_id) VALUES (%d, %d)"
