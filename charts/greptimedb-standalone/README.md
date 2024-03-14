@@ -64,7 +64,7 @@ helm uninstall greptimedb-standalone -n default
 | image.pullSecrets | list | `[]` | The image pull secrets. |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
-| image.tag | string | `"v0.7.0"` | The image tag |
+| image.tag | string | `"v0.7.1"` | The image tag |
 | monitoring.annotations | object | `{}` | PodMonitor annotations |
 | monitoring.enabled | bool | `false` | Enable prometheus podmonitor |
 | monitoring.interval | string | `"30s"` | PodMonitor scrape interval |
