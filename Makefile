@@ -38,6 +38,6 @@ check-crds: crds ## Check crd
     (echo "Need to update crds, please run 'make crds'"; \
 	exit 1)
 
-.PHONY: update-greptimedb-version
-update-greptimedb-version: ## Run update greptimedb version
-	.github/scripts/update-greptimedb-version.sh
+.PHONY: update-chart
+update-chart: ## Run update chart. For example: make update-chart CHART=greptimedb-standalone VERSION=v0.7.2
+	.github/scripts/update-chart.sh $(CHART) $(VERSION)
