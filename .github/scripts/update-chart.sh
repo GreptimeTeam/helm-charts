@@ -37,8 +37,6 @@ function update_chart() {
     appVersion=${VERSION#v}
   fi
 
-  echo "$appVersion"
-
   yq eval ".appVersion = \"$appVersion\"" -i "$chart_file"
   yq eval ".version = \"$next_version\"" -i "$chart_file"
 
