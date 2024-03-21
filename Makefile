@@ -37,3 +37,7 @@ check-crds: crds ## Check crd
 	@git diff --quiet || \
     (echo "Need to update crds, please run 'make crds'"; \
 	exit 1)
+
+.PHONY: update-greptimedb-version
+update-greptimedb-version: ## Run update greptimedb version
+	.github/scripts/update-greptimedb-version.sh
