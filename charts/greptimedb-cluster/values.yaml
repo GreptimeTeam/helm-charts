@@ -14,7 +14,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: 0.1.0-alpha.22
+  tag: 0.1.0-alpha.23
 
 base:
   # -- The pod template for base
