@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes
 
-![Version: 0.1.21](https://img.shields.io/badge/Version-0.1.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.1](https://img.shields.io/badge/AppVersion-0.7.1-informational?style=flat-square)
+![Version: 0.1.22](https://img.shields.io/badge/Version-0.1.22-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.1](https://img.shields.io/badge/AppVersion-0.7.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -131,7 +131,7 @@ helm uninstall mycluster -n default
 | image.tag | string | `"v0.7.1"` | The image tag |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"0.1.0-alpha.22"` | Initializer image tag |
+| initializer.tag | string | `"0.1.0-alpha.23"` | Initializer image tag |
 | meta | object | `{"config":"","etcdEndpoints":"etcd.default.svc.cluster.local:2379","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccountName":"","tolerations":[],"volumes":[]},"replicas":1,"storeKeyPrefix":""}` | Meta configure |
 | meta.config | string | `""` | Extra Meta config in toml format. |
 | meta.etcdEndpoints | string | `"etcd.default.svc.cluster.local:2379"` | Meta etcd endpoints |
