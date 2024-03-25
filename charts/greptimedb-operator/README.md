@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes
 
-![Version: 0.1.12](https://img.shields.io/badge/Version-0.1.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.23](https://img.shields.io/badge/AppVersion-0.1.0--alpha.23-informational?style=flat-square)
+![Version: 0.1.13](https://img.shields.io/badge/Version-0.1.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.23](https://img.shields.io/badge/AppVersion-0.1.0--alpha.23-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb-operator
@@ -40,6 +40,7 @@ Kubernetes: `>=1.18.0-0`
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| affinity | object | `{}` | The pod affinity |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
 | image.imagePullPolicy | string | `"IfNotPresent"` | The image pull policy for the controller |
 | image.pullSecrets | list | `[]` | The image pull secrets |
@@ -54,3 +55,4 @@ Kubernetes: `>=1.18.0-0`
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| tolerations | list | `[]` | The pod tolerations |

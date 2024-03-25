@@ -45,3 +45,9 @@ fullnameOverride: ""
 
 # -- The operator node selector
 nodeSelector: {}
+
+# -- The pod tolerations
+tolerations: []
+
+# -- The pod affinity
+affinity: {}
