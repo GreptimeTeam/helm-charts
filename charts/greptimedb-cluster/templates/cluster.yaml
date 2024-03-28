@@ -19,24 +19,24 @@ spec:
       {{- if .Values.base.podTemplate.main.env }}
       env: {{- toYaml .Values.base.podTemplate.main.env | nindent 8 }}
       {{- end }}
-      {{- if .Values.base.podTemplate.annotations }}
-      annotations: {{ .Values.base.podTemplate.annotations | toYaml | nindent 8 }}
-      {{- end }}
-      {{- if .Values.base.podTemplate.labels }}
-      labels: {{ .Values.base.podTemplate.labels | toYaml | nindent 8 }}
-      {{- end }}
-      {{- if .Values.base.podTemplate.serviceAccountName }}
-      serviceAccountName: {{ .Values.base.podTemplate.serviceAccountName }}
-      {{- end }}
-      {{- if .Values.base.podTemplate.tolerations }}
-      tolerations: {{ .Values.base.podTemplate.tolerations | toYaml | nindent 8 }}
-      {{- end }}
-      {{- if .Values.base.podTemplate.affinity }}
-      affinity: {{ .Values.base.podTemplate.affinity | toYaml | nindent 8 }}
-      {{- end }}
-      {{- if .Values.base.podTemplate.nodeSelector }}
-      nodeSelector: {{ .Values.base.podTemplate.nodeSelector | toYaml | nindent 8 }}
-      {{- end }}
+    {{- if .Values.base.podTemplate.annotations }}
+    annotations: {{ .Values.base.podTemplate.annotations | toYaml | nindent 6 }}
+    {{- end }}
+    {{- if .Values.base.podTemplate.labels }}
+    labels: {{ .Values.base.podTemplate.labels | toYaml | nindent 6 }}
+    {{- end }}
+    {{- if .Values.base.podTemplate.serviceAccountName }}
+    serviceAccountName: {{ .Values.base.podTemplate.serviceAccountName }}
+    {{- end }}
+    {{- if .Values.base.podTemplate.tolerations }}
+    tolerations: {{ .Values.base.podTemplate.tolerations | toYaml | nindent 6 }}
+    {{- end }}
+    {{- if .Values.base.podTemplate.affinity }}
+    affinity: {{ .Values.base.podTemplate.affinity | toYaml | nindent 6 }}
+    {{- end }}
+    {{- if .Values.base.podTemplate.nodeSelector }}
+    nodeSelector: {{ .Values.base.podTemplate.nodeSelector | toYaml | nindent 6 }}
+    {{- end }}
     {{- if .Values.image.pullSecrets }}
     imagePullSecrets:
     {{- range .Values.image.pullSecrets }}
