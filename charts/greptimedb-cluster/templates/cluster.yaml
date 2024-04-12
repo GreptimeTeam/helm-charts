@@ -82,8 +82,8 @@ spec:
       {{- if .Values.frontend.podTemplate.labels }}
       labels: {{ .Values.frontend.podTemplate.labels | toYaml | nindent 8 }}
       {{- end }}
-      {{- if .Values.frontend.podTemplate.serviceAccountName }}
-      serviceAccountName: {{ .Values.frontend.podTemplate.serviceAccountName }}
+      {{- if .Values.frontend.podTemplate.serviceAccount.create }}
+      serviceAccountName: {{ .Release.Name }}-frontend
       {{- end }}
       {{- if .Values.frontend.podTemplate.tolerations }}
       tolerations: {{ .Values.frontend.podTemplate.tolerations | toYaml | nindent 8 }}
@@ -136,8 +136,8 @@ spec:
       {{- if .Values.meta.podTemplate.labels }}
       labels: {{ .Values.meta.podTemplate.labels | toYaml | nindent 8 }}
       {{- end }}
-      {{- if .Values.meta.podTemplate.serviceAccountName }}
-      serviceAccountName: {{ .Values.meta.podTemplate.serviceAccountName }}
+      {{- if .Values.meta.podTemplate.serviceAccount.create }}
+      serviceAccountName: {{ .Release.Name }}-meta
       {{- end }}
       {{- if .Values.meta.podTemplate.tolerations }}
       tolerations: {{ .Values.meta.podTemplate.tolerations | toYaml | nindent 8 }}
