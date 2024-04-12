@@ -102,10 +102,14 @@ frontend:
     tolerations: []
     # -- The pod affinity
     affinity: {}
-    # -- The service account for frontend
-    serviceAccountName: ""
     # -- The pod volumes
     volumes: []
+
+    serviceAccount:
+      # -- Create a service account
+      create: false
+      # -- The annotations for frontend serviceaccount
+      annotations: {}
 
   # -- Frontend service
   service: {}
@@ -162,10 +166,14 @@ meta:
     tolerations: []
     # -- The pod affinity
     affinity: {}
-    # -- The service account for meta
-    serviceAccountName: ""
     # -- The pod volumes
     volumes: []
+
+    serviceAccount:
+      # -- Create a service account
+      create: false
+      # -- The annotations for meta serviceaccount
+      annotations: {}
 
   # -- Meta etcd endpoints
   etcdEndpoints: "etcd.default.svc.cluster.local:2379"
