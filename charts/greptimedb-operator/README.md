@@ -1,35 +1,58 @@
 # greptimedb-operator
 
-The greptimedb-operator Helm chart for Kubernetes
+The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.1.14](https://img.shields.io/badge/Version-0.1.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.24](https://img.shields.io/badge/AppVersion-0.1.0--alpha.24-informational?style=flat-square)
+![Version: 0.1.15](https://img.shields.io/badge/Version-0.1.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.24](https://img.shields.io/badge/AppVersion-0.1.0--alpha.24-informational?style=flat-square)
 
 ## Source Code
+
 - https://github.com/GreptimeTeam/greptimedb-operator
 
-## How to install
+## How to Install
+
+### Add Chart Repository
 
 ```console
-# Add charts repo.
 helm repo add greptime https://greptimeteam.github.io/helm-charts/
-
-# Update charts repo.
 helm repo update
-
-# Search charts repo.
-helm search repo greptime -l --devel
-
-# Deploy greptimedb-operator in default namespace.
-helm upgrade --install greptimedb-operator greptime/greptimedb-operator -n default
-
-# Specifiy the chart version.
-helm upgrade --install greptimedb-operator greptime/greptimedb-operator -n default --version <chart-version>
 ```
 
-## How to uninstall
+### Install the GreptimeDB Operator
+
+Install greptimedb-operator in the `greptimedb-admin` namespace:
 
 ```console
-helm uninstall greptimedb-operator -n default
+helm upgrade \
+  --install \
+  --create-namespace \
+  greptimedb-operator greptime/greptimedb-operator \
+  -n greptimedb-admin
+```
+
+If you want to specify the chart version, you can use `--version`:
+
+```console
+helm upgrade \
+  --install \
+  --create-namespace \
+  greptimedb-operator greptime/greptimedb-operator \
+  -n greptimedb-admin \
+  --version <chart-version>
+```
+
+## Upgrade CRDs
+
+Helm cannot upgrade custom resource definitions in the `<chart>/crds` folder [by design](https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#some-caveats-and-explanations). When the CRDs are upgraded, you can upgrade CRDs by using `kubectl` manually:
+
+```console
+kubectl apply -f https://github.com/GreptimeTeam/greptimedb-operator/releases/download/<version>/greptimedbclusters.yaml
+kubectl apply -f https://github.com/GreptimeTeam/greptimedb-operator/releases/download/<version>/greptimedbstandalones.yaml
+```
+
+## How to Uninstall
+
+```console
+helm uninstall greptimedb-operator -n greptimedb-admin
 ```
 
 ## Requirements
