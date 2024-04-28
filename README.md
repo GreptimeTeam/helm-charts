@@ -10,7 +10,7 @@ This is the repository that contains [Greptime](https://greptime.com/) Helm char
 
 ## Getting Started
 
-### Add chart repository
+### Add Chart Repository
 
 You can add the chart repository with the following commands:
 
@@ -27,34 +27,48 @@ helm search repo greptime
 
 ### Install the GreptimeDB Cluster
 
-If you want to deploy the GreptimeDB cluster, you can use the following command(use the `default` namespace):
+If you want to deploy the GreptimeDB cluster, you can use the following commands:
 
 1. **Deploy etcd cluster**
 
    We recommend using the Bitnami etcd [chart](https://github.com/bitnami/charts/blob/main/bitnami/etcd/README.md) to deploy the etcd cluster:
 
    ```console
-   helm upgrade --install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
+   helm upgrade \
+     --install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
      --set replicaCount=3 \
      --set auth.rbac.create=false \
      --set auth.rbac.token.enabled=false \
-     -n default
+     --create-namespace \
+     -n etcd-cluster
    ```
 
 2. **Deploy GreptimeDB operator**
 
+   The greptimedb-operator will install in the `greptimedb-admin` namespace:
+
    ```console
-   helm upgrade --install greptimedb-operator greptime/greptimedb-operator -n default
+   helm upgrade \
+     --install \
+     --create-namespace \
+     greptimedb-operator greptime/greptimedb-operator \
+     -n greptimedb-admin
    ```
 
 3. **Deploy GreptimeDB cluster**
 
-   - **Default Installation**
+   Install the GreptimeDB cluster in the `default` namespace:
+
+   - **Default installation**
 
      The default installation will use the local storage:
-     
+
      ```console
-     helm upgrade --install mycluster greptime/greptimedb-cluster -n default
+     helm upgrade \
+       --install mycluster \
+       --set meta.etcdEndpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
+       greptime/greptimedb-cluster \
+       -n default
      ```
 
    - **Use AWS S3 as backend storage**
@@ -62,12 +76,15 @@ If you want to deploy the GreptimeDB cluster, you can use the following command(
      Before installation, you must create the AWS S3 bucket, and the cluster will use the bucket as backend storage:
      
      ```console
-     helm upgrade --install mycluster greptime/greptimedb-cluster \
+     helm upgrade \
+       --install mycluster \
+       --set meta.etcdEndpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
        --set objectStorage.s3.bucket="your-bucket" \
        --set objectStorage.s3.region="region-of-bucket" \
        --set objectStorage.s3.root="root-directory-of-data" \
        --set objectStorage.credentials.accessKeyId="your-access-key-id" \
        --set objectStorage.credentials.secretAccessKey="your-secret-access-key" \
+       greptime/greptimedb-cluster \
        -n default
      ```
 
@@ -97,20 +114,23 @@ For example:
 helm upgrade --install mycluster greptime/greptimedb --values ./values.yaml
 ```
 
+To upgrade the CRDs, you can follow [the guide](charts/greptimedb-operator/README.md) of greptimedb-operator.
+
 ### Uninstallation
 
 If you want to terminate the GreptimeDB cluster, you can use the following command:
 
 ```console
 helm uninstall mycluster -n default
-helm uninstall etcd -n default
-helm uninstall greptimedb-operator -n default
+helm uninstall etcd -n etcd-cluster
+helm uninstall greptimedb-operator -n greptimedb-admin
 ```
 
 The CRDs of GreptimeDB are not deleted [by default](https://helm.sh/docs/topics/charts/#limitations-on-crds). You can delete them by the following command:
 
 ```console
 kubectl delete crds greptimedbclusters.greptime.io
+kubectl delete crds greptimedbstandalones.greptime.io
 ```
 
 ## List of Charts
