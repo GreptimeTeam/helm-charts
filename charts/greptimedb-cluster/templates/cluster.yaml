@@ -211,7 +211,6 @@ spec:
   grpcServicePort: {{ .Values.grpcServicePort }}
   mysqlServicePort: {{ .Values.mysqlServicePort }}
   postgresServicePort: {{ .Values.postgresServicePort }}
-  openTSDBServicePort: {{ .Values.openTSDBServicePort }}
   initializer:
     image: '{{ .Values.initializer.registry }}/{{ .Values.initializer.repository }}:{{ .Values.initializer.tag }}'
   objectStorage:

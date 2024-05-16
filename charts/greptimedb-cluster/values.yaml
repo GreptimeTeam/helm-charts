@@ -14,7 +14,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: 0.1.0-alpha.23
+  tag: 0.1.0-alpha.25
 
 base:
   # -- The pod template for base
@@ -258,8 +258,6 @@ grpcServicePort: 4001
 mysqlServicePort: 4002
 # -- GreptimeDB postgres service port
 postgresServicePort: 4003
-# -- GreptimeDB opentsdb service port
-openTSDBServicePort: 4242
 
 # -- Configure to prometheus PodMonitor
 prometheusMonitor:

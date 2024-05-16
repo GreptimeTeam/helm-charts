@@ -168,8 +168,6 @@ grpcServicePort: 4001
 mysqlServicePort: 4002
 # -- GreptimeDB postgres service port
 postgresServicePort: 4003
-# -- GreptimeDB opentsdb service port
-opentsdbServicePort: 4242
 
 service:
   # -- Service type
