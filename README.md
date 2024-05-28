@@ -111,7 +111,7 @@ helm upgrade --install <your-release> <chart> --values <your-values-file> -n <na
 For example:
 
 ```console
-helm upgrade --install mycluster greptime/greptimedb --values ./values.yaml
+helm upgrade --install mycluster greptime/greptimedb-cluster --values ./values.yaml
 ```
 
 To upgrade the CRDs, you can follow [the guide](charts/greptimedb-operator/README.md) of greptimedb-operator.
