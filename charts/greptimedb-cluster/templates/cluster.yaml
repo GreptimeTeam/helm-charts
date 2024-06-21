@@ -110,6 +110,9 @@ spec:
     {{- if .Values.meta.storeKeyPrefix }}
     storeKeyPrefix: {{ .Values.meta.storeKeyPrefix }}
     {{- end }}
+    {{- if .Values.meta.enableRegionFailover }}
+    enableRegionFailover: {{ .Values.meta.enableRegionFailover }}
+    {{- end }}
     template:
       main:
         {{- if .Values.meta.podTemplate.main.image }}
