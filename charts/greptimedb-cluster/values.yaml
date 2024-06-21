@@ -181,6 +181,9 @@ meta:
   # -- Meta will store data with this key prefix
   storeKeyPrefix: ""
 
+  # -- Whether to enable region failover
+  enableRegionFailover: false
+
 # -- Datanode configure
 datanode:
   # -- Datanode replicas
