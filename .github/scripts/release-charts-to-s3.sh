@@ -44,12 +44,20 @@ function release_charts_to_s3() {
   aws s3 cp latest-version.txt s3://"$GREPTIME_RELEASE_BUCKET"/"$RELEASE_DIR"/"$chart"/latest-version.txt
 }
 
+function update_index() {
+  helm plugin install https://github.com/hypnoglow/helm-s3.git
+  helm s3 init s3://"$GREPTIME_RELEASE_BUCKET"/"$RELEASE_DIR" --force
+  helm repo index --url s3://"$GREPTIME_RELEASE_BUCKET"/"$RELEASE_DIR" --merge index.yaml .
+  aws s3 cp index.yaml s3://"$GREPTIME_RELEASE_BUCKET"/"$RELEASE_DIR"/
+}
+
 function main() {
   update_greptime_charts
   release_charts_to_s3 greptime greptimedb-operator
   release_charts_to_s3 greptime greptimedb-standalone
   release_charts_to_s3 greptime greptimedb-cluster
   release_charts_to_s3 oci://registry-1.docker.io/bitnamicharts etcd
+  update_index
 }
 
 # The entrypoint for the script.
