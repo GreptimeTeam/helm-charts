@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - chore/cn-region-index
   workflow_dispatch:
 
 jobs:
