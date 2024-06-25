@@ -10,6 +10,11 @@ function update_greptime_charts() {
   helm repo update
 }
 
+function install_helm_s3() {
+  helm plugin install https://github.com/hypnoglow/helm-s3.git
+  helm repo add greptime-cn s3://"$GREPTIME_RELEASE_BUCKET"/"$RELEASE_DIR"/package
+}
+
 function release_charts_to_s3() {
   repo=$1
   chart=$2
@@ -38,6 +43,8 @@ function release_charts_to_s3() {
 
   aws s3 cp "$chart"/"$package" s3://"$GREPTIME_RELEASE_BUCKET"/"$RELEASE_DIR"/"$chart"/"$version"/"$package"
 
+  helm s3 push "$chart"/"$package" greptime-cn --force
+
   echo "$version" > latest-version.txt
 
   # Create a latest-version.txt file in the chart directory.
@@ -46,6 +53,7 @@ function release_charts_to_s3() {
 
 function main() {
   update_greptime_charts
+  install_helm_s3
   release_charts_to_s3 greptime greptimedb-operator
   release_charts_to_s3 greptime greptimedb-standalone
   release_charts_to_s3 greptime greptimedb-cluster
