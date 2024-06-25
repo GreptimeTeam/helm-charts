@@ -62,5 +62,3 @@ function main() {
 
 # The entrypoint for the script.
 main
-
-}
