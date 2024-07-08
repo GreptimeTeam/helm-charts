@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.1.32](https://img.shields.io/badge/Version-0.1.32-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.2](https://img.shields.io/badge/AppVersion-0.8.2-informational?style=flat-square)
+![Version: 0.1.33](https://img.shields.io/badge/Version-0.1.33-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.2](https://img.shields.io/badge/AppVersion-0.8.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -111,6 +111,27 @@ helm uninstall mycluster -n default
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
 | datanode.storage.storageSize | string | `"10Gi"` | Storage size for datanode persistent volume |
 | datanode.storage.walDir | string | `"/data/greptimedb/wal"` | The wal directory of the storage, default is "/data/greptimedb/wal" |
+| flownode | object | `{"config":"","enabled":false,"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1}` | Flownode configure. **It's NOT READY YET** |
+| flownode.config | string | `""` | Extra flownode config in toml format. |
+| flownode.enabled | bool | `false` | Enable flownode |
+| flownode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
+| flownode.podTemplate.affinity | object | `{}` | The pod affinity |
+| flownode.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
+| flownode.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
+| flownode.podTemplate.main | object | `{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]}` | The spec of main container |
+| flownode.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
+| flownode.podTemplate.main.command | list | `[]` | The command to be executed in the container |
+| flownode.podTemplate.main.env | list | `[]` | The environment variables for the container |
+| flownode.podTemplate.main.image | string | `""` | The flownode image. |
+| flownode.podTemplate.main.resources.limits | object | `{}` | The resources limits for the container |
+| flownode.podTemplate.main.resources.requests | object | `{}` | The requested resources for the container |
+| flownode.podTemplate.main.volumeMounts | list | `[]` | The pod volumeMounts |
+| flownode.podTemplate.nodeSelector | object | `{}` | The pod node selector |
+| flownode.podTemplate.serviceAccount.annotations | object | `{}` | The annotations for flownode serviceaccount |
+| flownode.podTemplate.serviceAccount.create | bool | `false` | Create a service account |
+| flownode.podTemplate.tolerations | list | `[]` | The pod tolerations |
+| flownode.podTemplate.volumes | list | `[]` | The pod volumes |
+| flownode.replicas | int | `1` | Flownode replicas |
 | frontend | object | `{"config":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{}}` | Frontend configure |
 | frontend.config | string | `""` | Extra frontend config in toml format. |
 | frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
