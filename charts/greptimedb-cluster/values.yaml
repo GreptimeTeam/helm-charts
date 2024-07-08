@@ -253,6 +253,66 @@ datanode:
     # -- The wal directory of the storage, default is "/data/greptimedb/wal"
     walDir: "/data/greptimedb/wal"
 
+# -- Flownode configure
+flownode:
+  # -- Enable flownode
+  enabled: true
+
+  # -- Flownode replicas
+  replicas: 1
+
+  # -- Extra flownode config in toml format.
+  config: ""
+
+  # -- The pod template for frontend
+  podTemplate:
+    # -- The spec of main container
+    main:
+      # -- The flownode image.
+      image: ""
+
+      resources:
+        # -- The requested resources for the container
+        requests: {}
+        #  cpu: "1"
+        #  memory: "2Gi"
+
+        # -- The resources limits for the container
+        limits: {}
+        #  cpu: "1"
+        #  memory: "2Gi"
+
+      # -- The environment variables for the container
+      env: []
+
+      # -- The command to be executed in the container
+      command: []
+
+      # -- The arguments to be passed to the command
+      args: []
+
+      # -- The pod volumeMounts
+      volumeMounts: []
+
+    # -- The annotations to be created to the pod.
+    annotations: {}
+    # -- The labels to be created to the pod.
+    labels: {}
+    # -- The pod node selector
+    nodeSelector: {}
+    # -- The pod tolerations
+    tolerations: []
+    # -- The pod affinity
+    affinity: {}
+    # -- The pod volumes
+    volumes: []
+
+    serviceAccount:
+      # -- Create a service account
+      create: false
+      # -- The annotations for flownode serviceaccount
+      annotations: {}
+
 # -- GreptimeDB http service port
 httpServicePort: 4000
 # -- GreptimeDB grpc service port

@@ -207,6 +207,55 @@ spec:
       storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
       dataHome: {{ .Values.datanode.storage.dataHome }}
       walDir: {{ .Values.datanode.storage.walDir }}
+  {{- if .Values.flownode.enabled }}
+  flownode:
+    replicas: {{ .Values.frontend.replicas }}
+    {{- if .Values.flownode.config }}
+    config: |-
+      {{ .Values.flownode.config | nindent 6 }}
+    {{- end }}
+    template:
+      main:
+        {{- if .Values.flownode.podTemplate.main.image }}
+        image: {{ .Values.flownode.podTemplate.main.image }}
+        {{- end }}
+        {{- if .Values.flownode.podTemplate.main.command }}
+        command: {{ .Values.flownode.podTemplate.main.command | toYaml | nindent 8 }}
+        {{- end }}
+        {{- if .Values.flownode.podTemplate.main.args }}
+        args: {{ .Values.flownode.podTemplate.main.args | toYaml | nindent 8 }}
+        {{- end }}
+        {{- if .Values.flownode.podTemplate.main.env }}
+        env: {{- toYaml .Values.flownode.podTemplate.main.env | nindent 8 }}
+        {{- end }}
+        {{- if .Values.flownode.podTemplate.main.volumeMounts }}
+        volumeMounts: {{- toYaml .Values.flownode.podTemplate.main.volumeMounts | nindent 8 }}
+        {{- end }}
+        resources:
+          requests: {{ .Values.flownode.podTemplate.main.resources.requests | toYaml | nindent 12 }}
+          limits: {{ .Values.flownode.podTemplate.main.resources.limits | toYaml | nindent 12 }}
+      {{- if .Values.flownode.podTemplate.annotations }}
+      annotations: {{ .Values.flownode.podTemplate.annotations | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.flownode.podTemplate.labels }}
+      labels: {{ .Values.flownode.podTemplate.labels | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.flownode.podTemplate.serviceAccount.create }}
+      serviceAccountName: {{ .Release.Name }}-flownode
+      {{- end }}
+      {{- if .Values.flownode.podTemplate.tolerations }}
+      tolerations: {{ .Values.flownode.podTemplate.tolerations | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.flownode.podTemplate.affinity }}
+      affinity: {{ .Values.flownode.podTemplate.affinity | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.flownode.podTemplate.nodeSelector }}
+      nodeSelector: {{ .Values.flownode.podTemplate.nodeSelector | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.flownode.podTemplate.volumes}}
+      volumes: {{ .Values.flownode.podTemplate.volumes | toYaml | nindent 8 }}
+      {{- end }}
+  {{- end }}
   {{- if (and .Values.prometheusMonitor (eq .Values.prometheusMonitor.enabled true ))}}
   prometheusMonitor: {{- toYaml .Values.prometheusMonitor | nindent 4 }}
   {{- end }}
