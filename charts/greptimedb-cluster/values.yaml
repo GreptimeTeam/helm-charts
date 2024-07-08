@@ -253,10 +253,10 @@ datanode:
     # -- The wal directory of the storage, default is "/data/greptimedb/wal"
     walDir: "/data/greptimedb/wal"
 
-# -- Flownode configure
+# -- Flownode configure. **It's NOT READY YET**
 flownode:
   # -- Enable flownode
-  enabled: true
+  enabled: false
 
   # -- Flownode replicas
   replicas: 1
