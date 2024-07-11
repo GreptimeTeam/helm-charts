@@ -209,7 +209,7 @@ spec:
       walDir: {{ .Values.datanode.storage.walDir }}
   {{- if .Values.flownode.enabled }}
   flownode:
-    replicas: {{ .Values.frontend.replicas }}
+    replicas: {{ .Values.flownode.replicas }}
     {{- if .Values.flownode.config }}
     config: |-
       {{ .Values.flownode.config | nindent 6 }}
