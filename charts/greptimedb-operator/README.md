@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.1.17](https://img.shields.io/badge/Version-0.1.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.26](https://img.shields.io/badge/AppVersion-0.1.0--alpha.26-informational?style=flat-square)
+![Version: 0.1.18](https://img.shields.io/badge/Version-0.1.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.26](https://img.shields.io/badge/AppVersion-0.1.0--alpha.26-informational?style=flat-square)
 
 ## Source Code
 
@@ -45,8 +45,8 @@ helm upgrade \
 Helm cannot upgrade custom resource definitions in the `<chart>/crds` folder [by design](https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#some-caveats-and-explanations). When the CRDs are upgraded, you can upgrade CRDs by using `kubectl` manually:
 
 ```console
-kubectl apply -f https://github.com/GreptimeTeam/greptimedb-operator/releases/download/<version>/greptimedbclusters.yaml
-kubectl apply -f https://github.com/GreptimeTeam/greptimedb-operator/releases/download/<version>/greptimedbstandalones.yaml
+kubectl apply -f https://github.com/GreptimeTeam/greptimedb-operator/releases/download/latest/greptimedbclusters.yaml
+kubectl apply -f https://github.com/GreptimeTeam/greptimedb-operator/releases/download/latest/greptimedbstandalones.yaml
 ```
 
 ## How to Uninstall
