@@ -45,8 +45,8 @@ helm upgrade \
 Helm cannot upgrade custom resource definitions in the `<chart>/crds` folder [by design](https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#some-caveats-and-explanations). When the CRDs are upgraded, you can upgrade CRDs by using `kubectl` manually:
 
 ```console
-kubectl apply -f https://github.com/GreptimeTeam/greptimedb-operator/releases/download/v0.1.0-alpha.26/greptimedbclusters.yaml
-kubectl apply -f https://github.com/GreptimeTeam/greptimedb-operator/releases/download/v0.1.0-alpha.26/greptimedbstandalones.yaml
+kubectl apply -f https://github.com/GreptimeTeam/greptimedb-operator/releases/download/latest/greptimedbclusters.yaml
+kubectl apply -f https://github.com/GreptimeTeam/greptimedb-operator/releases/download/latest/greptimedbstandalones.yaml
 ```
 
 ## How to Uninstall
