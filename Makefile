@@ -32,6 +32,10 @@ e2e: ## Run e2e tests
 crds: ## Run update crd
 	./scripts/update-crds.sh
 
+.PHONY: upgrade-crds
+upgrade-crds: ## Upgrade the crds in the cluster.
+	./scripts/upgrade-crds.sh $(CRDS_VERSION)
+
 .PHONY: check-crds
 check-crds: crds ## Check crd
 	@git diff --quiet || \
