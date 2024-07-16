@@ -25,12 +25,16 @@ check-docs: docs ## Check docs
 
 .PHONY: e2e
 e2e: ## Run e2e tests
-	.github/scripts/deploy-greptimedb-cluster.sh
-	.github/scripts/deploy-greptimedb-standalone.sh
+	./scripts/deploy-greptimedb-cluster.sh
+	./scripts/deploy-greptimedb-standalone.sh
 
 .PHONY: crds
 crds: ## Run update crd
-	.github/scripts/update-crds.sh
+	./scripts/update-crds.sh
+
+.PHONY: upgrade-crds
+upgrade-crds: ## Upgrade the crds in the cluster.
+	./scripts/upgrade-crds.sh $(CRDS_VERSION)
 
 .PHONY: check-crds
 check-crds: crds ## Check crd
@@ -44,4 +48,4 @@ check-crds: crds ## Check crd
 # make update-chart CHART=greptimedb-operator VERSION=0.1.0-alpha.23  # [the greptimedb-operator image tag not have 'v' prefix]
 .PHONY: update-chart
 update-chart: ## Run update chart
-	.github/scripts/update-chart.sh $(CHART) $(VERSION)
+	./scripts/update-chart.sh $(CHART) $(VERSION)

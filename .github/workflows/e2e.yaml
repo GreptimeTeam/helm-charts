@@ -32,10 +32,10 @@ jobs:
         if: ${{ github.event.inputs.chart == 'greptimedb-cluster' }}
         shell: bash
         run: |
-          .github/scripts/deploy-greptimedb-cluster.sh
+          ./scripts/deploy-greptimedb-cluster.sh
 
       - name: Deploy greptimedb-standalone chart
         if: ${{ github.event.inputs.chart == 'greptimedb-standalone' }}
         shell: bash
         run: |
-          .github/scripts/deploy-greptimedb-standalone.sh
+          ./scripts/deploy-greptimedb-standalone.sh

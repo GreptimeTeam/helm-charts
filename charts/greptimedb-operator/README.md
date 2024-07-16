@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.1.19](https://img.shields.io/badge/Version-0.1.19-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.27](https://img.shields.io/badge/AppVersion-0.1.0--alpha.27-informational?style=flat-square)
+![Version: 0.1.20](https://img.shields.io/badge/Version-0.1.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.27](https://img.shields.io/badge/AppVersion-0.1.0--alpha.27-informational?style=flat-square)
 
 ## Source Code
 
@@ -42,12 +42,21 @@ helm upgrade \
 
 ## Upgrade CRDs
 
-Helm cannot upgrade custom resource definitions in the `<chart>/crds` folder [by design](https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#some-caveats-and-explanations). When the CRDs are upgraded, you can upgrade CRDs by using `kubectl` manually:
+Helm cannot upgrade custom resource definitions in the `<chart>/crds` folder [by design](https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#some-caveats-and-explanations).
 
-```console
-kubectl apply -f https://github.com/GreptimeTeam/greptimedb-operator/releases/download/latest/greptimedbclusters.yaml
-kubectl apply -f https://github.com/GreptimeTeam/greptimedb-operator/releases/download/latest/greptimedbstandalones.yaml
-```
+You can upgrade the CRDs manually to **ensure the version of operator and CRDs are aligned**:
+
+- If your `helm-charts` repository is already up-to-date, you can upgrade the CRDs by the following command:
+
+  ```console
+  make upgrade-crds
+  ```
+
+- If you want to upgrade the CRDs to the latest released version:
+
+  ```console
+  make upgrade-crds CRDS_VERSION=latest
+  ```
 
 ## How to Uninstall
 

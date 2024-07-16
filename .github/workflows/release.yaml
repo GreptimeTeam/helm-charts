@@ -56,4 +56,4 @@ jobs:
       - name: Release charts to S3
         shell: bash
         run: |
-          .github/scripts/release-charts-to-s3.sh ${{ vars.AWS_RELEASE_BUCKET }}
+          ./scripts/release-charts-to-s3.sh ${{ vars.AWS_RELEASE_BUCKET }}
