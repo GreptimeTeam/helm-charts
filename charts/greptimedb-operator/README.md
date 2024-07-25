@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.1.20](https://img.shields.io/badge/Version-0.1.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.27](https://img.shields.io/badge/AppVersion-0.1.0--alpha.27-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.28](https://img.shields.io/badge/AppVersion-0.1.0--alpha.28-informational?style=flat-square)
 
 ## Source Code
 
@@ -78,7 +78,7 @@ Kubernetes: `>=1.18.0-0`
 | image.pullSecrets | list | `[]` | The image pull secrets |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb-operator"` | The image repository |
-| image.tag | string | `"0.1.0-alpha.27"` | The image tag |
+| image.tag | string | `"0.1.0-alpha.28"` | The image tag |
 | nameOverride | string | `""` | String to partially override release template name |
 | nodeSelector | object | `{}` | The operator node selector |
 | rbac.create | bool | `true` | Install role based access control |
