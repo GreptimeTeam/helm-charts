@@ -174,6 +174,29 @@ entries:
   greptimedb-cluster:
   - apiVersion: v2
     appVersion: 0.9.0
+    created: "2024-07-29T12:52:17.387861454Z"
+    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes.
+    digest: 5e0cc5b31ed4639d52f1384d1f6bdc2e53ea8b9297b4524d89db1fe8a35faae5
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - database
+    - greptimedb
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-cluster
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-cluster-0.2.1/greptimedb-cluster-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: 0.9.0
     created: "2024-07-29T07:54:21.775291788Z"
     description: A Helm chart for deploying GreptimeDB cluster in Kubernetes.
     digest: 1b1ae4408c571bcdff8bb74b9bdc5705899af12c1ff086c52f58dfe1cca51336
@@ -2035,4 +2058,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2024-07-29T07:54:21.905021836Z"
+generated: "2024-07-29T12:52:17.388365514Z"
