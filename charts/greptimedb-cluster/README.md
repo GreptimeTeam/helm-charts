@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.0](https://img.shields.io/badge/AppVersion-0.9.0-informational?style=flat-square)
+![Version: 0.2.2](https://img.shields.io/badge/Version-0.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.0](https://img.shields.io/badge/AppVersion-0.9.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -198,3 +198,7 @@ helm uninstall mycluster -n default
 | prometheusMonitor.enabled | bool | `false` | Create PodMonitor resource for scraping metrics using PrometheusOperator |
 | prometheusMonitor.interval | string | `"30s"` | Interval at which metrics should be scraped |
 | prometheusMonitor.labels | object | `{"release":"prometheus"}` | Add labels to the PodMonitor |
+| remoteWAL | object | `{"enabled":false,"kafka":{"brokerEndpoints":[]}}` | Configure to remote wal |
+| remoteWAL.enabled | bool | `false` | Enable remote wal |
+| remoteWAL.kafka | object | `{"brokerEndpoints":[]}` | The remote wal type, only support kafka now. |
+| remoteWAL.kafka.brokerEndpoints | list | `[]` | The kafka broker endpoints |

@@ -298,3 +298,9 @@ spec:
     {{- else }}
     {}
     {{- end }}
+  {{- if .Values.remoteWAL.enabled }}
+  remoteWAL:
+  {{- if .Values.remoteWAL.kafka }}
+    kafka: {{- toYaml .Values.remoteWAL.kafka | nindent 6 }}
+  {{- end }}
+  {{- end }}
