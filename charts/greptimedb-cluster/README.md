@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.0](https://img.shields.io/badge/AppVersion-0.9.0-informational?style=flat-square)
+![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.0](https://img.shields.io/badge/AppVersion-0.9.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -73,30 +73,32 @@ helm uninstall mycluster -n default
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| base.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for base |
+| base.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"readinessProbe":{},"resources":{"limits":{},"requests":{}}},"nodeSelector":{},"serviceAccountName":"","tolerations":[]}` | The pod template for base |
 | base.podTemplate.affinity | object | `{}` | The pod affinity |
 | base.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
 | base.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
-| base.podTemplate.main | object | `{"args":[],"command":[],"env":[],"resources":{"limits":{},"requests":{}}}` | The base spec of main container |
+| base.podTemplate.main | object | `{"args":[],"command":[],"env":[],"readinessProbe":{},"resources":{"limits":{},"requests":{}}}` | The base spec of main container |
 | base.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
 | base.podTemplate.main.command | list | `[]` | The command to be executed in the container |
 | base.podTemplate.main.env | list | `[]` | The environment variables for the container |
+| base.podTemplate.main.readinessProbe | object | `{}` | The config for readiness probe of the main container |
 | base.podTemplate.main.resources.limits | object | `{}` | The resources limits for the container |
 | base.podTemplate.main.resources.requests | object | `{}` | The requested resources for the container |
 | base.podTemplate.nodeSelector | object | `{}` | The pod node selector |
 | base.podTemplate.serviceAccountName | string | `""` | The global service account |
 | base.podTemplate.tolerations | list | `[]` | The pod tolerations |
-| datanode | object | `{"config":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":3,"storage":{"dataHome":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"10Gi","walDir":"/data/greptimedb/wal"}}` | Datanode configure |
+| datanode | object | `{"config":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":3,"storage":{"dataHome":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"10Gi","walDir":"/data/greptimedb/wal"}}` | Datanode configure |
 | datanode.config | string | `""` | Extra datanode config in toml format. |
-| datanode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for datanode |
+| datanode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for datanode |
 | datanode.podTemplate.affinity | object | `{}` | The pod affinity |
 | datanode.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
 | datanode.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
-| datanode.podTemplate.main | object | `{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]}` | The spec of main container |
+| datanode.podTemplate.main | object | `{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]}` | The spec of main container |
 | datanode.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
 | datanode.podTemplate.main.command | list | `[]` | The command to be executed in the container |
 | datanode.podTemplate.main.env | list | `[]` | The environment variables for the container |
 | datanode.podTemplate.main.image | string | `""` | The datanode image. |
+| datanode.podTemplate.main.readinessProbe | object | `{}` | The config for readiness probe of the main container |
 | datanode.podTemplate.main.resources.limits | object | `{}` | The resources limits for the container |
 | datanode.podTemplate.main.resources.requests | object | `{}` | The requested resources for the container |
 | datanode.podTemplate.main.volumeMounts | list | `[]` | The pod volumeMounts |
@@ -111,18 +113,19 @@ helm uninstall mycluster -n default
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
 | datanode.storage.storageSize | string | `"10Gi"` | Storage size for datanode persistent volume |
 | datanode.storage.walDir | string | `"/data/greptimedb/wal"` | The wal directory of the storage, default is "/data/greptimedb/wal" |
-| flownode | object | `{"config":"","enabled":false,"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1}` | Flownode configure. **It's NOT READY YET** |
+| flownode | object | `{"config":"","enabled":false,"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1}` | Flownode configure. **It's NOT READY YET** |
 | flownode.config | string | `""` | Extra flownode config in toml format. |
 | flownode.enabled | bool | `false` | Enable flownode |
-| flownode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
+| flownode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
 | flownode.podTemplate.affinity | object | `{}` | The pod affinity |
 | flownode.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
 | flownode.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
-| flownode.podTemplate.main | object | `{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]}` | The spec of main container |
+| flownode.podTemplate.main | object | `{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]}` | The spec of main container |
 | flownode.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
 | flownode.podTemplate.main.command | list | `[]` | The command to be executed in the container |
 | flownode.podTemplate.main.env | list | `[]` | The environment variables for the container |
 | flownode.podTemplate.main.image | string | `""` | The flownode image. |
+| flownode.podTemplate.main.readinessProbe | object | `{}` | The config for readiness probe of the main container |
 | flownode.podTemplate.main.resources.limits | object | `{}` | The resources limits for the container |
 | flownode.podTemplate.main.resources.requests | object | `{}` | The requested resources for the container |
 | flownode.podTemplate.main.volumeMounts | list | `[]` | The pod volumeMounts |
@@ -132,17 +135,18 @@ helm uninstall mycluster -n default
 | flownode.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | flownode.podTemplate.volumes | list | `[]` | The pod volumes |
 | flownode.replicas | int | `1` | Flownode replicas |
-| frontend | object | `{"config":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{}}` | Frontend configure |
+| frontend | object | `{"config":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{}}` | Frontend configure |
 | frontend.config | string | `""` | Extra frontend config in toml format. |
-| frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
+| frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
 | frontend.podTemplate.affinity | object | `{}` | The pod affinity |
 | frontend.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
 | frontend.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
-| frontend.podTemplate.main | object | `{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]}` | The spec of main container |
+| frontend.podTemplate.main | object | `{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]}` | The spec of main container |
 | frontend.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
 | frontend.podTemplate.main.command | list | `[]` | The command to be executed in the container |
 | frontend.podTemplate.main.env | list | `[]` | The environment variables for the container |
 | frontend.podTemplate.main.image | string | `""` | The frontend image. |
+| frontend.podTemplate.main.readinessProbe | object | `{}` | The config for readiness probe of the main container |
 | frontend.podTemplate.main.resources.limits | object | `{}` | The resources limits for the container |
 | frontend.podTemplate.main.resources.requests | object | `{}` | The requested resources for the container |
 | frontend.podTemplate.main.volumeMounts | list | `[]` | The pod volumeMounts |
@@ -163,11 +167,11 @@ helm uninstall mycluster -n default
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
 | initializer.tag | string | `"0.1.0-alpha.28"` | Initializer image tag |
-| meta | object | `{"config":"","enableRegionFailover":false,"etcdEndpoints":"etcd.default.svc.cluster.local:2379","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storeKeyPrefix":""}` | Meta configure |
+| meta | object | `{"config":"","enableRegionFailover":false,"etcdEndpoints":"etcd.default.svc.cluster.local:2379","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"readinessProbe":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storeKeyPrefix":""}` | Meta configure |
 | meta.config | string | `""` | Extra Meta config in toml format. |
 | meta.enableRegionFailover | bool | `false` | Whether to enable region failover |
 | meta.etcdEndpoints | string | `"etcd.default.svc.cluster.local:2379"` | Meta etcd endpoints |
-| meta.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for meta |
+| meta.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"readinessProbe":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for meta |
 | meta.podTemplate.affinity | object | `{}` | The pod affinity |
 | meta.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
 | meta.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
@@ -180,6 +184,7 @@ helm uninstall mycluster -n default
 | meta.podTemplate.main.resources.requests | object | `{}` | The requested resources for the container |
 | meta.podTemplate.main.volumeMounts | list | `[]` | The pod volumeMounts |
 | meta.podTemplate.nodeSelector | object | `{}` | The pod node selector |
+| meta.podTemplate.readinessProbe | object | `{}` | The config for readiness probe of the main container |
 | meta.podTemplate.serviceAccount.annotations | object | `{}` | The annotations for meta serviceaccount |
 | meta.podTemplate.serviceAccount.create | bool | `false` | Create a service account |
 | meta.podTemplate.tolerations | list | `[]` | The pod tolerations |

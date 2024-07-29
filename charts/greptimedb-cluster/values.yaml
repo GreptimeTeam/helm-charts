@@ -41,6 +41,19 @@ base:
       # -- The arguments to be passed to the command
       args: []
 
+      # -- The config for readiness probe of the main container
+      readinessProbe: {}
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
+
     # -- The annotations to be created to the pod.
     annotations: {}
     # -- The labels to be created to the pod.
@@ -91,6 +104,19 @@ frontend:
 
       # -- The pod volumeMounts
       volumeMounts: []
+
+      # -- The config for readiness probe of the main container
+      readinessProbe: {}
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
     # -- The annotations to be created to the pod.
     annotations: {}
@@ -169,6 +195,19 @@ meta:
     # -- The pod volumes
     volumes: []
 
+    # -- The config for readiness probe of the main container
+    readinessProbe: {}
+#      # -- The initial delay seconds for the readiness probe.
+#      initialDelaySeconds: 5
+#      # -- The timeout seconds for the readiness probe
+#      timeoutSeconds: 1
+#      # -- The period seconds for the readiness probe
+#      periodSeconds: 10
+#      # -- The success threshold for the readiness probe
+#      successThreshold: 1
+#      # -- The failure threshold for the readiness probe
+#      failureThreshold: 3
+
     serviceAccount:
       # -- Create a service account
       create: false
@@ -221,6 +260,19 @@ datanode:
 
       # -- The pod volumeMounts
       volumeMounts: []
+
+      # -- The config for readiness probe of the main container
+      readinessProbe: {}
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
     # -- The annotations to be created to the pod.
     annotations: {}
@@ -293,6 +345,19 @@ flownode:
 
       # -- The pod volumeMounts
       volumeMounts: []
+
+      # -- The config for readiness probe of the main container
+      readinessProbe: {}
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
     # -- The annotations to be created to the pod.
     annotations: {}
