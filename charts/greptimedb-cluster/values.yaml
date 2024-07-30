@@ -423,7 +423,7 @@ objectStorage:
 #    endpoint: "oss-cn-hangzhou.aliyuncs.com"
 
 # -- Configure to remote wal
-remoteWAL:
+remoteWal:
   # -- Enable remote wal
   enabled: false
   # -- The remote wal type, only support kafka now.
