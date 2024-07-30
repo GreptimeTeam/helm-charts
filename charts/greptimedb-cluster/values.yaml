@@ -421,3 +421,12 @@ objectStorage:
 #    # The data directory in OSS will be: 'oss://<bucket>/<root>/data/...'.
 #    root: "mycluster"
 #    endpoint: "oss-cn-hangzhou.aliyuncs.com"
+
+# -- Configure to remote wal
+remoteWAL:
+  # -- Enable remote wal
+  enabled: false
+  # -- The remote wal type, only support kafka now.
+  kafka:
+    # -- The kafka broker endpoints
+    brokerEndpoints: []
