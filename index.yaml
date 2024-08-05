@@ -173,6 +173,29 @@ entries:
     version: 0.1.1-alpha.1
   greptimedb-cluster:
   - apiVersion: v2
+    appVersion: 0.9.1
+    created: "2024-08-05T02:56:21.995853685Z"
+    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes.
+    digest: aaf2ef174f8b8e191e3c0d74c3b916786c67e406c4b41cece9000980f669bcc5
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - database
+    - greptimedb
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-cluster
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-cluster-0.2.4/greptimedb-cluster-0.2.4.tgz
+    version: 0.2.4
+  - apiVersion: v2
     appVersion: 0.9.0
     created: "2024-07-30T09:03:36.877978119Z"
     description: A Helm chart for deploying GreptimeDB cluster in Kubernetes.
@@ -1755,6 +1778,29 @@ entries:
     version: 0.1.1-alpha.1
   greptimedb-standalone:
   - apiVersion: v2
+    appVersion: 0.9.1
+    created: "2024-08-05T02:56:22.097477189Z"
+    description: A Helm chart for deploying standalone greptimedb
+    digest: 03f04e4685771fda81a889087ad27d8eb3d0ad85d7c327dcb48222092df8754b
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - database
+    - greptimedb
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-standalone
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.20/greptimedb-standalone-0.1.20.tgz
+    version: 0.1.20
+  - apiVersion: v2
     appVersion: 0.9.0
     created: "2024-07-17T06:16:30.19676687Z"
     description: A Helm chart for deploying standalone greptimedb
@@ -2104,4 +2150,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2024-07-30T09:03:36.878509971Z"
+generated: "2024-08-05T02:56:22.098421313Z"
