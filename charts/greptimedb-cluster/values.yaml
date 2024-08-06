@@ -72,8 +72,11 @@ frontend:
   # -- Frontend replicas
   replicas: 1
 
-  # -- Extra frontend config in toml format.
-  config: ""
+  # -- Extra toml file of frontend.
+  configFile: ""
+
+  # -- Extra raw toml config data of frontend. Skip if the `configFile` is used.
+  configData: ""
 
   # -- The pod template for frontend
   podTemplate:
@@ -149,8 +152,11 @@ meta:
   # -- Meta replicas
   replicas: 1
 
-  # -- Extra Meta config in toml format.
-  config: ""
+  # -- Extra toml file of meta.
+  configFile: ""
+
+  # -- Extra raw toml config data of meta. Skip if the `configFile` is used.
+  configData: ""
 
   # -- The pod template for meta
   podTemplate:
@@ -228,8 +234,11 @@ datanode:
   # -- Datanode replicas
   replicas: 3
 
-  # -- Extra datanode config in toml format.
-  config: ""
+  # -- Extra toml file of datanode.
+  configFile: ""
+
+  # -- Extra raw toml config data of datanode. Skip if the `configFile` is used.
+  configData: ""
 
   # -- The pod template for datanode
   podTemplate:
@@ -313,8 +322,11 @@ flownode:
   # -- Flownode replicas
   replicas: 1
 
-  # -- Extra flownode config in toml format.
-  config: ""
+  # -- Extra toml file of flownode.
+  configFile: ""
+
+  # -- Extra raw toml config data of flownode. Skip if the `configFile` is used.
+  configData: ""
 
   # -- The pod template for frontend
   podTemplate:

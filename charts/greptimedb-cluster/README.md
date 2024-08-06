@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.5](https://img.shields.io/badge/Version-0.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.1](https://img.shields.io/badge/AppVersion-0.9.1-informational?style=flat-square)
+![Version: 0.2.6](https://img.shields.io/badge/Version-0.2.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.1](https://img.shields.io/badge/AppVersion-0.9.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -87,8 +87,9 @@ helm uninstall mycluster -n default
 | base.podTemplate.nodeSelector | object | `{}` | The pod node selector |
 | base.podTemplate.serviceAccountName | string | `""` | The global service account |
 | base.podTemplate.tolerations | list | `[]` | The pod tolerations |
-| datanode | object | `{"config":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":3,"storage":{"dataHome":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"10Gi","walDir":"/data/greptimedb/wal"}}` | Datanode configure |
-| datanode.config | string | `""` | Extra datanode config in toml format. |
+| datanode | object | `{"configData":"","configFile":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":3,"storage":{"dataHome":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"10Gi","walDir":"/data/greptimedb/wal"}}` | Datanode configure |
+| datanode.configData | string | `""` | Extra raw toml config data of datanode. Skip if the `configFile` is used. |
+| datanode.configFile | string | `""` | Extra toml file of datanode. |
 | datanode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for datanode |
 | datanode.podTemplate.affinity | object | `{}` | The pod affinity |
 | datanode.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
@@ -113,8 +114,9 @@ helm uninstall mycluster -n default
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
 | datanode.storage.storageSize | string | `"10Gi"` | Storage size for datanode persistent volume |
 | datanode.storage.walDir | string | `"/data/greptimedb/wal"` | The wal directory of the storage, default is "/data/greptimedb/wal" |
-| flownode | object | `{"config":"","enabled":false,"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1}` | Flownode configure. **It's NOT READY YET** |
-| flownode.config | string | `""` | Extra flownode config in toml format. |
+| flownode | object | `{"configData":"","configFile":"","enabled":false,"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1}` | Flownode configure. **It's NOT READY YET** |
+| flownode.configData | string | `""` | Extra raw toml config data of flownode. Skip if the `configFile` is used. |
+| flownode.configFile | string | `""` | Extra toml file of flownode. |
 | flownode.enabled | bool | `false` | Enable flownode |
 | flownode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
 | flownode.podTemplate.affinity | object | `{}` | The pod affinity |
@@ -135,8 +137,9 @@ helm uninstall mycluster -n default
 | flownode.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | flownode.podTemplate.volumes | list | `[]` | The pod volumes |
 | flownode.replicas | int | `1` | Flownode replicas |
-| frontend | object | `{"config":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{}}` | Frontend configure |
-| frontend.config | string | `""` | Extra frontend config in toml format. |
+| frontend | object | `{"configData":"","configFile":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{}}` | Frontend configure |
+| frontend.configData | string | `""` | Extra raw toml config data of frontend. Skip if the `configFile` is used. |
+| frontend.configFile | string | `""` | Extra toml file of frontend. |
 | frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
 | frontend.podTemplate.affinity | object | `{}` | The pod affinity |
 | frontend.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
@@ -167,8 +170,9 @@ helm uninstall mycluster -n default
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
 | initializer.tag | string | `"0.1.0-alpha.28"` | Initializer image tag |
-| meta | object | `{"config":"","enableRegionFailover":false,"etcdEndpoints":"etcd.default.svc.cluster.local:2379","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"readinessProbe":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storeKeyPrefix":""}` | Meta configure |
-| meta.config | string | `""` | Extra Meta config in toml format. |
+| meta | object | `{"configData":"","configFile":"","enableRegionFailover":false,"etcdEndpoints":"etcd.default.svc.cluster.local:2379","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"readinessProbe":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storeKeyPrefix":""}` | Meta configure |
+| meta.configData | string | `""` | Extra raw toml config data of meta. Skip if the `configFile` is used. |
+| meta.configFile | string | `""` | Extra toml file of meta. |
 | meta.enableRegionFailover | bool | `false` | Whether to enable region failover |
 | meta.etcdEndpoints | string | `"etcd.default.svc.cluster.local:2379"` | Meta etcd endpoints |
 | meta.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"readinessProbe":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for meta |

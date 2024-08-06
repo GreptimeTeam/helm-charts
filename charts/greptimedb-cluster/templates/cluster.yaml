@@ -48,10 +48,14 @@ spec:
     {{- end }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
-    {{- if .Values.frontend.config }}
+{{- if or .Values.frontend.configFile .Values.frontend.configData }}
     config: |-
-      {{ .Values.frontend.config | nindent 6 }}
-    {{- end }}
+{{- if .Values.frontend.configFile }}
+{{ .Files.Get .Values.frontend.configFile | indent 6 }}
+{{- else }}
+{{ .Values.frontend.configData | indent 6 }}
+{{- end }}
+{{- end }}
     {{- if .Values.frontend.tls }}
     tls:
       secretName: {{ .Values.frontend.tls.secretName }}
@@ -105,10 +109,14 @@ spec:
       {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}
-    {{- if .Values.meta.config }}
+{{- if or .Values.meta.configFile .Values.meta.configData }}
     config: |-
-      {{ .Values.meta.config | nindent 6 }}
-    {{- end }}
+{{- if .Values.meta.configFile }}
+{{ .Files.Get .Values.meta.configFile | indent 6 }}
+{{- else }}
+{{ .Values.meta.configData | indent 6 }}
+{{- end }}
+{{- end }}
     {{- if .Values.meta.etcdEndpoints }}
     etcdEndpoints:
       - {{ .Values.meta.etcdEndpoints }}
@@ -165,10 +173,14 @@ spec:
       {{- end }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
-    {{- if .Values.datanode.config }}
+{{- if or .Values.datanode.configFile .Values.datanode.configData }}
     config: |-
-      {{ .Values.datanode.config | nindent 6 }}
-    {{- end }}
+{{- if .Values.datanode.configFile }}
+{{ .Files.Get .Values.datanode.configFile | indent 6 }}
+{{- else }}
+{{ .Values.datanode.configData | indent 6 }}
+{{- end }}
+{{- end }}
     template:
       main:
         {{- if .Values.datanode.podTemplate.main.image }}
@@ -222,10 +234,14 @@ spec:
   {{- if .Values.flownode.enabled }}
   flownode:
     replicas: {{ .Values.flownode.replicas }}
-    {{- if .Values.flownode.config }}
+{{- if or .Values.flownode.configFile .Values.flownode.configData }}
     config: |-
-      {{ .Values.flownode.config | nindent 6 }}
-    {{- end }}
+{{- if .Values.flownode.configFile }}
+{{ .Files.Get .Values.flownode.configFile | indent 6 }}
+{{- else }}
+{{ .Values.flownode.configData | indent 6 }}
+{{- end }}
+{{- end }}
     template:
       main:
         {{- if .Values.flownode.podTemplate.main.image }}
