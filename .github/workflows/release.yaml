@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -23,9 +23,7 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Install Helm
-        uses: azure/setup-helm@v3
-        with:
-          version: v3.12.1
+        uses: azure/setup-helm@v4.2.0
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
@@ -35,6 +33,26 @@ jobs:
           CR_SKIP_EXISTING: true
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
+  release-charts-to-acr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4.2.0
+
+      - name: Login to OCI registry
+        run: echo '${{ secrets.ALICLOUD_PASSWORD }}' | helm registry login ${{ vars.OCI_REGISTRY_URL }} -u ${{ secrets.ALICLOUD_USERNAME }} --password-stdin
+
+      - name: Package and push Helm Charts
+        shell: bash
+        env:
+          OCI_REGISTRY_URL: ${{ vars.OCI_REGISTRY_URL }}
+          OCI_NAMESPACE: ${{ vars.OCI_NAMESPACE }}
+        run: |
+          ./scripts/release-charts-to-acr.sh
+
   release-charts-to-s3:
     needs: [
       release,
@@ -42,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
