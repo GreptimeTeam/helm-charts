@@ -59,6 +59,11 @@ jobs:
     ]
     runs-on: ubuntu-latest
     steps:
+      # TODO(zyy17): Maybe it's not a elegant way to wait for GitHub Pages to update. For many scenarios, waiting for 5 minutes is enough.
+      - name: Wait for deployment of GitHub Pages
+        run: |
+          sleep 300
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
