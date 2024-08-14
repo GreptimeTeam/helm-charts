@@ -74,11 +74,25 @@ spec:
         {{- if .Values.frontend.podTemplate.main.args }}
         args: {{ .Values.frontend.podTemplate.main.args | toYaml | nindent 8 }}
         {{- end }}
-        {{- if .Values.frontend.podTemplate.main.env }}
-        env: {{- toYaml .Values.frontend.podTemplate.main.env | nindent 8 }}
+        {{- if or .Values.auth.enabled .Values.frontend.podTemplate.main.env }}
+        env:
+        {{- if .Values.auth.enabled }}
+        - name: GREPTIMEDB_FRONTEND__USER_PROVIDER
+          value: "static_user_provider:file:{{ .Values.auth.mountPath }}/{{ .Values.auth.fileName }}"
         {{- end }}
+        {{- if .Values.frontend.podTemplate.main.env }}
+        {{- toYaml .Values.frontend.podTemplate.main.env | nindent 8 }}
+        {{- end }}
+        {{- end }}
+        {{- if or .Values.auth.enabled .Values.frontend.podTemplate.main.volumeMounts }}
+        volumeMounts:
         {{- if .Values.frontend.podTemplate.main.volumeMounts }}
-        volumeMounts: {{- toYaml .Values.frontend.podTemplate.main.volumeMounts | nindent 8 }}
+        {{- toYaml .Values.frontend.podTemplate.main.volumeMounts | nindent 8 }}
+        {{- end }}
+        {{- if .Values.auth.enabled }}
+        - name: auth
+          mountPath: {{ .Values.auth.mountPath }}
+        {{- end }}
         {{- end }}
         resources:
           requests: {{ .Values.frontend.podTemplate.main.resources.requests | toYaml | nindent 12 }}
@@ -104,8 +118,16 @@ spec:
       {{- if .Values.frontend.podTemplate.nodeSelector }}
       nodeSelector: {{ .Values.frontend.podTemplate.nodeSelector | toYaml | nindent 8 }}
       {{- end }}
-      {{- if .Values.frontend.podTemplate.volumes}}
-      volumes: {{ .Values.frontend.podTemplate.volumes | toYaml | nindent 8 }}
+      {{- if or .Values.auth.enabled .Values.frontend.podTemplate.volumes }}
+      volumes:
+      {{- if .Values.frontend.podTemplate.volumes }}
+      {{- toYaml .Values.frontend.podTemplate.volumes | nindent 8 }}
+      {{- end }}
+      {{- if .Values.auth.enabled }}
+      - name: auth
+        secret:
+          secretName: {{ .Release.Name }}-users-auth
+      {{- end }}
       {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}
