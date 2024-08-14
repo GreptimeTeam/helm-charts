@@ -443,3 +443,16 @@ remoteWal:
   kafka:
     # -- The kafka broker endpoints
     brokerEndpoints: []
+
+# -- The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/clients/authentication#authentication).
+auth:
+  # -- Enable static auth
+  enabled: false
+  # -- The auth file path to store the auth info
+  mountPath: "/etc/greptimedb/auth"
+  # -- The auth file name, the full path is `${mountPath}/${fileName}`
+  fileName: "passwd"
+  # -- The users to be created in the auth file
+  users:
+    - username: "admin"
+      password: "admin"
