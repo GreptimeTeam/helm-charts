@@ -1046,6 +1046,31 @@ entries:
   greptimedb-operator:
   - apiVersion: v2
     appVersion: 0.1.0-alpha.28
+    created: "2024-08-19T12:12:00.59434542Z"
+    description: The greptimedb-operator Helm chart for Kubernetes.
+    digest: c72a23461315bdce30ae16c9a25af61c437c0a33ea0e4d1738dc6f3980352d2c
+    home: https://github.com/GreptimeTeam/greptimedb-operator
+    keywords:
+    - operator
+    - database
+    - greptimedb
+    kubeVersion: '>=1.18.0-0'
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-operator
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb-operator
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-operator-0.2.1/greptimedb-operator-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: 0.1.0-alpha.28
     created: "2024-07-29T07:54:21.904346693Z"
     description: The greptimedb-operator Helm chart for Kubernetes.
     digest: 50e020cddd085a8e61e9d88fdfde737927e0f645c2f532ae3cad4bf8bea4ed52
@@ -2265,4 +2290,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2024-08-19T12:05:51.178767131Z"
+generated: "2024-08-19T12:12:00.594772856Z"
