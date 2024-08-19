@@ -28,16 +28,16 @@ e2e: ## Run e2e tests
 	./scripts/deploy-greptimedb-cluster.sh
 	./scripts/deploy-greptimedb-standalone.sh
 
-.PHONY: crds
-crds: ## Run update crd
-	./scripts/update-crds.sh
+.PHONY: update-crds
+update-crds: ## Run update crd
+	./scripts/crds/update-crds.sh
 
 .PHONY: upgrade-crds
 upgrade-crds: ## Upgrade the crds in the cluster.
-	./scripts/upgrade-crds.sh $(CRDS_VERSION)
+	./scripts/crds/upgrade-crds.sh $(CRDS_VERSION)
 
 .PHONY: check-crds
-check-crds: crds ## Check crd
+check-crds: update-crds ## Check crd
 	@git diff --quiet || \
     (echo "Need to update crds, please run 'make crds'"; \
 	exit 1)

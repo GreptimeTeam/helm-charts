@@ -21,6 +21,17 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+## Custom resource configuration
+crds:
+  # -- Install and upgrade CRDs
+  install: true
+  # -- Keep CRDs on chart uninstall
+  keep: true
+  # -- Annotations to be added to all CRDs
+  annotations: {}
+  # -- Addtional labels to be added to all CRDs
+  additionalLabels: {}
+
 # -- Number of replicas for the greptimedb operator
 replicas: 1
 
