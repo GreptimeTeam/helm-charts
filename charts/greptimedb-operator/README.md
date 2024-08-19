@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.28](https://img.shields.io/badge/AppVersion-0.1.0--alpha.28-informational?style=flat-square)
+![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.28](https://img.shields.io/badge/AppVersion-0.1.0--alpha.28-informational?style=flat-square)
 
 ## Source Code
 
@@ -40,11 +40,25 @@ helm upgrade \
   --version <chart-version>
 ```
 
-## Upgrade CRDs
+## Installation and upgrade of CRDs
 
 Helm cannot upgrade custom resource definitions in the `<chart>/crds` folder [by design](https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#some-caveats-and-explanations).
 
-You can upgrade the CRDs manually to **ensure the version of operator and CRDs are aligned**:
+**We support CRD installation and upgrade automatically using the chart for deployment convenience**. You can disable the CRD installation by using `--set crds.install=false` when installing the chart. When you uninstall the release, **it will not delete the CRDs by default**.
+
+If the previous version of the chart already installs your CRDs, you have to modify some metadata of CRDs before installing the new version of the chart:
+
+```console
+# Add the following labels to the CRDs.
+kubectl patch crds greptimedbclusters.greptime.io -p '{"metadata":{"labels":{"app.kubernetes.io/managed-by":"Helm"}}}'
+kubectl patch crds greptimedbstandalones.greptime.io -p '{"metadata":{"labels":{"app.kubernetes.io/managed-by":"Helm"}}}'
+
+# Add the following annotations to the CRDs. The values of the annotations are the name and namespace of the release.
+kubectl patch crds greptimedbclusters.greptime.io -p '{"metadata":{"annotations":{"meta.helm.sh/release-name":<your-release-name>, "meta.helm.sh/release-namespace":<your-namespace>>}}}'
+kubectl patch crds greptimedbstandalones.greptime.io -p '{"metadata":{"annotations":{"meta.helm.sh/release-name":<your-release-name>, "meta.helm.sh/release-namespace":<your-namespace>>}}}'
+```
+
+If you want to upgrade CRDs manually, you can use the following steps (**ensure the version of the operator and CRDs are aligned**):
 
 - If your `helm-charts` repository is already up-to-date, you can upgrade the CRDs by the following command:
 
@@ -64,6 +78,18 @@ You can upgrade the CRDs manually to **ensure the version of operator and CRDs a
 helm uninstall greptimedb-operator -n greptimedb-admin
 ```
 
+## How to Update the CRDs in the Chart
+
+If you want to update the CRDs in the chart, you can use the following steps:
+
+1. Update the `appVersion` in the `Chart.yaml` file.
+
+2. Execute the following command:
+
+   ```console
+   make update-crds
+   ```
+
 ## Requirements
 
 Kubernetes: `>=1.18.0-0`
@@ -73,6 +99,10 @@ Kubernetes: `>=1.18.0-0`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | The pod affinity |
+| crds.additionalLabels | object | `{}` | Addtional labels to be added to all CRDs |
+| crds.annotations | object | `{}` | Annotations to be added to all CRDs |
+| crds.install | bool | `true` | Install and upgrade CRDs |
+| crds.keep | bool | `true` | Keep CRDs on chart uninstall |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
 | image.imagePullPolicy | string | `"IfNotPresent"` | The image pull policy for the controller |
 | image.pullSecrets | list | `[]` | The image pull secrets |

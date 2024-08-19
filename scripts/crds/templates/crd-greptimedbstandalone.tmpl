@@ -1,0 +1,19 @@
+{{- if .Values.crds.install }}
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    {{- if .Values.crds.keep }}
+    "helm.sh/resource-policy": keep
+    {{- end }}
+    {{- with .Values.crds.annotations }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+  labels:
+    {{- if .Values.crds.additionalLabels }}
+      {{- toYaml .Values.crds.additionalLabels | nindent 4 }}
+    {{- end }}
+  name: greptimedbstandalones.greptime.io
+spec:
+  ${{ spec }}
+{{- end }}
