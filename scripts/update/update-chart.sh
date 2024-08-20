@@ -29,13 +29,7 @@ function update_chart() {
   patch=$(echo "$current_version" | awk -F. '{print $3}')
 
   next_version="$major.$minor.$((patch + 1))"
-
-  if [[ "$CHART" == "greptimedb-operator" ]]; then
-    # The greptimedb-operator image tag not have 'v' prefix.
-    appVersion=$VERSION
-  else
-    appVersion=${VERSION#v}
-  fi
+  appVersion=${VERSION#v}
 
   yq eval ".appVersion = \"$appVersion\"" -i "$chart_file"
   yq eval ".version = \"$next_version\"" -i "$chart_file"
