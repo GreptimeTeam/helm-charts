@@ -28,14 +28,14 @@ jobs:
         with:
           wait: 120s
 
-      - name: Deploy greptimedb-cluster chart
+      - name: Deploy greptimedb-cluster
         if: ${{ github.event.inputs.chart == 'greptimedb-cluster' }}
         shell: bash
         run: |
-          ./scripts/deploy-greptimedb-cluster.sh
+          make e2e-greptimedb-cluster
 
-      - name: Deploy greptimedb-standalone chart
+      - name: Deploy greptimedb-standalone
         if: ${{ github.event.inputs.chart == 'greptimedb-standalone' }}
         shell: bash
         run: |
-          ./scripts/deploy-greptimedb-standalone.sh
+          make e2e-greptimedb-standalone

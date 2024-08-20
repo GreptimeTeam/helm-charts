@@ -23,10 +23,18 @@ check-docs: docs ## Check docs
     (echo "Need to update documentation, please run 'make docs'"; \
 	exit 1)
 
+.PHONY: e2e-greptimedb-cluster
+e2e-greptimedb-cluster: ## Run greptimedb-cluster e2e tests
+	./scripts/e2e/greptimedb-cluster.sh
+
+.PHONY: e2e-greptimedb-standalone
+e2e-greptimedb-standalone: ## Run greptimedb-standalone e2e tests
+	./scripts/e2e/greptimedb-standalone.sh
+
 .PHONY: e2e
 e2e: ## Run e2e tests
-	./scripts/deploy-greptimedb-cluster.sh
-	./scripts/deploy-greptimedb-standalone.sh
+	./scripts/e2e/greptimedb-cluster.sh
+	./scripts/e2e/greptimedb-standalone.sh
 
 .PHONY: update-crds
 update-crds: ## Run update crd
@@ -45,7 +53,7 @@ check-crds: update-crds ## Check crd
 # For example: make update-chart CHART=${CHART_NAME} VERSION=${IMAGE_TAG}
 # make update-chart CHART=greptimedb-standalone VERSION=v0.7.2
 # make update-chart CHART=greptimedb-cluster VERSION=v0.7.2
-# make update-chart CHART=greptimedb-operator VERSION=0.1.0-alpha.23  # [the greptimedb-operator image tag not have 'v' prefix]
+# make update-chart CHART=greptimedb-operator VERSION=v0.1.0-alpha.28
 .PHONY: update-chart
 update-chart: ## Run update chart
 	./scripts/update-chart.sh $(CHART) $(VERSION)
