@@ -51,7 +51,7 @@ jobs:
           OCI_REGISTRY_URL: ${{ vars.OCI_REGISTRY_URL }}
           OCI_NAMESPACE: ${{ vars.OCI_NAMESPACE }}
         run: |
-          ./scripts/release-charts-to-acr.sh
+          ./scripts/release/release-charts-to-acr.sh
 
   release-charts-to-s3:
     needs: [
@@ -79,4 +79,4 @@ jobs:
       - name: Release charts to S3
         shell: bash
         run: |
-          ./scripts/release-charts-to-s3.sh ${{ vars.AWS_RELEASE_BUCKET }}
+          ./scripts/release/release-charts-to-s3.sh ${{ vars.AWS_RELEASE_BUCKET }}
