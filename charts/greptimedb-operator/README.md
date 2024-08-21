@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.2.2](https://img.shields.io/badge/Version-0.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.29](https://img.shields.io/badge/AppVersion-0.1.0--alpha.29-informational?style=flat-square)
+![Version: 0.2.3](https://img.shields.io/badge/Version-0.2.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0-alpha.29](https://img.shields.io/badge/AppVersion-0.1.0--alpha.29-informational?style=flat-square)
 
 ## Source Code
 
@@ -40,13 +40,21 @@ helm upgrade \
   --version <chart-version>
 ```
 
-## Installation and upgrade of CRDs
+## How to Uninstall
+
+```console
+helm uninstall greptimedb-operator -n greptimedb-admin
+```
+
+## CRDs Management
+
+### Installation and Upgrade of the CRDs
 
 Helm cannot upgrade custom resource definitions in the `<chart>/crds` folder [by design](https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#some-caveats-and-explanations).
 
-**We support CRD installation and upgrade automatically using the chart for deployment convenience**. You can disable the CRD installation by using `--set crds.install=false` when installing the chart. When you uninstall the release, **it will not delete the CRDs by default**.
+For deployment convenience, we have decided to manage the CRDs using the Helm chart since **v0.2.1**. By default, the chart will automatically install or upgrade the CRDs. You can disable the behavior by using `--set crds.install=false` when installing the chart. When you uninstall the release, **it will not delete the CRDs by default** unless you use `--set crds.keep=false`.
 
-If the previous version of the chart already installs your CRDs, you have to modify some metadata of CRDs before installing the new version of the chart:
+If you installed the CRD using a chart version before v0.2.1 and  want to let the chart manage CRDs, you can add some necessary metadata for the original CRDs:
 
 ```console
 # Add the following labels to the CRDs.
@@ -72,13 +80,7 @@ If you want to upgrade CRDs manually, you can use the following steps (**ensure 
   make upgrade-crds CRDS_VERSION=latest
   ```
 
-## How to Uninstall
-
-```console
-helm uninstall greptimedb-operator -n greptimedb-admin
-```
-
-## How to Update the CRDs in the Chart
+### How to Update the CRDs in the Chart
 
 If you want to update the CRDs in the chart, you can use the following steps:
 
