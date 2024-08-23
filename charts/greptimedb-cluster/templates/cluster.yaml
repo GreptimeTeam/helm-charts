@@ -341,6 +341,17 @@ spec:
       {{- end }}
       {{- end }}
       {{- end }}
+    {{- else if .Values.objectStorage.gcs }}
+    gcs: {{- toYaml .Values.objectStorage.gcs | nindent 6 }}
+      {{- if .Values.objectStorage }}
+      {{- if .Values.objectStorage.credentials }}
+      {{- if .Values.objectStorage.credentials.existingSecretName }}
+      secretName: {{ .Values.objectStorage.credentials.existingSecretName }}
+      {{- else }}
+      secretName: {{ default "storage-credentials" .Values.objectStorage.credentials.secretName }}
+      {{- end }}
+      {{- end }}
+      {{- end }}
     {{- else }}
     {}
     {{- end }}
