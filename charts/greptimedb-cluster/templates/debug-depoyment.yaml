@@ -1,5 +1,5 @@
-{{- if .Values.debug }}
-{{- if .Values.debug.enabled }}
+{{- if .Values.debugPod }}
+{{- if .Values.debugPod.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,10 +18,10 @@ spec:
         app: {{ .Release.Name }}-debug-pod
     spec:
       containers:
-        - image: {{ printf "%s/%s:%s" .Values.debug.image.registry .Values.debug.image.repository .Values.debug.image.tag }}
+        - image: {{ printf "%s/%s:%s" .Values.debugPod.image.registry .Values.debugPod.image.repository .Values.debugPod.image.tag }}
           name: {{ .Release.Name }}-debug-pod
-          {{- if .Values.debug.resources }}
-          resources: {{ toYaml .Values.debug.resources | nindent 12 }}
+          {{- if .Values.debugPod.resources }}
+          resources: {{ toYaml .Values.debugPod.resources | nindent 12 }}
           {{- end }}
 {{- end }}
 {{- end }}

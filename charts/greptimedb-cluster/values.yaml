@@ -467,7 +467,7 @@ auth:
     - username: "admin"
       password: "admin"
 
-debug:
+debugPod:
   # -- Enable debug pod
   enabled: false
 
