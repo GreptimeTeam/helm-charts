@@ -3,23 +3,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-debug
+  name: {{ .Release.Name }}-debug-pod
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ .Release.Name }}-debug
+    app: {{ .Release.Name }}-debug-pod
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-debug
+      app: {{ .Release.Name }}-debug-pod
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-debug
+        app: {{ .Release.Name }}-debug-pod
     spec:
       containers:
         - image: {{ printf "%s/%s:%s" .Values.debug.image.registry .Values.debug.image.repository .Values.debug.image.tag }}
-          name: {{ .Release.Name }}-debug
+          name: {{ .Release.Name }}-debug-pod
           {{- if .Values.debug.resources }}
           resources: {{ toYaml .Values.debug.resources | nindent 12 }}
           {{- end }}
