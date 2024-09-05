@@ -1,0 +1,27 @@
+{{- if .Values.debugPod }}
+{{- if .Values.debugPod.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-debug-pod
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}-debug-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-debug-pod
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-debug-pod
+    spec:
+      containers:
+        - image: {{ printf "%s/%s:%s" .Values.debugPod.image.registry .Values.debugPod.image.repository .Values.debugPod.image.tag }}
+          name: {{ .Release.Name }}-debug-pod
+          {{- if .Values.debugPod.resources }}
+          resources: {{ toYaml .Values.debugPod.resources | nindent 12 }}
+          {{- end }}
+{{- end }}
+{{- end }}
