@@ -119,9 +119,9 @@ helm uninstall mycluster -n default
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
 | datanode.storage.storageSize | string | `"10Gi"` | Storage size for datanode persistent volume |
 | datanode.storage.walDir | string | `"/data/greptimedb/wal"` | The wal directory of the storage, default is "/data/greptimedb/wal" |
-| debug.enabled | bool | `false` | Enable debug pod |
-| debug.image | object | `{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20240905-67eaa147"}` | The debug pod image |
-| debug.resources | object | `{"limits":{"cpu":"200m","memory":"256Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | The debug pod resource |
+| debugPod.enabled | bool | `false` | Enable debug pod |
+| debugPod.image | object | `{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20240905-67eaa147"}` | The debug pod image |
+| debugPod.resources | object | `{"limits":{"cpu":"200m","memory":"256Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | The debug pod resource |
 | flownode | object | `{"configData":"","configFile":"","enabled":false,"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1}` | Flownode configure. **It's NOT READY YET** |
 | flownode.configData | string | `""` | Extra raw toml config data of flownode. Skip if the `configFile` is used. |
 | flownode.configFile | string | `""` | Extra toml file of flownode. |
