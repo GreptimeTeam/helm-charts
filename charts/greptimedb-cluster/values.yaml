@@ -14,7 +14,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: 0.1.0-alpha.28
+  tag: v0.1.0-alpha.29
 
 base:
   # -- The pod template for base
@@ -466,3 +466,22 @@ auth:
   users:
     - username: "admin"
       password: "admin"
+
+debug:
+  # -- Enable debug pod
+  enabled: false
+
+  # -- The debug pod image
+  image:
+    registry: docker.io
+    repository: greptime/greptime-tool
+    tag: "20240905-67eaa147"
+
+  # -- The debug pod resource
+  resources:
+    requests:
+      memory: 64Mi
+      cpu: 50m
+    limits:
+      memory: 256Mi
+      cpu: 200m
