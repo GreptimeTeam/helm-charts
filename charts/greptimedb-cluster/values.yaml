@@ -454,7 +454,7 @@ remoteWal:
     # -- The kafka broker endpoints
     brokerEndpoints: []
 
-# -- The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/clients/authentication#authentication).
+# -- The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/operations/authentication).
 auth:
   # -- Enable static auth
   enabled: false
