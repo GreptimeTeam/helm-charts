@@ -221,7 +221,7 @@ meta:
       annotations: {}
 
   # -- Meta etcd endpoints
-  etcdEndpoints: "etcd.default.svc.cluster.local:2379"
+  etcdEndpoints: "etcd.etcd-cluster.svc.cluster.local:2379"
 
   # -- Meta will store data with this key prefix
   storeKeyPrefix: ""
@@ -311,7 +311,10 @@ datanode:
     storageRetainPolicy: Retain
     # -- The dataHome directory, default is "/data/greptimedb/"
     dataHome: "/data/greptimedb"
+    # -- The data directory of the storage, default is "/data/greptimedb"
+    mountPath: "/data/greptimedb"
     # -- The wal directory of the storage, default is "/data/greptimedb/wal"
+    # -- deprecated
     walDir: "/data/greptimedb/wal"
 
 # -- Flownode configure. **It's NOT READY YET**

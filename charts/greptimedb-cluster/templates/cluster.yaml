@@ -248,11 +248,12 @@ spec:
       volumes: {{ .Values.datanode.podTemplate.volumes | toYaml | nindent 8 }}
       {{- end }}
     storage:
-      storageClassName: {{ .Values.datanode.storage.storageClassName }}
-      storageSize: {{ .Values.datanode.storage.storageSize }}
-      storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
       dataHome: {{ .Values.datanode.storage.dataHome }}
-      walDir: {{ .Values.datanode.storage.walDir }}
+      fs:
+        storageClassName: {{ .Values.datanode.storage.storageClassName }}
+        storageSize: {{ .Values.datanode.storage.storageSize }}
+        storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
+        mountPath: {{ .Values.datanode.storage.mountPath }}
   {{- if .Values.flownode.enabled }}
   flownode:
     replicas: {{ .Values.flownode.replicas }}
@@ -312,10 +313,10 @@ spec:
   {{- if (and .Values.prometheusMonitor (eq .Values.prometheusMonitor.enabled true ))}}
   prometheusMonitor: {{- toYaml .Values.prometheusMonitor | nindent 4 }}
   {{- end }}
-  httpServicePort: {{ .Values.httpServicePort }}
-  grpcServicePort: {{ .Values.grpcServicePort }}
-  mysqlServicePort: {{ .Values.mysqlServicePort }}
-  postgresServicePort: {{ .Values.postgresServicePort }}
+  httpPort: {{ .Values.httpServicePort }}
+  rpcPort: {{ .Values.grpcServicePort }}
+  mysqlPort: {{ .Values.mysqlServicePort }}
+  postgreSQLPort: {{ .Values.postgresServicePort }}
   initializer:
     image: '{{ .Values.initializer.registry }}/{{ .Values.initializer.repository }}:{{ .Values.initializer.tag }}'
   objectStorage:
@@ -356,7 +357,7 @@ spec:
     {}
     {{- end }}
   {{- if .Values.remoteWal.enabled }}
-  remoteWal:
+  wal:
   {{- if .Values.remoteWal.kafka }}
     kafka: {{- toYaml .Values.remoteWal.kafka | nindent 6 }}
   {{- end }}
