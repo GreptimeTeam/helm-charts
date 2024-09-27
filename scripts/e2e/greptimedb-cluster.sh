@@ -84,14 +84,16 @@ function deploy_greptimedb_operator() {
 }
 
 function deploy_etcd() {
-  helm upgrade --install etcd oci://registry-1.docker.io/bitnamicharts/etcd \
+  helm upgrade --install etcd \
+    oci://registry-1.docker.io/bitnamicharts/etcd \
     --set replicaCount=1 \
     --set auth.rbac.create=false \
     --set auth.rbac.token.enabled=false \
-    -n default
+    --create-namespace \
+    -n etcd-cluster
 
   # Wait for etcd to be ready
-  kubectl rollout status --timeout=120s statefulset/etcd -n default
+  kubectl rollout status --timeout=120s statefulset/etcd -n etcd-cluster
 }
 
 function mysql_test_greptimedb_cluster() {
