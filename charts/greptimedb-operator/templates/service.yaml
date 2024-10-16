@@ -1,0 +1,16 @@
+{{- if .Values.apiServer.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "greptimedb-operator.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: {{ include "greptimedb-operator.name" . }}
+  ports:
+  - name: http
+    port: {{ .Values.apiServer.port }}
+    protocol: TCP
+    targetPort: {{ .Values.apiServer.port }}
+{{- end }}

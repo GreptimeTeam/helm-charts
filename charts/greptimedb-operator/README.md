@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.2.5](https://img.shields.io/badge/Version-0.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0](https://img.shields.io/badge/AppVersion-0.1.0-informational?style=flat-square)
+![Version: 0.2.6](https://img.shields.io/badge/Version-0.2.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.1](https://img.shields.io/badge/AppVersion-0.1.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -101,6 +101,9 @@ Kubernetes: `>=1.18.0-0`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | The pod affinity |
+| apiServer | object | `{"enabled":false,"port":8081}` | The configuration for the operator API server |
+| apiServer.enabled | bool | `false` | Whether to enable the API server |
+| apiServer.port | int | `8081` | The port for the API server |
 | crds.additionalLabels | object | `{}` | Addtional labels to be added to all CRDs |
 | crds.annotations | object | `{}` | Annotations to be added to all CRDs |
 | crds.install | bool | `true` | Install and upgrade CRDs |
@@ -110,7 +113,7 @@ Kubernetes: `>=1.18.0-0`
 | image.pullSecrets | list | `[]` | The image pull secrets |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb-operator"` | The image repository |
-| image.tag | string | `"v0.1.0"` | The image tag |
+| image.tag | string | `"v0.1.1"` | The image tag |
 | nameOverride | string | `""` | String to partially override release template name |
 | nodeSelector | object | `{}` | The operator node selector |
 | rbac.create | bool | `true` | Install role based access control |
