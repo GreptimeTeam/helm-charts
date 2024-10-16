@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.16](https://img.shields.io/badge/Version-0.2.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.4](https://img.shields.io/badge/AppVersion-0.9.4-informational?style=flat-square)
+![Version: 0.2.17](https://img.shields.io/badge/Version-0.2.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.4](https://img.shields.io/badge/AppVersion-0.9.4-informational?style=flat-square)
 
 ## Source Code
 
@@ -92,9 +92,10 @@ helm uninstall mycluster -n default
 | base.podTemplate.nodeSelector | object | `{}` | The pod node selector |
 | base.podTemplate.serviceAccountName | string | `""` | The global service account |
 | base.podTemplate.tolerations | list | `[]` | The pod tolerations |
-| datanode | object | `{"configData":"","configFile":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":3,"storage":{"dataHome":"/data/greptimedb","mountPath":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"10Gi","walDir":"/data/greptimedb/wal"}}` | Datanode configure |
+| datanode | object | `{"configData":"","configFile":"","logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storage":{"dataHome":"/data/greptimedb","mountPath":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"10Gi","walDir":"/data/greptimedb/wal"}}` | Datanode configure |
 | datanode.configData | string | `""` | Extra raw toml config data of datanode. Skip if the `configFile` is used. |
 | datanode.configFile | string | `""` | Extra toml file of datanode. |
+| datanode.logging | object | `{}` | Logging configuration for datanode, if not set, it will use the global logging configuration. |
 | datanode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for datanode |
 | datanode.podTemplate.affinity | object | `{}` | The pod affinity |
 | datanode.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
@@ -113,7 +114,7 @@ helm uninstall mycluster -n default
 | datanode.podTemplate.serviceAccount.create | bool | `false` | Create a service account |
 | datanode.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | datanode.podTemplate.volumes | list | `[]` | The pod volumes |
-| datanode.replicas | int | `3` | Datanode replicas |
+| datanode.replicas | int | `1` | Datanode replicas |
 | datanode.storage.dataHome | string | `"/data/greptimedb"` | The dataHome directory, default is "/data/greptimedb/" |
 | datanode.storage.mountPath | string | `"/data/greptimedb"` | The data directory of the storage, default is "/data/greptimedb" |
 | datanode.storage.storageClassName | string | `nil` | Storage class for datanode persistent volume |
@@ -123,10 +124,11 @@ helm uninstall mycluster -n default
 | debugPod.enabled | bool | `false` | Enable debug pod |
 | debugPod.image | object | `{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20240905-67eaa147"}` | The debug pod image |
 | debugPod.resources | object | `{"limits":{"cpu":"200m","memory":"256Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | The debug pod resource |
-| flownode | object | `{"configData":"","configFile":"","enabled":false,"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1}` | Flownode configure. **It's NOT READY YET** |
+| flownode | object | `{"configData":"","configFile":"","enabled":false,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1}` | Flownode configure. **It's NOT READY YET** |
 | flownode.configData | string | `""` | Extra raw toml config data of flownode. Skip if the `configFile` is used. |
 | flownode.configFile | string | `""` | Extra toml file of flownode. |
 | flownode.enabled | bool | `false` | Enable flownode |
+| flownode.logging | object | `{}` | Logging configuration for flownode, if not set, it will use the global logging configuration. |
 | flownode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
 | flownode.podTemplate.affinity | object | `{}` | The pod affinity |
 | flownode.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
@@ -146,9 +148,10 @@ helm uninstall mycluster -n default
 | flownode.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | flownode.podTemplate.volumes | list | `[]` | The pod volumes |
 | flownode.replicas | int | `1` | Flownode replicas |
-| frontend | object | `{"configData":"","configFile":"","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{}}` | Frontend configure |
+| frontend | object | `{"configData":"","configFile":"","logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{}}` | Frontend configure |
 | frontend.configData | string | `""` | Extra raw toml config data of frontend. Skip if the `configFile` is used. |
 | frontend.configFile | string | `""` | Extra toml file of frontend. |
+| frontend.logging | object | `{}` | Logging configuration for frontend, if not set, it will use the global logging configuration. |
 | frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
 | frontend.podTemplate.affinity | object | `{}` | The pod affinity |
 | frontend.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
@@ -178,12 +181,19 @@ helm uninstall mycluster -n default
 | image.tag | string | `"v0.9.4"` | The image tag |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.1.0"` | Initializer image tag |
-| meta | object | `{"configData":"","configFile":"","enableRegionFailover":false,"etcdEndpoints":"etcd.etcd-cluster.svc.cluster.local:2379","podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"readinessProbe":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storeKeyPrefix":""}` | Meta configure |
+| initializer.tag | string | `"v0.1.1"` | Initializer image tag |
+| logging | object | `{"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false,"persistentWithData":false}` | Global logging configuration |
+| logging.format | string | `"text"` | The log format for greptimedb, only support "json" and "text" |
+| logging.level | string | `"info"` | The log level for greptimedb, only support "debug", "info", "warn", "debug" |
+| logging.logsDir | string | `"/data/greptimedb/logs"` | The logs directory for greptimedb |
+| logging.onlyLogToStdout | bool | `false` | Whether to log to stdout only |
+| logging.persistentWithData | bool | `false` | indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component. |
+| meta | object | `{"configData":"","configFile":"","enableRegionFailover":false,"etcdEndpoints":"etcd.etcd-cluster.svc.cluster.local:2379","logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"readinessProbe":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storeKeyPrefix":""}` | Meta configure |
 | meta.configData | string | `""` | Extra raw toml config data of meta. Skip if the `configFile` is used. |
 | meta.configFile | string | `""` | Extra toml file of meta. |
 | meta.enableRegionFailover | bool | `false` | Whether to enable region failover |
 | meta.etcdEndpoints | string | `"etcd.etcd-cluster.svc.cluster.local:2379"` | Meta etcd endpoints |
+| meta.logging | object | `{}` | Logging configuration for meta, if not set, it will use the global logging configuration. |
 | meta.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"readinessProbe":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for meta |
 | meta.podTemplate.affinity | object | `{}` | The pod affinity |
 | meta.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
@@ -204,6 +214,16 @@ helm uninstall mycluster -n default
 | meta.podTemplate.volumes | list | `[]` | The pod volumes |
 | meta.replicas | int | `1` | Meta replicas |
 | meta.storeKeyPrefix | string | `""` | Meta will store data with this key prefix |
+| monitoring | object | `{"enabled":false,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"vector":{"registry":"docker.io","repository":"timberio/vector","resource":{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"tag":"nightly-alpine"}}` | The monitoring bootstrap configuration |
+| monitoring.enabled | bool | `false` | Enable monitoring |
+| monitoring.logsCollection | object | `{"pipeline":{"data":""}}` | Configure the logs collection |
+| monitoring.logsCollection.pipeline | object | `{"data":""}` | The greptimedb pipeline for logs collection |
+| monitoring.standalone | object | `{}` | Configure the standalone instance for storing monitoring data |
+| monitoring.vector | object | `{"registry":"docker.io","repository":"timberio/vector","resource":{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"tag":"nightly-alpine"}` | Configure vector for logs and metrics collection. |
+| monitoring.vector.registry | string | `"docker.io"` | vector image registry |
+| monitoring.vector.repository | string | `"timberio/vector"` | vector image repository |
+| monitoring.vector.resource | object | `{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | vector resource |
+| monitoring.vector.tag | string | `"nightly-alpine"` | vector image tag |
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | objectStorage | object | `{"gcs":{},"oss":{},"s3":{}}` | Configure to object storage |
 | postgresServicePort | int | `4003` | GreptimeDB postgres service port |

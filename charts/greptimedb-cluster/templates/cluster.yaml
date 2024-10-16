@@ -129,6 +129,24 @@ spec:
           secretName: {{ .Release.Name }}-users-auth
       {{- end }}
       {{- end }}
+    {{- if .Values.frontend.logging }}
+    logging:
+      {{- if .Values.frontend.logging.level }}
+      level: {{ .Values.frontend.logging.level }}
+      {{- end }}
+      {{- if .Values.frontend.logging.format }}
+      format: {{ .Values.frontend.logging.format }}
+      {{- end }}
+      {{- if .Values.frontend.logging.logsDir }}
+      logsDir: {{ .Values.frontend.logging.logsDir }}
+      {{- end }}
+      {{- if .Values.frontend.logging.onlyLogToStdout }}
+      onlyLogToStdout: {{ .Values.frontend.logging.onlyLogToStdout }}
+      {{- end }}
+      {{- if .Values.frontend.logging.persistentWithData }}
+      persistentWithData: {{ .Values.frontend.logging.persistentWithData }}
+      {{- end }}
+    {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}
 {{- if or .Values.meta.configFile .Values.meta.configData }}
@@ -148,6 +166,24 @@ spec:
     {{- end }}
     {{- if .Values.meta.enableRegionFailover }}
     enableRegionFailover: {{ .Values.meta.enableRegionFailover }}
+    {{- end }}
+    {{- if .Values.meta.logging }}
+    logging:
+      {{- if .Values.meta.logging.level }}
+      level: {{ .Values.meta.logging.level }}
+      {{- end }}
+      {{- if .Values.meta.logging.format }}
+      format: {{ .Values.meta.logging.format }}
+      {{- end }}
+      {{- if .Values.meta.logging.logsDir }}
+      logsDir: {{ .Values.meta.logging.logsDir }}
+      {{- end }}
+      {{- if .Values.meta.logging.onlyLogToStdout }}
+      onlyLogToStdout: {{ .Values.meta.logging.onlyLogToStdout }}
+      {{- end }}
+      {{- if .Values.meta.logging.persistentWithData }}
+      persistentWithData: {{ .Values.meta.logging.persistentWithData }}
+      {{- end }}
     {{- end }}
     template:
       main:
@@ -247,6 +283,24 @@ spec:
       {{- if .Values.datanode.podTemplate.volumes}}
       volumes: {{ .Values.datanode.podTemplate.volumes | toYaml | nindent 8 }}
       {{- end }}
+    {{- if .Values.datanode.logging }}
+    logging:
+      {{- if .Values.datanode.logging.level }}
+      level: {{ .Values.datanode.logging.level }}
+      {{- end }}
+      {{- if .Values.datanode.logging.format }}
+      format: {{ .Values.datanode.logging.format }}
+      {{- end }}
+      {{- if .Values.datanode.logging.logsDir }}
+      logsDir: {{ .Values.datanode.logging.logsDir }}
+      {{- end }}
+      {{- if .Values.datanode.logging.onlyLogToStdout }}
+      onlyLogToStdout: {{ .Values.datanode.logging.onlyLogToStdout }}
+      {{- end }}
+      {{- if .Values.datanode.logging.persistentWithData }}
+      persistentWithData: {{ .Values.datanode.logging.persistentWithData }}
+      {{- end }}
+    {{- end }}
     storage:
       dataHome: {{ .Values.datanode.storage.dataHome }}
       fs:
@@ -306,9 +360,27 @@ spec:
       {{- if .Values.flownode.podTemplate.nodeSelector }}
       nodeSelector: {{ .Values.flownode.podTemplate.nodeSelector | toYaml | nindent 8 }}
       {{- end }}
-      {{- if .Values.flownode.podTemplate.volumes}}
+      {{- if .Values.flownode.podTemplate.volumes }}
       volumes: {{ .Values.flownode.podTemplate.volumes | toYaml | nindent 8 }}
       {{- end }}
+    {{- if .Values.flownode.logging }}
+    logging:
+      {{- if .Values.flownode.logging.level }}
+      level: {{ .Values.flownode.logging.level }}
+      {{- end }}
+      {{- if .Values.flownode.logging.format }}
+      format: {{ .Values.flownode.logging.format }}
+      {{- end }}
+      {{- if .Values.flownode.logging.logsDir }}
+      logsDir: {{ .Values.flownode.logging.logsDir }}
+      {{- end }}
+      {{- if .Values.flownode.logging.onlyLogToStdout }}
+      onlyLogToStdout: {{ .Values.flownode.logging.onlyLogToStdout }}
+      {{- end }}
+      {{- if .Values.flownode.logging.persistentWithData }}
+      persistentWithData: {{ .Values.flownode.logging.persistentWithData }}
+      {{- end }}
+    {{- end }}
   {{- end }}
   {{- if (and .Values.prometheusMonitor (eq .Values.prometheusMonitor.enabled true ))}}
   prometheusMonitor: {{- toYaml .Values.prometheusMonitor | nindent 4 }}
@@ -361,4 +433,41 @@ spec:
   {{- if .Values.remoteWal.kafka }}
     kafka: {{- toYaml .Values.remoteWal.kafka | nindent 6 }}
   {{- end }}
+  {{- end }}
+  {{- if .Values.monitoring.enabled }}
+  monitoring:
+    enabled: {{ .Values.monitoring.enabled }}
+    {{- if .Values.monitoring.standalone }}
+    standalone: {{ .Values.monitoring.standalone | toYaml | nindent 6 }}
+    {{- end }}
+    {{- if .Values.monitoring.logsCollection.pipeline.data }}
+    logsCollection:
+      pipeline:
+        data: {{ .Values.monitoring.logsCollection.pipeline.data }}
+    {{- end }}
+    {{- if .Values.monitoring.vector }}
+    vector:
+      image: '{{ .Values.monitoring.vector.registry }}/{{ .Values.monitoring.vector.repository }}:{{ .Values.monitoring.vector.tag }}'
+      {{- if .Values.monitoring.vector.resource }}
+      resource: {{- toYaml .Values.monitoring.vector.resource | nindent 8 }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  {{- if .Values.logging}}
+  logging:
+    {{- if .Values.logging.level }}
+    level: {{ .Values.logging.level }}
+    {{- end }}
+    {{- if .Values.logging.format }}
+    format: {{ .Values.logging.format }}
+    {{- end }}
+    {{- if .Values.logging.logsDir }}
+    logsDir: {{ .Values.logging.logsDir }}
+    {{- end }}
+    {{- if .Values.logging.onlyLogToStdout }}
+    onlyLogToStdout: {{ .Values.logging.onlyLogToStdout }}
+    {{- end }}
+    {{- if .Values.logging.persistentWithData }}
+    persistentWithData: {{ .Values.logging.persistentWithData }}
+    {{- end }}
   {{- end }}
