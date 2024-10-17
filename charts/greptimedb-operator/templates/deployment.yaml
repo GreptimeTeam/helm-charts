@@ -55,6 +55,10 @@ spec:
           periodSeconds: 10
         args:
           - --enable-leader-election
+          {{- if .Values.apiServer.enabled }}
+          - --enable-apiserver
+          - --apiserver-port={{ .Values.apiServer.port }}
+          {{- end }}
         command:
           - greptimedb-operator
         {{- if .Values.resources }}
