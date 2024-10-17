@@ -564,10 +564,52 @@ debugPod:
 # -- The monitoring bootstrap configuration
 monitoring:
   # -- Enable monitoring
-  enabled: false
+  enabled: true
 
   # -- Configure the standalone instance for storing monitoring data
   standalone: {}
+#    base:
+#      main:
+#        # -- The standalone image, if not set, it will use the cluster image.
+#        image: ""
+#
+#        resources:
+#          # -- The requested resources for monitoring
+#          requests: {}
+##            cpu: 500m
+##            memory: 512Mi
+#
+#          # -- The resources limits for monitoring
+#          limits: {}
+##            cpu: "1"
+##            memory: "1Gi"
+#
+#        # -- The environment variables for the container
+#        env: []
+#
+#        # -- The command to be executed in the container
+#        command: []
+#
+#        # -- The arguments to be passed to the command
+#        args: []
+#
+#      # -- The annotations to be created to the pod for monitoring
+#      annotations: {}
+#
+#      # -- The labels to be created to the pod for monitoring
+#      labels: {}
+#
+#      # -- The pod node selector for monitoring
+#      nodeSelector: {}
+#
+#      # -- The pod tolerations for monitoring
+#      tolerations: []
+#
+#      # -- The pod affinity for monitoring
+#      affinity: {}
+#
+#      # -- The global service account for monitoring
+#      serviceAccountName: ""
 
   # -- Configure the logs collection
   logsCollection:
