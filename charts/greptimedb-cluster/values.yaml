@@ -14,7 +14,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.1.0
+  tag: v0.1.1
 
 base:
   # -- The pod template for base
@@ -147,6 +147,24 @@ frontend:
   tls: {}
 #    secretName: greptimedb-frontend-tls
 
+  # -- Logging configuration for frontend, if not set, it will use the global logging configuration.
+  logging: {}
+
+#    # -- The log level for greptimedb, only support "debug", "info", "warn", "debug"
+#    level: "info"
+#
+#    # -- The log format for greptimedb, only support "json" and "text"
+#    format: "text"
+#
+#    # -- The logs directory for greptimedb
+#    logsDir: "/data/greptimedb/logs"
+#
+#    # -- Whether to log to stdout only
+#    onlyLogToStdout: false
+#
+#    # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
+#    persistentWithData: false
+
 # -- Meta configure
 meta:
   # -- Meta replicas
@@ -229,10 +247,28 @@ meta:
   # -- Whether to enable region failover
   enableRegionFailover: false
 
+  # -- Logging configuration for meta, if not set, it will use the global logging configuration.
+  logging: {}
+
+#    # -- The log level for greptimedb, only support "debug", "info", "warn", "debug"
+#    level: "info"
+#
+#    # -- The log format for greptimedb, only support "json" and "text"
+#    format: "text"
+#
+#    # -- The logs directory for greptimedb
+#    logsDir: "/data/greptimedb/logs"
+#
+#    # -- Whether to log to stdout only
+#    onlyLogToStdout: false
+#
+#    # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
+#    persistentWithData: false
+
 # -- Datanode configure
 datanode:
   # -- Datanode replicas
-  replicas: 3
+  replicas: 1
 
   # -- Extra toml file of datanode.
   configFile: ""
@@ -317,6 +353,24 @@ datanode:
     # -- deprecated
     walDir: "/data/greptimedb/wal"
 
+  # -- Logging configuration for datanode, if not set, it will use the global logging configuration.
+  logging: {}
+
+#    # -- The log level for greptimedb, only support "debug", "info", "warn", "debug"
+#    level: "info"
+#
+#    # -- The log format for greptimedb, only support "json" and "text"
+#    format: "text"
+#
+#    # -- The logs directory for greptimedb
+#    logsDir: "/data/greptimedb/logs"
+#
+#    # -- Whether to log to stdout only
+#    onlyLogToStdout: false
+#
+#    # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
+#    persistentWithData: false
+
 # -- Flownode configure. **It's NOT READY YET**
 flownode:
   # -- Enable flownode
@@ -330,6 +384,24 @@ flownode:
 
   # -- Extra raw toml config data of flownode. Skip if the `configFile` is used.
   configData: ""
+
+  # -- Logging configuration for flownode, if not set, it will use the global logging configuration.
+  logging: {}
+
+  #    # -- The log level for greptimedb, only support "debug", "info", "warn", "debug"
+  #    level: "info"
+  #
+  #    # -- The log format for greptimedb, only support "json" and "text"
+  #    format: "text"
+  #
+  #    # -- The logs directory for greptimedb
+  #    logsDir: "/data/greptimedb/logs"
+  #
+  #    # -- Whether to log to stdout only
+  #    onlyLogToStdout: false
+  #
+  #    # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
+  #    persistentWithData: false
 
   # -- The pod template for frontend
   podTemplate:
@@ -488,3 +560,94 @@ debugPod:
     limits:
       memory: 256Mi
       cpu: 200m
+
+# -- The monitoring bootstrap configuration
+monitoring:
+  # -- Enable monitoring
+  enabled: true
+
+  # -- Configure the standalone instance for storing monitoring data
+  standalone: {}
+#    base:
+#      main:
+#        # -- The standalone image, if not set, it will use the cluster image.
+#        image: ""
+#
+#        resources:
+#          # -- The requested resources for monitoring
+#          requests: {}
+##            cpu: 500m
+##            memory: 512Mi
+#
+#          # -- The resources limits for monitoring
+#          limits: {}
+##            cpu: "1"
+##            memory: "1Gi"
+#
+#        # -- The environment variables for the container
+#        env: []
+#
+#        # -- The command to be executed in the container
+#        command: []
+#
+#        # -- The arguments to be passed to the command
+#        args: []
+#
+#      # -- The annotations to be created to the pod for monitoring
+#      annotations: {}
+#
+#      # -- The labels to be created to the pod for monitoring
+#      labels: {}
+#
+#      # -- The pod node selector for monitoring
+#      nodeSelector: {}
+#
+#      # -- The pod tolerations for monitoring
+#      tolerations: []
+#
+#      # -- The pod affinity for monitoring
+#      affinity: {}
+#
+#      # -- The global service account for monitoring
+#      serviceAccountName: ""
+
+  # -- Configure the logs collection
+  logsCollection:
+    # -- The greptimedb pipeline for logs collection
+    pipeline:
+      data: ""
+
+  # -- Configure vector for logs and metrics collection.
+  vector:
+    # -- vector image registry
+    registry: docker.io
+    # -- vector image repository
+    repository: timberio/vector
+    # -- vector image tag
+    tag: nightly-alpine
+
+    # -- vector resource
+    resource:
+      requests:
+        cpu: "50m"
+        memory: "64Mi"
+      limits:
+        cpu: "50m"
+        memory: "64Mi"
+
+# -- Global logging configuration
+logging:
+  # -- The log level for greptimedb, only support "debug", "info", "warn", "debug"
+  level: "info"
+
+  # -- The log format for greptimedb, only support "json" and "text"
+  format: "text"
+
+  # -- The logs directory for greptimedb
+  logsDir: "/data/greptimedb/logs"
+
+  # -- Whether to log to stdout only
+  onlyLogToStdout: false
+
+  # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
+  persistentWithData: false
