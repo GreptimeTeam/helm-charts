@@ -54,6 +54,19 @@ base:
 #        # -- The failure threshold for the readiness probe
 #        failureThreshold: 3
 
+      # -- The config for liveness probe of the main container
+      livenessProbe: {}
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
+
     # -- The annotations to be created to the pod.
     annotations: {}
     # -- The labels to be created to the pod.
@@ -110,6 +123,19 @@ frontend:
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
+
+      # -- The config for liveness probe of the main container
+      livenessProbe: {}
 #        # -- The initial delay seconds for the readiness probe.
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
@@ -206,6 +232,32 @@ meta:
       # -- The pod volumeMounts
       volumeMounts: []
 
+      # -- The config for readiness probe of the main container
+      readinessProbe: {}
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
+
+      # -- The config for liveness probe of the main container
+      livenessProbe: {}
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
+
     # -- The annotations to be created to the pod.
     annotations: {}
     # -- The labels to be created to the pod.
@@ -218,19 +270,6 @@ meta:
     affinity: {}
     # -- The pod volumes
     volumes: []
-
-    # -- The config for readiness probe of the main container
-    readinessProbe: {}
-#      # -- The initial delay seconds for the readiness probe.
-#      initialDelaySeconds: 5
-#      # -- The timeout seconds for the readiness probe
-#      timeoutSeconds: 1
-#      # -- The period seconds for the readiness probe
-#      periodSeconds: 10
-#      # -- The success threshold for the readiness probe
-#      successThreshold: 1
-#      # -- The failure threshold for the readiness probe
-#      failureThreshold: 3
 
     serviceAccount:
       # -- Create a service account
@@ -308,6 +347,19 @@ datanode:
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
+
+      # -- The config for liveness probe of the main container
+      livenessProbe: {}
 #        # -- The initial delay seconds for the readiness probe.
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
@@ -435,6 +487,19 @@ flownode:
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
+
+      # -- The config for liveness probe of the main container
+      livenessProbe: {}
 #        # -- The initial delay seconds for the readiness probe.
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
