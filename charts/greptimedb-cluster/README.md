@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.18](https://img.shields.io/badge/Version-0.2.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.4](https://img.shields.io/badge/AppVersion-0.9.4-informational?style=flat-square)
+![Version: 0.2.19](https://img.shields.io/badge/Version-0.2.19-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.4](https://img.shields.io/badge/AppVersion-0.9.4-informational?style=flat-square)
 
 ## Source Code
 
@@ -181,7 +181,7 @@ helm uninstall mycluster -n default
 | image.tag | string | `"v0.9.4"` | The image tag |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.1.1"` | Initializer image tag |
+| initializer.tag | string | `"v0.1.2"` | Initializer image tag |
 | logging | object | `{"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false,"persistentWithData":false}` | Global logging configuration |
 | logging.format | string | `"text"` | The log format for greptimedb, only support "json" and "text" |
 | logging.level | string | `"info"` | The log level for greptimedb, only support "debug", "info", "warn", "debug" |
@@ -214,15 +214,15 @@ helm uninstall mycluster -n default
 | meta.podTemplate.volumes | list | `[]` | The pod volumes |
 | meta.replicas | int | `1` | Meta replicas |
 | meta.storeKeyPrefix | string | `""` | Meta will store data with this key prefix |
-| monitoring | object | `{"enabled":false,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"vector":{"registry":"docker.io","repository":"timberio/vector","resource":{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"tag":"nightly-alpine"}}` | The monitoring bootstrap configuration |
+| monitoring | object | `{"enabled":false,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"vector":{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"tag":"nightly-alpine"}}` | The monitoring bootstrap configuration |
 | monitoring.enabled | bool | `false` | Enable monitoring |
 | monitoring.logsCollection | object | `{"pipeline":{"data":""}}` | Configure the logs collection |
 | monitoring.logsCollection.pipeline | object | `{"data":""}` | The greptimedb pipeline for logs collection |
 | monitoring.standalone | object | `{}` | Configure the standalone instance for storing monitoring data |
-| monitoring.vector | object | `{"registry":"docker.io","repository":"timberio/vector","resource":{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"tag":"nightly-alpine"}` | Configure vector for logs and metrics collection. |
+| monitoring.vector | object | `{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"tag":"nightly-alpine"}` | Configure vector for logs and metrics collection. |
 | monitoring.vector.registry | string | `"docker.io"` | vector image registry |
 | monitoring.vector.repository | string | `"timberio/vector"` | vector image repository |
-| monitoring.vector.resource | object | `{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | vector resource |
+| monitoring.vector.resources | object | `{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | vector resource |
 | monitoring.vector.tag | string | `"nightly-alpine"` | vector image tag |
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | objectStorage | object | `{"gcs":{},"oss":{},"s3":{}}` | Configure to object storage |

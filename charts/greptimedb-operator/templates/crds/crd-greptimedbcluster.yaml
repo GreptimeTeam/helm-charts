@@ -17116,7 +17116,7 @@ spec:
                       properties:
                         image:
                           type: string
-                        resource:
+                        resources:
                           properties:
                             claims:
                               items:
