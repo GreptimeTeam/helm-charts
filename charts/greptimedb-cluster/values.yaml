@@ -564,7 +564,7 @@ debugPod:
 # -- The monitoring bootstrap configuration
 monitoring:
   # -- Enable monitoring
-  enabled: true
+  enabled: false
 
   # -- Configure the standalone instance for storing monitoring data
   standalone: {}

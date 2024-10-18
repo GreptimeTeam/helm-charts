@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.17](https://img.shields.io/badge/Version-0.2.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.4](https://img.shields.io/badge/AppVersion-0.9.4-informational?style=flat-square)
+![Version: 0.2.18](https://img.shields.io/badge/Version-0.2.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.4](https://img.shields.io/badge/AppVersion-0.9.4-informational?style=flat-square)
 
 ## Source Code
 
@@ -214,8 +214,8 @@ helm uninstall mycluster -n default
 | meta.podTemplate.volumes | list | `[]` | The pod volumes |
 | meta.replicas | int | `1` | Meta replicas |
 | meta.storeKeyPrefix | string | `""` | Meta will store data with this key prefix |
-| monitoring | object | `{"enabled":true,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"vector":{"registry":"docker.io","repository":"timberio/vector","resource":{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"tag":"nightly-alpine"}}` | The monitoring bootstrap configuration |
-| monitoring.enabled | bool | `true` | Enable monitoring |
+| monitoring | object | `{"enabled":false,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"vector":{"registry":"docker.io","repository":"timberio/vector","resource":{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"tag":"nightly-alpine"}}` | The monitoring bootstrap configuration |
+| monitoring.enabled | bool | `false` | Enable monitoring |
 | monitoring.logsCollection | object | `{"pipeline":{"data":""}}` | Configure the logs collection |
 | monitoring.logsCollection.pipeline | object | `{"data":""}` | The greptimedb pipeline for logs collection |
 | monitoring.standalone | object | `{}` | Configure the standalone instance for storing monitoring data |
