@@ -14,7 +14,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.1.1
+  tag: v0.1.2
 
 base:
   # -- The pod template for base
@@ -627,7 +627,7 @@ monitoring:
     tag: nightly-alpine
 
     # -- vector resource
-    resource:
+    resources:
       requests:
         cpu: "50m"
         memory: "64Mi"
