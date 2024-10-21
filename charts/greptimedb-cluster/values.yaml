@@ -43,7 +43,12 @@ base:
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
-#        # -- The initial delay seconds for the readiness probe.
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
+#        # -- The initial delay seconds for the readiness probe
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
 #        timeoutSeconds: 1
@@ -56,6 +61,11 @@ base:
 
       # -- The config for liveness probe of the main container
       livenessProbe: {}
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
 #        # -- The initial delay seconds for the readiness probe.
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
@@ -123,6 +133,11 @@ frontend:
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
 #        # -- The initial delay seconds for the readiness probe.
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
@@ -136,6 +151,11 @@ frontend:
 
       # -- The config for liveness probe of the main container
       livenessProbe: {}
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
 #        # -- The initial delay seconds for the readiness probe.
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
@@ -234,6 +254,11 @@ meta:
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
 #        # -- The initial delay seconds for the readiness probe.
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
@@ -247,6 +272,11 @@ meta:
 
       # -- The config for liveness probe of the main container
       livenessProbe: {}
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
 #        # -- The initial delay seconds for the readiness probe.
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
@@ -347,6 +377,11 @@ datanode:
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
 #        # -- The initial delay seconds for the readiness probe.
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
@@ -360,6 +395,11 @@ datanode:
 
       # -- The config for liveness probe of the main container
       livenessProbe: {}
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
 #        # -- The initial delay seconds for the readiness probe.
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
@@ -487,6 +527,11 @@ flownode:
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
 #        # -- The initial delay seconds for the readiness probe.
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
@@ -500,6 +545,11 @@ flownode:
 
       # -- The config for liveness probe of the main container
       livenessProbe: {}
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
 #        # -- The initial delay seconds for the readiness probe.
 #        initialDelaySeconds: 5
 #        # -- The timeout seconds for the readiness probe
