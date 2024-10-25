@@ -9,4 +9,5 @@ metadata:
 data:
   config.toml: |
 {{ .Values.configToml | indent 4 }}
+{{ include "greptimedb-standalone.objectStorageConfig" . | indent 4 }}
 {{- end -}}
