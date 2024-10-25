@@ -90,9 +90,7 @@ Create the name of the service account to use
   bucket = "{{ $bucket }}"
 
   # Root path within the bucket
-  {{- if $root }}
   root = "{{ $root }}"
-  {{- end }}
 
 {{- if .Values.objectStorage.s3 }}
   endpoint = "{{ .Values.objectStorage.s3.endpoint }}"

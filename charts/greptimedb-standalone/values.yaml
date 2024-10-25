@@ -1,4 +1,3 @@
-
 image:
   # -- The image registry
   registry: docker.io
