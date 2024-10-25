@@ -97,7 +97,11 @@ spec:
           {{- if .Values.objectStorage.credentials }}
           envFrom:
             - secretRef:
+                {{- if .Values.objectStorage.credentials.existingSecretName }}
+                name: {{ .Values.objectStorage.credentials.existingSecretName }}
+                {{- else }}
                 name: {{ .Release.Name }}-secret
+                {{- end }}
           {{- end }}
           {{- end }}
           {{- with .Values.securityContext }}

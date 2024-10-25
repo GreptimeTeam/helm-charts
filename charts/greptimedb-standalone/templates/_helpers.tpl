@@ -60,3 +60,25 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "greptimedb-standalone.objectStorageConfig" -}}
+{{- if or .Values.objectStorage.s3 .Values.objectStorage.oss .Values.objectStorage.gcs }}
+[storage]
+type = "{{- if .Values.objectStorage.s3 }}S3{{- else if .Values.objectStorage.oss }}Oss{{- else if .Values.objectStorage.gcs }}Gcs{{- end }}"
+
+bucket = "{{- if .Values.objectStorage.s3 }}{{ .Values.objectStorage.s3.bucket }}{{- else if .Values.objectStorage.oss }}{{ .Values.objectStorage.oss.bucket }}{{- else if .Values.objectStorage.gcs }}{{ .Values.objectStorage.gcs.bucket }}{{- end }}"
+
+root = "{{- if .Values.objectStorage.s3 }}{{ .Values.objectStorage.s3.root }}{{- else if .Values.objectStorage.oss }}{{ .Values.objectStorage.oss.root }}{{- else if .Values.objectStorage.gcs }}{{ .Values.objectStorage.gcs.root }}{{- end }}"
+
+{{- if .Values.objectStorage.s3 }}
+endpoint = "{{ .Values.objectStorage.s3.endpoint }}"
+region = "{{ .Values.objectStorage.s3.region }}"
+{{- else if .Values.objectStorage.oss }}
+endpoint = "{{ .Values.objectStorage.oss.endpoint }}"
+region = "{{ .Values.objectStorage.oss.region }}"
+{{- else if .Values.objectStorage.gcs }}
+endpoint = "{{ .Values.objectStorage.gcs.endpoint }}"
+scope = "{{ .Values.objectStorage.gcs.scope }}"
+{{- end }}
+{{- end }}
+{{- end }}

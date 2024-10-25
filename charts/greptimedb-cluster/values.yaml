@@ -602,10 +602,16 @@ prometheusMonitor:
 # -- Configure to object storage
 objectStorage:
 #  credentials:
+#    secretName: ""
+
+#    # AWS or AliCloud cloudProvider accessKeyID and secretAccessKey
 #    accessKeyId: "you-should-set-the-access-key-id-here"
 #    secretAccessKey: "you-should-set-the-secret-access-key-here"
+
+#    # GCP cloudProvider serviceAccountKey JSON-formatted base64 value
 #    serviceAccountKey: "you-should-set-the-base64-service-account-key-here"
-#    secretName: ""
+
+#    # Set the existing secret to get the key's of cloudProvider
 #    existingSecretName: ""
 
   # configure to use s3 storage.
@@ -629,7 +635,7 @@ objectStorage:
   # configure to use gcs storage
   gcs: {}
   #  bucket: "bucket-name"
-  #  Scope: "" # example: "https://www.googleapis.com/auth/devstorage.read_write"
+  #  scope: "" # example: "https://www.googleapis.com/auth/devstorage.read_write"
 
   #  # The data directory in gcs will be: 'gcs://<bucket>/<root>/data/...'.
   #  root: "mycluster"
