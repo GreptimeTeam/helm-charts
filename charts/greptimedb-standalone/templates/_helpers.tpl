@@ -63,22 +63,47 @@ Create the name of the service account to use
 
 {{- define "greptimedb-standalone.objectStorageConfig" -}}
 {{- if or .Values.objectStorage.s3 .Values.objectStorage.oss .Values.objectStorage.gcs }}
-[storage]
-type = "{{- if .Values.objectStorage.s3 }}S3{{- else if .Values.objectStorage.oss }}Oss{{- else if .Values.objectStorage.gcs }}Gcs{{- end }}"
-
-bucket = "{{- if .Values.objectStorage.s3 }}{{ .Values.objectStorage.s3.bucket }}{{- else if .Values.objectStorage.oss }}{{ .Values.objectStorage.oss.bucket }}{{- else if .Values.objectStorage.gcs }}{{ .Values.objectStorage.gcs.bucket }}{{- end }}"
-
-root = "{{- if .Values.objectStorage.s3 }}{{ .Values.objectStorage.s3.root }}{{- else if .Values.objectStorage.oss }}{{ .Values.objectStorage.oss.root }}{{- else if .Values.objectStorage.gcs }}{{ .Values.objectStorage.gcs.root }}{{- end }}"
+{{- $provider := "" }}
+{{- $bucket := "" }}
+{{- $root := "" }}
 
 {{- if .Values.objectStorage.s3 }}
-endpoint = "{{ .Values.objectStorage.s3.endpoint }}"
-region = "{{ .Values.objectStorage.s3.region }}"
+  {{- $provider = "S3" }}
+  {{- $bucket = .Values.objectStorage.s3.bucket }}
+  {{- $root = .Values.objectStorage.s3.root }}
 {{- else if .Values.objectStorage.oss }}
-endpoint = "{{ .Values.objectStorage.oss.endpoint }}"
-region = "{{ .Values.objectStorage.oss.region }}"
+  {{- $provider = "Oss" }}
+  {{- $bucket = .Values.objectStorage.oss.bucket }}
+  {{- $root = .Values.objectStorage.oss.root }}
 {{- else if .Values.objectStorage.gcs }}
-endpoint = "{{ .Values.objectStorage.gcs.endpoint }}"
-scope = "{{ .Values.objectStorage.gcs.scope }}"
+  {{- $provider = "Gcs" }}
+  {{- $bucket = .Values.objectStorage.gcs.bucket }}
+  {{- $root = .Values.objectStorage.gcs.root }}
+{{- end }}
+
+{{- if and $provider $bucket }}
+[storage]
+  # Storage provider type: S3, Oss, or Gcs
+  type = "{{ $provider }}"
+
+  # Bucket name in the storage provider
+  bucket = "{{ $bucket }}"
+
+  # Root path within the bucket
+  {{- if $root }}
+  root = "{{ $root }}"
+  {{- end }}
+
+{{- if .Values.objectStorage.s3 }}
+  endpoint = "{{ .Values.objectStorage.s3.endpoint }}"
+  region = "{{ .Values.objectStorage.s3.region }}"
+{{- else if .Values.objectStorage.oss }}
+  endpoint = "{{ .Values.objectStorage.oss.endpoint }}"
+  region = "{{ .Values.objectStorage.oss.region }}"
+{{- else if .Values.objectStorage.gcs }}
+  endpoint = "{{ .Values.objectStorage.gcs.endpoint }}"
+  scope = "{{ .Values.objectStorage.gcs.scope }}"
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
