@@ -1,3 +1,4 @@
+
 image:
   # -- The image registry
   registry: docker.io
@@ -41,16 +42,21 @@ dataHome: "/data/greptimedb/"
 
 # -- Configure to object storage
 objectStorage:
-#  credentials:
-#    # AWS or AliCloud cloudProvider accessKeyID and secretAccessKey
-#    accessKeyId: "you-should-set-the-access-key-id-here"
-#    secretAccessKey: "you-should-set-the-secret-access-key-here"
+  #  credentials:
+  #    # AWS or AliCloud cloudProvider accessKeyID
+  #    accessKeyId: "you-should-set-the-access-key-id-here"
 
-#    # GCP cloudProvider serviceAccountKey JSON-formatted base64 value
-#    serviceAccountKey: "you-should-set-the-base64-service-account-key-here"
+  #    # AWS cloudProvider secretAccessKey
+  #    secretAccessKey: "you-should-set-the-secret-access-key-here"
 
-#    # Set the existing secret to get the key's of cloudProvider
-#    existingSecretName: ""
+  #    # AliCloud cloudProvider secretAccessKey
+  #    accessKeySecret: "you-should-set-the-access-key-secret-here"
+
+  #    # GCP cloudProvider serviceAccountKey JSON-formatted base64 value
+  #    serviceAccountKey: "you-should-set-the-base64-service-account-key-here"
+
+  #    # Set the existing secret to get the key's of cloudProvider
+  #    existingSecretName: ""
 
   # configure to use s3 storage
   s3: {}
@@ -76,7 +82,7 @@ objectStorage:
   #  scope: "" # example: "https://www.googleapis.com/auth/devstorage.read_write"
 
   #  # The data directory in gcs will be: 'gcs://<bucket>/<root>/data/...'.
-  #  root: "mycluster"
+  #  root: "greptimedb-standalone"
   #  endpoint: "https://storage.googleapis.com"
 
 # -- Environment variables
