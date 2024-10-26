@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.23](https://img.shields.io/badge/Version-0.2.23-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.5](https://img.shields.io/badge/AppVersion-0.9.5-informational?style=flat-square)
+![Version: 0.2.24](https://img.shields.io/badge/Version-0.2.24-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.5](https://img.shields.io/badge/AppVersion-0.9.5-informational?style=flat-square)
 
 ## Source Code
 
@@ -68,6 +68,12 @@ If you set `storage.s3.root` as `mycluser`, then the data layout will be:
 ```console
 helm uninstall mycluster -n default
 ```
+
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://grafana.github.io/helm-charts | grafana | 8.5.8 |
 
 ## Values
 
@@ -177,6 +183,27 @@ helm uninstall mycluster -n default
 | frontend.replicas | int | `1` | Frontend replicas |
 | frontend.service | object | `{}` | Frontend service |
 | frontend.tls | object | `{}` | Frontend tls configure |
+| grafana | object | `{"adminPassword":"gt-operator","adminUser":"admin","dashboardProviders":{"dashboardproviders.yaml":{"apiVersion":1,"providers":[{"disableDeletion":false,"editable":true,"name":"greptimedb-cluster-metrics","options":{"path":"/var/lib/grafana/dashboards/greptimedb-cluster-metrics"},"orgId":1,"type":"file"},{"disableDeletion":false,"editable":true,"name":"greptimedb-cluster-logs","options":{"path":"/var/lib/grafana/dashboards/greptimedb-cluster-logs"},"orgId":1,"type":"file"},{"disableDeletion":false,"editable":true,"name":"greptimedb-cluster-slow-queries","options":{"path":"/var/lib/grafana/dashboards/greptimedb-cluster-slow-queries"},"orgId":1,"type":"file"}]}},"dashboardsConfigMaps":{"greptimedb-cluster-logs":"greptimedb-cluster-logs-dashboard","greptimedb-cluster-metrics":"greptimedb-cluster-metrics-dashboard","greptimedb-cluster-slow-queries":"greptimedb-cluster-slow-queries-dashboard"},"datasources":{"datasources.yaml":{"datasources":[{"access":"proxy","isDefault":true,"name":"greptimedb-metrics","type":"prometheus","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus"},{"access":"proxy","database":"public","name":"greptimedb-logs","type":"mysql","url":"mycluster-monitor-standalone.default.svc.cluster.local:4002"}]}},"enabled":false,"image":{"registry":"docker.io","repository":"grafana/grafana","tag":"11.1.3"},"initChownData":{"enabled":false},"persistence":{"accessModes":["ReadWriteOnce"],"enabled":true,"size":"10Gi"},"service":{"annotations":{},"enabled":true,"type":"ClusterIP"}}` | Deploy grafana for monitoring. |
+| grafana.adminPassword | string | `"gt-operator"` | The default admin password for grafana. |
+| grafana.adminUser | string | `"admin"` | The default admin username for grafana. |
+| grafana.dashboardProviders | object | `{"dashboardproviders.yaml":{"apiVersion":1,"providers":[{"disableDeletion":false,"editable":true,"name":"greptimedb-cluster-metrics","options":{"path":"/var/lib/grafana/dashboards/greptimedb-cluster-metrics"},"orgId":1,"type":"file"},{"disableDeletion":false,"editable":true,"name":"greptimedb-cluster-logs","options":{"path":"/var/lib/grafana/dashboards/greptimedb-cluster-logs"},"orgId":1,"type":"file"},{"disableDeletion":false,"editable":true,"name":"greptimedb-cluster-slow-queries","options":{"path":"/var/lib/grafana/dashboards/greptimedb-cluster-slow-queries"},"orgId":1,"type":"file"}]}}` | The grafana dashboard providers. |
+| grafana.dashboardsConfigMaps | object | `{"greptimedb-cluster-logs":"greptimedb-cluster-logs-dashboard","greptimedb-cluster-metrics":"greptimedb-cluster-metrics-dashboard","greptimedb-cluster-slow-queries":"greptimedb-cluster-slow-queries-dashboard"}` | The grafana dashboards configmaps that will be created to store the dashboards. |
+| grafana.datasources | object | `{"datasources.yaml":{"datasources":[{"access":"proxy","isDefault":true,"name":"greptimedb-metrics","type":"prometheus","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus"},{"access":"proxy","database":"public","name":"greptimedb-logs","type":"mysql","url":"mycluster-monitor-standalone.default.svc.cluster.local:4002"}]}}` | The grafana datasources. |
+| grafana.enabled | bool | `false` | Enable grafana deployment. It needs to enable monitoring `monitoring.enabled: true` first. |
+| grafana.image | object | `{"registry":"docker.io","repository":"grafana/grafana","tag":"11.1.3"}` | The grafana image. |
+| grafana.image.registry | string | `"docker.io"` | The grafana image registry. |
+| grafana.image.repository | string | `"grafana/grafana"` | The grafana image repository. |
+| grafana.image.tag | string | `"11.1.3"` | The grafana image tag. |
+| grafana.initChownData | object | `{"enabled":false}` | Init chown data for grafana. |
+| grafana.initChownData.enabled | bool | `false` | Enable init chown data for grafana. |
+| grafana.persistence | object | `{"accessModes":["ReadWriteOnce"],"enabled":true,"size":"10Gi"}` | The grafana persistence configuration. |
+| grafana.persistence.accessModes | list | `["ReadWriteOnce"]` | The access modes for the grafana persistence. |
+| grafana.persistence.enabled | bool | `true` | Whether to enable the persistence for grafana. |
+| grafana.persistence.size | string | `"10Gi"` | The storage size for the grafana persistence. |
+| grafana.service | object | `{"annotations":{},"enabled":true,"type":"ClusterIP"}` | The grafana service configuration. |
+| grafana.service.annotations | object | `{}` | The annotations for the grafana service. |
+| grafana.service.enabled | bool | `true` | Whether to create the service for grafana. |
+| grafana.service.type | string | `"ClusterIP"` | The type of the service. |
 | grpcServicePort | int | `4001` | GreptimeDB grpc service port |
 | httpServicePort | int | `4000` | GreptimeDB http service port |
 | image.pullSecrets | list | `[]` | The image pull secrets |
