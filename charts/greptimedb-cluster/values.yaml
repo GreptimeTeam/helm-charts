@@ -772,3 +772,96 @@ logging:
 
   # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
   persistentWithData: false
+
+# -- Deploy grafana for monitoring.
+grafana:
+  # -- Enable grafana deployment. It needs to enable monitoring `monitoring.enabled: true` first.
+  enabled: false
+
+  # -- The default admin username for grafana.
+  adminUser: admin
+
+  # -- The default admin password for grafana.
+  adminPassword: gt-operator
+
+  # -- The grafana image.
+  image:
+    # -- The grafana image registry.
+    registry: docker.io
+    # -- The grafana image repository.
+    repository: grafana/grafana
+    # -- The grafana image tag.
+    tag: 11.1.3
+
+  # -- The grafana dashboard providers.
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+        - name: greptimedb-cluster-metrics
+          orgId: 1
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/greptimedb-cluster-metrics
+        - name: greptimedb-cluster-logs
+          orgId: 1
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/greptimedb-cluster-logs
+        - name: greptimedb-cluster-slow-queries
+          orgId: 1
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/greptimedb-cluster-slow-queries
+
+  # -- The grafana dashboards configmaps that will be created to store the dashboards.
+  dashboardsConfigMaps:
+    greptimedb-cluster-metrics: greptimedb-cluster-metrics-dashboard
+    greptimedb-cluster-logs: greptimedb-cluster-logs-dashboard
+    greptimedb-cluster-slow-queries: greptimedb-cluster-slow-queries-dashboard
+
+  # -- The grafana datasources.
+  datasources:
+    datasources.yaml:
+      datasources:
+        - name: greptimedb-metrics
+          type: prometheus
+          url: http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus
+          access: proxy
+          isDefault: true
+
+        - name: greptimedb-logs
+          type: mysql
+          url: mycluster-monitor-standalone.default.svc.cluster.local:4002
+          access: proxy
+          database: public
+
+  # -- Init chown data for grafana.
+  initChownData:
+    # -- Enable init chown data for grafana.
+    enabled: false
+
+  # -- The grafana persistence configuration.
+  persistence:
+    # -- Whether to enable the persistence for grafana.
+    enabled: true
+    # -- The access modes for the grafana persistence.
+    accessModes:
+      - ReadWriteOnce
+    # -- The storage size for the grafana persistence.
+    size: 10Gi
+
+  # -- The grafana service configuration.
+  service:
+    # -- Whether to create the service for grafana.
+    enabled: true
+    # -- The type of the service.
+    type: ClusterIP
+    # -- The annotations for the grafana service.
+    annotations: {}
