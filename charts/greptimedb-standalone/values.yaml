@@ -157,6 +157,11 @@ affinity: {}
 # -- Grace period to allow the single binary to shut down before it is killed
 terminationGracePeriodSeconds: 30
 
+# -- PersistentVolumeClaimRetentionPolicyType is a string enumeration of the policies that will determine, when volumes from the VolumeClaimTemplates will be deleted when the controlling StatefulSet is deleted or scaled down.
+persistentVolumeClaimRetentionPolicy:
+  whenDeleted: Retain
+  whenScaled: Retain
+
 persistence:
   # -- Enable persistent disk
   enabled: true

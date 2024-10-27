@@ -19,8 +19,8 @@ spec:
   serviceName: {{ include "greptimedb-standalone.fullname" . }}
   {{- if and (semverCompare ">= 1.23-0" .Capabilities.KubeVersion.Version) (.Values.persistence.enableStatefulSetAutoDeletePVC) (.Values.persistence.enabled) }}
   persistentVolumeClaimRetentionPolicy:
-    whenDeleted: Delete
-    whenScaled: Delete
+    whenDeleted: {{ .Values.persistentVolumeClaimRetentionPolicy.whenDeleted }}
+    whenScaled: {{ .Values.persistentVolumeClaimRetentionPolicy.whenScaled }}
   {{- end }}
   selector:
     matchLabels:
