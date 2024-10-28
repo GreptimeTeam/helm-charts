@@ -41,21 +41,21 @@ dataHome: "/data/greptimedb/"
 
 # -- Configure to object storage
 objectStorage:
-  #  credentials:
-  #    # AWS or AliCloud cloudProvider accessKeyID
-  #    accessKeyId: "you-should-set-the-access-key-id-here"
+#  credentials:
+#    # AWS or AliCloud cloudProvider accessKeyID
+#    accessKeyId: "you-should-set-the-access-key-id-here"
 
-  #    # AWS cloudProvider secretAccessKey
-  #    secretAccessKey: "you-should-set-the-secret-access-key-here"
+#    # AWS cloudProvider secretAccessKey
+#    secretAccessKey: "you-should-set-the-secret-access-key-here"
 
-  #    # AliCloud cloudProvider secretAccessKey
-  #    accessKeySecret: "you-should-set-the-access-key-secret-here"
+#    # AliCloud cloudProvider secretAccessKey
+#    accessKeySecret: "you-should-set-the-access-key-secret-here"
 
-  #    # GCP cloudProvider serviceAccountKey JSON-formatted base64 value
-  #    serviceAccountKey: "you-should-set-the-base64-service-account-key-here"
+#    # GCP cloudProvider serviceAccountKey JSON-formatted base64 value
+#    serviceAccountKey: "you-should-set-the-base64-service-account-key-here"
 
-  #    # Set the existing secret to get the key's of cloudProvider
-  #    existingSecretName: ""
+#    # Set the existing secret to get the key's of cloudProvider
+#    existingSecretName: ""
 
   # configure to use s3 storage
   s3: {}
