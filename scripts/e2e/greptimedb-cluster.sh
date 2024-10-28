@@ -53,7 +53,7 @@ function drop_table() {
 
 function deploy_greptimedb_cluster() {
   # Handle greptimedb-cluster dependencies.
-  helm repo add grafana https://grafana.github.io/helm-charts
+  helm repo add grafana https://grafana.github.io/helm-charts --force-update
   helm dependency build charts/greptimedb-cluster
 
   # Deploy greptimedb cluster.
