@@ -5,6 +5,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      release-charts-to-acr:
+        description: Release the Helm charts to ACR
+        required: false
+        default: 'false'
 
 jobs:
   release:
@@ -39,6 +44,7 @@ jobs:
 
   release-charts-to-acr:
     runs-on: ubuntu-latest
+    if: ${{ inputs.release-charts-to-acr == 'true' || github.event_name == 'push' }}
     steps:
       - name: Check out code
         uses: actions/checkout@v4
