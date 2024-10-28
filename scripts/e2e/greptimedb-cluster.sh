@@ -52,7 +52,12 @@ function drop_table() {
 }
 
 function deploy_greptimedb_cluster() {
-  helm upgrade --install mycluster greptimedb-cluster -n default
+  # Handle greptimedb-cluster dependencies.
+  helm repo add grafana https://grafana.github.io/helm-charts
+  helm dependency build charts/greptimedb-cluster
+
+  # Deploy greptimedb cluster.
+  helm upgrade --install mycluster charts/greptimedb-cluster -n default
 
   timeout=300
   sleep_interval=5
@@ -76,8 +81,7 @@ function deploy_greptimedb_cluster() {
 }
 
 function deploy_greptimedb_operator() {
-  cd charts
-  helm upgrade --install greptimedb-operator greptimedb-operator -n default
+  helm upgrade --install greptimedb-operator charts/greptimedb-operator -n default
 
   # Wait for greptimedb operator to be ready
   kubectl rollout status --timeout=60s deployment/greptimedb-operator -n default
