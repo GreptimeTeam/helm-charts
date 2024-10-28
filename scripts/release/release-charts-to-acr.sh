@@ -22,7 +22,7 @@ for dir in "$CHARTS_DIR"/*; do
     helm package "$dir" --destination "$dir"
 
     # Get the packaged chart file path.
-    packaged_file=$(find "$dir" -type f -name "*.tgz" ! -name "grafana-*.tgz")
+    packaged_file=$(find "$dir" -type f -name "${chart_name}-*.tgz" -print -quit)
 
     echo "Package $chart_name to $packaged_file and push to oci://$OCI_REGISTRY_URL/$OCI_NAMESPACE/$chart_name ..."
 
