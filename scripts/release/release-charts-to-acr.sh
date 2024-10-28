@@ -4,7 +4,7 @@ OCI_REGISTRY_URL=${OCI_REGISTRY_URL:-"greptime-registry.cn-hangzhou.cr.aliyuncs.
 OCI_NAMESPACE=${OCI_NAMESPACE:-"charts"}
 CHARTS_DIR="charts"
 
-for dir in "$CHARTS_DIR"/*/; do
+for dir in "$CHARTS_DIR"/*; do
   # Ensure the directory exists and is not empty.
   if [ -d "$dir" ]; then
     # Get the chart name from the directory path.
@@ -22,7 +22,7 @@ for dir in "$CHARTS_DIR"/*/; do
     helm package "$dir" --destination "$dir"
 
     # Get the packaged chart file path.
-    packaged_file=$(find "$dir" -type f -name "*.tgz")
+    packaged_file=$(find "$dir" -type f -name "*.tgz" ! -name "grafana-*.tgz")
 
     echo "Package $chart_name to $packaged_file and push to oci://$OCI_REGISTRY_URL/$OCI_NAMESPACE/$chart_name ..."
 
