@@ -116,15 +116,23 @@ spec:
               mountPath: /etc/greptimedb
               readOnly: true
             {{- end }}
+            {{- with .Values.extraVolumeMounts }}
+                {{- toYaml . | nindent 12 }}
+            {{- end }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-      {{- if .Values.configToml }}
+      {{- if or .Values.configToml .Values.extraVolumes }}
       volumes:
+        {{- if .Values.configToml }}
         - name: config
           configMap:
             name: {{ .Release.Name }}-config
+        {{- end }}
+        {{- with .Values.extraVolumes }}
+            {{- toYaml . | nindent 8 }}
+        {{- end }}
       {{- end }}
       {{- with .Values.affinity }}
       affinity:
