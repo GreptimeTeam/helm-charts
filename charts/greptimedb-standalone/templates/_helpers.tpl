@@ -97,7 +97,9 @@ Create the name of the service account to use
   root = "{{ $root }}"
 
   # Cache path configuration
+  {{- if $cache_path }}
   cache_path = "{{ $cache_path }}"
+  {{- end }}
 
 {{- if .Values.objectStorage.s3 }}
   endpoint = "{{ .Values.objectStorage.s3.endpoint }}"
