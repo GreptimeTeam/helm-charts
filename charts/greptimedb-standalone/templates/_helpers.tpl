@@ -66,19 +66,23 @@ Create the name of the service account to use
 {{- $provider := "" }}
 {{- $bucket := "" }}
 {{- $root := "" }}
+{{- $cache_path := "" }}
 
 {{- if .Values.objectStorage.s3 }}
   {{- $provider = "S3" }}
   {{- $bucket = .Values.objectStorage.s3.bucket }}
   {{- $root = .Values.objectStorage.s3.root }}
+  {{- $cache_path = .Values.objectStorage.s3.cache_path }}
 {{- else if .Values.objectStorage.oss }}
   {{- $provider = "Oss" }}
   {{- $bucket = .Values.objectStorage.oss.bucket }}
   {{- $root = .Values.objectStorage.oss.root }}
+  {{- $cache_path = .Values.objectStorage.oss.cache_path }}
 {{- else if .Values.objectStorage.gcs }}
   {{- $provider = "Gcs" }}
   {{- $bucket = .Values.objectStorage.gcs.bucket }}
   {{- $root = .Values.objectStorage.gcs.root }}
+  {{- $cache_path = .Values.objectStorage.gcs.cache_path }}
 {{- end }}
 
 {{- if and $provider $bucket }}
@@ -91,6 +95,11 @@ Create the name of the service account to use
 
   # Root path within the bucket
   root = "{{ $root }}"
+
+  # Cache path configuration
+  {{- if $cache_path }}
+  cache_path = "{{ $cache_path }}"
+  {{- end }}
 
 {{- if .Values.objectStorage.s3 }}
   endpoint = "{{ .Values.objectStorage.s3.endpoint }}"
