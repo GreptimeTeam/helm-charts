@@ -127,6 +127,11 @@ resources: {}
 nodeSelector: {}
 #  disktype: ssd
 
+# -- Volume mounts to add to the pods
+extraVolumeMounts: []
+# -- Volumes to add to the pods
+extraVolumes: []
+
 # -- Tolerations to apply pod
 tolerations: {}
 #  - key: "key1"
