@@ -66,7 +66,7 @@ objectStorage:
   #  root: "greptimedb-standalone"
   #  endpoint: ""  # See more detail: https://docs.aws.amazon.com/general/latest/gr/s3.html
 
-  #  # Cache path configuration for object storage
+  #  # Cache path configuration
   #  cache_path: ""
 
   # configure to use oss storage
@@ -90,7 +90,7 @@ objectStorage:
   #  root: "greptimedb-standalone"
   #  endpoint: "https://storage.googleapis.com"
 
-  #  # Cache path for object storage
+  #  # Cache path configuration
   #  cache_path: ""
 
 # -- Environment variables
