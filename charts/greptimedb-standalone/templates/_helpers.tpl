@@ -67,22 +67,26 @@ Create the name of the service account to use
 {{- $bucket := "" }}
 {{- $root := "" }}
 {{- $cache_path := "" }}
+{{- $cache_capacity := "" }}
 
 {{- if .Values.objectStorage.s3 }}
   {{- $provider = "S3" }}
   {{- $bucket = .Values.objectStorage.s3.bucket }}
   {{- $root = .Values.objectStorage.s3.root }}
   {{- $cache_path = .Values.objectStorage.s3.cache_path }}
+  {{- $cache_capacity = .Values.objectStorage.s3.cache_capacity }}
 {{- else if .Values.objectStorage.oss }}
   {{- $provider = "Oss" }}
   {{- $bucket = .Values.objectStorage.oss.bucket }}
   {{- $root = .Values.objectStorage.oss.root }}
   {{- $cache_path = .Values.objectStorage.oss.cache_path }}
+  {{- $cache_capacity = .Values.objectStorage.oss.cache_capacity }}
 {{- else if .Values.objectStorage.gcs }}
   {{- $provider = "Gcs" }}
   {{- $bucket = .Values.objectStorage.gcs.bucket }}
   {{- $root = .Values.objectStorage.gcs.root }}
   {{- $cache_path = .Values.objectStorage.gcs.cache_path }}
+  {{- $cache_capacity = .Values.objectStorage.gcs.cache_capacity }}
 {{- end }}
 
 {{- if and $provider $bucket }}
@@ -99,6 +103,11 @@ Create the name of the service account to use
   # Cache path configuration
   {{- if $cache_path }}
   cache_path = "{{ $cache_path }}"
+  {{- end }}
+
+  # The cache capacity
+  {{- if $cache_capacity }}
+  cache_capacity = "{{ $cache_capacity }}"
   {{- end }}
 
 {{- if .Values.objectStorage.s3 }}

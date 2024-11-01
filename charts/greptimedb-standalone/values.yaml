@@ -69,6 +69,9 @@ objectStorage:
   #  # Cache path configuration
   #  cache_path: ""
 
+  # The cache capacity
+  # cache_capacity = ""
+
   # configure to use oss storage
   oss: {}
   #  bucket: "bucket-name"
@@ -81,6 +84,9 @@ objectStorage:
   #  # Cache path configuration
   #  cache_path: ""
 
+  # The cache capacity
+  # cache_capacity = ""
+
   # configure to use gcs storage
   gcs: {}
   #  bucket: "bucket-name"
@@ -92,6 +98,9 @@ objectStorage:
 
   #  # Cache path configuration
   #  cache_path: ""
+
+  # The cache capacity
+  # cache_capacity = ""
 
 # -- Environment variables
 env:
