@@ -100,7 +100,7 @@ spec:
                 {{- if .Values.objectStorage.credentials.existingSecretName }}
                 name: {{ .Values.objectStorage.credentials.existingSecretName }}
                 {{- else }}
-                name: {{ .Release.Name }}-secret
+                name: {{ include "greptimedb-standalone.fullname" . }}-secret
                 {{- end }}
           {{- end }}
           {{- end }}
@@ -128,7 +128,7 @@ spec:
         {{- if .Values.configToml }}
         - name: config
           configMap:
-            name: {{ .Release.Name }}-config
+            name: {{ include "greptimedb-standalone.fullname" . }}-config
         {{- end }}
         {{- with .Values.extraVolumes }}
             {{- toYaml . | nindent 8 }}
