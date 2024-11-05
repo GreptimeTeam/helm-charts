@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.25](https://img.shields.io/badge/Version-0.2.25-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.5](https://img.shields.io/badge/AppVersion-0.9.5-informational?style=flat-square)
+![Version: 0.2.26](https://img.shields.io/badge/Version-0.2.26-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.5](https://img.shields.io/badge/AppVersion-0.9.5-informational?style=flat-square)
 
 ## Source Code
 
@@ -213,12 +213,16 @@ helm uninstall mycluster -n default
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
 | initializer.tag | string | `"v0.1.2"` | Initializer image tag |
-| logging | object | `{"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false,"persistentWithData":false}` | Global logging configuration |
+| logging | object | `{"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false,"persistentWithData":false,"slowQuery":{"enabled":false,"sampleRatio":"1.0","threshold":"10s"}}` | Global logging configuration |
 | logging.format | string | `"text"` | The log format for greptimedb, only support "json" and "text" |
 | logging.level | string | `"info"` | The log level for greptimedb, only support "debug", "info", "warn", "debug" |
 | logging.logsDir | string | `"/data/greptimedb/logs"` | The logs directory for greptimedb |
 | logging.onlyLogToStdout | bool | `false` | Whether to log to stdout only |
 | logging.persistentWithData | bool | `false` | indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component. |
+| logging.slowQuery | object | `{"enabled":false,"sampleRatio":"1.0","threshold":"10s"}` | The slow query log configuration. |
+| logging.slowQuery.enabled | bool | `false` | Enable slow query log. |
+| logging.slowQuery.sampleRatio | string | `"1.0"` | Sample ratio of slow query log. |
+| logging.slowQuery.threshold | string | `"10s"` | The threshold of slow query log in seconds. |
 | meta | object | `{"configData":"","configFile":"","enableRegionFailover":false,"etcdEndpoints":"etcd.etcd-cluster.svc.cluster.local:2379","logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"volumeMounts":[]},"nodeSelector":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storeKeyPrefix":""}` | Meta configure |
 | meta.configData | string | `""` | Extra raw toml config data of meta. Skip if the `configFile` is used. |
 | meta.configFile | string | `""` | Extra toml file of meta. |

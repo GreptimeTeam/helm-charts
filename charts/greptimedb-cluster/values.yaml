@@ -773,6 +773,17 @@ logging:
   # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
   persistentWithData: false
 
+  # -- The slow query log configuration.
+  slowQuery:
+    # -- Enable slow query log.
+    enabled: false
+
+    # -- The threshold of slow query log in seconds.
+    threshold: "10s"
+
+    # -- Sample ratio of slow query log.
+    sampleRatio: "1.0"
+
 # -- Deploy grafana for monitoring.
 grafana:
   # -- Enable grafana deployment. It needs to enable monitoring `monitoring.enabled: true` first.

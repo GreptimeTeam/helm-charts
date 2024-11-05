@@ -485,4 +485,10 @@ spec:
     {{- if .Values.logging.persistentWithData }}
     persistentWithData: {{ .Values.logging.persistentWithData }}
     {{- end }}
+    {{- if .Values.logging.slowQuery.enabled }}
+    slowQuery:
+      enabled: {{ .Values.logging.slowQuery.enabled }}
+      threshold: {{ .Values.logging.slowQuery.threshold }}
+      sampleRatio: {{ .Values.logging.slowQuery.sampleRatio | quote }}
+    {{- end }}
   {{- end }}
