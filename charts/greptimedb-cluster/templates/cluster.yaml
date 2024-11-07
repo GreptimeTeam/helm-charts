@@ -152,6 +152,9 @@ spec:
       {{- if .Values.frontend.logging.persistentWithData }}
       persistentWithData: {{ .Values.frontend.logging.persistentWithData }}
       {{- end }}
+      {{- if .Values.frontend.logging.filters }}
+      filters: {{ .Values.frontend.logging.filters | toYaml | nindent 6 }}
+      {{- end }}
     {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}
@@ -189,6 +192,9 @@ spec:
       {{- end }}
       {{- if .Values.meta.logging.persistentWithData }}
       persistentWithData: {{ .Values.meta.logging.persistentWithData }}
+      {{- end }}
+      {{- if .Values.meta.logging.filters }}
+      filters: {{ .Values.meta.logging.filters | toYaml | nindent 6 }}
       {{- end }}
     {{- end }}
     template:
@@ -312,6 +318,9 @@ spec:
       {{- if .Values.datanode.logging.persistentWithData }}
       persistentWithData: {{ .Values.datanode.logging.persistentWithData }}
       {{- end }}
+      {{- if .Values.datanode.logging.filters }}
+      filters: {{ .Values.datanode.logging.filters | toYaml | nindent 6 }}
+      {{- end }}
     {{- end }}
     storage:
       dataHome: {{ .Values.datanode.storage.dataHome }}
@@ -394,6 +403,9 @@ spec:
       {{- end }}
       {{- if .Values.flownode.logging.persistentWithData }}
       persistentWithData: {{ .Values.flownode.logging.persistentWithData }}
+      {{- end }}
+      {{- if .Values.flownode.logging.filters }}
+      filters: {{ .Values.flownode.logging.filters | toYaml | nindent 6 }}
       {{- end }}
     {{- end }}
   {{- end }}
@@ -490,5 +502,8 @@ spec:
       enabled: {{ .Values.logging.slowQuery.enabled }}
       threshold: {{ .Values.logging.slowQuery.threshold }}
       sampleRatio: {{ .Values.logging.slowQuery.sampleRatio | quote }}
+    {{- end }}
+    {{- if .Values.logging.filters }}
+    filters: {{ .Values.logging.filters | toYaml | nindent 4 }}
     {{- end }}
   {{- end }}
