@@ -58,7 +58,10 @@ spec:
           {{- if .Values.apiServer.enabled }}
           - --enable-apiserver
           - --apiserver-port={{ .Values.apiServer.port }}
+          {{- if .Values.apiServer.podMetrics.enabled }}
+          - --enable-pod-metrics
           {{- end }}
+          {{- end}}
         command:
           - greptimedb-operator
         {{- if .Values.resources }}

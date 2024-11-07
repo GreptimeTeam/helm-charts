@@ -161,4 +161,13 @@ rules:
       - patch
       - update
       - watch
+  {{- if and .Values.apiServer.enabled .Values.apiServer.podMetrics.enabled }}
+  - apiGroups:
+      - metrics.k8s.io
+    resources:
+      - pods
+    verbs:
+      - get
+      - list
+  {{- end }}
 {{- end }}

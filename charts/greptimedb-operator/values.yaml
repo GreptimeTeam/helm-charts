@@ -8,7 +8,7 @@ image:
   # -- The image pull policy for the controller
   imagePullPolicy: IfNotPresent
   # -- The image tag
-  tag: v0.1.3-alpha.1
+  tag: v0.1.3-alpha.3
   # -- The image pull secrets
   pullSecrets: []
 
@@ -70,3 +70,8 @@ apiServer:
 
   # -- The port for the API server
   port: 8081
+
+  # -- The configuration for getting PodMetrics from metrics-server.
+  podMetrics:
+    # -- Whether to enable to get PodMetrics from metrics-server.
+    enabled: false
