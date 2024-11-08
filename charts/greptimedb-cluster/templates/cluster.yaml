@@ -19,6 +19,9 @@ spec:
       {{- if .Values.base.podTemplate.main.env }}
       env: {{- toYaml .Values.base.podTemplate.main.env | nindent 8 }}
       {{- end }}
+      {{- if .Values.base.podTemplate.main.startupProbe }}
+      startupProbe: {{- toYaml .Values.base.podTemplate.main.startupProbe | nindent 8 }}
+      {{- end }}
       {{- if .Values.base.podTemplate.main.readinessProbe }}
       readinessProbe: {{- toYaml .Values.base.podTemplate.main.readinessProbe | nindent 8 }}
       {{- end }}
@@ -100,6 +103,9 @@ spec:
         resources:
           requests: {{ .Values.frontend.podTemplate.main.resources.requests | toYaml | nindent 12 }}
           limits: {{ .Values.frontend.podTemplate.main.resources.limits | toYaml | nindent 12 }}
+        {{- if .Values.frontend.podTemplate.main.startupProbe }}
+        startupProbe: {{- toYaml .Values.frontend.podTemplate.main.startupProbe | nindent 10 }}
+        {{- end }}
         {{- if .Values.frontend.podTemplate.main.readinessProbe }}
         readinessProbe: {{- toYaml .Values.frontend.podTemplate.main.readinessProbe | nindent 10 }}
         {{- end }}
@@ -217,6 +223,9 @@ spec:
         resources:
           requests: {{ .Values.meta.podTemplate.main.resources.requests | toYaml | nindent 12 }}
           limits: {{ .Values.meta.podTemplate.main.resources.limits | toYaml | nindent 12 }}
+        {{- if .Values.meta.podTemplate.main.startupProbe }}
+        startupProbe: {{- toYaml .Values.meta.podTemplate.main.startupProbe | nindent 10 }}
+        {{- end }}
         {{- if .Values.meta.podTemplate.main.readinessProbe }}
         readinessProbe: {{- toYaml .Values.meta.podTemplate.main.readinessProbe | nindent 10 }}
         {{- end }}
@@ -274,6 +283,9 @@ spec:
         resources:
           requests: {{ .Values.datanode.podTemplate.main.resources.requests | toYaml | nindent 12 }}
           limits: {{ .Values.datanode.podTemplate.main.resources.limits | toYaml | nindent 12 }}
+        {{- if .Values.datanode.podTemplate.main.startupProbe }}
+        startupProbe: {{- toYaml .Values.datanode.podTemplate.main.startupProbe | nindent 10 }}
+        {{- end }}
         {{- if .Values.datanode.podTemplate.main.readinessProbe }}
         readinessProbe: {{- toYaml .Values.datanode.podTemplate.main.readinessProbe | nindent 10 }}
         {{- end }}
@@ -360,6 +372,9 @@ spec:
         resources:
           requests: {{ .Values.flownode.podTemplate.main.resources.requests | toYaml | nindent 12 }}
           limits: {{ .Values.flownode.podTemplate.main.resources.limits | toYaml | nindent 12 }}
+        {{- if .Values.flownode.podTemplate.main.startupProbe }}
+        startupProbe: {{- toYaml .Values.flownode.podTemplate.main.startupProbe | nindent 10 }}
+        {{- end }}
         {{- if .Values.flownode.podTemplate.main.readinessProbe }}
         readinessProbe: {{- toYaml .Values.flownode.podTemplate.main.readinessProbe | nindent 10 }}
         {{- end }}
