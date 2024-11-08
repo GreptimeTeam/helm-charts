@@ -41,6 +41,24 @@ base:
       # -- The arguments to be passed to the command
       args: []
 
+      # -- The config for startup probe of the main container
+      startupProbe: {}
+#        httpGet:
+#          # -- Path to access on the HTTP server
+#          path: /health
+#          # -- Name or number of the port to access on the container
+#          port: 4000
+#          # -- The initial delay seconds for the readiness probe.
+#          initialDelaySeconds: 5
+#          # -- The timeout seconds for the readiness probe
+#          timeoutSeconds: 1
+#          # -- The period seconds for the readiness probe
+#          periodSeconds: 10
+#          # -- The success threshold for the readiness probe
+#          successThreshold: 1
+#          # -- The failure threshold for the readiness probe
+#          failureThreshold: 3
+
       # -- The config for readiness probe of the main container
       readinessProbe: {}
 #        httpGet:
@@ -130,6 +148,24 @@ frontend:
 
       # -- The pod volumeMounts
       volumeMounts: []
+
+      # -- The config for startup probe of the main container
+      startupProbe: {}
+#        httpGet:
+#          # -- Path to access on the HTTP server
+#          path: /health
+#          # -- Name or number of the port to access on the container
+#          port: 4000
+#          # -- The initial delay seconds for the readiness probe.
+#          initialDelaySeconds: 5
+#          # -- The timeout seconds for the readiness probe
+#          timeoutSeconds: 1
+#          # -- The period seconds for the readiness probe
+#          periodSeconds: 10
+#          # -- The success threshold for the readiness probe
+#          successThreshold: 1
+#          # -- The failure threshold for the readiness probe
+#          failureThreshold: 3
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
@@ -253,6 +289,24 @@ meta:
 
       # -- The pod volumeMounts
       volumeMounts: []
+
+      # -- The config for startup probe of the main container
+      startupProbe: {}
+#        httpGet:
+#          # -- Path to access on the HTTP server
+#          path: /health
+#          # -- Name or number of the port to access on the container
+#          port: 4000
+#          # -- The initial delay seconds for the readiness probe.
+#          initialDelaySeconds: 5
+#          # -- The timeout seconds for the readiness probe
+#          timeoutSeconds: 1
+#          # -- The period seconds for the readiness probe
+#          periodSeconds: 10
+#          # -- The success threshold for the readiness probe
+#          successThreshold: 1
+#          # -- The failure threshold for the readiness probe
+#          failureThreshold: 3
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
@@ -378,6 +432,23 @@ datanode:
 
       # -- The pod volumeMounts
       volumeMounts: []
+      # -- The config for startup probe of the main container
+      startupProbe: {}
+#        httpGet:
+#          # -- Path to access on the HTTP server
+#          path: /health
+#          # -- Name or number of the port to access on the container
+#          port: 4000
+#          # -- The initial delay seconds for the readiness probe.
+#          initialDelaySeconds: 5
+#          # -- The timeout seconds for the readiness probe
+#          timeoutSeconds: 1
+#          # -- The period seconds for the readiness probe
+#          periodSeconds: 10
+#          # -- The success threshold for the readiness probe
+#          successThreshold: 1
+#          # -- The failure threshold for the readiness probe
+#          failureThreshold: 3
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
@@ -532,6 +603,24 @@ flownode:
 
       # -- The pod volumeMounts
       volumeMounts: []
+
+      # -- The config for startup probe of the main container
+      startupProbe: {}
+#        httpGet:
+#          # -- Path to access on the HTTP server
+#          path: /health
+#          # -- Name or number of the port to access on the container
+#          port: 4000
+#          # -- The initial delay seconds for the readiness probe.
+#          initialDelaySeconds: 5
+#          # -- The timeout seconds for the readiness probe
+#          timeoutSeconds: 1
+#          # -- The period seconds for the readiness probe
+#          periodSeconds: 10
+#          # -- The success threshold for the readiness probe
+#          successThreshold: 1
+#          # -- The failure threshold for the readiness probe
+#          failureThreshold: 3
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
