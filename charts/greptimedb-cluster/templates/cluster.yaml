@@ -28,6 +28,9 @@ spec:
       {{- if .Values.base.podTemplate.main.livenessProbe }}
       livenessProbe: {{- toYaml .Values.base.podTemplate.main.livenessProbe | nindent 8 }}
       {{- end }}
+      {{- if .Values.base.podTemplate.main.securityContext }}
+      securityContext: {{ .Values.base.podTemplate.main.securityContext | toYaml | nindent 8 }}
+      {{- end }}
     {{- if .Values.base.podTemplate.annotations }}
     annotations: {{ .Values.base.podTemplate.annotations | toYaml | nindent 6 }}
     {{- end }}
@@ -51,6 +54,9 @@ spec:
     {{- range .Values.image.pullSecrets }}
       - name: {{ . }}
     {{- end }}
+    {{- end }}
+    {{- if .Values.base.podTemplate.securityContext }}
+    securityContext: {{ .Values.base.podTemplate.securityContext | toYaml | nindent 6 }}
     {{- end }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
@@ -112,6 +118,9 @@ spec:
         {{- if .Values.frontend.podTemplate.main.livenessProbe }}
         livenessProbe: {{- toYaml .Values.frontend.podTemplate.main.livenessProbe | nindent 10 }}
         {{- end }}
+        {{- if .Values.frontend.podTemplate.main.securityContext }}
+        securityContext: {{ .Values.frontend.podTemplate.main.securityContext | toYaml | nindent 10 }}
+        {{- end }}
       {{- if .Values.frontend.podTemplate.annotations }}
       annotations: {{ .Values.frontend.podTemplate.annotations | toYaml | nindent 8 }}
       {{- end }}
@@ -140,6 +149,9 @@ spec:
         secret:
           secretName: {{ .Release.Name }}-users-auth
       {{- end }}
+      {{- end }}
+      {{- if .Values.frontend.podTemplate.securityContext }}
+      securityContext: {{ .Values.frontend.podTemplate.securityContext | toYaml | nindent 8 }}
       {{- end }}
     {{- if .Values.frontend.logging }}
     logging:
@@ -232,6 +244,9 @@ spec:
         {{- if .Values.meta.podTemplate.main.livenessProbe }}
         livenessProbe: {{- toYaml .Values.meta.podTemplate.main.livenessProbe | nindent 10 }}
         {{- end }}
+        {{- if .Values.meta.podTemplate.main.securityContext }}
+        securityContext: {{ .Values.meta.podTemplate.main.securityContext | toYaml | nindent 10 }}
+        {{- end }}
       {{- if .Values.meta.podTemplate.annotations }}
       annotations: {{ .Values.meta.podTemplate.annotations | toYaml | nindent 8 }}
       {{- end }}
@@ -252,6 +267,9 @@ spec:
       {{- end }}
       {{- if .Values.meta.podTemplate.volumes}}
       volumes: {{ .Values.meta.podTemplate.volumes | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.meta.podTemplate.securityContext }}
+      securityContext: {{ .Values.meta.podTemplate.securityContext | toYaml | nindent 8 }}
       {{- end }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
@@ -292,6 +310,9 @@ spec:
         {{- if .Values.datanode.podTemplate.main.livenessProbe }}
         livenessProbe: {{- toYaml .Values.datanode.podTemplate.main.livenessProbe | nindent 10 }}
         {{- end }}
+        {{- if .Values.datanode.podTemplate.main.securityContext }}
+        securityContext: {{ .Values.datanode.podTemplate.main.securityContext | toYaml | nindent 10 }}
+        {{- end }}
       {{- if .Values.datanode.podTemplate.annotations }}
       annotations: {{ .Values.datanode.podTemplate.annotations | toYaml | nindent 8 }}
       {{- end }}
@@ -312,6 +333,9 @@ spec:
       {{- end }}
       {{- if .Values.datanode.podTemplate.volumes}}
       volumes: {{ .Values.datanode.podTemplate.volumes | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.datanode.podTemplate.securityContext }}
+      securityContext: {{ .Values.datanode.podTemplate.securityContext | toYaml | nindent 8 }}
       {{- end }}
     {{- if .Values.datanode.logging }}
     logging:
@@ -381,6 +405,9 @@ spec:
         {{- if .Values.flownode.podTemplate.main.livenessProbe }}
         livenessProbe: {{- toYaml .Values.flownode.podTemplate.main.livenessProbe | nindent 10 }}
         {{- end }}
+        {{- if .Values.flownode.podTemplate.main.securityContext }}
+        securityContext: {{ .Values.flownode.podTemplate.main.securityContext | toYaml | nindent 10 }}
+        {{- end }}
       {{- if .Values.flownode.podTemplate.annotations }}
       annotations: {{ .Values.flownode.podTemplate.annotations | toYaml | nindent 8 }}
       {{- end }}
@@ -401,6 +428,9 @@ spec:
       {{- end }}
       {{- if .Values.flownode.podTemplate.volumes }}
       volumes: {{ .Values.flownode.podTemplate.volumes | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.flownode.podTemplate.securityContext }}
+      securityContext: {{ .Values.flownode.podTemplate.securityContext | toYaml | nindent 8 }}
       {{- end }}
     {{- if .Values.flownode.logging }}
     logging:
