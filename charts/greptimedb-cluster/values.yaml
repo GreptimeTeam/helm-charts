@@ -14,7 +14,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.1.3-alpha.3
+  tag: v0.1.3-alpha.6
 
 base:
   # -- The pod template for base
@@ -95,6 +95,9 @@ base:
 #        # -- The failure threshold for the readiness probe
 #        failureThreshold: 3
 
+      # -- The configurations for security context of main container.
+      securityContext: {}
+
     # -- The annotations to be created to the pod.
     annotations: {}
     # -- The labels to be created to the pod.
@@ -107,6 +110,8 @@ base:
     affinity: {}
     # -- The global service account
     serviceAccountName: ""
+    # -- The configurations for pod security context.
+    securityContext: {}
 
 # -- Frontend configure
 frontend:
@@ -203,6 +208,9 @@ frontend:
 #        # -- The failure threshold for the readiness probe
 #        failureThreshold: 3
 
+      # -- The configurations for frontend container.
+      securityContext: {}
+
     # -- The annotations to be created to the pod.
     annotations: {}
     # -- The labels to be created to the pod.
@@ -221,6 +229,9 @@ frontend:
       create: false
       # -- The annotations for frontend serviceaccount
       annotations: {}
+
+    # -- The configurations for frontend security context.
+    securityContext: {}
 
   # -- Frontend service
   service: {}
@@ -344,6 +355,9 @@ meta:
 #        # -- The failure threshold for the readiness probe
 #        failureThreshold: 3
 
+      # -- The configurations for meta security context.
+      securityContext: {}
+
     # -- The annotations to be created to the pod.
     annotations: {}
     # -- The labels to be created to the pod.
@@ -362,6 +376,9 @@ meta:
       create: false
       # -- The annotations for meta serviceaccount
       annotations: {}
+
+    # -- The configurations for meta security context.
+    securityContext: {}
 
   # -- Meta etcd endpoints
   etcdEndpoints: "etcd.etcd-cluster.svc.cluster.local:2379"
@@ -486,6 +503,9 @@ datanode:
 #        # -- The failure threshold for the readiness probe
 #        failureThreshold: 3
 
+      # -- The configurations for datanode security context.
+      securityContext: {}
+
     # -- The annotations to be created to the pod.
     annotations: {}
     # -- The labels to be created to the pod.
@@ -504,6 +524,9 @@ datanode:
       create: false
       # -- The annotations for datanode serviceaccount
       annotations: {}
+
+    # -- The configurations for datanode security context.
+    securityContext: {}
 
   storage:
     # -- Storage class for datanode persistent volume
@@ -658,6 +681,9 @@ flownode:
 #        # -- The failure threshold for the readiness probe
 #        failureThreshold: 3
 
+      # -- The configurations for flownode security context.
+      securityContext: {}
+
     # -- The annotations to be created to the pod.
     annotations: {}
     # -- The labels to be created to the pod.
@@ -676,6 +702,9 @@ flownode:
       create: false
       # -- The annotations for flownode serviceaccount
       annotations: {}
+
+    # -- The configurations for flownode security context.
+    securityContext: {}
 
 # -- GreptimeDB http service port
 httpServicePort: 4000
