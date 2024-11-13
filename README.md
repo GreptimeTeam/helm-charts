@@ -113,13 +113,13 @@ If you want to deploy the GreptimeDB cluster, you can use the following commands
 
    ```console
    # You can use the MySQL or PostgreSQL client to connect the cluster, for example: 'mysql -h 127.0.0.1 -P 4002'.
-   kubectl port-forward -n default svc/mycluster-frontend 4001:4001 4002:4002 4003:4003 4000:4000 > connections.out &
+   kubectl port-forward -n default svc/mycluster-frontend 4001:4001 4002:4002 4003:4003 4000:4000
    ```
 
    If you want to expose the service to the public, you can use the `kubectl port-forward` command with the `--address` option:
 
    ```console
-   kubectl port-forward --address 0.0.0.0 svc/mycluster-frontend 4001:4001 4002:4002 4003:4003 4000:4000 > connections.txt &
+   kubectl port-forward --address 0.0.0.0 svc/mycluster-frontend 4001:4001 4002:4002 4003:4003 4000:4000
    ```
 
    You can also read and write data using refer to the [docs](https://docs.greptime.com/user-guide/cluster).
