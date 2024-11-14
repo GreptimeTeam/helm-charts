@@ -174,6 +174,34 @@ entries:
   greptimedb-cluster:
   - apiVersion: v2
     appVersion: 0.9.5
+    created: "2024-11-14T07:44:51.541213893Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 8.5.8
+    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes.
+    digest: ebfeddfaaf3577ee402e488ef0dfe4f3a34b4e490a29ebfd453ab0ba644cac3a
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - database
+    - greptimedb
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-cluster
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-cluster-0.2.30/greptimedb-cluster-0.2.30.tgz
+    version: 0.2.30
+  - apiVersion: v2
+    appVersion: 0.9.5
     created: "2024-11-11T09:24:00.82238953Z"
     dependencies:
     - condition: grafana.enabled
@@ -3278,4 +3306,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2024-11-13T03:49:15.931830823Z"
+generated: "2024-11-14T07:44:51.541610854Z"
