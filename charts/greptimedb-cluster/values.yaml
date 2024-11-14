@@ -970,17 +970,26 @@ grafana:
   datasources:
     datasources.yaml:
       datasources:
-        - name: greptimedb-metrics
+        # Query the cluster metrics.
+        - name: metrics
           type: prometheus
           url: http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus
           access: proxy
           isDefault: true
 
-        - name: greptimedb-logs
+        # Query the cluster logs and slow queries.
+        - name: logs
           type: mysql
           url: mycluster-monitor-standalone.default.svc.cluster.local:4002
           access: proxy
           database: public
+
+        # Query the information schema from the cluster.
+        - name: information_schema
+          type: mysql
+          url: mycluster-frontend.default.svc.cluster.local:4002
+          access: proxy
+          database: information_schema
 
   # -- Init chown data for grafana.
   initChownData:

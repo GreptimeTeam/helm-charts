@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 8,
   "links": [],
   "panels": [
     {
@@ -85,8 +84,8 @@
       {
         "current": {
           "selected": true,
-          "text": "greptimedb-logs",
-          "value": "ddx5v5cofxszkc"
+          "text": "logs",
+          "value": "P98F38F12DB221A8C"
         },
         "hide": 0,
         "includeAll": false,
@@ -163,6 +162,6 @@
   "timezone": "browser",
   "title": "GreptimeDB Cluster Slow Queries",
   "uid": "fe1wjkiq8bxtse",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }
