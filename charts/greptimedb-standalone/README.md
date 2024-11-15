@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.1.31](https://img.shields.io/badge/Version-0.1.31-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.5](https://img.shields.io/badge/AppVersion-0.9.5-informational?style=flat-square)
+![Version: 0.1.32](https://img.shields.io/badge/Version-0.1.32-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.5](https://img.shields.io/badge/AppVersion-0.9.5-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -34,10 +34,10 @@ helm upgrade --install greptimedb-standalone greptime/greptimedb-standalone \
 
 ```console
 # You can use the MySQL client to connect the greptimedb, for example: 'mysql -h 127.0.0.1 -P 4002'.
-kubectl port-forward -n default svc/greptimedb-standalone 4002:4002 > connections.out &
+kubectl port-forward -n default svc/greptimedb-standalone 4002:4002
 
 # You can use the PostgreSQL client to connect the greptimedb, for example: 'psql -h 127.0.0.1 -p 4003 -d public'.
-kubectl port-forward -n default svc/greptimedb-standalone 4003:4003 > connections.out &
+kubectl port-forward -n default svc/greptimedb-standalone 4003:4003
 ```
 
 ## How to uninstall
