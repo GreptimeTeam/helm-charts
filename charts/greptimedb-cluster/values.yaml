@@ -768,7 +768,7 @@ debugPod:
   image:
     registry: docker.io
     repository: greptime/greptime-tool
-    tag: "20240905-67eaa147"
+    tag: "20241107-9c210d18"
 
   # -- The debug pod resource
   resources:
