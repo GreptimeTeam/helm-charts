@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.1.32](https://img.shields.io/badge/Version-0.1.32-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.5](https://img.shields.io/badge/AppVersion-0.9.5-informational?style=flat-square)
+![Version: 0.1.33](https://img.shields.io/badge/Version-0.1.33-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.10.0](https://img.shields.io/badge/AppVersion-0.10.0-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -66,7 +66,7 @@ helm uninstall greptimedb-standalone -n default
 | image.pullSecrets | list | `[]` | The image pull secrets. |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
-| image.tag | string | `"v0.9.5"` | The image tag |
+| image.tag | string | `"v0.10.0"` | The image tag |
 | monitoring.annotations | object | `{}` | PodMonitor annotations |
 | monitoring.enabled | bool | `false` | Enable prometheus podmonitor |
 | monitoring.interval | string | `"30s"` | PodMonitor scrape interval |
