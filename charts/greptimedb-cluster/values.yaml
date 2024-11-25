@@ -4,7 +4,7 @@ image:
   # -- The image repository
   repository: greptime/greptimedb
   # -- The image tag
-  tag: "v0.9.5"
+  tag: "v0.10.1"
   # -- The image pull secrets
   pullSecrets: []
 
@@ -14,7 +14,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.1.3-alpha.6
+  tag: v0.1.3-alpha.8
 
 base:
   # -- The pod template for base
