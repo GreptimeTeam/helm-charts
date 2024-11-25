@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.33](https://img.shields.io/badge/Version-0.2.33-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.5](https://img.shields.io/badge/AppVersion-0.9.5-informational?style=flat-square)
+![Version: 0.2.34](https://img.shields.io/badge/Version-0.2.34-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.10.1](https://img.shields.io/badge/AppVersion-0.10.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -221,10 +221,10 @@ helm uninstall mycluster -n default
 | image.pullSecrets | list | `[]` | The image pull secrets |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
-| image.tag | string | `"v0.9.5"` | The image tag |
+| image.tag | string | `"v0.10.1"` | The image tag |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.1.3-alpha.6"` | Initializer image tag |
+| initializer.tag | string | `"v0.1.3-alpha.8"` | Initializer image tag |
 | logging | object | `{"filters":[],"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false,"persistentWithData":false,"slowQuery":{"enabled":false,"sampleRatio":"1.0","threshold":"10s"}}` | Global logging configuration |
 | logging.filters | list | `[]` | The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs. |
 | logging.format | string | `"text"` | The log format for greptimedb, only support "json" and "text" |
