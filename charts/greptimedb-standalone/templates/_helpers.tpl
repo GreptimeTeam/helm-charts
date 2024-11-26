@@ -98,7 +98,7 @@ Create the name of the service account to use
 
 {{- if $provider }}
 [storage]
-  # Storage provider type: S3, Oss, azblob, or Gcs
+  # Storage provider type: S3, Oss, Azblob, or Gcs
   type = "{{ $provider }}"
 
   {{- if $bucket }}
