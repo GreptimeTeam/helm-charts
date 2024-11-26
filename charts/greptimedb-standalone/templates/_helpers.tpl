@@ -62,10 +62,11 @@ Create the name of the service account to use
 {{- end }}
 
 {{- define "greptimedb-standalone.objectStorageConfig" -}}
-{{- if or .Values.objectStorage.s3 .Values.objectStorage.oss .Values.objectStorage.gcs }}
+{{- if or .Values.objectStorage.s3 .Values.objectStorage.oss .Values.objectStorage.gcs .Values.objectStorage.azblob }}
 {{- $provider := "" }}
 {{- $bucket := "" }}
 {{- $root := "" }}
+{{- $container := "" }}
 {{- $cache_path := "" }}
 {{- $cache_capacity := "" }}
 
@@ -87,26 +88,39 @@ Create the name of the service account to use
   {{- $root = .Values.objectStorage.gcs.root }}
   {{- $cache_path = .Values.objectStorage.gcs.cache_path }}
   {{- $cache_capacity = .Values.objectStorage.gcs.cache_capacity }}
+{{- else if .Values.objectStorage.azblob }}
+  {{- $provider = "Azblob" }}
+  {{- $container = .Values.objectStorage.azblob.container }}
+  {{- $root = .Values.objectStorage.azblob.root }}
+  {{- $cache_path = .Values.objectStorage.azblob.cache_path }}
+  {{- $cache_capacity = .Values.objectStorage.azblob.cache_capacity }}
 {{- end }}
 
-{{- if and $provider $bucket }}
+{{- if $provider }}
 [storage]
-  # Storage provider type: S3, Oss, or Gcs
+  # Storage provider type: S3, Oss, azblob, or Gcs
   type = "{{ $provider }}"
 
+  {{- if $bucket }}
   # Bucket name in the storage provider
   bucket = "{{ $bucket }}"
+  {{- end }}
+
+  {{- if $container }}
+  # The container name for the Azure blob
+  container = "{{ $container }}"
+  {{- end }}
 
   # Root path within the bucket
   root = "{{ $root }}"
 
-  # Cache path configuration
   {{- if $cache_path }}
+  # Cache path configuration
   cache_path = "{{ $cache_path }}"
   {{- end }}
 
-  # The cache capacity
   {{- if $cache_capacity }}
+  # The cache capacity
   cache_capacity = "{{ $cache_capacity }}"
   {{- end }}
 
@@ -119,6 +133,8 @@ Create the name of the service account to use
 {{- else if .Values.objectStorage.gcs }}
   endpoint = "{{ .Values.objectStorage.gcs.endpoint }}"
   scope = "{{ .Values.objectStorage.gcs.scope }}"
+{{- else if .Values.objectStorage.azblob }}
+  endpoint = "{{ .Values.objectStorage.azblob.endpoint }}"
 {{- end }}
 {{- end }}
 {{- end }}
