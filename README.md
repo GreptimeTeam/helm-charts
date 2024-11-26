@@ -122,7 +122,7 @@ If you want to deploy the GreptimeDB cluster, you can use the following commands
    kubectl port-forward --address 0.0.0.0 svc/mycluster-frontend 4001:4001 4002:4002 4003:4003 4000:4000
    ```
 
-   You can also read and write data using refer to the [docs](https://docs.greptime.com/user-guide/cluster).
+   You can also [read](https://docs.greptime.com/user-guide/query-data/overview) and [write](https://docs.greptime.com/user-guide/ingest-data/overview) data by referring to the documentation.
 
 ### Upgrade
 
