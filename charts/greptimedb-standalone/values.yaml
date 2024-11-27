@@ -51,6 +51,10 @@ objectStorage:
 #    # AliCloud cloudProvider secretAccessKey
 #    accessKeySecret: "you-should-set-the-access-key-secret-here"
 
+#    # Azure cloudProvider accountName and accountKey
+#    accountName: "you-should-set-the-account-name-here"
+#    accountKey: "you-should-set-the-account-key-here"
+
 #    # GCP cloudProvider serviceAccountKey JSON-formatted base64 value
 #    serviceAccountKey: "you-should-set-the-base64-service-account-key-here"
 
@@ -95,6 +99,18 @@ objectStorage:
   #  # The data directory in gcs will be: 'gcs://<bucket>/<root>/data/...'.
   #  root: "greptimedb-standalone"
   #  endpoint: "https://storage.googleapis.com"
+
+  #  # Cache path configuration
+  #  cache_path: ""
+
+  #  The cache capacity
+  #  cache_capacity = ""
+
+  # configure to use azblob storage
+  azblob: {}
+  #  container: ""
+  #  endpoint: ""
+  #  root: "greptimedb-standalone"
 
   #  # Cache path configuration
   #  cache_path: ""

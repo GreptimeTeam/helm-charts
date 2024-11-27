@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.1.34](https://img.shields.io/badge/Version-0.1.34-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.10.2](https://img.shields.io/badge/AppVersion-0.10.2-informational?style=flat-square)
+![Version: 0.1.35](https://img.shields.io/badge/Version-0.1.35-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.10.2](https://img.shields.io/badge/AppVersion-0.10.2-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -74,7 +74,7 @@ helm uninstall greptimedb-standalone -n default
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | nameOverride | string | `""` | Overrides the chart's name |
 | nodeSelector | object | `{}` | NodeSelector to apply pod |
-| objectStorage | object | `{"gcs":{},"oss":{},"s3":{}}` | Configure to object storage |
+| objectStorage | object | `{"azblob":{},"gcs":{},"oss":{},"s3":{}}` | Configure to object storage |
 | persistence.enableStatefulSetAutoDeletePVC | bool | `false` | Enable StatefulSetAutoDeletePVC feature |
 | persistence.enabled | bool | `true` | Enable persistent disk |
 | persistence.mountPath | string | `"/data/greptimedb"` | Mount path of persistent disk. |
