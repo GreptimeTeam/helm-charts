@@ -33,6 +33,7 @@ jobs:
       - name: Add Dependencies
         run: |
           helm repo add grafana https://grafana.github.io/helm-charts
+          helm repo add jaeger-all-in-one https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts/
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
