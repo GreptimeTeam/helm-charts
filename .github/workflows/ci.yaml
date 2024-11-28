@@ -28,6 +28,7 @@ jobs:
         run: |
           helm repo add greptime https://greptimeteam.github.io/helm-charts/
           helm repo add grafana https://grafana.github.io/helm-charts/
+          helm repo add jaeger-all-in-one https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts/
           helm search repo greptime
 
       - uses: actions/setup-python@v4
