@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.36](https://img.shields.io/badge/Version-0.2.36-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.10.2](https://img.shields.io/badge/AppVersion-0.10.2-informational?style=flat-square)
+![Version: 0.2.37](https://img.shields.io/badge/Version-0.2.37-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.10.2](https://img.shields.io/badge/AppVersion-0.10.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -74,6 +74,7 @@ helm uninstall mycluster -n default
 | Repository | Name | Version |
 |------------|------|---------|
 | https://grafana.github.io/helm-charts | grafana | 8.5.8 |
+| https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts | jaeger-all-in-one | 0.1.12 |
 
 ## Values
 
@@ -225,6 +226,23 @@ helm uninstall mycluster -n default
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
 | initializer.tag | string | `"v0.1.3"` | Initializer image tag |
+| jaeger-all-in-one | object | `{"enableHttpOpenTelemetryCollector":true,"enableHttpZipkinCollector":true,"enabled":false,"image":{"pullPolicy":"IfNotPresent","repository":"jaegertracing/all-in-one","versionOverride":"latest"},"resources":{},"service":{"annotations":{},"port":16686,"type":"ClusterIP"},"volume":{"className":"","enabled":true,"size":"3Gi"}}` | Deploy jaeger-all-in-one for development purpose. |
+| jaeger-all-in-one.enableHttpOpenTelemetryCollector | bool | `true` | Enable the opentelemetry collector for jaeger-all-in-one and listen on port 4317. |
+| jaeger-all-in-one.enableHttpZipkinCollector | bool | `true` | Enable the zipkin collector for jaeger-all-in-one and listen on port 9411. |
+| jaeger-all-in-one.enabled | bool | `false` | Enable jaeger-all-in-one deployment. |
+| jaeger-all-in-one.image | object | `{"pullPolicy":"IfNotPresent","repository":"jaegertracing/all-in-one","versionOverride":"latest"}` | The jaeger-all-in-one image configuration. |
+| jaeger-all-in-one.image.pullPolicy | string | `"IfNotPresent"` | The jaeger-all-in-one image pull policy. |
+| jaeger-all-in-one.image.repository | string | `"jaegertracing/all-in-one"` | The jaeger-all-in-one image repository. |
+| jaeger-all-in-one.image.versionOverride | string | `"latest"` | The jaeger-all-in-one image tag. |
+| jaeger-all-in-one.resources | object | `{}` | The resources configurations for the jaeger-all-in-one. |
+| jaeger-all-in-one.service | object | `{"annotations":{},"port":16686,"type":"ClusterIP"}` | The jaeger-all-in-one service configuration. |
+| jaeger-all-in-one.service.annotations | object | `{}` | The annotations for the service. |
+| jaeger-all-in-one.service.port | int | `16686` | The service port. |
+| jaeger-all-in-one.service.type | string | `"ClusterIP"` | The type of the service. |
+| jaeger-all-in-one.volume | object | `{"className":"","enabled":true,"size":"3Gi"}` | The jaeger-all-in-one persistence configuration. |
+| jaeger-all-in-one.volume.className | string | `""` | The storageclass for the jaeger-all-in-one. |
+| jaeger-all-in-one.volume.enabled | bool | `true` | Whether to enable the persistence for jaeger-all-in-one. |
+| jaeger-all-in-one.volume.size | string | `"3Gi"` | The storage size for the jaeger-all-in-one. |
 | logging | object | `{"filters":[],"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false,"persistentWithData":false,"slowQuery":{"enabled":false,"sampleRatio":"1.0","threshold":"10s"}}` | Global logging configuration |
 | logging.filters | list | `[]` | The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs. |
 | logging.format | string | `"text"` | The log format for greptimedb, only support "json" and "text" |

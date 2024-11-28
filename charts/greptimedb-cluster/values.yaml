@@ -1024,3 +1024,50 @@ grafana:
     type: ClusterIP
     # -- The annotations for the grafana service.
     annotations: {}
+
+# -- Deploy jaeger-all-in-one for development purpose.
+jaeger-all-in-one:
+  # -- Enable jaeger-all-in-one deployment.
+  enabled: false
+
+  # -- The jaeger-all-in-one image configuration.
+  image:
+    # -- The jaeger-all-in-one image repository.
+    repository: jaegertracing/all-in-one
+    # -- The jaeger-all-in-one image pull policy.
+    pullPolicy: IfNotPresent
+    # -- The jaeger-all-in-one image tag.
+    versionOverride: latest
+
+  # -- The jaeger-all-in-one service configuration.
+  service:
+    # -- The type of the service.
+    type: ClusterIP
+    # -- The service port.
+    port: 16686
+    # -- The annotations for the service.
+    annotations: {}
+
+  # -- The jaeger-all-in-one persistence configuration.
+  volume:
+    # -- Whether to enable the persistence for jaeger-all-in-one.
+    enabled: true
+    # -- The storageclass for the jaeger-all-in-one.
+    className: ""
+    # -- The storage size for the jaeger-all-in-one.
+    size: 3Gi
+
+  # -- Enable the zipkin collector for jaeger-all-in-one and listen on port 9411.
+  enableHttpZipkinCollector: true
+
+  # -- Enable the opentelemetry collector for jaeger-all-in-one and listen on port 4317.
+  enableHttpOpenTelemetryCollector: true
+
+  # -- The resources configurations for the jaeger-all-in-one.
+  resources: {}
+#    limits:
+#     cpu: 100m
+#     memory: 128Mi
+#    requests:
+#     cpu: 100m
+#     memory: 128Mi
