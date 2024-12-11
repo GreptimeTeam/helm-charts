@@ -5,6 +5,7 @@ on: [push, pull_request]
 jobs:
   chart-test:
     runs-on: ubuntu-latest
+    if: ${{ github.repository == 'GreptimeTeam/helm-charts' }}
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
