@@ -16,6 +16,7 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-latest
+    if: ${{ github.repository == 'GreptimeTeam/helm-charts' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,7 +46,7 @@ jobs:
 
   release-charts-to-acr:
     runs-on: ubuntu-latest
-    if: ${{ inputs.release-charts-to-acr == 'true' || github.event_name == 'push' }}
+    if: ${{ github.repository == 'GreptimeTeam/helm-charts' && (inputs.release-charts-to-acr == 'true' || github.event_name == 'push') }}
     steps:
       - name: Check out code
         uses: actions/checkout@v4
