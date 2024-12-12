@@ -64,7 +64,7 @@ spec:
           args:
             {{- if .Values.configToml }}
             - "--config-file"
-            - "/etc/greptimedb/config.toml"
+            - "/etc/greptimedb/config/config.toml"
             {{- end }}
             {{- if .Values.dataHome }}
             - "--data-home"
@@ -86,11 +86,15 @@ spec:
             - containerPort: {{ .Values.postgresServicePort }}
               name: postgres
               protocol: TCP
-          {{- if .Values.env }}
+          {{- if or .Values.env .Values.auth.enabled }}
           env:
             {{- range $key, $val := .Values.env }}
             - name: {{ $key }}
               value: {{ $val | quote }}
+            {{- end }}
+            {{- if .Values.auth.enabled }}
+            - name: GREPTIMEDB_STANDALONE__USER_PROVIDER
+              value: "static_user_provider:file:{{ .Values.auth.mountPath }}/{{ .Values.auth.fileName }}"
             {{- end }}
           {{- end }}
           {{- if .Values.objectStorage }}
@@ -113,7 +117,12 @@ spec:
               mountPath: {{ .Values.persistence.mountPath }}
             {{- if .Values.configToml }}
             - name: config
-              mountPath: /etc/greptimedb
+              mountPath: /etc/greptimedb/config
+              readOnly: true
+            {{- end }}
+            {{- if .Values.auth.enabled }}
+            - name: auth
+              mountPath: {{ .Values.auth.mountPath }}
               readOnly: true
             {{- end }}
             {{- with .Values.extraVolumeMounts }}
@@ -123,17 +132,20 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-      {{- if or .Values.configToml .Values.extraVolumes }}
       volumes:
         {{- if .Values.configToml }}
         - name: config
           configMap:
             name: {{ include "greptimedb-standalone.fullname" . }}-config
         {{- end }}
+        {{- if .Values.auth.enabled }}
+        - name: auth
+          secret:
+            secretName: {{ include "greptimedb-standalone.fullname" . }}-users-auth
+        {{- end }}
         {{- with .Values.extraVolumes }}
             {{- toYaml . | nindent 8 }}
         {{- end }}
-      {{- end }}
       {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
