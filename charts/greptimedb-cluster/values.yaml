@@ -539,9 +539,6 @@ datanode:
     dataHome: "/data/greptimedb"
     # -- The data directory of the storage, default is "/data/greptimedb"
     mountPath: "/data/greptimedb"
-    # -- The wal directory of the storage, default is "/data/greptimedb/wal"
-    # -- deprecated
-    walDir: "/data/greptimedb/wal"
 
   # -- Logging configuration for datanode, if not set, it will use the global logging configuration.
   logging: {}
