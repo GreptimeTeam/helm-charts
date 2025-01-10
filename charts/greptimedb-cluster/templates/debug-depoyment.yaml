@@ -6,6 +6,7 @@ metadata:
   name: {{ .Release.Name }}-debug-pod
   namespace: {{ .Release.Namespace }}
   labels:
+    {{- include "greptimedb-cluster.labels" . | nindent 4 }}
     app: {{ .Release.Name }}-debug-pod
 spec:
   replicas: 1
