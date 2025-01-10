@@ -53,7 +53,10 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/component: operator
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-app.kubernetes.io/parrt-of: greptimedb-operator
+app.kubernetes.io/part-of: greptimedb-operator
+{{- with .Values.additionalLabels }}
+{{ toYaml . }}
+{{- end }}
 {{- end }}
 
 {{/*

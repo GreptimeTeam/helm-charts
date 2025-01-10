@@ -42,6 +42,9 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/component: standalone
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/part-of: greptimedb-standalone
+{{- with .Values.additionalLabels }}
+{{ toYaml . }}
+{{- end }}
 {{- end }}
 
 {{/*

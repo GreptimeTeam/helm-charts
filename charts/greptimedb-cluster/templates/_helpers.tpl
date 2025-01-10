@@ -54,6 +54,9 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/component: cluster
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/part-of: greptimedb-cluster
+{{- with .Values.additionalLabels }}
+{{ toYaml . }}
+{{- end }}
 {{- end }}
 
 {{/*
