@@ -4,10 +4,11 @@ kind: PodMonitor
 metadata:
   name: {{ include "greptimedb-standalone.fullname" . }}
   namespace: {{ .Release.Namespace }}
-  {{- with .Values.monitoring.labels }}
   labels:
+    {{- include "greptimedb-standalone.labels" . | nindent 4 }}
+    {{- with .Values.monitoring.labels }}
     {{- toYaml . | nindent 4 }}
-  {{- end }}
+    {{- end }}
   {{- with .Values.monitoring.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
