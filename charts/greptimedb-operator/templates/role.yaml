@@ -4,6 +4,8 @@ kind: Role
 metadata:
   name: {{ include "greptimedb-operator.fullname" . }}-leader-election-role
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "greptimedb-operator.labels" . | nindent 4 }}
 rules:
   - apiGroups:
       - ''

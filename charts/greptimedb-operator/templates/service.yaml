@@ -4,6 +4,8 @@ kind: Service
 metadata:
   name: {{ include "greptimedb-operator.fullname" . }}
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "greptimedb-operator.labels" . | nindent 4 }}
 spec:
   type: ClusterIP
   selector:
