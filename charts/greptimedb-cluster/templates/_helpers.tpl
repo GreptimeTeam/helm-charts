@@ -51,8 +51,9 @@ helm.sh/chart: {{ include "greptimedb-cluster.chart" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
-app.kubernetes.io/component: greptimedb-cluster
+app.kubernetes.io/component: cluster
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+app.kubernetes.io/part-of: greptimedb-cluster
 {{- end }}
 
 {{/*

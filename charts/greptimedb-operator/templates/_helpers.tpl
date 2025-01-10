@@ -51,8 +51,9 @@ helm.sh/chart: {{ include "greptimedb-operator.chart" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
-app.kubernetes.io/component: greptimedb-operator
+app.kubernetes.io/component: operator
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+app.kubernetes.io/parrt-of: greptimedb-operator
 {{- end }}
 
 {{/*

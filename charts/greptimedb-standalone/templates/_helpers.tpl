@@ -39,8 +39,9 @@ helm.sh/chart: {{ include "greptimedb-standalone.chart" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
-app.kubernetes.io/component: greptimedb-standalone
+app.kubernetes.io/component: standalone
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+app.kubernetes.io/part-of: greptimedb-standalone
 {{- end }}
 
 {{/*
