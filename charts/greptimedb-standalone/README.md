@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.1.39](https://img.shields.io/badge/Version-0.1.39-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.2](https://img.shields.io/badge/AppVersion-0.11.2-informational?style=flat-square)
+![Version: 0.1.40](https://img.shields.io/badge/Version-0.1.40-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.2](https://img.shields.io/badge/AppVersion-0.11.2-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -50,6 +50,7 @@ helm uninstall greptimedb-standalone -n default
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| additionalLabels | object | `{}` | additional labels to add to all resources |
 | affinity | object | `{}` | Affinity configuration for pod |
 | annotations | object | `{}` | The annotations |
 | args | list | `[]` | The container args |
