@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.43](https://img.shields.io/badge/Version-0.2.43-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.2](https://img.shields.io/badge/AppVersion-0.11.2-informational?style=flat-square)
+![Version: 0.2.44](https://img.shields.io/badge/Version-0.2.44-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.2](https://img.shields.io/badge/AppVersion-0.11.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -103,7 +103,7 @@ helm uninstall mycluster -n default
 | base.podTemplate.securityContext | object | `{}` | The configurations for pod security context. |
 | base.podTemplate.serviceAccountName | string | `""` | The global service account |
 | base.podTemplate.tolerations | list | `[]` | The pod tolerations |
-| datanode | object | `{"configData":"","configFile":"","logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storage":{"dataHome":"/data/greptimedb","mountPath":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"10Gi"}}` | Datanode configure |
+| datanode | object | `{"configData":"","configFile":"","logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storage":{"annotations":{},"dataHome":"/data/greptimedb","labels":{},"mountPath":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"10Gi"}}` | Datanode configure |
 | datanode.configData | string | `""` | Extra raw toml config data of datanode. Skip if the `configFile` is used. |
 | datanode.configFile | string | `""` | Extra toml file of datanode. |
 | datanode.logging | object | `{}` | Logging configuration for datanode, if not set, it will use the global logging configuration. |
@@ -130,7 +130,9 @@ helm uninstall mycluster -n default
 | datanode.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | datanode.podTemplate.volumes | list | `[]` | The pod volumes |
 | datanode.replicas | int | `1` | Datanode replicas |
+| datanode.storage.annotations | object | `{}` | The annotations for the PVC that will be created |
 | datanode.storage.dataHome | string | `"/data/greptimedb"` | The dataHome directory, default is "/data/greptimedb/" |
+| datanode.storage.labels | object | `{}` | The labels for the PVC that will be created |
 | datanode.storage.mountPath | string | `"/data/greptimedb"` | The data directory of the storage, default is "/data/greptimedb" |
 | datanode.storage.storageClassName | string | `nil` | Storage class for datanode persistent volume |
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
@@ -224,7 +226,7 @@ helm uninstall mycluster -n default
 | image.tag | string | `"v0.11.2"` | The image tag |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.1.4-alpha.2"` | Initializer image tag |
+| initializer.tag | string | `"v0.1.4-alpha.3"` | Initializer image tag |
 | jaeger-all-in-one | object | `{"enableHttpOpenTelemetryCollector":true,"enableHttpZipkinCollector":true,"enabled":false,"image":{"pullPolicy":"IfNotPresent","repository":"jaegertracing/all-in-one","versionOverride":"latest"},"resources":{},"service":{"annotations":{},"port":16686,"type":"ClusterIP"},"volume":{"className":"","enabled":true,"size":"3Gi"}}` | Deploy jaeger-all-in-one for development purpose. |
 | jaeger-all-in-one.enableHttpOpenTelemetryCollector | bool | `true` | Enable the opentelemetry collector for jaeger-all-in-one and listen on port 4317. |
 | jaeger-all-in-one.enableHttpZipkinCollector | bool | `true` | Enable the zipkin collector for jaeger-all-in-one and listen on port 9411. |
@@ -283,15 +285,15 @@ helm uninstall mycluster -n default
 | meta.podTemplate.volumes | list | `[]` | The pod volumes |
 | meta.replicas | int | `1` | Meta replicas |
 | meta.storeKeyPrefix | string | `""` | Meta will store data with this key prefix |
-| monitoring | object | `{"enabled":false,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"vector":{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"tag":"nightly-alpine"}}` | The monitoring bootstrap configuration |
+| monitoring | object | `{"enabled":false,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"vector":{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"500m","memory":"256Mi"}},"tag":"nightly-alpine"}}` | The monitoring bootstrap configuration |
 | monitoring.enabled | bool | `false` | Enable monitoring |
 | monitoring.logsCollection | object | `{"pipeline":{"data":""}}` | Configure the logs collection |
 | monitoring.logsCollection.pipeline | object | `{"data":""}` | The greptimedb pipeline for logs collection |
 | monitoring.standalone | object | `{}` | Configure the standalone instance for storing monitoring data |
-| monitoring.vector | object | `{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"tag":"nightly-alpine"}` | Configure vector for logs and metrics collection. |
+| monitoring.vector | object | `{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"500m","memory":"256Mi"}},"tag":"nightly-alpine"}` | Configure vector for logs and metrics collection. |
 | monitoring.vector.registry | string | `"docker.io"` | vector image registry |
 | monitoring.vector.repository | string | `"timberio/vector"` | vector image repository |
-| monitoring.vector.resources | object | `{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | vector resource |
+| monitoring.vector.resources | object | `{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"500m","memory":"256Mi"}}` | vector resource |
 | monitoring.vector.tag | string | `"nightly-alpine"` | vector image tag |
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | objectStorage | object | `{"azblob":{},"gcs":{},"oss":{},"s3":{}}` | Configure to object storage |

@@ -14,7 +14,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.1.4-alpha.2
+  tag: v0.1.4-alpha.3
 
 base:
   # -- The pod template for base
@@ -539,6 +539,10 @@ datanode:
     dataHome: "/data/greptimedb"
     # -- The data directory of the storage, default is "/data/greptimedb"
     mountPath: "/data/greptimedb"
+    # -- The labels for the PVC that will be created
+    labels: {}
+    # -- The annotations for the PVC that will be created
+    annotations: {}
 
   # -- Logging configuration for datanode, if not set, it will use the global logging configuration.
   logging: {}
@@ -822,48 +826,64 @@ monitoring:
 
   # -- Configure the standalone instance for storing monitoring data
   standalone: {}
-#    base:
+#     base:
 #      main:
 #        # -- The standalone image, if not set, it will use the cluster image.
 #        image: ""
-#
+
 #        resources:
 #          # -- The requested resources for monitoring
 #          requests: {}
-##            cpu: 500m
-##            memory: 512Mi
-#
+# #            cpu: 500m
+# #            memory: 512Mi
+
 #          # -- The resources limits for monitoring
 #          limits: {}
-##            cpu: "1"
-##            memory: "1Gi"
-#
+# #            cpu: "1"
+# #            memory: "1Gi"
+
 #        # -- The environment variables for the container
 #        env: []
-#
+
 #        # -- The command to be executed in the container
 #        command: []
-#
+
 #        # -- The arguments to be passed to the command
 #        args: []
-#
+
 #      # -- The annotations to be created to the pod for monitoring
 #      annotations: {}
-#
+
 #      # -- The labels to be created to the pod for monitoring
 #      labels: {}
-#
+
 #      # -- The pod node selector for monitoring
 #      nodeSelector: {}
-#
+
 #      # -- The pod tolerations for monitoring
 #      tolerations: []
-#
+
 #      # -- The pod affinity for monitoring
 #      affinity: {}
-#
+
 #      # -- The global service account for monitoring
 #      serviceAccountName: ""
+#     datanodeStorage:
+#       fs:
+#         # -- Storage class for datanode persistent volume
+#         storageClassName: test
+#         # -- Storage size for datanode persistent volume
+#         storageSize: 500Gi
+#         # -- Storage retain policy for datanode persistent volume
+#         storageRetainPolicy: Retain
+#         # -- The dataHome directory, default is "/data/greptimedb/"
+#         dataHome: "/data/greptimedb"
+#         # -- The data directory of the storage, default is "/data/greptimedb"
+#         mountPath: "/data/greptimedb"
+#         # -- The labels for the PVC that will be created
+#         labels: {}
+#         # -- The annotations for the PVC that will be created
+#         annotations: {}
 
   # -- Configure the logs collection
   logsCollection:
@@ -883,11 +903,11 @@ monitoring:
     # -- vector resource
     resources:
       requests:
-        cpu: "50m"
-        memory: "64Mi"
+        cpu: "500m"
+        memory: "256Mi"
       limits:
-        cpu: "50m"
-        memory: "64Mi"
+        cpu: "500m"
+        memory: "256Mi"
 
 # -- Global logging configuration
 logging:
