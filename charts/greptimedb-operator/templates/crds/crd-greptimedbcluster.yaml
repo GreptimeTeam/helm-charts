@@ -3115,6 +3115,14 @@ spec:
                           type: string
                         fs:
                           properties:
+                            annotations:
+                              additionalProperties:
+                                type: string
+                              type: object
+                            labels:
+                              additionalProperties:
+                                type: string
+                              type: object
                             mountPath:
                               type: string
                             name:
@@ -18364,6 +18372,14 @@ spec:
                               type: string
                             fs:
                               properties:
+                                annotations:
+                                  additionalProperties:
+                                    type: string
+                                  type: object
+                                labels:
+                                  additionalProperties:
+                                    type: string
+                                  type: object
                                 mountPath:
                                   type: string
                                 name:
@@ -18455,6 +18471,14 @@ spec:
                                   type: string
                                 fs:
                                   properties:
+                                    annotations:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                    labels:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
                                     mountPath:
                                       type: string
                                     name:
@@ -18595,6 +18619,14 @@ spec:
                               properties:
                                 fs:
                                   properties:
+                                    annotations:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                    labels:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
                                     mountPath:
                                       type: string
                                     name:
@@ -18679,6 +18711,14 @@ spec:
                           type: string
                         fs:
                           properties:
+                            annotations:
+                              additionalProperties:
+                                type: string
+                              type: object
+                            labels:
+                              additionalProperties:
+                                type: string
+                              type: object
                             mountPath:
                               type: string
                             name:
@@ -18786,6 +18826,14 @@ spec:
                       properties:
                         fs:
                           properties:
+                            annotations:
+                              additionalProperties:
+                                type: string
+                              type: object
+                            labels:
+                              additionalProperties:
+                                type: string
+                              type: object
                             mountPath:
                               type: string
                             name:
