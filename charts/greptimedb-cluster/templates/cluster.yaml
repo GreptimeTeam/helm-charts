@@ -367,6 +367,12 @@ spec:
         storageSize: {{ .Values.datanode.storage.storageSize }}
         storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
         mountPath: {{ .Values.datanode.storage.mountPath }}
+        {{- if .Values.datanode.storage.labels }}
+        labels: {{ .Values.datanode.storage.labels | toYaml | nindent 10 }}
+        {{- end }}
+        {{- if .Values.datanode.storage.annotations }}
+        annotations: {{ .Values.datanode.storage.annotations | toYaml | nindent 10 }}
+        {{- end }}
   {{- if .Values.flownode.enabled }}
   flownode:
     replicas: {{ .Values.flownode.replicas }}
