@@ -943,6 +943,16 @@ logging:
     # -- Sample ratio of slow query log.
     sampleRatio: "1.0"
 
+# -- Deploy grafana dashboards for the grafana dashboard sidecar.
+# -- https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
+dashboards:
+  enabled: false
+  namespace: ~
+  label: grafana_dashboard
+  labelValue: "1"
+  annotations: {}
+  extraLabels: {}
+
 # -- Deploy grafana for monitoring.
 grafana:
   # -- Enable grafana deployment. It needs to enable monitoring `monitoring.enabled: true` first.

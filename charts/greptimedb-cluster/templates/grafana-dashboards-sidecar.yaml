@@ -1,0 +1,26 @@
+{{- if .Values.dashboards.enabled }}
+{{ $root := . }}
+{{- range $path, $_ := .Files.Glob "dashboards/**.json" }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    component: grafana-dashboards
+    {{- if $.Values.dashboards.label }}
+    {{ $.Values.dashboards.label }}: {{ ternary $.Values.dashboards.labelValue "1" (not (empty $.Values.dashboards.labelValue)) | quote }}
+    {{- end }}
+  {{- with $.Values.dashboards.extraLabels }}
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with $.Values.dashboards.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: dashboard-{{ (base $path | replace ".json" "" | trunc 63 | replace "_" "-") }}
+  namespace: {{ $.Values.dashboards.namespace | default $.Release.Namespace }}
+data:
+{{ (base $path | replace ".json" "" | trunc 63 | replace "_" "-" | lower | indent 2) }}.json: |
+{{ $root.Files.Get $path | indent 4 }}
+{{- end }}
+{{- end }}
