@@ -943,14 +943,19 @@ logging:
     # -- Sample ratio of slow query log.
     sampleRatio: "1.0"
 
-# -- Deploy grafana dashboards for the grafana dashboard sidecar.
-# -- https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
+# -- Deploy grafana dashboards for the grafana dashboard sidecar. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
 dashboards:
+  # -- Enable the grafana dashboards sidecar.
   enabled: false
+  # -- The namespace in which the grafana dashboard configmaps are installed
   namespace: ~
+  # -- The label as defined in the grafana helmchart. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
   label: grafana_dashboard
+  # -- The label value as defined in the grafana helmchart. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
   labelValue: "1"
+  # -- Additional annotation for the configmap
   annotations: {}
+  # -- Extra labels for the configmap
   extraLabels: {}
 
 # -- Deploy grafana for monitoring.
