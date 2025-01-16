@@ -978,38 +978,13 @@ grafana:
     # -- The grafana image tag.
     tag: 11.1.3
 
-  # -- The grafana dashboard providers.
-  dashboardProviders:
-    dashboardproviders.yaml:
-      apiVersion: 1
-      providers:
-        - name: greptimedb-cluster-metrics
-          orgId: 1
-          type: file
-          disableDeletion: false
-          editable: true
-          options:
-            path: /var/lib/grafana/dashboards/greptimedb-cluster-metrics
-        - name: greptimedb-cluster-logs
-          orgId: 1
-          type: file
-          disableDeletion: false
-          editable: true
-          options:
-            path: /var/lib/grafana/dashboards/greptimedb-cluster-logs
-        - name: greptimedb-cluster-slow-queries
-          orgId: 1
-          type: file
-          disableDeletion: false
-          editable: true
-          options:
-            path: /var/lib/grafana/dashboards/greptimedb-cluster-slow-queries
-
-  # -- The grafana dashboards configmaps that will be created to store the dashboards.
-  dashboardsConfigMaps:
-    greptimedb-cluster-metrics: greptimedb-cluster-metrics-dashboard
-    greptimedb-cluster-logs: greptimedb-cluster-logs-dashboard
-    greptimedb-cluster-slow-queries: greptimedb-cluster-slow-queries-dashboard
+  # -- The grafana sidecar settings to import dashboards
+  sidecar:
+    dashboards:
+      enabled: true
+      searchNamespace: ALL
+      provider:
+        allowUiUpdates: true
 
   # -- The grafana datasources.
   datasources:
