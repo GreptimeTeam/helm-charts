@@ -7,7 +7,7 @@ metadata:
   name: {{ $value }}
   namespace: {{ $root.Release.Namespace }}
   labels:
-    {{- include "greptimedb-cluster.labels" . | nindent 4 }}
+    {{- include "greptimedb-cluster.labels" $root | nindent 4 }}
 data:
   {{ $key }}.json: |-
 {{ $root.Files.Get (printf "dashboards/%s.json" $key) | indent 4 }}
