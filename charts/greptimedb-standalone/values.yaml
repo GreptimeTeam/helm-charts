@@ -16,6 +16,9 @@ nameOverride: ""
 # -- Provide a name to substitute for the full names of resources
 fullnameOverride: ""
 
+# -- additional labels to add to all resources
+additionalLabels: {}
+
 serviceAccount:
   # -- Specifies whether a service account should be created
   create: true

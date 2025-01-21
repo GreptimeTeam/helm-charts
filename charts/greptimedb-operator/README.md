@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.2.15](https://img.shields.io/badge/Version-0.2.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.4-alpha.3](https://img.shields.io/badge/AppVersion-0.1.4--alpha.3-informational?style=flat-square)
+![Version: 0.2.16](https://img.shields.io/badge/Version-0.2.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.4-alpha.3](https://img.shields.io/badge/AppVersion-0.1.4--alpha.3-informational?style=flat-square)
 
 ## Source Code
 
@@ -100,6 +100,7 @@ Kubernetes: `>=1.18.0-0`
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| additionalLabels | object | `{}` | additional labels to add to all resources |
 | affinity | object | `{}` | The pod affinity |
 | apiServer | object | `{"enabled":false,"podMetrics":{"enabled":false},"port":8081}` | The configuration for the operator API server |
 | apiServer.enabled | bool | `false` | Whether to enable the API server |

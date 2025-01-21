@@ -8,6 +8,9 @@ image:
   # -- The image pull secrets
   pullSecrets: []
 
+# -- additional labels to add to all resources
+additionalLabels: {}
+
 initializer:
   # -- Initializer image registry
   registry: docker.io

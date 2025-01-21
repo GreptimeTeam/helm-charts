@@ -3,6 +3,8 @@ kind: GreptimeDBCluster
 metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "greptimedb-cluster.labels" . | nindent 4 }}
 spec:
   base:
     main:

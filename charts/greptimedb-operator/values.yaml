@@ -12,6 +12,9 @@ image:
   # -- The image pull secrets
   pullSecrets: []
 
+# -- additional labels to add to all resources
+additionalLabels: {}
+
 serviceAccount:
   # -- Specifies whether a service account should be created
   create: true
