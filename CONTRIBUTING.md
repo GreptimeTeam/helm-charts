@@ -8,7 +8,7 @@ Contributions are welcome through GitHub pull request. This document outlines th
 2. Bump the chart version and update chart documentation.
 3. Submit a pull request.
 
-In order to make testing and merging of PR easier, please submit modifications to one chart in a separate pull request.
+To simplify testing and merging, please submit changes for only one chart per pull request.
 
 ### Technical Requirements
 
