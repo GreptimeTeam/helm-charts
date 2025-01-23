@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.45](https://img.shields.io/badge/Version-0.2.45-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.2](https://img.shields.io/badge/AppVersion-0.11.2-informational?style=flat-square)
+![Version: 0.2.46](https://img.shields.io/badge/Version-0.2.46-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.2](https://img.shields.io/badge/AppVersion-0.11.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -104,6 +104,13 @@ helm uninstall mycluster -n default
 | base.podTemplate.securityContext | object | `{}` | The configurations for pod security context. |
 | base.podTemplate.serviceAccountName | string | `""` | The global service account |
 | base.podTemplate.tolerations | list | `[]` | The pod tolerations |
+| dashboards | object | `{"annotations":{},"enabled":false,"extraLabels":{},"label":"grafana_dashboard","labelValue":"1","namespace":""}` | Deploy grafana dashboards for the grafana dashboard sidecar. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards |
+| dashboards.annotations | object | `{}` | Additional annotation for the configmap |
+| dashboards.enabled | bool | `false` | Enable the grafana dashboards sidecar. |
+| dashboards.extraLabels | object | `{}` | Extra labels for the configmap |
+| dashboards.label | string | `"grafana_dashboard"` | The label as defined in the grafana helmchart. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards |
+| dashboards.labelValue | string | `"1"` | The label value as defined in the grafana helmchart. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards |
+| dashboards.namespace | string | `""` | The namespace in which the grafana dashboard configmaps are installed |
 | datanode | object | `{"configData":"","configFile":"","logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storage":{"annotations":{},"dataHome":"/data/greptimedb","labels":{},"mountPath":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"10Gi"}}` | Datanode configure |
 | datanode.configData | string | `""` | Extra raw toml config data of datanode. Skip if the `configFile` is used. |
 | datanode.configFile | string | `""` | Extra toml file of datanode. |
@@ -198,11 +205,9 @@ helm uninstall mycluster -n default
 | frontend.replicas | int | `1` | Frontend replicas |
 | frontend.service | object | `{}` | Frontend service |
 | frontend.tls | object | `{}` | Frontend tls configure |
-| grafana | object | `{"adminPassword":"gt-operator","adminUser":"admin","dashboardProviders":{"dashboardproviders.yaml":{"apiVersion":1,"providers":[{"disableDeletion":false,"editable":true,"name":"greptimedb-cluster-metrics","options":{"path":"/var/lib/grafana/dashboards/greptimedb-cluster-metrics"},"orgId":1,"type":"file"},{"disableDeletion":false,"editable":true,"name":"greptimedb-cluster-logs","options":{"path":"/var/lib/grafana/dashboards/greptimedb-cluster-logs"},"orgId":1,"type":"file"},{"disableDeletion":false,"editable":true,"name":"greptimedb-cluster-slow-queries","options":{"path":"/var/lib/grafana/dashboards/greptimedb-cluster-slow-queries"},"orgId":1,"type":"file"}]}},"dashboardsConfigMaps":{"greptimedb-cluster-logs":"greptimedb-cluster-logs-dashboard","greptimedb-cluster-metrics":"greptimedb-cluster-metrics-dashboard","greptimedb-cluster-slow-queries":"greptimedb-cluster-slow-queries-dashboard"},"datasources":{"datasources.yaml":{"datasources":[{"access":"proxy","isDefault":true,"name":"metrics","type":"prometheus","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus"},{"access":"proxy","database":"public","name":"logs","type":"mysql","url":"mycluster-monitor-standalone.default.svc.cluster.local:4002"},{"access":"proxy","database":"information_schema","name":"information_schema","type":"mysql","url":"mycluster-frontend.default.svc.cluster.local:4002"}]}},"enabled":false,"image":{"registry":"docker.io","repository":"grafana/grafana","tag":"11.1.3"},"initChownData":{"enabled":false},"persistence":{"accessModes":["ReadWriteOnce"],"enabled":true,"size":"10Gi"},"service":{"annotations":{},"enabled":true,"type":"ClusterIP"}}` | Deploy grafana for monitoring. |
+| grafana | object | `{"adminPassword":"gt-operator","adminUser":"admin","datasources":{"datasources.yaml":{"datasources":[{"access":"proxy","isDefault":true,"name":"metrics","type":"prometheus","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus"},{"access":"proxy","database":"public","name":"logs","type":"mysql","url":"mycluster-monitor-standalone.default.svc.cluster.local:4002"},{"access":"proxy","database":"information_schema","name":"information_schema","type":"mysql","url":"mycluster-frontend.default.svc.cluster.local:4002"}]}},"enabled":false,"image":{"registry":"docker.io","repository":"grafana/grafana","tag":"11.1.3"},"initChownData":{"enabled":false},"persistence":{"accessModes":["ReadWriteOnce"],"enabled":true,"size":"10Gi"},"service":{"annotations":{},"enabled":true,"type":"ClusterIP"},"sidecar":{"dashboards":{"enabled":true,"provider":{"allowUiUpdates":true},"searchNamespace":"ALL"}}}` | Deploy grafana for monitoring. |
 | grafana.adminPassword | string | `"gt-operator"` | The default admin password for grafana. |
 | grafana.adminUser | string | `"admin"` | The default admin username for grafana. |
-| grafana.dashboardProviders | object | `{"dashboardproviders.yaml":{"apiVersion":1,"providers":[{"disableDeletion":false,"editable":true,"name":"greptimedb-cluster-metrics","options":{"path":"/var/lib/grafana/dashboards/greptimedb-cluster-metrics"},"orgId":1,"type":"file"},{"disableDeletion":false,"editable":true,"name":"greptimedb-cluster-logs","options":{"path":"/var/lib/grafana/dashboards/greptimedb-cluster-logs"},"orgId":1,"type":"file"},{"disableDeletion":false,"editable":true,"name":"greptimedb-cluster-slow-queries","options":{"path":"/var/lib/grafana/dashboards/greptimedb-cluster-slow-queries"},"orgId":1,"type":"file"}]}}` | The grafana dashboard providers. |
-| grafana.dashboardsConfigMaps | object | `{"greptimedb-cluster-logs":"greptimedb-cluster-logs-dashboard","greptimedb-cluster-metrics":"greptimedb-cluster-metrics-dashboard","greptimedb-cluster-slow-queries":"greptimedb-cluster-slow-queries-dashboard"}` | The grafana dashboards configmaps that will be created to store the dashboards. |
 | grafana.datasources | object | `{"datasources.yaml":{"datasources":[{"access":"proxy","isDefault":true,"name":"metrics","type":"prometheus","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus"},{"access":"proxy","database":"public","name":"logs","type":"mysql","url":"mycluster-monitor-standalone.default.svc.cluster.local:4002"},{"access":"proxy","database":"information_schema","name":"information_schema","type":"mysql","url":"mycluster-frontend.default.svc.cluster.local:4002"}]}}` | The grafana datasources. |
 | grafana.enabled | bool | `false` | Enable grafana deployment. It needs to enable monitoring `monitoring.enabled: true` first. |
 | grafana.image | object | `{"registry":"docker.io","repository":"grafana/grafana","tag":"11.1.3"}` | The grafana image. |
@@ -219,6 +224,7 @@ helm uninstall mycluster -n default
 | grafana.service.annotations | object | `{}` | The annotations for the grafana service. |
 | grafana.service.enabled | bool | `true` | Whether to create the service for grafana. |
 | grafana.service.type | string | `"ClusterIP"` | The type of the service. |
+| grafana.sidecar | object | `{"dashboards":{"enabled":true,"provider":{"allowUiUpdates":true},"searchNamespace":"ALL"}}` | The grafana sidecar settings to import dashboards |
 | grpcServicePort | int | `4001` | GreptimeDB grpc service port |
 | httpServicePort | int | `4000` | GreptimeDB http service port |
 | image.pullSecrets | list | `[]` | The image pull secrets |

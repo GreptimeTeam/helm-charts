@@ -943,6 +943,21 @@ logging:
     # -- Sample ratio of slow query log.
     sampleRatio: "1.0"
 
+# -- Deploy grafana dashboards for the grafana dashboard sidecar. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
+dashboards:
+  # -- Enable the grafana dashboards sidecar.
+  enabled: false
+  # -- The namespace in which the grafana dashboard configmaps are installed
+  namespace: ""
+  # -- The label as defined in the grafana helmchart. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
+  label: grafana_dashboard
+  # -- The label value as defined in the grafana helmchart. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
+  labelValue: "1"
+  # -- Additional annotation for the configmap
+  annotations: {}
+  # -- Extra labels for the configmap
+  extraLabels: {}
+
 # -- Deploy grafana for monitoring.
 grafana:
   # -- Enable grafana deployment. It needs to enable monitoring `monitoring.enabled: true` first.
@@ -963,38 +978,13 @@ grafana:
     # -- The grafana image tag.
     tag: 11.1.3
 
-  # -- The grafana dashboard providers.
-  dashboardProviders:
-    dashboardproviders.yaml:
-      apiVersion: 1
-      providers:
-        - name: greptimedb-cluster-metrics
-          orgId: 1
-          type: file
-          disableDeletion: false
-          editable: true
-          options:
-            path: /var/lib/grafana/dashboards/greptimedb-cluster-metrics
-        - name: greptimedb-cluster-logs
-          orgId: 1
-          type: file
-          disableDeletion: false
-          editable: true
-          options:
-            path: /var/lib/grafana/dashboards/greptimedb-cluster-logs
-        - name: greptimedb-cluster-slow-queries
-          orgId: 1
-          type: file
-          disableDeletion: false
-          editable: true
-          options:
-            path: /var/lib/grafana/dashboards/greptimedb-cluster-slow-queries
-
-  # -- The grafana dashboards configmaps that will be created to store the dashboards.
-  dashboardsConfigMaps:
-    greptimedb-cluster-metrics: greptimedb-cluster-metrics-dashboard
-    greptimedb-cluster-logs: greptimedb-cluster-logs-dashboard
-    greptimedb-cluster-slow-queries: greptimedb-cluster-slow-queries-dashboard
+  # -- The grafana sidecar settings to import dashboards
+  sidecar:
+    dashboards:
+      enabled: true
+      searchNamespace: ALL
+      provider:
+        allowUiUpdates: true
 
   # -- The grafana datasources.
   datasources:
