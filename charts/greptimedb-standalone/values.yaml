@@ -4,7 +4,7 @@ image:
   # -- The image repository
   repository: greptime/greptimedb
   # -- The image tag
-  tag: "v0.11.2"
+  tag: "v0.11.3"
   # -- The image pull policy for the controller
   pullPolicy: IfNotPresent
   # -- The image pull secrets.
