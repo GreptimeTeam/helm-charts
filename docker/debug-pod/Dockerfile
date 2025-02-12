@@ -1,14 +1,12 @@
 FROM ubuntu:22.04
 
-RUN ARCH=$(dpkg --print-architecture) && echo "Using architecture: $ARCH"
-
-# supporting command install
+# Supporting Command Install
 RUN apt-get update && apt-get install -y \
     wget \
+    tar \
     sudo \
     curl \
     unzip \
-    tar \
     net-tools \
     iproute2 \
     telnet \
@@ -16,29 +14,35 @@ RUN apt-get update && apt-get install -y \
     gcc \
     mysql-client \
     postgresql-client \
-    jq
+    jq \
+    python3 \
+    python3-pip
 
-# etcdctl cli install
-RUN wget "https://github.com/etcd-io/etcd/releases/download/v3.5.0/etcd-v3.5.0-linux-${ARCH}.tar.gz" && \
+# ETCD CLI Install
+RUN ARCH=$(dpkg --print-architecture) && \
+    wget "https://github.com/etcd-io/etcd/releases/download/v3.5.0/etcd-v3.5.0-linux-${ARCH}.tar.gz" && \
     tar zxvf "etcd-v3.5.0-linux-${ARCH}.tar.gz" && \
     sudo mv etcd-v3.5.0-linux-${ARCH}/etcdctl /usr/local/bin/ && \
     rm -rf etcd-v3.5.0-linux-${ARCH}*
 
-# aws cli install
-RUN if [ "$ARCH" = "amd64" ]; then \
+# AWS CLI Install
+RUN ARCH=$(dpkg --print-architecture) && \
+    if [ "$ARCH" = "amd64" ]; then \
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"; \
     else \
         curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"; \
     fi && \
     unzip awscliv2.zip && \
-    sudo ./aws/install && \
-    rm awscliv2.zip
+    ./aws/install && \
+    rm -rf awscliv2.zip aws/
 
-# aliyun cli install
-RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/aliyun/aliyun-cli/HEAD/install.sh)"
+# AliCloud CLI Install
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/aliyun/aliyun-cli/HEAD/install.sh)" && \
+    rm aliyun-cli-linux-latest-*
 
-# gcloud cli install
-RUN if [ "$ARCH" = "amd64" ]; then \
+# Google Cloud CLI Install
+RUN ARCH=$(dpkg --print-architecture) && \
+    if [ "$ARCH" = "amd64" ]; then \
         curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz; \
     else \
         curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-arm.tar.gz; \
@@ -47,9 +51,10 @@ RUN if [ "$ARCH" = "amd64" ]; then \
     ./google-cloud-sdk/install.sh && \
     rm -rf google-cloud-cli-linux-*
 
-# kubectl cli install
-RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$(dpkg --print-architecture)/kubectl" \
-    && curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$(dpkg --print-architecture)/kubectl.sha256" \
+# Kubectl CLI Install
+RUN ARCH=$(dpkg --print-architecture) && \
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${ARCH}/kubectl" \
+    && curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${ARCH}/kubectl.sha256" \
     && echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check \
     && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
     && kubectl version --client

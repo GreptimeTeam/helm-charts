@@ -804,7 +804,7 @@ auth:
       password: "admin"
 
 debugPod:
-  # -- Enable debug pod
+  # -- Enable debug pod, for more information see: "../../docker/debug-pod/README.md".
   enabled: false
 
   # -- The debug pod image
