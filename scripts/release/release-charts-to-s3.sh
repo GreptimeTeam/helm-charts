@@ -36,16 +36,16 @@ function release_charts_to_s3() {
 
   echo "Releasing package '$package' to 's3://$GREPTIME_RELEASE_BUCKET/$RELEASE_DIR/$chart/$version'..."
 
-  aws s3 cp "$chart"/"$package" s3://"$GREPTIME_RELEASE_BUCKET"/"$RELEASE_DIR"/"$chart"/"$version"/"$package"
+  s5cmd cp "$chart"/"$package" s3://"$GREPTIME_RELEASE_BUCKET"/"$RELEASE_DIR"/"$chart"/"$version"/"$package"
 
   echo "Releasing package "$chart-latest.tgz" to 's3://$GREPTIME_RELEASE_BUCKET/$RELEASE_DIR/$chart/latest'..."
 
-  aws s3 cp "$chart"/"$package" s3://"$GREPTIME_RELEASE_BUCKET"/"$RELEASE_DIR"/"$chart"/latest/"$chart"-latest.tgz
+  s5cmd cp "$chart"/"$package" s3://"$GREPTIME_RELEASE_BUCKET"/"$RELEASE_DIR"/"$chart"/latest/"$chart"-latest.tgz
 
   echo "$version" > latest-version.txt
 
   # Create a latest-version.txt file in the chart directory.
-  aws s3 cp latest-version.txt s3://"$GREPTIME_RELEASE_BUCKET"/"$RELEASE_DIR"/"$chart"/latest-version.txt
+  s5cmd cp latest-version.txt s3://"$GREPTIME_RELEASE_BUCKET"/"$RELEASE_DIR"/"$chart"/latest-version.txt
 }
 
 function main() {
