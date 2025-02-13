@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.ALICLOUD_USERNAME }}
           password: ${{ secrets.ALICLOUD_PASSWORD }}
 
-      - name: Configure build image tag # The image tag will be like '20230116-6441c463'
+      - name: Configure build image tag # The image tag will be like '20250213-e64e46c'
         shell: bash
         run: |
           buildTime=`date "+%Y%m%d"`
