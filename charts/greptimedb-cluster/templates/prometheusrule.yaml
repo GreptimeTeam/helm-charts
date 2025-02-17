@@ -1,0 +1,21 @@
+{{- if and .Values.prometheusRule .Values.prometheusRule.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ .Release.Name }}-prometheus-rules
+  namespace: {{ default .Release.Namespace .Values.prometheusRule.namespace }}
+  labels:
+    {{- include "greptimedb-cluster.labels" . | nindent 4 }}
+  {{- if .Values.prometheusRule.labels }}
+    {{- toYaml .Values.prometheusRule.labels | nindent 4 }}
+  {{- end }}
+  {{- if .Values.prometheusRule.annotations }}
+  annotations: {{ toYaml .Values.prometheusRule.annotations | nindent 4 }}
+  {{- end }}
+spec:
+{{- if .Values.prometheusRule.rules }}
+  groups:
+    - name: {{ .Release.Name }}
+      rules: {{- toYaml .Values.prometheusRule.rules | nindent 4 }}
+{{- end }}
+{{- end }}

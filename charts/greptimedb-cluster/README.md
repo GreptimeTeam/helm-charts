@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.49](https://img.shields.io/badge/Version-0.2.49-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.3](https://img.shields.io/badge/AppVersion-0.11.3-informational?style=flat-square)
+![Version: 0.2.50](https://img.shields.io/badge/Version-0.2.50-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.3](https://img.shields.io/badge/AppVersion-0.11.3-informational?style=flat-square)
 
 ## Source Code
 
@@ -309,6 +309,12 @@ helm uninstall mycluster -n default
 | prometheusMonitor.enabled | bool | `false` | Create PodMonitor resource for scraping metrics using PrometheusOperator |
 | prometheusMonitor.interval | string | `"30s"` | Interval at which metrics should be scraped |
 | prometheusMonitor.labels | object | `{"release":"prometheus"}` | Add labels to the PodMonitor |
+| prometheusRule | object | `{"annotations":{},"enabled":false,"labels":{},"namespace":"","rules":[]}` | Configure to PrometheusRule |
+| prometheusRule.annotations | object | `{}` | Additional annotations for the rules PrometheusRule resource |
+| prometheusRule.enabled | bool | `false` | If enabled, create PrometheusRule resource |
+| prometheusRule.labels | object | `{}` | Additional labels for the rules PrometheusRule resource |
+| prometheusRule.namespace | string | `""` | The namespace of prometheus rules |
+| prometheusRule.rules | list | `[]` | The prometheus rules |
 | remoteWal | object | `{"enabled":false,"kafka":{"brokerEndpoints":[]}}` | Configure to remote wal |
 | remoteWal.enabled | bool | `false` | Enable remote wal |
 | remoteWal.kafka | object | `{"brokerEndpoints":[]}` | The remote wal type, only support kafka now. |
