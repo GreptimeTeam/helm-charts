@@ -729,6 +729,60 @@ prometheusMonitor:
   labels:
     release: prometheus
 
+# -- Configure to PrometheusRule
+prometheusRule:
+  # -- If enabled, create PrometheusRule resource
+  enabled: false
+  # -- Additional annotations for the rules PrometheusRule resource
+  annotations: {}
+  # -- Additional labels for the rules PrometheusRule resource
+  labels: {}
+  # -- The namespace of prometheus rules
+  namespace: ""
+  # -- The prometheus rules
+  rules: []
+  # # These are examples rules, please adapt them to your needs
+#    - alert: HighGRPCRequestLatency
+#      expr: histogram_quantile(0.99, sum by(pod, le) (rate(greptime_servers_grpc_requests_elapsed_bucket[1m]))) > 1
+#      for: 5s
+#      labels:
+#        severity: warning
+#      annotations:
+#        description: "The 99th percentile of gRPC request latency is above the threshold for pod: {{ $labels.pod }}"
+#        summary: "High gRPC request latency for greptimedb pods"
+#    - alert: HighHTTPRequestLatency
+#      expr: histogram_quantile(0.99, sum by(pod, le) (rate(greptime_servers_http_requests_elapsed_bucket[1m]))) > 1
+#      for: 5s
+#      labels:
+#        severity: warning
+#      annotations:
+#        description: "The 99th percentile of HTTP request latency is above the threshold for pod: {{ $labels.pod }}"
+#        summary: "High HTTP request latency for greptimedb pods"
+#    - alert: HighMySQLRequestLatency
+#      expr: histogram_quantile(0.99, sum by(pod, le) (rate(greptime_servers_mysql_query_elapsed_bucket[1m]))) > 1
+#      for: 5s
+#      labels:
+#        severity: warning
+#      annotations:
+#        description: "The 99th percentile of MySQL request latency is above the threshold for pod: {{ $labels.pod }}"
+#        summary: "High MySQL request latency for greptimedb pods"
+#    - alert: HighPostgreSQLRequestLatency
+#      expr: histogram_quantile(0.99, sum by(pod, le) (rate(greptime_servers_postgres_query_elapsed_bucket[1m]))) > 1
+#      for: 5s
+#      labels:
+#        severity: warning
+#      annotations:
+#        description: "The 99th percentile of PostgreSQL request latency is above the threshold for pod: {{ $labels.pod }}"
+#        summary: "High PostgreSQL request latency for greptimedb pods"
+#    - alert: CompactionFailures
+#      expr: increase(greptime_mito_compaction_failure_total[1h]) > 2
+#      for: 10m
+#      labels:
+#        severity: warning
+#      annotations:
+#        summary: "GreptimeDB compaction failures"
+#        description: "GreptimeDB compaction failures have increased by more than {{ $value }} in the last hour"
+
 # -- Configure to object storage
 objectStorage:
 #  credentials:
