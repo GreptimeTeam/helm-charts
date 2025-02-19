@@ -1,4 +1,3 @@
-
 image:
   # -- The image registry
   registry: docker.io
@@ -47,57 +46,57 @@ base:
 
       # -- The config for startup probe of the main container
       startupProbe: {}
-      #        httpGet:
-      #          # -- Path to access on the HTTP server
-      #          path: /health
-      #          # -- Name or number of the port to access on the container
-      #          port: 4000
-      #          # -- The initial delay seconds for the readiness probe.
-      #          initialDelaySeconds: 5
-      #          # -- The timeout seconds for the readiness probe
-      #          timeoutSeconds: 1
-      #          # -- The period seconds for the readiness probe
-      #          periodSeconds: 10
-      #          # -- The success threshold for the readiness probe
-      #          successThreshold: 1
-      #          # -- The failure threshold for the readiness probe
-      #          failureThreshold: 3
+#        httpGet:
+#          # -- Path to access on the HTTP server
+#          path: /health
+#          # -- Name or number of the port to access on the container
+#          port: 4000
+#          # -- The initial delay seconds for the readiness probe.
+#          initialDelaySeconds: 5
+#          # -- The timeout seconds for the readiness probe
+#          timeoutSeconds: 1
+#          # -- The period seconds for the readiness probe
+#          periodSeconds: 10
+#          # -- The success threshold for the readiness probe
+#          successThreshold: 1
+#          # -- The failure threshold for the readiness probe
+#          failureThreshold: 3
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
-      #        httpGet:
-      #        # -- Path to access on the HTTP server
-      #          path: /health
-      #        # -- Name or number of the port to access on the container
-      #          port: 4000
-      #        # -- The initial delay seconds for the readiness probe
-      #        initialDelaySeconds: 5
-      #        # -- The timeout seconds for the readiness probe
-      #        timeoutSeconds: 1
-      #        # -- The period seconds for the readiness probe
-      #        periodSeconds: 10
-      #        # -- The success threshold for the readiness probe
-      #        successThreshold: 1
-      #        # -- The failure threshold for the readiness probe
-      #        failureThreshold: 3
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
+#        # -- The initial delay seconds for the readiness probe
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
       # -- The config for liveness probe of the main container
       livenessProbe: {}
-      #        httpGet:
-      #        # -- Path to access on the HTTP server
-      #          path: /health
-      #        # -- Name or number of the port to access on the container
-      #          port: 4000
-      #        # -- The initial delay seconds for the readiness probe.
-      #        initialDelaySeconds: 5
-      #        # -- The timeout seconds for the readiness probe
-      #        timeoutSeconds: 1
-      #        # -- The period seconds for the readiness probe
-      #        periodSeconds: 10
-      #        # -- The success threshold for the readiness probe
-      #        successThreshold: 1
-      #        # -- The failure threshold for the readiness probe
-      #        failureThreshold: 3
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
       # -- The configurations for security context of main container.
       securityContext: {}
@@ -160,57 +159,57 @@ frontend:
 
       # -- The config for startup probe of the main container
       startupProbe: {}
-      #        httpGet:
-      #          # -- Path to access on the HTTP server
-      #          path: /health
-      #          # -- Name or number of the port to access on the container
-      #          port: 4000
-      #          # -- The initial delay seconds for the readiness probe.
-      #          initialDelaySeconds: 5
-      #          # -- The timeout seconds for the readiness probe
-      #          timeoutSeconds: 1
-      #          # -- The period seconds for the readiness probe
-      #          periodSeconds: 10
-      #          # -- The success threshold for the readiness probe
-      #          successThreshold: 1
-      #          # -- The failure threshold for the readiness probe
-      #          failureThreshold: 3
+#        httpGet:
+#          # -- Path to access on the HTTP server
+#          path: /health
+#          # -- Name or number of the port to access on the container
+#          port: 4000
+#          # -- The initial delay seconds for the readiness probe.
+#          initialDelaySeconds: 5
+#          # -- The timeout seconds for the readiness probe
+#          timeoutSeconds: 1
+#          # -- The period seconds for the readiness probe
+#          periodSeconds: 10
+#          # -- The success threshold for the readiness probe
+#          successThreshold: 1
+#          # -- The failure threshold for the readiness probe
+#          failureThreshold: 3
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
-      #        httpGet:
-      #        # -- Path to access on the HTTP server
-      #          path: /health
-      #        # -- Name or number of the port to access on the container
-      #          port: 4000
-      #        # -- The initial delay seconds for the readiness probe.
-      #        initialDelaySeconds: 5
-      #        # -- The timeout seconds for the readiness probe
-      #        timeoutSeconds: 1
-      #        # -- The period seconds for the readiness probe
-      #        periodSeconds: 10
-      #        # -- The success threshold for the readiness probe
-      #        successThreshold: 1
-      #        # -- The failure threshold for the readiness probe
-      #        failureThreshold: 3
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
       # -- The config for liveness probe of the main container
       livenessProbe: {}
-      #        httpGet:
-      #        # -- Path to access on the HTTP server
-      #          path: /health
-      #        # -- Name or number of the port to access on the container
-      #          port: 4000
-      #        # -- The initial delay seconds for the readiness probe.
-      #        initialDelaySeconds: 5
-      #        # -- The timeout seconds for the readiness probe
-      #        timeoutSeconds: 1
-      #        # -- The period seconds for the readiness probe
-      #        periodSeconds: 10
-      #        # -- The success threshold for the readiness probe
-      #        successThreshold: 1
-      #        # -- The failure threshold for the readiness probe
-      #        failureThreshold: 3
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
       # -- The configurations for frontend container.
       securityContext: {}
@@ -242,7 +241,7 @@ frontend:
 
   # -- Frontend tls configure
   tls: {}
-  #    secretName: greptimedb-frontend-tls
+#    secretName: greptimedb-frontend-tls
 
   # -- Logging configuration for frontend, if not set, it will use the global logging configuration.
   logging: {}
@@ -307,57 +306,57 @@ meta:
 
       # -- The config for startup probe of the main container
       startupProbe: {}
-      #        httpGet:
-      #          # -- Path to access on the HTTP server
-      #          path: /health
-      #          # -- Name or number of the port to access on the container
-      #          port: 4000
-      #          # -- The initial delay seconds for the readiness probe.
-      #          initialDelaySeconds: 5
-      #          # -- The timeout seconds for the readiness probe
-      #          timeoutSeconds: 1
-      #          # -- The period seconds for the readiness probe
-      #          periodSeconds: 10
-      #          # -- The success threshold for the readiness probe
-      #          successThreshold: 1
-      #          # -- The failure threshold for the readiness probe
-      #          failureThreshold: 3
+#        httpGet:
+#          # -- Path to access on the HTTP server
+#          path: /health
+#          # -- Name or number of the port to access on the container
+#          port: 4000
+#          # -- The initial delay seconds for the readiness probe.
+#          initialDelaySeconds: 5
+#          # -- The timeout seconds for the readiness probe
+#          timeoutSeconds: 1
+#          # -- The period seconds for the readiness probe
+#          periodSeconds: 10
+#          # -- The success threshold for the readiness probe
+#          successThreshold: 1
+#          # -- The failure threshold for the readiness probe
+#          failureThreshold: 3
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
-      #        httpGet:
-      #        # -- Path to access on the HTTP server
-      #          path: /health
-      #        # -- Name or number of the port to access on the container
-      #          port: 4000
-      #        # -- The initial delay seconds for the readiness probe.
-      #        initialDelaySeconds: 5
-      #        # -- The timeout seconds for the readiness probe
-      #        timeoutSeconds: 1
-      #        # -- The period seconds for the readiness probe
-      #        periodSeconds: 10
-      #        # -- The success threshold for the readiness probe
-      #        successThreshold: 1
-      #        # -- The failure threshold for the readiness probe
-      #        failureThreshold: 3
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
       # -- The config for liveness probe of the main container
       livenessProbe: {}
-      #        httpGet:
-      #        # -- Path to access on the HTTP server
-      #          path: /health
-      #        # -- Name or number of the port to access on the container
-      #          port: 4000
-      #        # -- The initial delay seconds for the readiness probe.
-      #        initialDelaySeconds: 5
-      #        # -- The timeout seconds for the readiness probe
-      #        timeoutSeconds: 1
-      #        # -- The period seconds for the readiness probe
-      #        periodSeconds: 10
-      #        # -- The success threshold for the readiness probe
-      #        successThreshold: 1
-      #        # -- The failure threshold for the readiness probe
-      #        failureThreshold: 3
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
       # -- The configurations for meta security context.
       securityContext: {}
@@ -455,57 +454,57 @@ datanode:
       volumeMounts: []
       # -- The config for startup probe of the main container
       startupProbe: {}
-      #        httpGet:
-      #          # -- Path to access on the HTTP server
-      #          path: /health
-      #          # -- Name or number of the port to access on the container
-      #          port: 4000
-      #          # -- The initial delay seconds for the readiness probe.
-      #          initialDelaySeconds: 5
-      #          # -- The timeout seconds for the readiness probe
-      #          timeoutSeconds: 1
-      #          # -- The period seconds for the readiness probe
-      #          periodSeconds: 10
-      #          # -- The success threshold for the readiness probe
-      #          successThreshold: 1
-      #          # -- The failure threshold for the readiness probe
-      #          failureThreshold: 3
+#        httpGet:
+#          # -- Path to access on the HTTP server
+#          path: /health
+#          # -- Name or number of the port to access on the container
+#          port: 4000
+#          # -- The initial delay seconds for the readiness probe.
+#          initialDelaySeconds: 5
+#          # -- The timeout seconds for the readiness probe
+#          timeoutSeconds: 1
+#          # -- The period seconds for the readiness probe
+#          periodSeconds: 10
+#          # -- The success threshold for the readiness probe
+#          successThreshold: 1
+#          # -- The failure threshold for the readiness probe
+#          failureThreshold: 3
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
-      #        httpGet:
-      #        # -- Path to access on the HTTP server
-      #          path: /health
-      #        # -- Name or number of the port to access on the container
-      #          port: 4000
-      #        # -- The initial delay seconds for the readiness probe.
-      #        initialDelaySeconds: 5
-      #        # -- The timeout seconds for the readiness probe
-      #        timeoutSeconds: 1
-      #        # -- The period seconds for the readiness probe
-      #        periodSeconds: 10
-      #        # -- The success threshold for the readiness probe
-      #        successThreshold: 1
-      #        # -- The failure threshold for the readiness probe
-      #        failureThreshold: 3
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
       # -- The config for liveness probe of the main container
       livenessProbe: {}
-      #        httpGet:
-      #        # -- Path to access on the HTTP server
-      #          path: /health
-      #        # -- Name or number of the port to access on the container
-      #          port: 4000
-      #        # -- The initial delay seconds for the readiness probe.
-      #        initialDelaySeconds: 5
-      #        # -- The timeout seconds for the readiness probe
-      #        timeoutSeconds: 1
-      #        # -- The period seconds for the readiness probe
-      #        periodSeconds: 10
-      #        # -- The success threshold for the readiness probe
-      #        successThreshold: 1
-      #        # -- The failure threshold for the readiness probe
-      #        failureThreshold: 3
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
       # -- The configurations for datanode security context.
       securityContext: {}
@@ -584,23 +583,23 @@ flownode:
 
   # -- Logging configuration for flownode, if not set, it will use the global logging configuration.
   logging: {}
-  #      # -- The log level for greptimedb, only support "debug", "info", "warn", "debug"
-  #      level: "info"
-  #
-  #      # -- The log format for greptimedb, only support "json" and "text"
-  #      format: "text"
-  #
-  #      # -- The logs directory for greptimedb
-  #      logsDir: "/data/greptimedb/logs"
-  #
-  #      # -- Whether to log to stdout only
-  #      onlyLogToStdout: false
-  #
-  #      # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
-  #      persistentWithData: false
-  #
-  #      # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
-  #      filters: []
+#      # -- The log level for greptimedb, only support "debug", "info", "warn", "debug"
+#      level: "info"
+#
+#      # -- The log format for greptimedb, only support "json" and "text"
+#      format: "text"
+#
+#      # -- The logs directory for greptimedb
+#      logsDir: "/data/greptimedb/logs"
+#
+#      # -- Whether to log to stdout only
+#      onlyLogToStdout: false
+#
+#      # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
+#      persistentWithData: false
+#
+#      # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
+#      filters: []
 
   # -- The pod template for frontend
   podTemplate:
@@ -634,57 +633,57 @@ flownode:
 
       # -- The config for startup probe of the main container
       startupProbe: {}
-      #        httpGet:
-      #          # -- Path to access on the HTTP server
-      #          path: /health
-      #          # -- Name or number of the port to access on the container
-      #          port: 4000
-      #          # -- The initial delay seconds for the readiness probe.
-      #          initialDelaySeconds: 5
-      #          # -- The timeout seconds for the readiness probe
-      #          timeoutSeconds: 1
-      #          # -- The period seconds for the readiness probe
-      #          periodSeconds: 10
-      #          # -- The success threshold for the readiness probe
-      #          successThreshold: 1
-      #          # -- The failure threshold for the readiness probe
-      #          failureThreshold: 3
+#        httpGet:
+#          # -- Path to access on the HTTP server
+#          path: /health
+#          # -- Name or number of the port to access on the container
+#          port: 4000
+#          # -- The initial delay seconds for the readiness probe.
+#          initialDelaySeconds: 5
+#          # -- The timeout seconds for the readiness probe
+#          timeoutSeconds: 1
+#          # -- The period seconds for the readiness probe
+#          periodSeconds: 10
+#          # -- The success threshold for the readiness probe
+#          successThreshold: 1
+#          # -- The failure threshold for the readiness probe
+#          failureThreshold: 3
 
       # -- The config for readiness probe of the main container
       readinessProbe: {}
-      #        httpGet:
-      #        # -- Path to access on the HTTP server
-      #          path: /health
-      #        # -- Name or number of the port to access on the container
-      #          port: 4000
-      #        # -- The initial delay seconds for the readiness probe.
-      #        initialDelaySeconds: 5
-      #        # -- The timeout seconds for the readiness probe
-      #        timeoutSeconds: 1
-      #        # -- The period seconds for the readiness probe
-      #        periodSeconds: 10
-      #        # -- The success threshold for the readiness probe
-      #        successThreshold: 1
-      #        # -- The failure threshold for the readiness probe
-      #        failureThreshold: 3
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
       # -- The config for liveness probe of the main container
       livenessProbe: {}
-      #        httpGet:
-      #        # -- Path to access on the HTTP server
-      #          path: /health
-      #        # -- Name or number of the port to access on the container
-      #          port: 4000
-      #        # -- The initial delay seconds for the readiness probe.
-      #        initialDelaySeconds: 5
-      #        # -- The timeout seconds for the readiness probe
-      #        timeoutSeconds: 1
-      #        # -- The period seconds for the readiness probe
-      #        periodSeconds: 10
-      #        # -- The success threshold for the readiness probe
-      #        successThreshold: 1
-      #        # -- The failure threshold for the readiness probe
-      #        failureThreshold: 3
+#        httpGet:
+#        # -- Path to access on the HTTP server
+#          path: /health
+#        # -- Name or number of the port to access on the container
+#          port: 4000
+#        # -- The initial delay seconds for the readiness probe.
+#        initialDelaySeconds: 5
+#        # -- The timeout seconds for the readiness probe
+#        timeoutSeconds: 1
+#        # -- The period seconds for the readiness probe
+#        periodSeconds: 10
+#        # -- The success threshold for the readiness probe
+#        successThreshold: 1
+#        # -- The failure threshold for the readiness probe
+#        failureThreshold: 3
 
       # -- The configurations for flownode security context.
       securityContext: {}
@@ -786,40 +785,40 @@ prometheusRule:
 
 # -- Configure to object storage
 objectStorage:
-  #  credentials:
-  #    secretName: ""
+#  credentials:
+#    secretName: ""
 
-  #    # AWS or AliCloud cloudProvider accessKeyID and secretAccessKey
-  #    accessKeyId: "you-should-set-the-access-key-id-here"
-  #    secretAccessKey: "you-should-set-the-secret-access-key-here"
+#    # AWS or AliCloud cloudProvider accessKeyID and secretAccessKey
+#    accessKeyId: "you-should-set-the-access-key-id-here"
+#    secretAccessKey: "you-should-set-the-secret-access-key-here"
 
-  #    # Azure cloudProvider accountName and accountKey
-  #    accountName: "you-should-set-the-account-name-here"
-  #    accountKey: "you-should-set-the-account-key-here"
+#    # Azure cloudProvider accountName and accountKey
+#    accountName: "you-should-set-the-account-name-here"
+#    accountKey: "you-should-set-the-account-key-here"
 
-  #    # GCP cloudProvider serviceAccountKey JSON-formatted base64 value
-  #    serviceAccountKey: "you-should-set-the-base64-service-account-key-here"
+#    # GCP cloudProvider serviceAccountKey JSON-formatted base64 value
+#    serviceAccountKey: "you-should-set-the-base64-service-account-key-here"
 
-  #    # Set the existing secret to get the key's of cloudProvider
-  #    existingSecretName: ""
+#    # Set the existing secret to get the key's of cloudProvider
+#    existingSecretName: ""
 
   # configure to use s3 storage.
   s3: {}
-  #    bucket: "bucket-name"
-  #    region: "us-west-2"
+#    bucket: "bucket-name"
+#    region: "us-west-2"
 
-  #    # The data directory in S3 will be: 's3://<bucket>/<root>/data/...'.
-  #    root: "mycluster"
-  #    endpoint: "s3.us-west-2.amazonaws.com"   # See more detail: https://docs.aws.amazon.com/general/latest/gr/s3.html
+#    # The data directory in S3 will be: 's3://<bucket>/<root>/data/...'.
+#    root: "mycluster"
+#    endpoint: "s3.us-west-2.amazonaws.com"   # See more detail: https://docs.aws.amazon.com/general/latest/gr/s3.html
 
   # configure to use oss storage.
   oss: {}
-  #    bucket: "bucket-name"
-  #    region: "cn-hangzhou"
+#    bucket: "bucket-name"
+#    region: "cn-hangzhou"
 
-  #    # The data directory in OSS will be: 'oss://<bucket>/<root>/data/...'.
-  #    root: "mycluster"
-  #    endpoint: "oss-cn-hangzhou.aliyuncs.com"
+#    # The data directory in OSS will be: 'oss://<bucket>/<root>/data/...'.
+#    root: "mycluster"
+#    endpoint: "oss-cn-hangzhou.aliyuncs.com"
 
   # configure to use gcs storage
   gcs: {}
@@ -884,64 +883,64 @@ monitoring:
 
   # -- Configure the standalone instance for storing monitoring data
   standalone: {}
-  #     base:
-  #      main:
-  #        # -- The standalone image, if not set, it will use the cluster image.
-  #        image: ""
+#     base:
+#      main:
+#        # -- The standalone image, if not set, it will use the cluster image.
+#        image: ""
 
-  #        resources:
-  #          # -- The requested resources for monitoring
-  #          requests: {}
-  # #            cpu: 500m
-  # #            memory: 512Mi
+#        resources:
+#          # -- The requested resources for monitoring
+#          requests: {}
+# #            cpu: 500m
+# #            memory: 512Mi
 
-  #          # -- The resources limits for monitoring
-  #          limits: {}
-  # #            cpu: "1"
-  # #            memory: "1Gi"
+#          # -- The resources limits for monitoring
+#          limits: {}
+# #            cpu: "1"
+# #            memory: "1Gi"
 
-  #        # -- The environment variables for the container
-  #        env: []
+#        # -- The environment variables for the container
+#        env: []
 
-  #        # -- The command to be executed in the container
-  #        command: []
+#        # -- The command to be executed in the container
+#        command: []
 
-  #        # -- The arguments to be passed to the command
-  #        args: []
+#        # -- The arguments to be passed to the command
+#        args: []
 
-  #      # -- The annotations to be created to the pod for monitoring
-  #      annotations: {}
+#      # -- The annotations to be created to the pod for monitoring
+#      annotations: {}
 
-  #      # -- The labels to be created to the pod for monitoring
-  #      labels: {}
+#      # -- The labels to be created to the pod for monitoring
+#      labels: {}
 
-  #      # -- The pod node selector for monitoring
-  #      nodeSelector: {}
+#      # -- The pod node selector for monitoring
+#      nodeSelector: {}
 
-  #      # -- The pod tolerations for monitoring
-  #      tolerations: []
+#      # -- The pod tolerations for monitoring
+#      tolerations: []
 
-  #      # -- The pod affinity for monitoring
-  #      affinity: {}
+#      # -- The pod affinity for monitoring
+#      affinity: {}
 
-  #      # -- The global service account for monitoring
-  #      serviceAccountName: ""
-  #     datanodeStorage:
-  #       fs:
-  #         # -- Storage class for datanode persistent volume
-  #         storageClassName: test
-  #         # -- Storage size for datanode persistent volume
-  #         storageSize: 500Gi
-  #         # -- Storage retain policy for datanode persistent volume
-  #         storageRetainPolicy: Retain
-  #         # -- The dataHome directory, default is "/data/greptimedb/"
-  #         dataHome: "/data/greptimedb"
-  #         # -- The data directory of the storage, default is "/data/greptimedb"
-  #         mountPath: "/data/greptimedb"
-  #         # -- The labels for the PVC that will be created
-  #         labels: {}
-  #         # -- The annotations for the PVC that will be created
-  #         annotations: {}
+#      # -- The global service account for monitoring
+#      serviceAccountName: ""
+#     datanodeStorage:
+#       fs:
+#         # -- Storage class for datanode persistent volume
+#         storageClassName: test
+#         # -- Storage size for datanode persistent volume
+#         storageSize: 500Gi
+#         # -- Storage retain policy for datanode persistent volume
+#         storageRetainPolicy: Retain
+#         # -- The dataHome directory, default is "/data/greptimedb/"
+#         dataHome: "/data/greptimedb"
+#         # -- The data directory of the storage, default is "/data/greptimedb"
+#         mountPath: "/data/greptimedb"
+#         # -- The labels for the PVC that will be created
+#         labels: {}
+#         # -- The annotations for the PVC that will be created
+#         annotations: {}
 
   # -- Configure the logs collection
   logsCollection:
