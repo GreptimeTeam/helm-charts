@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.50](https://img.shields.io/badge/Version-0.2.50-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.3](https://img.shields.io/badge/AppVersion-0.11.3-informational?style=flat-square)
+![Version: 0.2.51](https://img.shields.io/badge/Version-0.2.51-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.3](https://img.shields.io/badge/AppVersion-0.11.3-informational?style=flat-square)
 
 ## Source Code
 
