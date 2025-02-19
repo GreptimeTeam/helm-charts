@@ -743,7 +743,7 @@ prometheusRule:
   rules: []
   # # These are examples rules, please adapt them to your needs
 #    - alert: HighGRPCRequestLatency
-#      expr: histogram_quantile(0.99, sum by(pod, le, path, code) (rate(greptime_servers_grpc_requests_elapsed_bucket[1m]))) > 1
+#      expr: histogram_quantile(0.99, sum by(pod, le) (rate(greptime_servers_grpc_requests_elapsed_bucket[1m]))) > 1
 #      for: 5s
 #      labels:
 #        severity: warning
@@ -751,7 +751,7 @@ prometheusRule:
 #        description: "The 99th percentile of gRPC request latency is above the threshold for pod: {{ $labels.pod }}"
 #        summary: "High gRPC request latency for greptimedb pods"
 #    - alert: HighHTTPRequestLatency
-#      expr: histogram_quantile(0.99, sum by(pod, le, path, code) (rate(greptime_servers_http_requests_elapsed_bucket[1m]))) > 1
+#      expr: histogram_quantile(0.99, sum by(pod, le) (rate(greptime_servers_http_requests_elapsed_bucket[1m]))) > 1
 #      for: 5s
 #      labels:
 #        severity: warning
@@ -759,7 +759,7 @@ prometheusRule:
 #        description: "The 99th percentile of HTTP request latency is above the threshold for pod: {{ $labels.pod }}"
 #        summary: "High HTTP request latency for greptimedb pods"
 #    - alert: HighMySQLRequestLatency
-#      expr: histogram_quantile(0.99, sum by(pod, le, path, code) (rate(greptime_servers_mysql_query_elapsed_bucket[1m]))) > 1
+#      expr: histogram_quantile(0.99, sum by(pod, le) (rate(greptime_servers_mysql_query_elapsed_bucket[1m]))) > 1
 #      for: 5s
 #      labels:
 #        severity: warning
@@ -767,7 +767,7 @@ prometheusRule:
 #        description: "The 99th percentile of MySQL request latency is above the threshold for pod: {{ $labels.pod }}"
 #        summary: "High MySQL request latency for greptimedb pods"
 #    - alert: HighPostgreSQLRequestLatency
-#      expr: histogram_quantile(0.99, sum by(pod, le, path, code) (rate(greptime_servers_postgres_query_elapsed_bucket[1m]))) > 1
+#      expr: histogram_quantile(0.99, sum by(pod, le) (rate(greptime_servers_postgres_query_elapsed_bucket[1m]))) > 1
 #      for: 5s
 #      labels:
 #        severity: warning
