@@ -16,6 +16,6 @@ spec:
 {{- if .Values.prometheusRule.rules }}
   groups:
     - name: {{ .Release.Name }}
-      rules: {{- toYaml .Values.prometheusRule.rules | nindent 4 }}
+      rules: {{- toYaml .Values.prometheusRule.rules | nindent 6 }}
 {{- end }}
 {{- end }}
