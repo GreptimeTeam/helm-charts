@@ -1079,6 +1079,8 @@ grafana:
       - ReadWriteOnce
     # -- The storage size for the grafana persistence.
     size: 10Gi
+    # -- The storageClassName for the grafana persistence.
+    storageClassName: null
 
   # -- The grafana service configuration.
   service:
