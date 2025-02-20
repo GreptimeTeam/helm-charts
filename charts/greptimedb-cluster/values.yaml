@@ -1015,7 +1015,7 @@ dashboards:
 # -- Deploy grafana for monitoring.
 grafana:
   # -- Enable grafana deployment. It needs to enable monitoring `monitoring.enabled: true` first.
-  enabled: false
+  enabled: true
 
   # -- The default admin username for grafana.
   adminUser: admin
@@ -1079,6 +1079,8 @@ grafana:
       - ReadWriteOnce
     # -- The storage size for the grafana persistence.
     size: 10Gi
+    # -- The storageClassName for the grafana persistence.
+    storageClassName: null
 
   # -- The grafana service configuration.
   service:
