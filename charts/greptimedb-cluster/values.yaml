@@ -1015,7 +1015,7 @@ dashboards:
 # -- Deploy grafana for monitoring.
 grafana:
   # -- Enable grafana deployment. It needs to enable monitoring `monitoring.enabled: true` first.
-  enabled: true
+  enabled: false
 
   # -- The default admin username for grafana.
   adminUser: admin
