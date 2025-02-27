@@ -710,6 +710,52 @@ flownode:
     # -- The configurations for flownode security context.
     securityContext: {}
 
+# -- Frontend group configure
+frontendGroup: []
+  # -- Custom frontend name
+#  - name: read
+#    replicas: 1
+
+    # -- Extra raw toml config data of frontend.
+#    config: |
+#      default_timezone = "UTC"
+#
+#      [http]
+#      timeout = "10s"
+
+    # -- The pod template for frontend
+#    template:
+#      main:
+#        resources:
+#          requests:
+#            cpu: 2000m
+#            memory: 2048Mi
+#          limits:
+#            cpu: 2000m
+#            memory: 2048Mi
+
+  # -- Custom frontend name
+#  - name: write
+#    replicas: 1
+
+    # -- Extra raw toml config data of frontend.
+#    config: |
+#      default_timezone = "UTC"
+#
+#      [http]
+#      timeout = "10s"
+
+    # -- The pod template for frontend
+#    template:
+#      main:
+#        resources:
+#          requests:
+#            cpu: 2000m
+#            memory: 2048Mi
+#          limits:
+#            cpu: 2000m
+#            memory: 2048Mi
+
 # -- GreptimeDB http service port
 httpServicePort: 4000
 # -- GreptimeDB grpc service port
