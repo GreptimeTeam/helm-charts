@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.51](https://img.shields.io/badge/Version-0.2.51-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.3](https://img.shields.io/badge/AppVersion-0.11.3-informational?style=flat-square)
+![Version: 0.2.52](https://img.shields.io/badge/Version-0.2.52-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0](https://img.shields.io/badge/AppVersion-0.12.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -231,10 +231,10 @@ helm uninstall mycluster -n default
 | image.pullSecrets | list | `[]` | The image pull secrets |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
-| image.tag | string | `"v0.11.3"` | The image tag |
+| image.tag | string | `"v0.12.0"` | The image tag |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.1.4-alpha.3"` | Initializer image tag |
+| initializer.tag | string | `"v0.2.0"` | Initializer image tag |
 | jaeger-all-in-one | object | `{"enableHttpOpenTelemetryCollector":true,"enableHttpZipkinCollector":true,"enabled":false,"image":{"pullPolicy":"IfNotPresent","repository":"jaegertracing/all-in-one","versionOverride":"latest"},"resources":{},"service":{"annotations":{},"port":16686,"type":"ClusterIP"},"volume":{"className":"","enabled":true,"size":"3Gi"}}` | Deploy jaeger-all-in-one for development purpose. |
 | jaeger-all-in-one.enableHttpOpenTelemetryCollector | bool | `true` | Enable the opentelemetry collector for jaeger-all-in-one and listen on port 4317. |
 | jaeger-all-in-one.enableHttpZipkinCollector | bool | `true` | Enable the zipkin collector for jaeger-all-in-one and listen on port 9411. |
