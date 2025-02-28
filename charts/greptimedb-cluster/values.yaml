@@ -17,7 +17,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.2.0
+  tag: v0.2.1-alpha.1
 
 base:
   # -- The pod template for base
@@ -710,13 +710,13 @@ flownode:
     # -- The configurations for flownode security context.
     securityContext: {}
 
-# -- Frontend group configure
-frontendGroup: []
+# -- Frontend instance group configure
+frontends: []
   # -- Custom frontend name
 #  - name: read
 #    replicas: 1
-
-    # -- Extra raw toml config data of frontend.
+#
+#    # -- Extra raw toml config data of frontend.
 #    config: |
 #      default_timezone = "UTC"
 #
@@ -737,8 +737,8 @@ frontendGroup: []
   # -- Custom frontend name
 #  - name: write
 #    replicas: 1
-
-    # -- Extra raw toml config data of frontend.
+#
+#    # -- Extra raw toml config data of frontend.
 #    config: |
 #      default_timezone = "UTC"
 #
