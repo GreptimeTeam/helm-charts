@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.52](https://img.shields.io/badge/Version-0.2.52-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0](https://img.shields.io/badge/AppVersion-0.12.0-informational?style=flat-square)
+![Version: 0.2.53](https://img.shields.io/badge/Version-0.2.53-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0](https://img.shields.io/badge/AppVersion-0.12.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -205,6 +205,7 @@ helm uninstall mycluster -n default
 | frontend.replicas | int | `1` | Frontend replicas |
 | frontend.service | object | `{}` | Frontend service |
 | frontend.tls | object | `{}` | Frontend tls configure |
+| frontends | list | `[]` | Frontend instance group configure |
 | grafana | object | `{"adminPassword":"gt-operator","adminUser":"admin","datasources":{"datasources.yaml":{"datasources":[{"access":"proxy","isDefault":true,"name":"metrics","type":"prometheus","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus"},{"access":"proxy","database":"public","name":"logs","type":"mysql","url":"mycluster-monitor-standalone.default.svc.cluster.local:4002"},{"access":"proxy","database":"information_schema","name":"information_schema","type":"mysql","url":"mycluster-frontend.default.svc.cluster.local:4002"}]}},"enabled":false,"image":{"registry":"docker.io","repository":"grafana/grafana","tag":"11.1.3"},"initChownData":{"enabled":false},"persistence":{"accessModes":["ReadWriteOnce"],"enabled":true,"size":"10Gi","storageClassName":null},"service":{"annotations":{},"enabled":true,"type":"ClusterIP"},"sidecar":{"dashboards":{"enabled":true,"provider":{"allowUiUpdates":true},"searchNamespace":"ALL"}}}` | Deploy grafana for monitoring. |
 | grafana.adminPassword | string | `"gt-operator"` | The default admin password for grafana. |
 | grafana.adminUser | string | `"admin"` | The default admin username for grafana. |
@@ -234,7 +235,7 @@ helm uninstall mycluster -n default
 | image.tag | string | `"v0.12.0"` | The image tag |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.2.0"` | Initializer image tag |
+| initializer.tag | string | `"v0.2.1-alpha.1"` | Initializer image tag |
 | jaeger-all-in-one | object | `{"enableHttpOpenTelemetryCollector":true,"enableHttpZipkinCollector":true,"enabled":false,"image":{"pullPolicy":"IfNotPresent","repository":"jaegertracing/all-in-one","versionOverride":"latest"},"resources":{},"service":{"annotations":{},"port":16686,"type":"ClusterIP"},"volume":{"className":"","enabled":true,"size":"3Gi"}}` | Deploy jaeger-all-in-one for development purpose. |
 | jaeger-all-in-one.enableHttpOpenTelemetryCollector | bool | `true` | Enable the opentelemetry collector for jaeger-all-in-one and listen on port 4317. |
 | jaeger-all-in-one.enableHttpZipkinCollector | bool | `true` | Enable the zipkin collector for jaeger-all-in-one and listen on port 9411. |

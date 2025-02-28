@@ -60,6 +60,7 @@ spec:
     {{- if .Values.base.podTemplate.securityContext }}
     securityContext: {{ .Values.base.podTemplate.securityContext | toYaml | nindent 6 }}
     {{- end }}
+  {{- if not .Values.frontends }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
 {{- if or .Values.frontend.configFile .Values.frontend.configData }}
@@ -176,6 +177,7 @@ spec:
       filters: {{ .Values.frontend.logging.filters | toYaml | nindent 6 }}
       {{- end }}
     {{- end }}
+  {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}
 {{- if or .Values.meta.configFile .Values.meta.configData }}
@@ -461,6 +463,9 @@ spec:
       filters: {{ .Values.flownode.logging.filters | toYaml | nindent 6 }}
       {{- end }}
     {{- end }}
+  {{- end }}
+  {{- if .Values.frontends }}
+  frontends:{{ toYaml .Values.frontends | nindent 2 }}
   {{- end }}
   {{- if (and .Values.prometheusMonitor (eq .Values.prometheusMonitor.enabled true ))}}
   prometheusMonitor: {{- toYaml .Values.prometheusMonitor | nindent 4 }}
