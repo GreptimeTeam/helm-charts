@@ -60,7 +60,8 @@ spec:
     {{- if .Values.base.podTemplate.securityContext }}
     securityContext: {{ .Values.base.podTemplate.securityContext | toYaml | nindent 6 }}
     {{- end }}
-  {{- if not .Values.frontends }}
+  {{- if .Values.frontend }}
+  {{- if .Values.frontend.enabled }}
   frontend:
     replicas: {{ .Values.frontend.replicas }}
 {{- if or .Values.frontend.configFile .Values.frontend.configData }}
@@ -177,6 +178,7 @@ spec:
       filters: {{ .Values.frontend.logging.filters | toYaml | nindent 6 }}
       {{- end }}
     {{- end }}
+  {{- end }}
   {{- end }}
   meta:
     replicas: {{ .Values.meta.replicas }}

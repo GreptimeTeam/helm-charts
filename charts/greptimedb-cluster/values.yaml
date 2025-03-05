@@ -118,6 +118,8 @@ base:
 
 # -- Frontend configure
 frontend:
+  enabled: true
+
   # -- Frontend replicas
   replicas: 1
 
