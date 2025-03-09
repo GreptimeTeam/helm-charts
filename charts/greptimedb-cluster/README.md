@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.2.54](https://img.shields.io/badge/Version-0.2.54-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0](https://img.shields.io/badge/AppVersion-0.12.0-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0](https://img.shields.io/badge/AppVersion-0.12.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -148,6 +148,14 @@ helm uninstall mycluster -n default
 | debugPod.enabled | bool | `false` | Enable debug pod, for more information see: "../../docker/debug-pod/README.md". |
 | debugPod.image | object | `{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250213-e64e46c"}` | The debug pod image |
 | debugPod.resources | object | `{"limits":{"cpu":"200m","memory":"256Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | The debug pod resource |
+| dedicatedWAL | object | `{"enabled":false,"raftEngine":{"fs":{"mountPath":"/wal","name":"wal","storageClassName":null,"storageSize":"20Gi"}}}` | Configure to dedicated wal |
+| dedicatedWAL.enabled | bool | `false` | Enable dedicated wal |
+| dedicatedWAL.raftEngine | object | `{"fs":{"mountPath":"/wal","name":"wal","storageClassName":null,"storageSize":"20Gi"}}` | Configure to raft engine |
+| dedicatedWAL.raftEngine.fs | object | `{"mountPath":"/wal","name":"wal","storageClassName":null,"storageSize":"20Gi"}` | Configure to fs |
+| dedicatedWAL.raftEngine.fs.mountPath | string | `"/wal"` | The mount path |
+| dedicatedWAL.raftEngine.fs.name | string | `"wal"` | The name of the wal |
+| dedicatedWAL.raftEngine.fs.storageClassName | string | `nil` | The storage class name |
+| dedicatedWAL.raftEngine.fs.storageSize | string | `"20Gi"` | The storage size |
 | flownode | object | `{"configData":"","configFile":"","enabled":false,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1}` | Flownode configure. **It's NOT READY YET** |
 | flownode.configData | string | `""` | Extra raw toml config data of flownode. Skip if the `configFile` is used. |
 | flownode.configFile | string | `""` | Extra toml file of flownode. |
