@@ -526,11 +526,12 @@ spec:
     {{- else }}
     {}
     {{- end }}
-  {{- if .Values.remoteWal.enabled }}
   wal:
-  {{- if .Values.remoteWal.kafka }}
+  {{- if .Values.remoteWal.kafka.enabled }}
     kafka: {{- toYaml .Values.remoteWal.kafka | nindent 6 }}
   {{- end }}
+  {{- if .Values.dedicatedWAL.enabled }}
+    raftEngine: {{- toYaml .Values.dedicatedWAL.raftEngine | nindent 6 }}
   {{- end }}
   {{- if .Values.monitoring.enabled }}
   monitoring:

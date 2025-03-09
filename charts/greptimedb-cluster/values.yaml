@@ -892,6 +892,23 @@ remoteWal:
     # -- The kafka broker endpoints
     brokerEndpoints: []
 
+# -- Configure to dedicated wal
+dedicatedWAL:
+  # -- Enable dedicated wal
+  enabled: false
+  # -- Configure to raft engine
+  raftEngine:
+    # -- Configure to fs
+    fs:
+      # -- The storage class name
+      storageClassName: null
+      # -- The name of the wal
+      name: wal
+      # -- The storage size
+      storageSize: 20Gi
+      # -- The mount path
+      mountPath: /wal
+
 # -- The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/deployments/authentication/static).
 auth:
   # -- Enable static auth
