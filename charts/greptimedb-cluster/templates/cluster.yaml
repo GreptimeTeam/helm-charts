@@ -527,7 +527,7 @@ spec:
     {}
     {{- end }}
   wal:
-  {{- if .Values.remoteWal.kafka.enabled }}
+  {{- if .Values.remoteWal.enabled }}
     kafka: {{- toYaml .Values.remoteWal.kafka | nindent 6 }}
   {{- end }}
   {{- if .Values.dedicatedWAL.enabled }}
