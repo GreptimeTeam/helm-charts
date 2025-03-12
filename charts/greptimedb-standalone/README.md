@@ -62,7 +62,7 @@ helm uninstall greptimedb-standalone -n default
 | command | list | `[]` | The container command |
 | configToml | string | `"mode = 'standalone'\n"` | The extra configuration for greptimedb |
 | dataHome | string | `"/data/greptimedb/"` | Storage root directory |
-| env | list | `[]` | Environment variables |
+| env | object | `{}` | Environment variables |
 | extraVolumeMounts | list | `[]` | Volume mounts to add to the pods |
 | extraVolumes | list | `[]` | Volumes to add to the pods |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
