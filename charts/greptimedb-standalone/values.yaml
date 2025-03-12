@@ -33,7 +33,16 @@ serviceAccount:
 command: []
 
 # -- The container args
-args: []
+args: [
+  "--http-addr",
+  "0.0.0.0:4000",
+  "--rpc-bind-addr",
+  "0.0.0.0:4001",
+  "--mysql-addr",
+  "0.0.0.0:4002",
+  "--postgres-addr",
+  "0.0.0.0:4003",
+]
 
 # -- The extra configuration for greptimedb
 configToml: |
@@ -122,12 +131,7 @@ objectStorage:
   #  cache_capacity = ""
 
 # -- Environment variables
-env:
-  GREPTIMEDB_STANDALONE__HTTP__ADDR: "0.0.0.0:4000"
-#  GREPTIMEDB_STANDALONE__GRPC__ADDR: "0.0.0.0:4001"
-#  GREPTIMEDB_STANDALONE__MYSQL__ADDR: "0.0.0.0:4002"
-#  GREPTIMEDB_STANDALONE__POSTGRES__ADDR: "0.0.0.0:4003"
-#  GREPTIMEDB_STANDALONE__OPENTSDB__ADDR: "0.0.0.0:4242"
+env: []
 
 # -- Extra pod annotations to add
 podAnnotations: {}
