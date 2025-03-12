@@ -131,7 +131,8 @@ objectStorage:
   #  cache_capacity = ""
 
 # -- Environment variables
-env: []
+env: {}
+ # envKey: "envValue"
 
 # -- Extra pod annotations to add
 podAnnotations: {}
