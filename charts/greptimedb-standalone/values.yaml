@@ -33,16 +33,7 @@ serviceAccount:
 command: []
 
 # -- The container args
-args: [
-  "--http-addr",
-  "0.0.0.0:4000",
-  "--rpc-bind-addr",
-  "0.0.0.0:4001",
-  "--mysql-addr",
-  "0.0.0.0:4002",
-  "--postgres-addr",
-  "0.0.0.0:4003",
-]
+args: []
 
 # -- The extra configuration for greptimedb
 configToml: |

@@ -13,19 +13,19 @@ spec:
   ports:
     - name: http
       port: {{ .Values.httpServicePort }}
-      targetPort: {{ .Values.httpServicePort }}
+      targetPort: http
       protocol: TCP
     - name: grpc
       port: {{ .Values.grpcServicePort }}
-      targetPort: {{ .Values.grpcServicePort }}
+      targetPort: grpc
       protocol: TCP
     - name: mysql
       port: {{ .Values.mysqlServicePort }}
-      targetPort: {{ .Values.mysqlServicePort }}
+      targetPort: mysql
       protocol: TCP
     - name: postgres
       port: {{ .Values.postgresServicePort }}
-      targetPort: {{ .Values.postgresServicePort }}
+      targetPort: postgres
       protocol: TCP
   selector:
     {{- include "greptimedb-standalone.selectorLabels" . | nindent 4 }}

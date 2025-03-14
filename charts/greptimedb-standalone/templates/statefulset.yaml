@@ -62,6 +62,14 @@ spec:
             - "start"
           {{- end }}
           args:
+            - "--http-addr"
+            - "0.0.0.0:{{ .Values.httpServicePort }}"
+            - "--rpc-bind-addr"
+            - "0.0.0.0:{{ .Values.grpcServicePort }}"
+            - "--mysql-addr"
+            - "0.0.0.0:{{ .Values.mysqlServicePort }}"
+            - "--postgres-addr"
+            - "0.0.0.0:{{ .Values.postgresServicePort }}"
             {{- if .Values.configToml }}
             - "--config-file"
             - "/etc/greptimedb/config/config.toml"
