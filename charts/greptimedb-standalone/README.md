@@ -53,7 +53,7 @@ helm uninstall greptimedb-standalone -n default
 | additionalLabels | object | `{}` | additional labels to add to all resources |
 | affinity | object | `{}` | Affinity configuration for pod |
 | annotations | object | `{}` | The annotations |
-| args | list | `["--http-addr","0.0.0.0:4000","--rpc-bind-addr","0.0.0.0:4001","--mysql-addr","0.0.0.0:4002","--postgres-addr","0.0.0.0:4003"]` | The container args |
+| args | list | `[]` | The container args |
 | auth | object | `{"enabled":false,"fileName":"passwd","mountPath":"/etc/greptimedb/auth","users":[{"password":"admin","username":"admin"}]}` | The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/deployments/authentication/static). |
 | auth.enabled | bool | `false` | Enable static auth |
 | auth.fileName | string | `"passwd"` | The auth file name, the full path is `${mountPath}/${fileName}` |
