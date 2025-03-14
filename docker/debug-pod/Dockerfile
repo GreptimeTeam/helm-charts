@@ -16,7 +16,12 @@ RUN apt-get update && apt-get install -y \
     postgresql-client \
     jq \
     python3 \
-    python3-pip
+    python3-pip \
+    curl \
+    telnet \
+    netcat-openbsd \
+    fio \
+    iperf3
 
 # ETCD CLI Install
 RUN ARCH=$(dpkg --print-architecture) && \
