@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.1.43](https://img.shields.io/badge/Version-0.1.43-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.0](https://img.shields.io/badge/AppVersion-0.13.0-informational?style=flat-square)
+![Version: 0.1.44](https://img.shields.io/badge/Version-0.1.44-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.0](https://img.shields.io/badge/AppVersion-0.13.0-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -62,7 +62,7 @@ helm uninstall greptimedb-standalone -n default
 | command | list | `[]` | The container command |
 | configToml | string | `"mode = 'standalone'\n"` | The extra configuration for greptimedb |
 | dataHome | string | `"/data/greptimedb/"` | Storage root directory |
-| env | object | `{"GREPTIMEDB_STANDALONE__HTTP__ADDR":"0.0.0.0:4000"}` | Environment variables |
+| env | object | `{}` | Environment variables |
 | extraVolumeMounts | list | `[]` | Volume mounts to add to the pods |
 | extraVolumes | list | `[]` | Volumes to add to the pods |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
