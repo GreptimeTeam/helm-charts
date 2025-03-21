@@ -206,7 +206,7 @@ persistence:
   # -- Enable StatefulSetAutoDeletePVC feature
   enableStatefulSetAutoDeletePVC: false
   # -- Size of persistent disk
-  size: 10Gi
+  size: 20Gi
   # -- Storage class name
   storageClass: null
   # -- Selector for persistent disk
