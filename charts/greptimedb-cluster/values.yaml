@@ -537,7 +537,7 @@ datanode:
     # -- Storage class for datanode persistent volume
     storageClassName: null
     # -- Storage size for datanode persistent volume
-    storageSize: 10Gi
+    storageSize: 20Gi
     # -- Storage retain policy for datanode persistent volume
     storageRetainPolicy: Retain
     # -- The dataHome directory, default is "/data/greptimedb/"
@@ -993,9 +993,9 @@ monitoring:
 #     datanodeStorage:
 #       fs:
 #         # -- Storage class for datanode persistent volume
-#         storageClassName: test
+#         storageClassName: null
 #         # -- Storage size for datanode persistent volume
-#         storageSize: 500Gi
+#         storageSize: 50Gi
 #         # -- Storage retain policy for datanode persistent volume
 #         storageRetainPolicy: Retain
 #         # -- The dataHome directory, default is "/data/greptimedb/"
