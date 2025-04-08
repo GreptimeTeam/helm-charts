@@ -2,8 +2,8 @@ apiVersion: v2
 name: greptimedb-standalone
 description: A Helm chart for deploying standalone greptimedb
 type: application
-version: 0.1.46
-appVersion: 0.13.1
+version: 0.1.47
+appVersion: 0.13.2
 home: https://github.com/GreptimeTeam/greptimedb
 sources:
   - https://github.com/GreptimeTeam/greptimedb
