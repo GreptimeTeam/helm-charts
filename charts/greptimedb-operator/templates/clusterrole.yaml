@@ -44,6 +44,7 @@ rules:
       - configmaps
     verbs:
       - create
+      - delete
       - get
       - list
       - patch
@@ -78,6 +79,7 @@ rules:
       - create
       - get
       - list
+      - patch
       - watch
   - apiGroups:
       - ""
@@ -86,6 +88,7 @@ rules:
     verbs:
       - get
       - list
+      - patch
       - watch
   - apiGroups:
       - ""
@@ -155,6 +158,18 @@ rules:
       - monitoring.coreos.com
     resources:
       - podmonitors
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
     verbs:
       - create
       - delete
