@@ -17,7 +17,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.2.1-alpha.1
+  tag: v0.2.1
 
 base:
   # -- The pod template for base
@@ -836,9 +836,14 @@ objectStorage:
 #  credentials:
 #    secretName: ""
 
-#    # AWS or AliCloud cloudProvider accessKeyID and secretAccessKey
+#    # AWS or AliCloud cloudProvider accessKeyID
 #    accessKeyId: "you-should-set-the-access-key-id-here"
+
+#    # AWS cloudProvider secretAccessKey
 #    secretAccessKey: "you-should-set-the-secret-access-key-here"
+
+#    # AliCloud cloudProvider secretAccessKey
+#    accessKeySecret: "you-should-set-the-access-key-secret-here"
 
 #    # Azure cloudProvider accountName and accountKey
 #    accountName: "you-should-set-the-account-name-here"
