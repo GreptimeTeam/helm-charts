@@ -37,6 +37,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.Volumes }}
+      volumes: {{ toYaml .Values.Volumes | nindent 8 }}
+      {{- end }}
       containers:
       - name: manager
         image: '{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}'
@@ -53,6 +56,9 @@ spec:
             port: 9494
           initialDelaySeconds: 5
           periodSeconds: 10
+        {{- if .Values.VolumeMounts }}
+        volumeMounts: {{ toYaml .Values.VolumeMounts | nindent 10 }}
+        {{- end }}
         args:
           - --enable-leader-election
           {{- if .Values.apiServer.enabled }}
@@ -61,7 +67,12 @@ spec:
           {{- if .Values.apiServer.podMetrics.enabled }}
           - --enable-pod-metrics
           {{- end }}
-          {{- end}}
+          {{- end }}
+          {{- if .Values.admissionWebhook.enabled }}
+          - --enable-admission-webhook
+          - --admission-webhook-port={{ .Values.admissionWebhook.port }}
+          - --admission-webhook-cert-dir={{ .Values.admissionWebhook.certDir }}
+          {{- end }}
         command:
           - greptimedb-operator
         {{- if .Values.resources }}

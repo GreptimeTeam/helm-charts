@@ -66,6 +66,38 @@ tolerations: []
 # -- The pod affinity
 affinity: {}
 
+# -- Volume mounts to add to the pod
+VolumeMounts: []
+#  - name: webhook-tls
+#    mountPath: /etc/webhook-tls
+#    readOnly: true
+
+# -- Volumes to add to the pod
+Volumes: []
+#  - name: webhook-tls
+#    secret:
+#      secretName: webhook-server-tls
+
+# -- The configuration for the admission webhook
+admissionWebhook:
+  # -- Whether to enable the admission webhook
+  enabled: false
+
+  # -- The port for the admission webhook
+  port: 8082
+
+  # -- The directory that contains the certificate
+  certDir: "/etc/webhook-tls"
+
+  # -- Additional annotations to the admission webhooks
+  annotations: {}
+
+  # -- Valid values: Fail, Ignore, IgnoreOnInstallOnly
+  failurePolicy: Fail
+
+  # -- A PEM encoded CA bundle which will be used to validate the webhook's server certificate.
+  caBundle: ""
+
 # -- The configuration for the operator API server
 apiServer:
   # -- Whether to enable the API server
