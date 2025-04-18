@@ -1,0 +1,54 @@
+{{- if .Values.admissionWebhook.enabled -}}
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: {{ include "greptimedb-operator.fullname" . }}-admission
+  labels:
+    {{- include "greptimedb-operator.labels" . | nindent 4 }}
+  {{- if .Values.admissionWebhook.annotations }}
+  annotations: {{- toYaml .Values.admissionWebhook.annotations | nindent 4 }}
+  {{- end }}
+webhooks:
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: {{ .Values.admissionWebhook.caBundle }}
+      service:
+        name: {{ include "greptimedb-operator.fullname" . }}
+        namespace: {{ .Release.Namespace }}
+        path: /validate-greptime-io-v1alpha1-greptimedbcluster
+    failurePolicy: {{ .Values.admissionWebhook.failurePolicy }}
+    name: vgreptimedbcluster.kb.io
+    rules:
+      - apiGroups:
+          - greptime.io
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - greptimedbclusters
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: {{ .Values.admissionWebhook.caBundle }}
+      service:
+        name: {{ include "greptimedb-operator.fullname" . }}
+        namespace: {{ .Release.Namespace }}
+        path: /validate-greptime-io-v1alpha1-greptimedbstandalone
+    failurePolicy: {{ .Values.admissionWebhook.failurePolicy }}
+    name: vgreptimedbstandalone.kb.io
+    rules:
+      - apiGroups:
+          - greptime.io
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - greptimedbstandalones
+    sideEffects: None
+{{- end }}

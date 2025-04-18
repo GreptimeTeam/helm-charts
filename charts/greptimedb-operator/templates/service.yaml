@@ -1,4 +1,4 @@
-{{- if .Values.apiServer.enabled }}
+{{- if or .Values.apiServer.enabled .Values.admissionWebhook.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -11,8 +11,16 @@ spec:
   selector:
     app.kubernetes.io/name: {{ include "greptimedb-operator.name" . }}
   ports:
+  {{- if .Values.apiServer.enabled }}
   - name: http
     port: {{ .Values.apiServer.port }}
     protocol: TCP
     targetPort: {{ .Values.apiServer.port }}
+  {{- end }}
+  {{- if .Values.admissionWebhook.enabled }}
+  - name: webhook
+    port: 443
+    protocol: TCP
+    targetPort: {{ .Values.admissionWebhook.port }}
+  {{- end }}
 {{- end }}

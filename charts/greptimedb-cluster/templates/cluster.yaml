@@ -478,54 +478,51 @@ spec:
   postgreSQLPort: {{ .Values.postgresServicePort }}
   initializer:
     image: '{{ .Values.initializer.registry }}/{{ .Values.initializer.repository }}:{{ .Values.initializer.tag }}'
+  {{- $objectStorage := .Values.objectStorage }}
+  {{- if and $objectStorage (or $objectStorage.s3 $objectStorage.oss $objectStorage.gcs $objectStorage.azblob) }}
   objectStorage:
-    {{- if .Values.objectStorage.s3 }}
-    s3: {{- toYaml .Values.objectStorage.s3 | nindent 6 }}
-      {{- if .Values.objectStorage }}
-      {{- if .Values.objectStorage.credentials }}
-      {{- if .Values.objectStorage.credentials.existingSecretName }}
-      secretName: {{ .Values.objectStorage.credentials.existingSecretName }}
+    {{- if $objectStorage.s3 }}
+    s3: {{- toYaml $objectStorage.s3 | nindent 6 }}
+      {{- if $objectStorage.credentials }}
+      {{- if $objectStorage.credentials.existingSecretName }}
+      secretName: {{ $objectStorage.credentials.existingSecretName }}
       {{- else }}
-      secretName: {{ default "storage-credentials" .Values.objectStorage.credentials.secretName }}
+      secretName: {{ default "storage-credentials" $objectStorage.credentials.secretName }}
       {{- end }}
       {{- end }}
-      {{- end }}
-    {{- else if .Values.objectStorage.oss }}
-    oss: {{- toYaml .Values.objectStorage.oss | nindent 6 }}
-      {{- if .Values.objectStorage }}
-      {{- if .Values.objectStorage.credentials }}
-      {{- if .Values.objectStorage.credentials.existingSecretName }}
-      secretName: {{ .Values.objectStorage.credentials.existingSecretName }}
+    {{- else if $objectStorage.oss }}
+    oss: {{- toYaml $objectStorage.oss | nindent 6 }}
+      {{- if $objectStorage.credentials }}
+      {{- if $objectStorage.credentials.existingSecretName }}
+      secretName: {{ $objectStorage.credentials.existingSecretName }}
       {{- else }}
-      secretName: {{ default "storage-credentials" .Values.objectStorage.credentials.secretName }}
+      secretName: {{ default "storage-credentials" $objectStorage.credentials.secretName }}
       {{- end }}
       {{- end }}
-      {{- end }}
-    {{- else if .Values.objectStorage.gcs }}
-    gcs: {{- toYaml .Values.objectStorage.gcs | nindent 6 }}
-      {{- if .Values.objectStorage }}
-      {{- if .Values.objectStorage.credentials }}
-      {{- if .Values.objectStorage.credentials.existingSecretName }}
-      secretName: {{ .Values.objectStorage.credentials.existingSecretName }}
+    {{- else if $objectStorage.gcs }}
+    gcs: {{- toYaml $objectStorage.gcs | nindent 6 }}
+      {{- if $objectStorage.credentials }}
+      {{- if $objectStorage.credentials.existingSecretName }}
+      secretName: {{ $objectStorage.credentials.existingSecretName }}
       {{- else }}
-      secretName: {{ default "storage-credentials" .Values.objectStorage.credentials.secretName }}
+      secretName: {{ default "storage-credentials" $objectStorage.credentials.secretName }}
       {{- end }}
       {{- end }}
-      {{- end }}
-    {{- else if .Values.objectStorage.azblob }}
-    azblob: {{- toYaml .Values.objectStorage.azblob | nindent 6 }}
-      {{- if .Values.objectStorage }}
-      {{- if .Values.objectStorage.credentials }}
-      {{- if .Values.objectStorage.credentials.existingSecretName }}
-      secretName: {{ .Values.objectStorage.credentials.existingSecretName }}
+    {{- else if $objectStorage.azblob }}
+    azblob: {{- toYaml $objectStorage.azblob | nindent 6 }}
+      {{- if $objectStorage.credentials }}
+      {{- if $objectStorage.credentials.existingSecretName }}
+      secretName: {{ $objectStorage.credentials.existingSecretName }}
       {{- else }}
-      secretName: {{ default "storage-credentials" .Values.objectStorage.credentials.secretName }}
+      secretName: {{ default "storage-credentials" $objectStorage.credentials.secretName }}
       {{- end }}
       {{- end }}
-      {{- end }}
-    {{- else }}
-    {}
     {{- end }}
+    {{- if $objectStorage.cache }}
+    cache:
+      cacheCapacity: {{ $objectStorage.cache.cacheCapacity }}
+    {{- end }}
+  {{- end }}
   {{- if or .Values.remoteWal.enabled .Values.dedicatedWAL.enabled }}
   wal:
   {{- if .Values.remoteWal.enabled }}
@@ -552,6 +549,25 @@ spec:
       {{- if .Values.monitoring.vector.resources }}
       resources: {{- toYaml .Values.monitoring.vector.resources | nindent 8 }}
       {{- end }}
+    {{- end }}
+  {{- end }}
+  {{- $ingress := .Values.ingress }}
+  {{- if $ingress }}
+  ingress:
+    {{- if $ingress.annotations }}
+    annotations: {{- toYaml $ingress.annotations | nindent 6 }}
+    {{- end }}
+    {{- if $ingress.labels }}
+    labels: {{- toYaml $ingress.labels | nindent 6 }}
+    {{- end }}
+    {{- if $ingress.ingressClassName }}
+    ingressClassName: {{ $ingress.ingressClassName }}
+    {{- end }}
+    {{- if $ingress.rules }}
+    rules: {{- toYaml $ingress.rules | nindent 6 }}
+    {{- end }}
+    {{- if $ingress.tls }}
+    tls: {{- toYaml $ingress.tls | nindent 6 }}
     {{- end }}
   {{- end }}
   {{- if .Values.logging}}

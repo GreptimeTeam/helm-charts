@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.2.19](https://img.shields.io/badge/Version-0.2.19-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.1](https://img.shields.io/badge/AppVersion-0.2.1-informational?style=flat-square)
+![Version: 0.2.20](https://img.shields.io/badge/Version-0.2.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.1](https://img.shields.io/badge/AppVersion-0.2.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -100,7 +100,16 @@ Kubernetes: `>=1.18.0-0`
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| VolumeMounts | list | `[]` | Volume mounts to add to the pod |
+| Volumes | list | `[]` | Volumes to add to the pod |
 | additionalLabels | object | `{}` | additional labels to add to all resources |
+| admissionWebhook | object | `{"annotations":{},"caBundle":"","certDir":"/etc/webhook-tls","enabled":false,"failurePolicy":"Fail","port":8082}` | The configuration for the admission webhook |
+| admissionWebhook.annotations | object | `{}` | Additional annotations to the admission webhooks |
+| admissionWebhook.caBundle | string | `""` | A PEM encoded CA bundle which will be used to validate the webhook's server certificate. |
+| admissionWebhook.certDir | string | `"/etc/webhook-tls"` | The directory that contains the certificate |
+| admissionWebhook.enabled | bool | `false` | Whether to enable the admission webhook |
+| admissionWebhook.failurePolicy | string | `"Fail"` | Valid values: Fail, Ignore, IgnoreOnInstallOnly |
+| admissionWebhook.port | int | `8082` | The port for the admission webhook |
 | affinity | object | `{}` | The pod affinity |
 | apiServer | object | `{"enabled":false,"podMetrics":{"enabled":false},"port":8081}` | The configuration for the operator API server |
 | apiServer.enabled | bool | `false` | Whether to enable the API server |

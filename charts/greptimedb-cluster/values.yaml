@@ -855,7 +855,7 @@ objectStorage:
 #    # Set the existing secret to get the key's of cloudProvider
 #    existingSecretName: ""
 
-  # configure to use s3 storage.
+  # Configure to use s3 storage.
   s3: {}
 #    bucket: "bucket-name"
 #    region: "us-west-2"
@@ -864,7 +864,7 @@ objectStorage:
 #    root: "mycluster"
 #    endpoint: "s3.us-west-2.amazonaws.com"   # See more detail: https://docs.aws.amazon.com/general/latest/gr/s3.html
 
-  # configure to use oss storage.
+  # Configure to use oss storage.
   oss: {}
 #    bucket: "bucket-name"
 #    region: "cn-hangzhou"
@@ -873,7 +873,7 @@ objectStorage:
 #    root: "mycluster"
 #    endpoint: "oss-cn-hangzhou.aliyuncs.com"
 
-  # configure to use gcs storage
+  # Configure to use gcs storage
   gcs: {}
   #  bucket: "bucket-name"
   #  scope: "" # example: "https://www.googleapis.com/auth/devstorage.read_write"
@@ -882,11 +882,15 @@ objectStorage:
   #  root: "mycluster"
   #  endpoint: "https://storage.googleapis.com"
 
-  # configure to use azblob storage
+  # Configure to use azblob storage
   azblob: {}
   #  container: ""
   #  endpoint: ""
   #  root: "mycluster"
+
+  # Configure to object storage cache.
+  cache: {}
+  #  cacheCapacity: "10GiB"
 
 # -- Configure to remote wal
 remoteWal:
@@ -913,6 +917,39 @@ dedicatedWAL:
       storageSize: 20Gi
       # -- The mount path
       mountPath: /wal
+
+# -- Configure to frontend ingress
+ingress: {}
+ # -- Ingress annotations to apply to the ingress resource
+ # annotations: {}
+ #   example: frontend-ingress
+
+ # -- Labels to apply to the ingress resource
+ # labels: {}
+ #   example: frontend-ingress
+
+ # -- Specify the IngressClassName to use for the ingress
+ # ingressClassName: nginx
+
+ # -- The rules for routing traffic to the frontend service
+ # rules:
+ #   - host: ingress.example.com
+ #     backends:
+ #       - path: /
+ #         pathType: Prefix  # Support to 'Prefix', 'ImplementationSpecific', 'Exact'.
+
+ #       - name: read        # Specify the read frontend name if it exists.
+ #         path: /
+ #         pathType: Prefix
+ #       - name: write       # Specify the write frontend name if it exists.
+ #         path: /v1/sql
+ #         pathType: Prefix
+
+ # -- TLS configuration for securing the ingress traffic
+ # tls:
+ #   - secretName: frontend-ingress-tls
+ #     hosts:
+ #       - ingress.example.com
 
 # -- The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/deployments/authentication/static).
 auth:
