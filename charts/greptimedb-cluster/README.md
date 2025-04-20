@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.3.9](https://img.shields.io/badge/Version-0.3.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.2](https://img.shields.io/badge/AppVersion-0.13.2-informational?style=flat-square)
+![Version: 0.3.10](https://img.shields.io/badge/Version-0.3.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.2](https://img.shields.io/badge/AppVersion-0.13.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -156,10 +156,10 @@ helm uninstall mycluster -n default
 | dedicatedWAL.raftEngine.fs.name | string | `"wal"` | The name of the wal |
 | dedicatedWAL.raftEngine.fs.storageClassName | string | `nil` | The storage class name |
 | dedicatedWAL.raftEngine.fs.storageSize | string | `"20Gi"` | The storage size |
-| flownode | object | `{"configData":"","configFile":"","enabled":false,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1}` | Flownode configure. **It's NOT READY YET** |
+| flownode | object | `{"configData":"","configFile":"","enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1}` | Flownode configure. |
 | flownode.configData | string | `""` | Extra raw toml config data of flownode. Skip if the `configFile` is used. |
 | flownode.configFile | string | `""` | Extra toml file of flownode. |
-| flownode.enabled | bool | `false` | Enable flownode |
+| flownode.enabled | bool | `true` | Enable flownode |
 | flownode.logging | object | `{}` | Logging configuration for flownode, if not set, it will use the global logging configuration. |
 | flownode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
 | flownode.podTemplate.affinity | object | `{}` | The pod affinity |
