@@ -30,6 +30,13 @@ RUN ARCH=$(dpkg --print-architecture) && \
     sudo mv etcd-v3.5.0-linux-${ARCH}/etcdctl /usr/local/bin/ && \
     rm -rf etcd-v3.5.0-linux-${ARCH}*
 
+# Kafka Install
+RUN KAFKA_VERSION=3.5.0 && \
+    wget "https://archive.apache.org/dist/kafka/3.5.0/kafka_2.13-${KAFKA_VERSION}.tgz" && \
+    tar -xzf "kafka_2.13-${KAFKA_VERSION}.tgz" && \
+    sudo mv "kafka_2.13-${KAFKA_VERSION}/bin/"* /usr/local/bin/ && \
+    rm -rf "kafka_2.13-${KAFKA_VERSION}" "kafka_2.13-${KAFKA_VERSION}.tgz"
+
 # AWS CLI Install
 RUN ARCH=$(dpkg --print-architecture) && \
     if [ "$ARCH" = "amd64" ]; then \
