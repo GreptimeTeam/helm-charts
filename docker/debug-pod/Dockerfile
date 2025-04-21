@@ -35,9 +35,8 @@ RUN ARCH=$(dpkg --print-architecture) && \
 RUN KAFKA_VERSION=3.5.0 && \
     wget "https://archive.apache.org/dist/kafka/3.5.0/kafka_2.13-${KAFKA_VERSION}.tgz" && \
     tar -xzf "kafka_2.13-${KAFKA_VERSION}.tgz" && \
-    sudo mv "kafka_2.13-${KAFKA_VERSION}" /usr/local/kafka && \
-    sudo mv /usr/local/kafka/bin/* /usr/local/bin/ && \
-    rm -rf "kafka_2.13-${KAFKA_VERSION}.tgz"
+    sudo mv "kafka_2.13-${KAFKA_VERSION}" kafka && \
+    rm -rf "kafka_2.13-${KAFKA_VERSION}.tgz" "kafka_2.13-${KAFKA_VERSION}"
 
 # AWS CLI Install
 RUN ARCH=$(dpkg --print-architecture) && \
