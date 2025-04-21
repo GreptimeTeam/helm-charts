@@ -56,6 +56,13 @@ RUN ARCH=$(dpkg --print-architecture) && \
     ./google-cloud-sdk/install.sh && \
     rm -rf google-cloud-cli-linux-*
 
+# s5cmd cli Install
+RUN wget https://github.com/peak/s5cmd/releases/download/v2.3.0/s5cmd_2.3.0_Linux-64bit.tar.gz && \
+    tar -xzf s5cmd_2.3.0_Linux-64bit.tar.gz && \
+    sudo mv s5cmd /usr/local/bin/ && \
+    sudo chmod +x /usr/local/bin/s5cmd && \
+    rm s5cmd_2.3.0_Linux-64bit.tar.gz
+
 # Kubectl CLI Install
 RUN ARCH=$(dpkg --print-architecture) && \
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${ARCH}/kubectl" \
