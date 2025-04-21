@@ -569,10 +569,10 @@ datanode:
 #    # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
 #    filters: []
 
-# -- Flownode configure. **It's NOT READY YET**
+# -- Flownode configure.
 flownode:
   # -- Enable flownode
-  enabled: false
+  enabled: true
 
   # -- Flownode replicas
   replicas: 1
