@@ -1,0 +1,99 @@
+{{- if .Values.infraTesting.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-infra-testing-scripts
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-2"
+    "helm.sh/hook-delete-policy": hook-succeeded
+data:
+  benchmark.sh: |
+    #!/bin/sh
+
+    echo "================== Starting testing... =================="
+
+    # Run Disk Benchmark
+    echo "\n================== Disk Benchmark =================="
+    echo "\n================== Running full I/O benchmark =================="
+    fio --filename=/data/fio-rw.data --direct=1 --ioengine=libaio --time_based --runtime=60 --group_reporting \
+        --name=seq-read --rw=read --bs=4k --iodepth=64 --numjobs=1 --size=1G \
+        --name=seq-write --rw=write --bs=4k --iodepth=64 --numjobs=1 --size=1G \
+        --name=rand-iops --rw=randrw --bs=4k --iodepth=256 --numjobs=4 --size=1G
+
+    echo "\n================== Running mixed read/write benchmark =================="
+    fio --name=fiotest --filename=/data/fio.data --size=1Gb --rw=readwrite --bs=64k --direct=1 --numjobs=8 \
+        --ioengine=libaio --iodepth=16 --group_reporting --runtime=60 --startdelay=60
+
+    # Run S3 Benchmark
+    echo "\n================== S3 Benchmark =================="
+
+    S3_BUCKET=${S3_BUCKET}
+
+    echo "\n================== Generating 10MB test file... =================="
+    dd if=/dev/urandom of=/data/s3-testfile bs=1M count=1 status=progress
+
+    echo "\n================== Running S3 transfer benchmark... =================="
+    echo "\n================== Upload s3 testfile... =================="
+    start_time=$(date +%s)
+    stdbuf -o0 s5cmd cp --show-progress /data/s3-testfile "s3://$S3_BUCKET/tmp/" > upload_testfile.log 2>&1
+    cat upload_testfile.log
+    end_time=$(date +%s)
+    echo "\n================== Upload time: $((end_time - start_time)) seconds =================="
+
+    echo "\n================== Download s3 testfile... =================="
+    start_time=$(date +%s)
+    stdbuf -o0 s5cmd cp --show-progress "s3://$S3_BUCKET/tmp/s3-testfile" /data/s3-testfile.download > download_testfile.log 2>&1
+    cat download_testfile.log
+    end_time=$(date +%s)
+    echo "\n================== Download time: $((end_time - start_time)) seconds =================="
+
+    # Verify file integrity
+    echo "\n================== Verifying file integrity... =================="
+    original_size=$(wc -c < /data/s3-testfile)
+    downloaded_size=$(wc -c < /data/s3-testfile.download)
+    md5_original=$(md5sum /data/s3-testfile | awk '{print $1}')
+    md5_downloaded=$(md5sum /data/s3-testfile.download | awk '{print $1}')
+
+    if [ "$original_size" -eq "$downloaded_size" ] && [ "$md5_original" = "$md5_downloaded" ]; then
+      echo "\n================== S3 test passed =================="
+      echo "File size: $original_size bytes"
+      echo "MD5 checksum: $md5_original"
+    else
+      echo "\n================== S3 test failed =================="
+      echo "Original size: $original_size bytes"
+      echo "Downloaded size: $downloaded_size bytes"
+      echo "Original MD5: $md5_original"
+      echo "Downloaded MD5: $md5_downloaded"
+      exit 1
+    fi
+
+    # Run Kafka Benchmark
+    echo "\n================== Kafka Benchmark =================="
+
+    KAFKA_ENDPOINT=${KAFKA_ENDPOINT}
+    TOPIC="benchmark-topic"
+
+    echo "\n================== Creating Kafka Topic =================="
+    ./kafka/bin/kafka-topics.sh --create --topic $TOPIC --bootstrap-server $KAFKA_ENDPOINT --partitions 1 --replication-factor 1 --if-not-exists
+
+    # Produce messages to Kafka
+    echo "\n================== Producing messages to Kafka =================="
+    start_time=$(date +%s)
+    for i in {1..100}; do
+      echo "Test message $i" | ./kafka/bin/kafka-console-producer.sh --broker-list $KAFKA_ENDPOINT --topic $TOPIC
+    done
+    end_time=$(date +%s)
+    echo "\n================== Kafka produce time: $((end_time - start_time)) seconds =================="
+
+    # Consume messages from Kafka
+    echo "\n================== Consuming messages from Kafka =================="
+    start_time=$(date +%s)
+    ./kafka/bin/kafka-console-consumer.sh --bootstrap-server $KAFKA_ENDPOINT --topic $TOPIC --from-beginning --timeout-ms 10000 > kafka_consume.log
+    cat kafka_consume.log
+    end_time=$(date +%s)
+    echo "\n================== Kafka consume time: $((end_time - start_time)) seconds =================="
+
+    echo "\n================== All tests completed! =================="
+{{- end }}

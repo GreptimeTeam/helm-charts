@@ -1,0 +1,49 @@
+{{- if .Values.infraTesting.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-infra-testing
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-1"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      containers:
+        - name: {{ .Release.Name }}-infra-testing
+          image: {{ printf "%s/%s:%s" .Values.infraTesting.image.registry .Values.infraTesting.image.repository .Values.infraTesting.image.tag }}
+          command: ["/bin/sh", "-c"]
+          args: ["/scripts/benchmark.sh"]
+          env:
+            {{- range $key, $val := .Values.infraTesting.env }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+            {{- end }}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: s3-credentials
+                  key: access_key_id
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: s3-credentials
+                  key: secret_access_key
+          volumeMounts:
+            - name: script
+              mountPath: /scripts
+            - name: data
+              mountPath: /data
+      restartPolicy: Never
+      volumes:
+        - name: script
+          configMap:
+            name: {{ .Release.Name }}-infra-testing-scripts
+            defaultMode: 0755
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-infra-testing-data
+  backoffLimit: 0
+{{- end }}

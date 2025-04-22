@@ -972,7 +972,7 @@ debugPod:
   image:
     registry: docker.io
     repository: greptime/greptime-tool
-    tag: "20250317-5281e66"
+    tag: "20250421-94c4b8d"
 
   # -- The debug pod resource
   resources:
@@ -982,6 +982,35 @@ debugPod:
     limits:
       memory: 256Mi
       cpu: 200m
+
+# -- Configure to the infra testing
+infraTesting:
+  # -- Enable the infra testing.
+  enabled: false
+
+  # -- The infra testing runner image
+  image:
+    registry: docker.io
+    repository: greptime/greptime-tool
+    tag: "20250421-94c4b8d"
+
+  # -- Environment variables
+  env: {}
+#    KAFKA_ENDPOINT: "kafka.kafka.svc.cluster.local:9092"
+#    AWS_REGION: "ap-southeast-1"
+#    S3_BUCKET: "bucket-name"
+
+  # -- Storage class name
+  storageClass: null
+
+  # -- Size of persistent disk
+  size: 20Gi
+
+  # -- AWS Access Key ID
+  accessKeyID: "access_key_id"
+
+  # -- AWS Secret Access Key
+  secretAccessKey: "secret_access_key"
 
 # -- The monitoring bootstrap configuration
 monitoring:
