@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.3.11](https://img.shields.io/badge/Version-0.3.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.2](https://img.shields.io/badge/AppVersion-0.13.2-informational?style=flat-square)
+![Version: 0.3.12](https://img.shields.io/badge/Version-0.3.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.2](https://img.shields.io/badge/AppVersion-0.13.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -214,15 +214,15 @@ helm uninstall mycluster -n default
 | frontend.service | object | `{}` | Frontend service |
 | frontend.tls | object | `{}` | Frontend tls configure |
 | frontends | list | `[]` | Frontend instance group configure |
-| grafana | object | `{"adminPassword":"gt-operator","adminUser":"admin","datasources":{"datasources.yaml":{"datasources":[{"access":"proxy","isDefault":true,"name":"metrics","type":"prometheus","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus"},{"access":"proxy","database":"public","name":"logs","type":"mysql","url":"mycluster-monitor-standalone.default.svc.cluster.local:4002"},{"access":"proxy","database":"information_schema","name":"information_schema","type":"mysql","url":"mycluster-frontend.default.svc.cluster.local:4002"}]}},"enabled":false,"image":{"registry":"docker.io","repository":"grafana/grafana","tag":"11.1.3"},"initChownData":{"enabled":false},"persistence":{"accessModes":["ReadWriteOnce"],"enabled":true,"size":"10Gi","storageClassName":null},"service":{"annotations":{},"enabled":true,"type":"ClusterIP"},"sidecar":{"dashboards":{"enabled":true,"provider":{"allowUiUpdates":true},"searchNamespace":"ALL"}}}` | Deploy grafana for monitoring. |
+| grafana | object | `{"adminPassword":"gt-operator","adminUser":"admin","datasources":{"datasources.yaml":{"datasources":[{"access":"proxy","isDefault":true,"name":"metrics","type":"prometheus","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus"},{"access":"proxy","database":"public","name":"logs","type":"mysql","url":"mycluster-monitor-standalone.default.svc.cluster.local:4002"},{"access":"proxy","database":"information_schema","name":"information_schema","type":"mysql","url":"mycluster-frontend.default.svc.cluster.local:4002"}]}},"enabled":false,"image":{"registry":"docker.io","repository":"grafana/grafana","tag":"11.6.0"},"initChownData":{"enabled":false},"persistence":{"accessModes":["ReadWriteOnce"],"enabled":true,"size":"10Gi","storageClassName":null},"service":{"annotations":{},"enabled":true,"type":"ClusterIP"},"sidecar":{"dashboards":{"enabled":true,"provider":{"allowUiUpdates":true},"searchNamespace":"ALL"}}}` | Deploy grafana for monitoring. |
 | grafana.adminPassword | string | `"gt-operator"` | The default admin password for grafana. |
 | grafana.adminUser | string | `"admin"` | The default admin username for grafana. |
 | grafana.datasources | object | `{"datasources.yaml":{"datasources":[{"access":"proxy","isDefault":true,"name":"metrics","type":"prometheus","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus"},{"access":"proxy","database":"public","name":"logs","type":"mysql","url":"mycluster-monitor-standalone.default.svc.cluster.local:4002"},{"access":"proxy","database":"information_schema","name":"information_schema","type":"mysql","url":"mycluster-frontend.default.svc.cluster.local:4002"}]}}` | The grafana datasources. |
 | grafana.enabled | bool | `false` | Enable grafana deployment. It needs to enable monitoring `monitoring.enabled: true` first. |
-| grafana.image | object | `{"registry":"docker.io","repository":"grafana/grafana","tag":"11.1.3"}` | The grafana image. |
+| grafana.image | object | `{"registry":"docker.io","repository":"grafana/grafana","tag":"11.6.0"}` | The grafana image. |
 | grafana.image.registry | string | `"docker.io"` | The grafana image registry. |
 | grafana.image.repository | string | `"grafana/grafana"` | The grafana image repository. |
-| grafana.image.tag | string | `"11.1.3"` | The grafana image tag. |
+| grafana.image.tag | string | `"11.6.0"` | The grafana image tag. |
 | grafana.initChownData | object | `{"enabled":false}` | Init chown data for grafana. |
 | grafana.initChownData.enabled | bool | `false` | Enable init chown data for grafana. |
 | grafana.persistence | object | `{"accessModes":["ReadWriteOnce"],"enabled":true,"size":"10Gi","storageClassName":null}` | The grafana persistence configuration. |
@@ -303,16 +303,16 @@ helm uninstall mycluster -n default
 | meta.podTemplate.volumes | list | `[]` | The pod volumes |
 | meta.replicas | int | `1` | Meta replicas |
 | meta.storeKeyPrefix | string | `""` | Meta will store data with this key prefix |
-| monitoring | object | `{"enabled":false,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"vector":{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"500m","memory":"256Mi"}},"tag":"nightly-alpine"}}` | The monitoring bootstrap configuration |
+| monitoring | object | `{"enabled":false,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"vector":{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"500m","memory":"256Mi"}},"tag":"0.46.1-debian"}}` | The monitoring bootstrap configuration |
 | monitoring.enabled | bool | `false` | Enable monitoring |
 | monitoring.logsCollection | object | `{"pipeline":{"data":""}}` | Configure the logs collection |
 | monitoring.logsCollection.pipeline | object | `{"data":""}` | The greptimedb pipeline for logs collection |
 | monitoring.standalone | object | `{}` | Configure the standalone instance for storing monitoring data |
-| monitoring.vector | object | `{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"500m","memory":"256Mi"}},"tag":"nightly-alpine"}` | Configure vector for logs and metrics collection. |
+| monitoring.vector | object | `{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"500m","memory":"256Mi"}},"tag":"0.46.1-debian"}` | Configure vector for logs and metrics collection. |
 | monitoring.vector.registry | string | `"docker.io"` | vector image registry |
 | monitoring.vector.repository | string | `"timberio/vector"` | vector image repository |
 | monitoring.vector.resources | object | `{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"500m","memory":"256Mi"}}` | vector resource |
-| monitoring.vector.tag | string | `"nightly-alpine"` | vector image tag |
+| monitoring.vector.tag | string | `"0.46.1-debian"` | vector image tag |
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | objectStorage | object | `{"azblob":{},"cache":{},"gcs":{},"oss":{},"s3":{}}` | Configure to object storage |
 | postgresServicePort | int | `4003` | GreptimeDB postgres service port |
