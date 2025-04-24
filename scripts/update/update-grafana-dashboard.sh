@@ -27,7 +27,7 @@ update_grafana_dashboard() {
     cp /tmp/latest-dashboard.json charts/greptimedb-cluster/dashboards/greptimedb-cluster-metrics.json
 
     # Checkout a new branch.
-    BRANCH_NAME="ci/update-grafana-dashboard-$(date +%Y%m%d)"
+    BRANCH_NAME="ci/update-grafana-dashboard-$(date +%Y%m%d%H%M%S)"
     git checkout -b $BRANCH_NAME
 
     # Update the chart version.
