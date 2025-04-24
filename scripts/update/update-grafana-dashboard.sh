@@ -18,11 +18,16 @@ update_grafana_dashboard() {
 
   # Check for differences.
   if ! cmp -s /tmp/latest-dashboard.json charts/greptimedb-cluster/dashboards/greptimedb-cluster-metrics.json; then
+
+    # Configure Git configs.
+    git config --global user.email helm-charts-ci@greptime.com
+    git config --global user.name helm-charts-ci
+
     # Copy the new dashboard file.
     cp /tmp/latest-dashboard.json charts/greptimedb-cluster/dashboards/greptimedb-cluster-metrics.json
 
     # Checkout a new branch.
-    BRANCH_NAME="ci/update-grafana-dashboard-$(date +%Y%m%d)"
+    BRANCH_NAME="ci/update-grafana-dashboard-$(date +%Y%m%d%H%M%S)"
     git checkout -b $BRANCH_NAME
 
     # Update the chart version.
@@ -41,7 +46,9 @@ update_grafana_dashboard() {
       --title "ci: update Grafana dashboard from upstream" \
       --body "This PR updates the Grafana dashboard from the upstream repository." \
       --base main \
-      --head $BRANCH_NAME
+      --head $BRANCH_NAME \
+      --reviewer zyy17 \
+      --reviewer daviderli614
   else
     exit 0
   fi
