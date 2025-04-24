@@ -46,7 +46,9 @@ update_grafana_dashboard() {
       --title "ci: update Grafana dashboard from upstream" \
       --body "This PR updates the Grafana dashboard from the upstream repository." \
       --base main \
-      --head $BRANCH_NAME
+      --head $BRANCH_NAME \
+      --reviewer zyy17 \
+      --reviewer daviderli614
   else
     exit 0
   fi
