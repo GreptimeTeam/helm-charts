@@ -18,6 +18,11 @@ update_grafana_dashboard() {
 
   # Check for differences.
   if ! cmp -s /tmp/latest-dashboard.json charts/greptimedb-cluster/dashboards/greptimedb-cluster-metrics.json; then
+
+    # Configure Git configs.
+    git config --global user.email helm-charts-ci@greptime.com
+    git config --global user.name helm-charts-ci
+
     # Copy the new dashboard file.
     cp /tmp/latest-dashboard.json charts/greptimedb-cluster/dashboards/greptimedb-cluster-metrics.json
 
