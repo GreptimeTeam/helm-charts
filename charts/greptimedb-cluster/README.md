@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.3.13](https://img.shields.io/badge/Version-0.3.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.2](https://img.shields.io/badge/AppVersion-0.13.2-informational?style=flat-square)
+![Version: 0.3.14](https://img.shields.io/badge/Version-0.3.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.2](https://img.shields.io/badge/AppVersion-0.13.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -86,7 +86,7 @@ helm uninstall mycluster -n default
 | auth.fileName | string | `"passwd"` | The auth file name, the full path is `${mountPath}/${fileName}` |
 | auth.mountPath | string | `"/etc/greptimedb/auth"` | The auth file path to store the auth info |
 | auth.users | list | `[{"password":"admin","username":"admin"}]` | The users to be created in the auth file |
-| base.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{}},"nodeSelector":{},"securityContext":{},"serviceAccountName":"","tolerations":[]}` | The pod template for base |
+| base.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{}},"nodeSelector":{},"securityContext":{},"serviceAccountName":"","terminationGracePeriodSeconds":30,"tolerations":[]}` | The pod template for base |
 | base.podTemplate.affinity | object | `{}` | The pod affinity |
 | base.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
 | base.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
@@ -103,6 +103,7 @@ helm uninstall mycluster -n default
 | base.podTemplate.nodeSelector | object | `{}` | The pod node selector |
 | base.podTemplate.securityContext | object | `{}` | The configurations for pod security context. |
 | base.podTemplate.serviceAccountName | string | `""` | The global service account |
+| base.podTemplate.terminationGracePeriodSeconds | int | `30` | The termination grace period seconds |
 | base.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | dashboards | object | `{"annotations":{},"enabled":false,"extraLabels":{},"label":"grafana_dashboard","labelValue":"1","namespace":""}` | Deploy grafana dashboards for the grafana dashboard sidecar. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards |
 | dashboards.annotations | object | `{}` | Additional annotation for the configmap |

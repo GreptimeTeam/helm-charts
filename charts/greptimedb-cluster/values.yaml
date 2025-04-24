@@ -115,6 +115,8 @@ base:
     serviceAccountName: ""
     # -- The configurations for pod security context.
     securityContext: {}
+    # -- The termination grace period seconds
+    terminationGracePeriodSeconds: 30
 
 # -- Frontend configure
 frontend:
@@ -237,6 +239,9 @@ frontend:
 
     # -- The configurations for frontend security context.
     securityContext: {}
+
+    # -- The termination grace period seconds
+    # terminationGracePeriodSeconds: 30
 
   # -- Frontend service
   service: {}
@@ -385,6 +390,9 @@ meta:
     # -- The configurations for meta security context.
     securityContext: {}
 
+    # -- The termination grace period seconds
+    # terminationGracePeriodSeconds: 30
+
   # -- Meta etcd endpoints
   etcdEndpoints: "etcd.etcd-cluster.svc.cluster.local:2379"
 
@@ -532,6 +540,9 @@ datanode:
 
     # -- The configurations for datanode security context.
     securityContext: {}
+
+    # -- The termination grace period seconds
+    # terminationGracePeriodSeconds: 30
 
   storage:
     # -- Storage class for datanode persistent volume
@@ -711,6 +722,9 @@ flownode:
 
     # -- The configurations for flownode security context.
     securityContext: {}
+
+    # -- The termination grace period seconds
+    # terminationGracePeriodSeconds: 30
 
 # -- Frontend instance group configure
 frontends: []
