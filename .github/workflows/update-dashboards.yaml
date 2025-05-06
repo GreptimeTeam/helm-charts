@@ -1,0 +1,23 @@
+name: Update Grafana Dashboards
+
+on:
+  schedule:
+    - cron: '0 1 * * *' # Run daily at 01:00 UTC.
+  workflow_dispatch:
+
+jobs:
+  update-dashboards:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./scripts/update/update-grafana-dashboard.sh

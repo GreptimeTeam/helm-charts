@@ -4,7 +4,7 @@ image:
   # -- The image repository
   repository: greptime/greptimedb
   # -- The image tag
-  tag: "v0.13.2"
+  tag: "v0.14.2"
   # -- The image pull secrets
   pullSecrets: []
 
@@ -17,7 +17,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.2.1
+  tag: v0.2.2
 
 base:
   # -- The pod template for base
@@ -115,6 +115,8 @@ base:
     serviceAccountName: ""
     # -- The configurations for pod security context.
     securityContext: {}
+    # -- The termination grace period seconds
+    terminationGracePeriodSeconds: 30
 
 # -- Frontend configure
 frontend:
@@ -237,6 +239,9 @@ frontend:
 
     # -- The configurations for frontend security context.
     securityContext: {}
+
+    # -- The termination grace period seconds
+    # terminationGracePeriodSeconds: 30
 
   # -- Frontend service
   service: {}
@@ -385,6 +390,9 @@ meta:
     # -- The configurations for meta security context.
     securityContext: {}
 
+    # -- The termination grace period seconds
+    # terminationGracePeriodSeconds: 30
+
   # -- Meta etcd endpoints
   etcdEndpoints: "etcd.etcd-cluster.svc.cluster.local:2379"
 
@@ -532,6 +540,9 @@ datanode:
 
     # -- The configurations for datanode security context.
     securityContext: {}
+
+    # -- The termination grace period seconds
+    # terminationGracePeriodSeconds: 30
 
   storage:
     # -- Storage class for datanode persistent volume
@@ -711,6 +722,9 @@ flownode:
 
     # -- The configurations for flownode security context.
     securityContext: {}
+
+    # -- The termination grace period seconds
+    # terminationGracePeriodSeconds: 30
 
 # -- Frontend instance group configure
 frontends: []
@@ -964,6 +978,7 @@ auth:
     - username: "admin"
       password: "admin"
 
+# -- Configure to the debug pod
 debugPod:
   # -- Enable debug pod, for more information see: "../../docker/debug-pod/README.md".
   enabled: false
@@ -983,34 +998,38 @@ debugPod:
       memory: 256Mi
       cpu: 200m
 
-# -- Configure to the infra testing
-infraTesting:
-  # -- Enable the infra testing.
+# -- Configure to the pre-check runner
+preCheck:
+  # -- Enable the pre-check runner
   enabled: false
 
-  # -- The infra testing runner image
+  # -- The pre-check runner image
   image:
     registry: docker.io
     repository: greptime/greptime-tool
     tag: "20250421-94c4b8d"
 
+  case:
+    disk:
+      enabled: false
+    s3:
+      enabled: false
+      bucket: "bucket-name"
+      region: "s3-region"
+      accessKeyID: "your-access-key-id"
+      secretAccessKey: "your-secret-access-key"
+    kafka:
+      enabled: false
+      endpoint: "your-kafka-endpoint"
+
   # -- Environment variables
   env: {}
-#    KAFKA_ENDPOINT: "kafka.kafka.svc.cluster.local:9092"
-#    AWS_REGION: "ap-southeast-1"
-#    S3_BUCKET: "bucket-name"
 
   # -- Storage class name
   storageClass: null
 
   # -- Size of persistent disk
   size: 20Gi
-
-  # -- AWS Access Key ID
-  accessKeyID: "access_key_id"
-
-  # -- AWS Secret Access Key
-  secretAccessKey: "secret_access_key"
 
 # -- The monitoring bootstrap configuration
 monitoring:
@@ -1091,7 +1110,7 @@ monitoring:
     # -- vector image repository
     repository: timberio/vector
     # -- vector image tag
-    tag: nightly-alpine
+    tag: 0.46.1-debian
 
     # -- vector resource
     resources:
@@ -1166,7 +1185,7 @@ grafana:
     # -- The grafana image repository.
     repository: grafana/grafana
     # -- The grafana image tag.
-    tag: 11.1.3
+    tag: 11.6.0
 
   # -- The grafana sidecar settings to import dashboards
   sidecar:

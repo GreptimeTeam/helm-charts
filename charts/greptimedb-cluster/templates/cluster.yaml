@@ -60,6 +60,9 @@ spec:
     {{- if .Values.base.podTemplate.securityContext }}
     securityContext: {{ .Values.base.podTemplate.securityContext | toYaml | nindent 6 }}
     {{- end }}
+    {{- if .Values.base.podTemplate.terminationGracePeriodSeconds }}
+    terminationGracePeriodSeconds: {{ .Values.base.podTemplate.terminationGracePeriodSeconds }}
+    {{- end }}
   {{- if .Values.frontend }}
   {{- if .Values.frontend.enabled }}
   frontend:
@@ -142,6 +145,9 @@ spec:
       {{- end }}
       {{- if .Values.frontend.podTemplate.nodeSelector }}
       nodeSelector: {{ .Values.frontend.podTemplate.nodeSelector | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.frontend.podTemplate.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.frontend.podTemplate.terminationGracePeriodSeconds }}
       {{- end }}
       {{- if or .Values.auth.enabled .Values.frontend.podTemplate.volumes }}
       volumes:
@@ -277,6 +283,9 @@ spec:
       {{- if .Values.meta.podTemplate.securityContext }}
       securityContext: {{ .Values.meta.podTemplate.securityContext | toYaml | nindent 8 }}
       {{- end }}
+      {{- if .Values.meta.podTemplate.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.meta.podTemplate.terminationGracePeriodSeconds }}
+      {{- end }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
 {{- if or .Values.datanode.configFile .Values.datanode.configData }}
@@ -342,6 +351,9 @@ spec:
       {{- end }}
       {{- if .Values.datanode.podTemplate.securityContext }}
       securityContext: {{ .Values.datanode.podTemplate.securityContext | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.datanode.podTemplate.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.datanode.podTemplate.terminationGracePeriodSeconds }}
       {{- end }}
     {{- if .Values.datanode.logging }}
     logging:
@@ -443,6 +455,9 @@ spec:
       {{- end }}
       {{- if .Values.flownode.podTemplate.securityContext }}
       securityContext: {{ .Values.flownode.podTemplate.securityContext | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.flownode.podTemplate.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.flownode.podTemplate.terminationGracePeriodSeconds }}
       {{- end }}
     {{- if .Values.flownode.logging }}
     logging:
