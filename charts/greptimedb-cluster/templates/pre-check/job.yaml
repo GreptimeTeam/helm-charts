@@ -1,0 +1,56 @@
+{{- if .Values.preCheck.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-pre-check
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade,pre-delete
+    "helm.sh/hook-weight": "-1"
+spec:
+  template:
+    spec:
+      containers:
+        - name: {{ .Release.Name }}-pre-check
+          image: {{ printf "%s/%s:%s" .Values.preCheck.image.registry .Values.preCheck.image.repository .Values.preCheck.image.tag }}
+          command: ["/bin/sh", "-c"]
+          args: ["/scripts/testing.sh"]
+          env:
+            {{- range $key, $val := .Values.preCheck.env }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+            {{- end }}
+            {{- if and .Values.preCheck.case.s3 .Values.preCheck.case.s3.enabled }}
+            - name: S3_BUCKET
+              value: {{ .Values.preCheck.case.s3.bucket }}
+            - name: AWS_REGION
+              value: {{ .Values.preCheck.case.s3.region }}
+            - name: AWS_ACCESS_KEY_ID
+              value: {{ .Values.preCheck.case.s3.accessKeyID }}
+            - name: AWS_SECRET_ACCESS_KEY
+              value: {{ .Values.preCheck.case.s3.secretAccessKey }}
+            {{- end }}
+            {{- if and .Values.preCheck.case.kafka .Values.preCheck.case.kafka.enabled }}
+            - name: KAFKA_ENDPOINT
+              value: {{ .Values.preCheck.case.kafka.endpoint }}
+            {{- end }}
+          volumeMounts:
+            - name: script
+              mountPath: /scripts
+            {{- if .Values.preCheck.case.disk.enabled }}
+            - name: data
+              mountPath: /data
+            {{- end }}
+      restartPolicy: Never
+      volumes:
+        - name: script
+          configMap:
+            name: {{ .Release.Name }}-pre-check-scripts
+            defaultMode: 0755
+        {{- if .Values.preCheck.case.disk.enabled }}
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-pre-check-data
+        {{- end }}
+  backoffLimit: 0
+{{- end }}
