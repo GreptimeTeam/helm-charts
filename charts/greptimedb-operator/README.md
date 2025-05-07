@@ -108,6 +108,7 @@ Kubernetes: `>=1.18.0-0`
 | admissionWebhook.caBundle | string | `""` | A PEM encoded CA bundle which will be used to validate the webhook's server certificate. If certManager.enabled is true, you can get it like this: kubectl get secret webhook-server-tls -n ${namespace} -o jsonpath='{.data.ca\.crt}' |
 | admissionWebhook.certDir | string | `"/etc/webhook-tls"` | The directory that contains the certificate |
 | admissionWebhook.certManager | object | `{"admissionCert":{"duration":""},"enabled":false,"rootCert":{"duration":""}}` | Use certmanager to generate webhook certs |
+| admissionWebhook.certManager.admissionCert | object | `{"duration":""}` | self-signed webhook certificate |
 | admissionWebhook.certManager.rootCert | object | `{"duration":""}` | self-signed root certificate |
 | admissionWebhook.enabled | bool | `false` | Whether to enable the admission webhook |
 | admissionWebhook.failurePolicy | string | `"Fail"` | Valid values: Fail, Ignore, IgnoreOnInstallOnly |
