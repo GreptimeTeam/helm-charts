@@ -30,6 +30,9 @@ RUN ARCH=$(dpkg --print-architecture) && \
     sudo mv etcd-v3.5.0-linux-${ARCH}/etcdctl /usr/local/bin/ && \
     rm -rf etcd-v3.5.0-linux-${ARCH}*
 
+# Helm CLI Install
+RUN curl -sSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | sh
+
 # AWS CLI Install
 RUN ARCH=$(dpkg --print-architecture) && \
     if [ "$ARCH" = "amd64" ]; then \
