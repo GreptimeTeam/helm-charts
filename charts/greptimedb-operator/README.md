@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.2.21](https://img.shields.io/badge/Version-0.2.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.2](https://img.shields.io/badge/AppVersion-0.2.2-informational?style=flat-square)
+![Version: 0.2.22](https://img.shields.io/badge/Version-0.2.22-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.2](https://img.shields.io/badge/AppVersion-0.2.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -103,10 +103,12 @@ Kubernetes: `>=1.18.0-0`
 | VolumeMounts | list | `[]` | Volume mounts to add to the pod |
 | Volumes | list | `[]` | Volumes to add to the pod |
 | additionalLabels | object | `{}` | additional labels to add to all resources |
-| admissionWebhook | object | `{"annotations":{},"caBundle":"","certDir":"/etc/webhook-tls","enabled":false,"failurePolicy":"Fail","port":8082}` | The configuration for the admission webhook |
+| admissionWebhook | object | `{"annotations":{},"caBundle":"","certDir":"/etc/webhook-tls","certManager":{"admissionCert":{"duration":""},"enabled":false,"rootCert":{"duration":""}},"enabled":false,"failurePolicy":"Fail","port":8082}` | The configuration for the admission webhook |
 | admissionWebhook.annotations | object | `{}` | Additional annotations to the admission webhooks |
-| admissionWebhook.caBundle | string | `""` | A PEM encoded CA bundle which will be used to validate the webhook's server certificate. |
+| admissionWebhook.caBundle | string | `""` | A PEM encoded CA bundle which will be used to validate the webhook's server certificate. If certManager.enabled is true, you can get it like this: kubectl get secret webhook-server-tls -n ${namespace} -o jsonpath='{.data.ca\.crt}' |
 | admissionWebhook.certDir | string | `"/etc/webhook-tls"` | The directory that contains the certificate |
+| admissionWebhook.certManager | object | `{"admissionCert":{"duration":""},"enabled":false,"rootCert":{"duration":""}}` | Use certmanager to generate webhook certs |
+| admissionWebhook.certManager.rootCert | object | `{"duration":""}` | self-signed root certificate |
 | admissionWebhook.enabled | bool | `false` | Whether to enable the admission webhook |
 | admissionWebhook.failurePolicy | string | `"Fail"` | Valid values: Fail, Ignore, IgnoreOnInstallOnly |
 | admissionWebhook.port | int | `8082` | The port for the admission webhook |

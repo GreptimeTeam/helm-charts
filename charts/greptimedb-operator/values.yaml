@@ -96,7 +96,21 @@ admissionWebhook:
   failurePolicy: Fail
 
   # -- A PEM encoded CA bundle which will be used to validate the webhook's server certificate.
+  # If certManager.enabled is true, you can get it like this: kubectl get secret webhook-server-tls -n ${namespace} -o jsonpath='{.data.ca\.crt}'
   caBundle: ""
+
+  # -- Use certmanager to generate webhook certs
+  certManager:
+    enabled: false
+
+    # -- self-signed root certificate
+    rootCert:
+      # default to be 5 year
+      duration: "" # 43800h0m0s
+
+    admissionCert:
+      # default to be 1 year
+      duration: "" # 8760h0m0s
 
 # -- The configuration for the operator API server
 apiServer:
