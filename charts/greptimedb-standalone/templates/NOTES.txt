@@ -7,4 +7,4 @@
 Installed components:
 * greptimedb-standalone
 
-The greptimedb-standalone is starting, use `kubectl get statefulset {{ include "greptimedb-standalone.fullname" . }} -n {{ .Release.Namespace }}` to check its status.
+The greptimedb-standalone is starting, use `kubectl get statefulsets {{ include "greptimedb-standalone.fullname" . }} -n {{ .Release.Namespace }}` to check its status.
