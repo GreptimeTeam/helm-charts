@@ -124,6 +124,11 @@ function deploy_greptimedb_cluster() {
         exit 1
     fi
 
+    if ! helm dependency build charts/greptimedb-cluster; then
+        log "Failed to build dependencies"
+        exit 1
+    fi
+
     log "Deploying GreptimeDB Cluster..."
     if ! helm upgrade --install mycluster charts/greptimedb-cluster -n default; then
         log "Failed to deploy greptimedb-cluster"

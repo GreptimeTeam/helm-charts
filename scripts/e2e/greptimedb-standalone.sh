@@ -83,7 +83,7 @@ function deploy_greptimedb_standalone() {
         exit 1
     fi
 
-    log "Waiting for GreptimeDB to be ready..."
+    log "Waiting for GreptimeDB standalone to be ready..."
     if ! kubectl rollout status --timeout=120s statefulset/greptimedb-standalone -n default; then
         log "GreptimeDB standalone deployment failed or timed out"
         exit 1
