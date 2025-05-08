@@ -17,11 +17,13 @@ maintainers:
   - name: zyy17
     email: zyy@greptime.com
     url: https://github.com/zyy17
+
 dependencies:
   - name: grafana
     version: "8.5.8"
     repository: https://grafana.github.io/helm-charts
     condition: grafana.enabled
+
   # TODO(zyy17): Should we use the official Jaeger chart: https://github.com/jaegertracing/helm-charts/tree/main in the future?
   # The main function of the current chart is the same as the official one, but more lightweight and easy to use.
   - name: jaeger-all-in-one
