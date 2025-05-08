@@ -1,6 +1,8 @@
 name: E2E
 
 on:
+  schedule:
+    - cron: '0 2 * * 1-5'
   workflow_dispatch:
     inputs:
       chart:
@@ -30,13 +32,24 @@ jobs:
           wait: 120s
 
       - name: Deploy greptimedb-cluster
-        if: ${{ github.event.inputs.chart == 'greptimedb-cluster' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.chart == 'greptimedb-cluster' }}
         shell: bash
         run: |
           make e2e-greptimedb-cluster
+        continue-on-error: true
 
       - name: Deploy greptimedb-standalone
-        if: ${{ github.event.inputs.chart == 'greptimedb-standalone' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.chart == 'greptimedb-standalone' }}
         shell: bash
         run: |
           make e2e-greptimedb-standalone
+        continue-on-error: true
+
+      - name: Notify Slack
+        if: ${{ failure() }}
+        uses: slackapi/slack-github-action@v1.25.0
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          payload: |
+            {"text": "helm-charts e2e failed. Please check: https://github.com/GreptimeTeam/helm-charts/actions/workflows/e2e.yaml"}
