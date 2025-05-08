@@ -3,7 +3,7 @@
 CHART="$1"
 VERSION="$2"
 
-function update_chart() {
+function update_version() {
   if [ -z "$CHART" ] || [ -z "$VERSION" ]; then
     echo "Error: Missing required arguments CHART or VERSION."
     exit 1
@@ -14,7 +14,7 @@ function update_chart() {
     exit 1
   fi
 
-  if [[ ! "$VERSION" =~ ^v && "$CHART" != "greptimedb-operator" ]]; then
+  if [[ ! "$VERSION" =~ ^v ]]; then
     echo "Error: VERSION must start with 'v'."
     exit 1
   fi
@@ -31,8 +31,8 @@ function update_chart() {
   next_version="$major.$minor.$((patch + 1))"
   appVersion=${VERSION#v}
 
-  yq eval ".appVersion = \"$appVersion\"" -i "$chart_file"
   yq eval ".version = \"$next_version\"" -i "$chart_file"
+  yq eval ".appVersion = \"$appVersion\"" -i "$chart_file"
 
   echo "The chart $CHART version updated to $next_version successfully."
 
@@ -43,4 +43,4 @@ function update_chart() {
   echo "The chart $CHART image updated to $VERSION successfully."
 }
 
-update_chart
+update_version

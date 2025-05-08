@@ -50,10 +50,10 @@ check-crds: update-crds ## Check crd
     (echo "Need to update crds, please run 'make crds'"; \
 	exit 1)
 
-# For example: make update-chart CHART=${CHART_NAME} VERSION=${IMAGE_TAG}
-# make update-chart CHART=greptimedb-standalone VERSION=v0.7.2
-# make update-chart CHART=greptimedb-cluster VERSION=v0.7.2
-# make update-chart CHART=greptimedb-operator VERSION=v0.1.0-alpha.28
-.PHONY: update-chart
-update-chart: ## Run update chart
-	./scripts/update-chart.sh $(CHART) $(VERSION)
+# For example: make update-version CHART=${CHART_NAME} VERSION=${IMAGE_TAG}
+# make update-version CHART=greptimedb-standalone VERSION=v0.14.2
+# make update-version CHART=greptimedb-cluster VERSION=v0.14.2
+# make update-version CHART=greptimedb-operator VERSION=v0.2.2
+.PHONY: update-version
+update-version: ## Run update version
+	./scripts/update/update-version.sh $(CHART) $(VERSION)
