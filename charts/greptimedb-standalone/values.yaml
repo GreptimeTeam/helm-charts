@@ -239,3 +239,10 @@ auth:
   users:
     - username: "admin"
       password: "admin"
+
+# -- Logging configuration for greptimedb
+logging:
+  # -- The log level for greptimedb, only support "debug", "info", "warn"
+  level: "info"
+  # -- The logs directory for greptimedb
+  logsDir: "/data/greptimedb/logs"
