@@ -1,0 +1,60 @@
+{{- if .Values.admissionWebhook.certManager.enabled }}
+# Create a selfsigned Issuer, in order to create a root CA certificate for
+# signing webhook serving certificates
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  labels:
+    {{- include "greptimedb-operator.labels" . | nindent 4 }}
+  name: {{ include "greptimedb-operator.fullname" . }}-selfsigned-issuer
+  namespace: {{ .Release.Namespace }}
+spec:
+  selfSigned: {}
+---
+# Generate a CA Certificate used to sign certificates for the webhook
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "greptimedb-operator.fullname" . }}-root-cert
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "greptimedb-operator.labels" . | nindent 4 }}
+spec:
+  secretName: {{ include "greptimedb-operator.fullname" . }}-root-cert
+  duration: {{ .Values.admissionWebhook.certManager.rootCert.duration | default "43800h0m0s" | quote }}
+  issuerRef:
+    name: {{ include "greptimedb-operator.fullname" . }}-selfsigned-issuer
+  commonName: "ca.webhook.greptimedb-operator"
+  isCA: true
+---
+# Create an Issuer that uses the above generated CA certificate to issue certs
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "greptimedb-operator.fullname" . }}-root-issuer
+  namespace: {{ .Release.Namespace }}
+  labels:
+      {{- include "greptimedb-operator.labels" . | nindent 4 }}
+spec:
+  ca:
+    secretName: {{ include "greptimedb-operator.fullname" . }}-root-cert
+---
+# generate a server certificate for the apiservices to use
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  labels:
+    {{- include "greptimedb-operator.labels" . | nindent 4 }}
+  name: {{ include "greptimedb-operator.fullname" . }}-webhook-cert
+  namespace: {{ .Release.Namespace }}
+spec:
+  dnsNames:
+    - {{ include "greptimedb-operator.fullname" . }}
+    - {{ include "greptimedb-operator.fullname" . }}.{{ .Release.Namespace }}
+    - {{ include "greptimedb-operator.fullname" . }}.{{ .Release.Namespace }}.svc
+  issuerRef:
+    kind: Issuer
+    name: {{ include "greptimedb-operator.fullname" . }}-root-issuer
+  secretName: webhook-server-tls
+  duration: {{ .Values.admissionWebhook.certManager.admissionCert.duration | default "8760h0m0s" | quote }}
+{{- end }}
