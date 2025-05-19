@@ -28,8 +28,13 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
-        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        app.greptime.io/config-hash: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        app.greptime.io/secret-hash: {{
+          (printf "%s%s"
+            (include (print $.Template.BasePath "/secret.yaml") .)
+            (include (print $.Template.BasePath "/users-auth-secret.yaml") .)
+          ) | sha256sum
+        }}
         {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
