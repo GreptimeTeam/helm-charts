@@ -38,6 +38,9 @@ RUN KAFKA_VERSION=3.5.0 && \
     sudo mv "kafka_2.13-${KAFKA_VERSION}" kafka && \
     rm -rf "kafka_2.13-${KAFKA_VERSION}.tgz" "kafka_2.13-${KAFKA_VERSION}"
 
+# Helm CLI Install
+RUN curl -sSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | sh
+
 # AWS CLI Install
 RUN ARCH=$(dpkg --print-architecture) && \
     if [ "$ARCH" = "amd64" ]; then \

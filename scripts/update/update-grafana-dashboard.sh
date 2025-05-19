@@ -1,6 +1,8 @@
 #!/bin/bash
 
-UPSTREAM_DASHBOARD_URL=https://raw.githubusercontent.com/GreptimeTeam/greptimedb/refs/heads/main/grafana/dashboards/cluster/dashboard.json
+set -e
+
+UPSTREAM_DASHBOARD_URL=https://raw.githubusercontent.com/GreptimeTeam/greptimedb/refs/heads/main/grafana/dashboards/metrics/cluster/dashboard.json
 
 update_chart_version() {
   # Extract the version and increment the last digit by 1.
@@ -16,8 +18,8 @@ update_grafana_dashboard() {
   # Download the latest dashboard from the upstream repository.
   curl -o /tmp/latest-dashboard.json ${UPSTREAM_DASHBOARD_URL}
 
-  # Check for differences.
-  if ! cmp -s /tmp/latest-dashboard.json charts/greptimedb-cluster/dashboards/greptimedb-cluster-metrics.json; then
+  # Ensure the dashboard file is not empty and has differences with the local file.
+  if [ -s /tmp/latest-dashboard.json ] && ! cmp -s /tmp/latest-dashboard.json charts/greptimedb-cluster/dashboards/greptimedb-cluster-metrics.json; then
 
     # Configure Git configs.
     git config --global user.email helm-charts-ci@greptime.com
