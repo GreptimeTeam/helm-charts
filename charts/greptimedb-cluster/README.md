@@ -318,12 +318,10 @@ helm uninstall mycluster -n default
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | objectStorage | object | `{"azblob":{},"cache":{},"gcs":{},"oss":{},"s3":{}}` | Configure to object storage |
 | postgresServicePort | int | `4003` | GreptimeDB postgres service port |
-| preCheck | object | `{"case":{"disk":{"enabled":false},"kafka":{"enabled":false,"endpoint":"your-kafka-endpoint"},"s3":{"accessKeyID":"your-access-key-id","bucket":"bucket-name","enabled":false,"region":"s3-region","secretAccessKey":"your-secret-access-key"}},"enabled":false,"env":{},"image":{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250421-94c4b8d"},"size":"20Gi","storageClass":null}` | Configure to the pre-check runner |
+| preCheck | object | `{"case":{"disk":{"enabled":false,"size":"20Gi","storageClass":null},"kafka":{"enabled":false,"endpoint":"your-kafka-endpoint"},"s3":{"accessKeyID":"your-access-key-id","bucket":"bucket-name","enabled":false,"region":"s3-region","secretAccessKey":"your-secret-access-key"}},"enabled":false,"env":{},"image":{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250421-94c4b8d"}}` | Configure to the pre-check runner |
 | preCheck.enabled | bool | `false` | Enable the pre-check runner |
 | preCheck.env | object | `{}` | Environment variables |
 | preCheck.image | object | `{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250421-94c4b8d"}` | The pre-check runner image |
-| preCheck.size | string | `"20Gi"` | Size of persistent disk |
-| preCheck.storageClass | string | `nil` | Storage class name |
 | prometheusMonitor | object | `{"enabled":false,"interval":"30s","labels":{"release":"prometheus"}}` | Configure to prometheus PodMonitor |
 | prometheusMonitor.enabled | bool | `false` | Create PodMonitor resource for scraping metrics using PrometheusOperator |
 | prometheusMonitor.interval | string | `"30s"` | Interval at which metrics should be scraped |

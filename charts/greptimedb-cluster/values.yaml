@@ -1012,6 +1012,8 @@ preCheck:
   case:
     disk:
       enabled: false
+      storageClass: null
+      size: 20Gi
     s3:
       enabled: false
       bucket: "bucket-name"
@@ -1024,12 +1026,6 @@ preCheck:
 
   # -- Environment variables
   env: {}
-
-  # -- Storage class name
-  storageClass: null
-
-  # -- Size of persistent disk
-  size: 20Gi
 
 # -- The monitoring bootstrap configuration
 monitoring:

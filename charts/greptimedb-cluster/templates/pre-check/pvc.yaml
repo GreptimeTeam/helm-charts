@@ -8,10 +8,10 @@ metadata:
     "helm.sh/hook": pre-install,pre-upgrade,pre-delete
     "helm.sh/hook-weight": "-2"
 spec:
-  storageClassName: {{ .Values.preCheck.storageClass }}
+  storageClassName: {{ .Values.preCheck.case.disk.storageClass }}
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.preCheck.size }}
+      storage: {{ .Values.preCheck.case.disk.size }}
 {{- end }}
