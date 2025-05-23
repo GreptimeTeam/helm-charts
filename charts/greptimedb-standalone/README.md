@@ -73,6 +73,9 @@ helm uninstall greptimedb-standalone -n default
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
 | image.tag | string | `"v0.14.2"` | The image tag |
+| logging | object | `{"level":"info","logsDir":"/data/greptimedb/logs"}` | Logging configuration for greptimedb |
+| logging.level | string | `"info"` | The log level for greptimedb, only support "debug", "info", "warn" |
+| logging.logsDir | string | `"/data/greptimedb/logs"` | The logs directory for greptimedb |
 | monitoring.annotations | object | `{}` | PodMonitor annotations |
 | monitoring.enabled | bool | `false` | Enable prometheus podmonitor |
 | monitoring.interval | string | `"30s"` | PodMonitor scrape interval |
