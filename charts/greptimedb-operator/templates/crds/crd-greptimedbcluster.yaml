@@ -3075,19 +3075,6 @@ spec:
                           type: boolean
                         persistentWithData:
                           type: boolean
-                        slowQuery:
-                          properties:
-                            enabled:
-                              type: boolean
-                            sampleRatio:
-                              pattern: ^(0?\.\d+|1(\.0+)?)$
-                              type: string
-                            threshold:
-                              pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h))+$
-                              type: string
-                          required:
-                            - enabled
-                          type: object
                       type: object
                     replicas:
                       format: int32
@@ -6156,19 +6143,6 @@ spec:
                           type: boolean
                         persistentWithData:
                           type: boolean
-                        slowQuery:
-                          properties:
-                            enabled:
-                              type: boolean
-                            sampleRatio:
-                              pattern: ^(0?\.\d+|1(\.0+)?)$
-                              type: string
-                            threshold:
-                              pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h))+$
-                              type: string
-                          required:
-                            - enabled
-                          type: object
                       type: object
                     replicas:
                       format: int32
@@ -9207,19 +9181,6 @@ spec:
                           type: boolean
                         persistentWithData:
                           type: boolean
-                        slowQuery:
-                          properties:
-                            enabled:
-                              type: boolean
-                            sampleRatio:
-                              pattern: ^(0?\.\d+|1(\.0+)?)$
-                              type: string
-                            threshold:
-                              pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h))+$
-                              type: string
-                          required:
-                            - enabled
-                          type: object
                       type: object
                     mysqlPort:
                       format: int32
@@ -9268,6 +9229,22 @@ spec:
                         loadBalancerClass:
                           type: string
                         type:
+                          type: string
+                      type: object
+                    slowQuery:
+                      properties:
+                        enabled:
+                          type: boolean
+                        recordType:
+                          type: string
+                        sampleRatio:
+                          pattern: ^(0?\.\d+|1(\.0+)?)$
+                          type: string
+                        threshold:
+                          pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h))+$
+                          type: string
+                        ttl:
+                          pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h|d))+$
                           type: string
                       type: object
                     template:
@@ -12261,7 +12238,7 @@ spec:
                         - secretName
                       type: object
                   type: object
-                frontends:
+                frontendGroups:
                   items:
                     properties:
                       config:
@@ -12295,19 +12272,6 @@ spec:
                             type: boolean
                           persistentWithData:
                             type: boolean
-                          slowQuery:
-                            properties:
-                              enabled:
-                                type: boolean
-                              sampleRatio:
-                                pattern: ^(0?\.\d+|1(\.0+)?)$
-                                type: string
-                              threshold:
-                                pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h))+$
-                                type: string
-                            required:
-                              - enabled
-                            type: object
                         type: object
                       mysqlPort:
                         format: int32
@@ -12356,6 +12320,22 @@ spec:
                           loadBalancerClass:
                             type: string
                           type:
+                            type: string
+                        type: object
+                      slowQuery:
+                        properties:
+                          enabled:
+                            type: boolean
+                          recordType:
+                            type: string
+                          sampleRatio:
+                            pattern: ^(0?\.\d+|1(\.0+)?)$
+                            type: string
+                          threshold:
+                            pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h))+$
+                            type: string
+                          ttl:
+                            pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h|d))+$
                             type: string
                         type: object
                       template:
@@ -15427,22 +15407,65 @@ spec:
                       type: boolean
                     persistentWithData:
                       type: boolean
-                    slowQuery:
-                      properties:
-                        enabled:
-                          type: boolean
-                        sampleRatio:
-                          pattern: ^(0?\.\d+|1(\.0+)?)$
-                          type: string
-                        threshold:
-                          pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h))+$
-                          type: string
-                      required:
-                        - enabled
-                      type: object
                   type: object
                 meta:
                   properties:
+                    backendStorage:
+                      properties:
+                        etcd:
+                          properties:
+                            enableCheckEtcdService:
+                              type: boolean
+                            endpoints:
+                              items:
+                                type: string
+                              type: array
+                            storeKeyPrefix:
+                              type: string
+                          required:
+                            - endpoints
+                          type: object
+                        mysql:
+                          properties:
+                            credentialsSecretName:
+                              type: string
+                            database:
+                              type: string
+                            host:
+                              type: string
+                            port:
+                              format: int32
+                              maximum: 65535
+                              minimum: 0
+                              type: integer
+                            table:
+                              type: string
+                          required:
+                            - credentialsSecretName
+                            - host
+                            - port
+                          type: object
+                        postgresql:
+                          properties:
+                            credentialsSecretName:
+                              type: string
+                            database:
+                              type: string
+                            host:
+                              type: string
+                            port:
+                              format: int32
+                              maximum: 65535
+                              minimum: 0
+                              type: integer
+                            table:
+                              type: string
+                          required:
+                            - credentialsSecretName
+                            - host
+                            - port
+                          type: object
+                      type: object
                     config:
                       type: string
                     enableCheckEtcdService:
@@ -15482,19 +15505,6 @@ spec:
                           type: boolean
                         persistentWithData:
                           type: boolean
-                        slowQuery:
-                          properties:
-                            enabled:
-                              type: boolean
-                            sampleRatio:
-                              pattern: ^(0?\.\d+|1(\.0+)?)$
-                              type: string
-                            threshold:
-                              pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h))+$
-                              type: string
-                          required:
-                            - enabled
-                          type: object
                       type: object
                     replicas:
                       format: int32
@@ -18503,8 +18513,6 @@ spec:
                             type: object
                           type: array
                       type: object
-                  required:
-                    - etcdEndpoints
                   type: object
                 monitoring:
                   properties:
@@ -21569,19 +21577,6 @@ spec:
                               type: boolean
                             persistentWithData:
                               type: boolean
-                            slowQuery:
-                              properties:
-                                enabled:
-                                  type: boolean
-                                sampleRatio:
-                                  pattern: ^(0?\.\d+|1(\.0+)?)$
-                                  type: string
-                                threshold:
-                                  pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h))+$
-                                  type: string
-                              required:
-                                - enabled
-                              type: object
                           type: object
                         mysqlPort:
                           format: int32
@@ -21734,6 +21729,22 @@ spec:
                             loadBalancerClass:
                               type: string
                             type:
+                              type: string
+                          type: object
+                        slowQuery:
+                          properties:
+                            enabled:
+                              type: boolean
+                            recordType:
+                              type: string
+                            sampleRatio:
+                              pattern: ^(0?\.\d+|1(\.0+)?)$
+                              type: string
+                            threshold:
+                              pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h))+$
+                              type: string
+                            ttl:
+                              pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h|d))+$
                               type: string
                           type: object
                         tls:

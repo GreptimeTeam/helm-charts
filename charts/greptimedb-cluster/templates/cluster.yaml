@@ -196,15 +196,50 @@ spec:
 {{ .Values.meta.configData | indent 6 }}
 {{- end }}
 {{- end }}
-    {{- if .Values.meta.etcdEndpoints }}
-    etcdEndpoints:
-      - {{ .Values.meta.etcdEndpoints }}
-    {{- end }}
-    {{- if .Values.meta.storeKeyPrefix }}
-    storeKeyPrefix: {{ .Values.meta.storeKeyPrefix }}
-    {{- end }}
     {{- if .Values.meta.enableRegionFailover }}
     enableRegionFailover: {{ .Values.meta.enableRegionFailover }}
+    {{- end }}
+    {{- if or .Values.meta.backendStorage.mysql .Values.meta.backendStorage.postgresql .Values.meta.etcdEndpoints .Values.meta.etcd }}
+    backendStorage:
+      {{- if or .Values.meta.backendStorage.etcd .Values.meta.etcdEndpoints }}
+      etcd:
+        {{- if .Values.meta.backendStorage.etcd.etcdEndpoints }}
+        endpoints:
+          - {{ .Values.meta.backendStorage.etcd.etcdEndpoints }}
+        {{- else if .Values.meta.etcdEndpoints }}
+        endpoints:
+          - {{ .Values.meta.etcdEndpoints }}
+        {{- end }}
+        {{- if .Values.meta.backendStorage.etcd.storeKeyPrefix }}
+        storeKeyPrefix: {{ .Values.meta.backendStorage.etcd.storeKeyPrefix }}
+        {{- else if .Values.meta.storeKeyPrefix }}
+        storeKeyPrefix: {{ .Values.meta.storeKeyPrefix }}
+        {{- end }}
+      {{- end }}
+      {{- if .Values.meta.backendStorage.mysql }}
+      mysql:
+        host: {{ .Values.meta.backendStorage.mysql.host }}
+        port: {{ .Values.meta.backendStorage.mysql.port }}
+        database: {{ .Values.meta.backendStorage.mysql.database }}
+        table: {{ .Values.meta.backendStorage.mysql.table }}
+        {{- if .Values.meta.backendStorage.mysql.credentials.existingSecretName }}
+        credentialsSecretName: {{ .Values.meta.backendStorage.mysql.credentials.existingSecretName }}
+        {{- else }}
+        credentialsSecretName: {{ .Values.meta.backendStorage.mysql.credentials.secretName }}
+        {{- end }}
+      {{- end }}
+      {{- if .Values.meta.backendStorage.postgresql }}
+      postgresql:
+        host: {{ .Values.meta.backendStorage.postgresql.host }}
+        port: {{ .Values.meta.backendStorage.postgresql.port }}
+        database: {{ .Values.meta.backendStorage.postgresql.database }}
+        table: {{ .Values.meta.backendStorage.postgresql.table }}
+        {{- if .Values.meta.backendStorage.postgresql.credentials.existingSecretName }}
+        credentialsSecretName: {{ .Values.meta.backendStorage.postgresql.credentials.existingSecretName }}
+        {{- else }}
+        credentialsSecretName: {{ .Values.meta.backendStorage.postgresql.credentials.secretName }}
+        {{- end }}
+      {{- end }}
     {{- end }}
     {{- if .Values.meta.logging }}
     logging:
@@ -481,8 +516,8 @@ spec:
       {{- end }}
     {{- end }}
   {{- end }}
-  {{- if .Values.frontends }}
-  frontends:{{ toYaml .Values.frontends | nindent 2 }}
+  {{- if .Values.frontendGroups }}
+  frontendGroups:{{ toYaml .Values.frontendGroups | nindent 2 }}
   {{- end }}
   {{- if (and .Values.prometheusMonitor (eq .Values.prometheusMonitor.enabled true ))}}
   prometheusMonitor: {{- toYaml .Values.prometheusMonitor | nindent 4 }}
@@ -585,6 +620,14 @@ spec:
     tls: {{- toYaml $ingress.tls | nindent 6 }}
     {{- end }}
   {{- end }}
+  {{- if .Values.slowQuery.enabled }}
+  slowQuery:
+    enabled: {{ .Values.slowQuery.enabled }}
+    recordType: {{ .Values.slowQuery.recordType }}
+    threshold: {{ .Values.slowQuery.threshold }}
+    sampleRatio: {{ .Values.slowQuery.sampleRatio | quote }}
+    ttl: {{ .Values.slowQuery.ttl }}
+  {{- end }}
   {{- if .Values.logging}}
   logging:
     {{- if .Values.logging.level }}
@@ -601,12 +644,6 @@ spec:
     {{- end }}
     {{- if .Values.logging.persistentWithData }}
     persistentWithData: {{ .Values.logging.persistentWithData }}
-    {{- end }}
-    {{- if .Values.logging.slowQuery.enabled }}
-    slowQuery:
-      enabled: {{ .Values.logging.slowQuery.enabled }}
-      threshold: {{ .Values.logging.slowQuery.threshold }}
-      sampleRatio: {{ .Values.logging.slowQuery.sampleRatio | quote }}
     {{- end }}
     {{- if .Values.logging.filters }}
     filters: {{ .Values.logging.filters | toYaml | nindent 4 }}
