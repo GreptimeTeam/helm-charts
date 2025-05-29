@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.3.21](https://img.shields.io/badge/Version-0.3.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.3](https://img.shields.io/badge/AppVersion-0.14.3-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.3](https://img.shields.io/badge/AppVersion-0.14.3-informational?style=flat-square)
 
 ## Source Code
 
@@ -215,7 +215,7 @@ helm uninstall mycluster -n default
 | frontend.replicas | int | `1` | Frontend replicas |
 | frontend.service | object | `{}` | Frontend service |
 | frontend.tls | object | `{}` | Frontend tls configure |
-| frontends | list | `[]` | Frontend instance group configure |
+| frontendGroups | list | `[]` | Frontend instance groups configure |
 | grafana | object | `{"adminPassword":"gt-operator","adminUser":"admin","datasources":{"datasources.yaml":{"datasources":[{"access":"proxy","isDefault":true,"name":"metrics","type":"prometheus","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus"},{"access":"proxy","database":"public","name":"logs","type":"mysql","url":"mycluster-monitor-standalone.default.svc.cluster.local:4002"},{"access":"proxy","database":"information_schema","name":"information_schema","type":"mysql","url":"mycluster-frontend.default.svc.cluster.local:4002"}]}},"enabled":false,"image":{"registry":"docker.io","repository":"grafana/grafana","tag":"11.6.0"},"initChownData":{"enabled":false},"persistence":{"accessModes":["ReadWriteOnce"],"enabled":true,"size":"10Gi","storageClassName":null},"service":{"annotations":{},"enabled":true,"type":"ClusterIP"},"sidecar":{"dashboards":{"enabled":true,"provider":{"allowUiUpdates":true},"searchNamespace":"ALL"}}}` | Deploy grafana for monitoring. |
 | grafana.adminPassword | string | `"gt-operator"` | The default admin password for grafana. |
 | grafana.adminUser | string | `"admin"` | The default admin username for grafana. |
@@ -246,7 +246,7 @@ helm uninstall mycluster -n default
 | ingress | object | `{}` | Configure to frontend ingress |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.2.2"` | Initializer image tag |
+| initializer.tag | string | `"v0.3.0"` | Initializer image tag |
 | jaeger-all-in-one | object | `{"enableHttpOpenTelemetryCollector":true,"enableHttpZipkinCollector":true,"enabled":false,"image":{"pullPolicy":"IfNotPresent","repository":"jaegertracing/all-in-one","versionOverride":"latest"},"resources":{},"service":{"annotations":{},"port":16686,"type":"ClusterIP"},"volume":{"className":"","enabled":true,"size":"3Gi"}}` | Deploy jaeger-all-in-one for development purpose. |
 | jaeger-all-in-one.enableHttpOpenTelemetryCollector | bool | `true` | Enable the opentelemetry collector for jaeger-all-in-one and listen on port 4317. |
 | jaeger-all-in-one.enableHttpZipkinCollector | bool | `true` | Enable the zipkin collector for jaeger-all-in-one and listen on port 9411. |
@@ -264,22 +264,22 @@ helm uninstall mycluster -n default
 | jaeger-all-in-one.volume.className | string | `""` | The storageclass for the jaeger-all-in-one. |
 | jaeger-all-in-one.volume.enabled | bool | `true` | Whether to enable the persistence for jaeger-all-in-one. |
 | jaeger-all-in-one.volume.size | string | `"3Gi"` | The storage size for the jaeger-all-in-one. |
-| logging | object | `{"filters":[],"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false,"persistentWithData":false,"slowQuery":{"enabled":false,"sampleRatio":"1.0","threshold":"10s"}}` | Global logging configuration |
+| logging | object | `{"filters":[],"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false,"persistentWithData":false}` | Global logging configuration |
 | logging.filters | list | `[]` | The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs. |
 | logging.format | string | `"text"` | The log format for greptimedb, only support "json" and "text" |
 | logging.level | string | `"info"` | The log level for greptimedb, only support "debug", "info", "warn", "debug" |
 | logging.logsDir | string | `"/data/greptimedb/logs"` | The logs directory for greptimedb |
 | logging.onlyLogToStdout | bool | `false` | Whether to log to stdout only |
 | logging.persistentWithData | bool | `false` | indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component. |
-| logging.slowQuery | object | `{"enabled":false,"sampleRatio":"1.0","threshold":"10s"}` | The slow query log configuration. |
-| logging.slowQuery.enabled | bool | `false` | Enable slow query log. |
-| logging.slowQuery.sampleRatio | string | `"1.0"` | Sample ratio of slow query log. |
-| logging.slowQuery.threshold | string | `"10s"` | The threshold of slow query log in seconds. |
-| meta | object | `{"configData":"","configFile":"","enableRegionFailover":false,"etcdEndpoints":"etcd.etcd-cluster.svc.cluster.local:2379","logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storeKeyPrefix":""}` | Meta configure |
+| meta | object | `{"backendStorage":{"etcd":{},"mysql":{},"postgresql":{}},"configData":"","configFile":"","enableRegionFailover":false,"etcdEndpoints":"etcd.etcd-cluster.svc.cluster.local:2379","logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storeKeyPrefix":""}` | Meta configure |
+| meta.backendStorage | object | `{"etcd":{},"mysql":{},"postgresql":{}}` | Meta Backend storage configuration |
+| meta.backendStorage.etcd | object | `{}` | Etcd backend storage configuration |
+| meta.backendStorage.mysql | object | `{}` | MySQL backend storage configuration |
+| meta.backendStorage.postgresql | object | `{}` | PostgreSQL backend storage configuration |
 | meta.configData | string | `""` | Extra raw toml config data of meta. Skip if the `configFile` is used. |
 | meta.configFile | string | `""` | Extra toml file of meta. |
 | meta.enableRegionFailover | bool | `false` | Whether to enable region failover |
-| meta.etcdEndpoints | string | `"etcd.etcd-cluster.svc.cluster.local:2379"` | Meta etcd endpoints |
+| meta.etcdEndpoints | string | `"etcd.etcd-cluster.svc.cluster.local:2379"` | Deprecated: Meta etcd endpoints, use `backendStorage.etcd.etcdEndpoints` instead |
 | meta.logging | object | `{}` | Logging configuration for meta, if not set, it will use the global logging configuration. |
 | meta.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for meta |
 | meta.podTemplate.affinity | object | `{}` | The pod affinity |
@@ -304,7 +304,7 @@ helm uninstall mycluster -n default
 | meta.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | meta.podTemplate.volumes | list | `[]` | The pod volumes |
 | meta.replicas | int | `1` | Meta replicas |
-| meta.storeKeyPrefix | string | `""` | Meta will store data with this key prefix |
+| meta.storeKeyPrefix | string | `""` | Deprecated: Meta will store data with this key prefix |
 | monitoring | object | `{"enabled":false,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"vector":{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"500m","memory":"256Mi"}},"tag":"0.46.1-debian"}}` | The monitoring bootstrap configuration |
 | monitoring.enabled | bool | `false` | Enable monitoring |
 | monitoring.logsCollection | object | `{"pipeline":{"data":""}}` | Configure the logs collection |
@@ -336,3 +336,9 @@ helm uninstall mycluster -n default
 | remoteWal.enabled | bool | `false` | Enable remote wal |
 | remoteWal.kafka | object | `{"brokerEndpoints":[]}` | The remote wal type, only support kafka now. |
 | remoteWal.kafka.brokerEndpoints | list | `[]` | The kafka broker endpoints |
+| slowQuery | object | `{"enabled":true,"recordType":"system_table","sampleRatio":"1.0","threshold":"30s","ttl":"30d"}` | The slow query log configuration. |
+| slowQuery.enabled | bool | `true` | Enable slow query log. |
+| slowQuery.recordType | string | `"system_table"` | The record type of slow query log. |
+| slowQuery.sampleRatio | string | `"1.0"` | Sample ratio of slow query log. |
+| slowQuery.threshold | string | `"30s"` | The threshold of slow query log in seconds. |
+| slowQuery.ttl | string | `"30d"` | The TTL of slow query system table. |

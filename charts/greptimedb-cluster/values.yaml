@@ -17,7 +17,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.2.2
+  tag: v0.3.0
 
 base:
   # -- The pod template for base
@@ -393,14 +393,65 @@ meta:
     # -- The termination grace period seconds
     # terminationGracePeriodSeconds: 30
 
-  # -- Meta etcd endpoints
+  # -- Deprecated: Meta etcd endpoints, use `backendStorage.etcd.etcdEndpoints` instead
   etcdEndpoints: "etcd.etcd-cluster.svc.cluster.local:2379"
 
-  # -- Meta will store data with this key prefix
+  # -- Deprecated: Meta will store data with this key prefix
   storeKeyPrefix: ""
 
   # -- Whether to enable region failover
   enableRegionFailover: false
+
+  # -- Meta Backend storage configuration
+  backendStorage:
+    # -- MySQL backend storage configuration
+    mysql: {}
+      # # -- MySQL host
+      # host: "mysql.default.svc.cluster.local"
+      # # -- MySQL port
+      # port: 3306
+      # # -- MySQL database
+      # database: "metasrv"
+      # # -- MySQL table
+      # table: "greptime_metakv"
+      # # -- MySQL credentials
+      # credentials:
+      #   # -- MySQL credentials secret name
+      #   secretName: "meta-mysql-credentials"
+      #   # -- MySQL credentials existing secret name
+      #   existingSecretName: ""
+      #   # -- MySQL credentials username
+      #   username: "root"
+      #   # -- MySQL credentials password
+      #   password: "test"
+
+    # -- PostgreSQL backend storage configuration
+    postgresql: {}
+      # # -- PostgreSQL host
+      # host: "postgres.default.svc.cluster.local"
+      # # -- PostgreSQL port
+      # port: 5432
+      # # -- PostgreSQL database
+      # database: "metasrv"
+      # # -- PostgreSQL table
+      # table: "greptime_metakv"
+      # # -- PostgreSQL credentials
+      # credentials:
+      #   # -- PostgreSQL credentials secret name
+      #   secretName: "meta-postgresql-credentials"
+      #   # -- PostgreSQL credentials existing secret name
+      #   existingSecretName: ""
+      #   # -- PostgreSQL credentials username
+      #   username: "root"
+      #   # -- PostgreSQL credentials password
+      #   password: "root"
+
+    # -- Etcd backend storage configuration
+    etcd: {}
+      # # -- Etcd endpoints
+      # etcdEndpoints: "etcd.etcd-cluster.svc.cluster.local:2379"
+      # # -- Etcd store key prefix
+      # storeKeyPrefix: ""
 
   # -- Logging configuration for meta, if not set, it will use the global logging configuration.
   logging: {}
@@ -726,8 +777,8 @@ flownode:
     # -- The termination grace period seconds
     # terminationGracePeriodSeconds: 30
 
-# -- Frontend instance group configure
-frontends: []
+# -- Frontend instance groups configure
+frontendGroups: []
   # -- Custom frontend name
 #  - name: read
 #    replicas: 1
@@ -1137,16 +1188,22 @@ logging:
   # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
   filters: []
 
-  # -- The slow query log configuration.
-  slowQuery:
-    # -- Enable slow query log.
-    enabled: false
+# -- The slow query log configuration.
+slowQuery:
+  # -- Enable slow query log.
+  enabled: true
 
-    # -- The threshold of slow query log in seconds.
-    threshold: "10s"
+  # -- The record type of slow query log.
+  recordType: "system_table"
 
-    # -- Sample ratio of slow query log.
-    sampleRatio: "1.0"
+  # -- The threshold of slow query log in seconds.
+  threshold: "30s"
+
+  # -- Sample ratio of slow query log.
+  sampleRatio: "1.0"
+
+  # -- The TTL of slow query system table.
+  ttl: "30d"
 
 # -- Deploy grafana dashboards for the grafana dashboard sidecar. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
 dashboards:
