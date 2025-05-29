@@ -71,3 +71,10 @@ helm uninstall mycluster -n default
 {{ template "chart.requirementsSection" . }}
 
 {{ template "chart.valuesSection" . }}
+
+## Compatibility Matrix
+
+| GreptimeDB Cluster  | GreptimeDB Operator Chart | GreptimeDB version  |
+|---------------------|---------------------------|---------------------|
+| < v0.1.53           | < v0.2.0                  | < v0.12.0           |
+| ≥ v0.1.53           | ≥ v0.2.0                  | ≥ v0.12.0           |
