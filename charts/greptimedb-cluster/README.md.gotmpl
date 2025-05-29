@@ -7,11 +7,20 @@
 
 - https://github.com/GreptimeTeam/greptimedb
 
+## Compatibility Matrix
+
+Each row in the following matrix represents a version combination, indicating the required `greptimedb-operator` chart version when installing `greptimedb-cluster` chart.
+
+| `greptimedb-cluster` Chart Version | `greptimedb-operator` Chart Version |
+|----------------------------------|----------------------------------------------|
+| ≥ `0.4.0`                        | ≥ `0.3.0` with GreptimeDB Operator ≥ `v0.3.0` |
+| < `0.4.0`                        | < `0.3.0` with GreptimeDB Operator < `v0.3.0` | 
+
 ## How to install
 
 ### Prerequisites
 
-1. Install the [greptimedb-operator](../greptimedb-operator/README.md);
+1. Install the [greptimedb-operator](../greptimedb-operator/README.md) and pay attention to the version compatibility in the above matrix.
 
 2. Install the etcd cluster:
 
@@ -71,10 +80,3 @@ helm uninstall mycluster -n default
 {{ template "chart.requirementsSection" . }}
 
 {{ template "chart.valuesSection" . }}
-
-## Compatibility Matrix
-
-| GreptimeDB Cluster  | GreptimeDB Operator Chart | GreptimeDB version  |
-|---------------------|---------------------------|---------------------|
-| < v0.1.53           | < v0.2.0                  | < v0.12.0           |
-| ≥ v0.1.53           | ≥ v0.2.0                  | ≥ v0.12.0           |

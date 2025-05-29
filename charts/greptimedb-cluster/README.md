@@ -2,17 +2,26 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.3](https://img.shields.io/badge/AppVersion-0.14.3-informational?style=flat-square)
+![Version: 0.4.1](https://img.shields.io/badge/Version-0.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.3](https://img.shields.io/badge/AppVersion-0.14.3-informational?style=flat-square)
 
 ## Source Code
 
 - https://github.com/GreptimeTeam/greptimedb
 
+## Compatibility Matrix
+
+Each row in the following matrix represents a version combination, indicating the required `greptimedb-operator` chart version when installing `greptimedb-cluster` chart.
+
+| `greptimedb-cluster` Chart Version | `greptimedb-operator` Chart Version |
+|----------------------------------|----------------------------------------------|
+| ≥ `0.4.0`                        | ≥ `0.3.0` with GreptimeDB Operator ≥ `v0.3.0` |
+| < `0.4.0`                        | < `0.3.0` with GreptimeDB Operator < `v0.3.0` |
+
 ## How to install
 
 ### Prerequisites
 
-1. Install the [greptimedb-operator](../greptimedb-operator/README.md);
+1. Install the [greptimedb-operator](../greptimedb-operator/README.md) and pay attention to the version compatibility in the above matrix.
 
 2. Install the etcd cluster:
 
