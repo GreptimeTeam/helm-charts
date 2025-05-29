@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.1.53](https://img.shields.io/badge/Version-0.1.53-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.3](https://img.shields.io/badge/AppVersion-0.14.3-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.3](https://img.shields.io/badge/AppVersion-0.14.3-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -73,6 +73,11 @@ helm uninstall greptimedb-standalone -n default
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
 | image.tag | string | `"v0.14.3"` | The image tag |
+| logging | object | `{"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false}` | Logging configuration for greptimedb |
+| logging.format | string | `"text"` | The log format for greptimedb, only support "json" and "text" |
+| logging.level | string | `"info"` | The log level for greptimedb, only support "debug", "info", "warn" |
+| logging.logsDir | string | `"/data/greptimedb/logs"` | The logs directory for greptimedb. It will be ignored if `onlyLogToStdout` is `true`. |
+| logging.onlyLogToStdout | bool | `false` | Whether to log to stdout only. If `true`, it will ignore the `logsDir` options. |
 | monitoring.annotations | object | `{}` | PodMonitor annotations |
 | monitoring.enabled | bool | `false` | Enable prometheus podmonitor |
 | monitoring.interval | string | `"30s"` | PodMonitor scrape interval |

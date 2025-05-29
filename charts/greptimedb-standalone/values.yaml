@@ -239,3 +239,14 @@ auth:
   users:
     - username: "admin"
       password: "admin"
+
+# -- Logging configuration for greptimedb
+logging:
+  # -- The log level for greptimedb, only support "debug", "info", "warn"
+  level: "info"
+  # -- The log format for greptimedb, only support "json" and "text"
+  format: "text"
+  # -- The logs directory for greptimedb. It will be ignored if `onlyLogToStdout` is `true`.
+  logsDir: "/data/greptimedb/logs"
+  # -- Whether to log to stdout only. If `true`, it will ignore the `logsDir` options.
+  onlyLogToStdout: false

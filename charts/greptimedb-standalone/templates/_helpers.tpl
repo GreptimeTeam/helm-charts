@@ -134,3 +134,20 @@ Create the name of the service account to use
 {{- end }}
 {{- end }}
 {{- end }}
+
+{{- define "greptimedb-standalone.loggingConfig" -}}
+{{- if .Values.logging }}
+[logging]
+  {{- if .Values.logging.level }}
+  level = "{{ .Values.logging.level }}"
+  {{- end }}
+  {{- if .Values.logging.format }}
+  log_format = "{{ .Values.logging.format }}"
+  {{- end }}
+  {{- if not .Values.logging.onlyLogToStdout }}
+  {{- if .Values.logging.logsDir }}
+  dir = "{{ .Values.logging.logsDir }}"
+  {{- end }}
+  {{- end }}
+{{- end }}
+{{- end }}
