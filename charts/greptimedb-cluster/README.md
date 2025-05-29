@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.3.18](https://img.shields.io/badge/Version-0.3.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.2](https://img.shields.io/badge/AppVersion-0.14.2-informational?style=flat-square)
+![Version: 0.3.21](https://img.shields.io/badge/Version-0.3.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.3](https://img.shields.io/badge/AppVersion-0.14.3-informational?style=flat-square)
 
 ## Source Code
 
@@ -146,8 +146,9 @@ helm uninstall mycluster -n default
 | datanode.storage.storageClassName | string | `nil` | Storage class for datanode persistent volume |
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
 | datanode.storage.storageSize | string | `"20Gi"` | Storage size for datanode persistent volume |
+| debugPod | object | `{"enabled":false,"image":{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250421-94c4b8d"},"resources":{"limits":{"cpu":"200m","memory":"256Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}}` | Configure to the debug pod |
 | debugPod.enabled | bool | `false` | Enable debug pod, for more information see: "../../docker/debug-pod/README.md". |
-| debugPod.image | object | `{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250317-5281e66"}` | The debug pod image |
+| debugPod.image | object | `{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250421-94c4b8d"}` | The debug pod image |
 | debugPod.resources | object | `{"limits":{"cpu":"200m","memory":"256Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | The debug pod resource |
 | dedicatedWAL | object | `{"enabled":false,"raftEngine":{"fs":{"mountPath":"/wal","name":"wal","storageClassName":null,"storageSize":"20Gi"}}}` | Configure to dedicated wal |
 | dedicatedWAL.enabled | bool | `false` | Enable dedicated wal |
@@ -241,7 +242,7 @@ helm uninstall mycluster -n default
 | image.pullSecrets | list | `[]` | The image pull secrets |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
-| image.tag | string | `"v0.14.2"` | The image tag |
+| image.tag | string | `"v0.14.3"` | The image tag |
 | ingress | object | `{}` | Configure to frontend ingress |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
@@ -317,6 +318,10 @@ helm uninstall mycluster -n default
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | objectStorage | object | `{"azblob":{},"cache":{},"gcs":{},"oss":{},"s3":{}}` | Configure to object storage |
 | postgresServicePort | int | `4003` | GreptimeDB postgres service port |
+| preCheck | object | `{"case":{"disk":{"enabled":false,"size":"20Gi","storageClass":null},"kafka":{"enabled":false,"endpoint":"your-kafka-endpoint"},"s3":{"accessKeyID":"your-access-key-id","bucket":"bucket-name","enabled":false,"region":"s3-region","secretAccessKey":"your-secret-access-key"}},"enabled":false,"env":{},"image":{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250421-94c4b8d"}}` | Configure to the pre-check runner |
+| preCheck.enabled | bool | `false` | Enable the pre-check runner |
+| preCheck.env | object | `{}` | Environment variables |
+| preCheck.image | object | `{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250421-94c4b8d"}` | The pre-check runner image |
 | prometheusMonitor | object | `{"enabled":false,"interval":"30s","labels":{"release":"prometheus"}}` | Configure to prometheus PodMonitor |
 | prometheusMonitor.enabled | bool | `false` | Create PodMonitor resource for scraping metrics using PrometheusOperator |
 | prometheusMonitor.interval | string | `"30s"` | Interval at which metrics should be scraped |

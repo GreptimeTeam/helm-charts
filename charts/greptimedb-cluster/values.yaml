@@ -4,7 +4,7 @@ image:
   # -- The image repository
   repository: greptime/greptimedb
   # -- The image tag
-  tag: "v0.14.2"
+  tag: "v0.14.3"
   # -- The image pull secrets
   pullSecrets: []
 
@@ -978,6 +978,7 @@ auth:
     - username: "admin"
       password: "admin"
 
+# -- Configure to the debug pod
 debugPod:
   # -- Enable debug pod, for more information see: "../../docker/debug-pod/README.md".
   enabled: false
@@ -986,7 +987,7 @@ debugPod:
   image:
     registry: docker.io
     repository: greptime/greptime-tool
-    tag: "20250317-5281e66"
+    tag: "20250421-94c4b8d"
 
   # -- The debug pod resource
   resources:
@@ -996,6 +997,35 @@ debugPod:
     limits:
       memory: 256Mi
       cpu: 200m
+
+# -- Configure to the pre-check runner
+preCheck:
+  # -- Enable the pre-check runner
+  enabled: false
+
+  # -- The pre-check runner image
+  image:
+    registry: docker.io
+    repository: greptime/greptime-tool
+    tag: "20250421-94c4b8d"
+
+  case:
+    disk:
+      enabled: false
+      storageClass: null
+      size: 20Gi
+    s3:
+      enabled: false
+      bucket: "bucket-name"
+      region: "s3-region"
+      accessKeyID: "your-access-key-id"
+      secretAccessKey: "your-secret-access-key"
+    kafka:
+      enabled: false
+      endpoint: "your-kafka-endpoint"
+
+  # -- Environment variables
+  env: {}
 
 # -- The monitoring bootstrap configuration
 monitoring:

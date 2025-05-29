@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.1.52](https://img.shields.io/badge/Version-0.1.52-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.2](https://img.shields.io/badge/AppVersion-0.14.2-informational?style=flat-square)
+![Version: 0.1.54](https://img.shields.io/badge/Version-0.1.54-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.3](https://img.shields.io/badge/AppVersion-0.14.3-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -72,7 +72,7 @@ helm uninstall greptimedb-standalone -n default
 | image.pullSecrets | list | `[]` | The image pull secrets. |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
-| image.tag | string | `"v0.14.2"` | The image tag |
+| image.tag | string | `"v0.14.3"` | The image tag |
 | logging | object | `{"level":"info","logsDir":"/data/greptimedb/logs"}` | Logging configuration for greptimedb |
 | logging.level | string | `"info"` | The log level for greptimedb, only support "debug", "info", "warn" |
 | logging.logsDir | string | `"/data/greptimedb/logs"` | The logs directory for greptimedb |

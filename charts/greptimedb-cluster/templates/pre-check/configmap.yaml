@@ -1,0 +1,34 @@
+{{- if .Values.preCheck.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-pre-check-scripts
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade,pre-delete
+    "helm.sh/hook-weight": "-2"
+data:
+  testing.sh: |
+    #!/bin/sh
+
+    set -ue
+
+    echo "================== Starting testing... =================="
+
+    {{- if and .Values.preCheck.case.disk .Values.preCheck.case.disk.enabled }}
+    # Run Disk tests
+    {{ .Files.Get "scripts/pre-check/disk.sh" | nindent 4 }}
+    {{- end }}
+
+    {{- if and .Values.preCheck.case.s3 .Values.preCheck.case.s3.enabled }}
+    # Run S3 tests
+    {{ .Files.Get "scripts/pre-check/s3.sh" | nindent 4 }}
+    {{- end }}
+
+    {{- if and .Values.preCheck.case.kafka .Values.preCheck.case.kafka.enabled }}
+    # Run Kafka tests
+    {{ .Files.Get "scripts/pre-check/kafka.sh" | nindent 4 }}
+    {{- end }}
+
+    echo "\n================== All tests completed! =================="
+{{- end }}
