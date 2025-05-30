@@ -184,6 +184,14 @@ spec:
       filters: {{ .Values.frontend.logging.filters | toYaml | nindent 6 }}
       {{- end }}
     {{- end }}
+    {{- if .Values.slowQuery }}
+    slowQuery:
+      enabled: {{ .Values.slowQuery.enabled }}
+      recordType: {{ .Values.slowQuery.recordType }}
+      threshold: {{ .Values.slowQuery.threshold }}
+      sampleRatio: {{ .Values.slowQuery.sampleRatio | quote }}
+      ttl: {{ .Values.slowQuery.ttl }}
+    {{- end }}
   {{- end }}
   {{- end }}
   meta:
@@ -619,14 +627,6 @@ spec:
     {{- if $ingress.tls }}
     tls: {{- toYaml $ingress.tls | nindent 6 }}
     {{- end }}
-  {{- end }}
-  {{- if .Values.slowQuery.enabled }}
-  slowQuery:
-    enabled: {{ .Values.slowQuery.enabled }}
-    recordType: {{ .Values.slowQuery.recordType }}
-    threshold: {{ .Values.slowQuery.threshold }}
-    sampleRatio: {{ .Values.slowQuery.sampleRatio | quote }}
-    ttl: {{ .Values.slowQuery.ttl }}
   {{- end }}
   {{- if .Values.logging}}
   logging:
