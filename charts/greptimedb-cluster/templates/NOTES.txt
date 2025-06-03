@@ -5,8 +5,13 @@
 ***********************************************************************
 
 Installed components:
-* greptimedb-frontend
-* greptimedb-datanode
 * greptimedb-meta
+* greptimedb-datanode
+{{- if or .Values.frontend.enabled .Values.frontendGroups }}
+* greptimedb-frontend
+{{- end }}
+{{- if .Values.flownode.enabled }}
+* greptimedb-flownode
+{{- end }}
 
 The greptimedb-cluster is starting, use `kubectl get pods -n {{ .Release.Namespace }}` to check its status.

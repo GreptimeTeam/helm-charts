@@ -120,7 +120,7 @@ base:
 
 # -- Frontend configure
 frontend:
-  enabled: true
+  enabled: false
 
   # -- Frontend replicas
   replicas: 1
@@ -634,7 +634,7 @@ datanode:
 # -- Flownode configure.
 flownode:
   # -- Enable flownode
-  enabled: true
+  enabled: false
 
   # -- Flownode replicas
   replicas: 1
