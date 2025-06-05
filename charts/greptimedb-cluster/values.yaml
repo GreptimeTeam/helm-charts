@@ -4,7 +4,7 @@ image:
   # -- The image repository
   repository: greptime/greptimedb
   # -- The image tag
-  tag: "v0.14.3"
+  tag: "v0.14.4"
   # -- The image pull secrets
   pullSecrets: []
 
@@ -449,7 +449,7 @@ meta:
     # -- Etcd backend storage configuration
     etcd: {}
       # # -- Etcd endpoints
-      # etcdEndpoints: "etcd.etcd-cluster.svc.cluster.local:2379"
+      # endpoints: "etcd.etcd-cluster.svc.cluster.local:2379"
       # # -- Etcd store key prefix
       # storeKeyPrefix: ""
 
