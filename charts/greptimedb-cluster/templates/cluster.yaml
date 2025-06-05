@@ -211,9 +211,9 @@ spec:
     backendStorage:
       {{- if or .Values.meta.backendStorage.etcd .Values.meta.etcdEndpoints }}
       etcd:
-        {{- if .Values.meta.backendStorage.etcd.etcdEndpoints }}
+        {{- if .Values.meta.backendStorage.etcd.endpoints }}
         endpoints:
-          - {{ .Values.meta.backendStorage.etcd.etcdEndpoints }}
+          - {{ .Values.meta.backendStorage.etcd.endpoints }}
         {{- else if .Values.meta.etcdEndpoints }}
         endpoints:
           - {{ .Values.meta.etcdEndpoints }}
