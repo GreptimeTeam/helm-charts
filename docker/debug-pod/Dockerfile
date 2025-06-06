@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     telnet \
     make \
     gcc \
+    vim \
     mysql-client \
     postgresql-client \
     jq \
