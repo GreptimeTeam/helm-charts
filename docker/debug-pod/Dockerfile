@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     tar \
     sudo \
     curl \
+    vim \
     unzip \
     net-tools \
     iproute2 \
