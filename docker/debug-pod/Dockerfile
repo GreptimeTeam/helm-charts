@@ -38,7 +38,10 @@ RUN KAFKA_VERSION=3.5.0 && \
     rm -rf "kafka_2.13-${KAFKA_VERSION}.tgz" "kafka_2.13-${KAFKA_VERSION}"
 
 # Helm CLI Install
-RUN curl -sSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | sh
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 \
+    && chmod 700 get_helm.sh \
+    && ./get_helm.sh \
+    && rm get_helm.sh
 
 # AWS CLI Install
 RUN ARCH=$(dpkg --print-architecture) && \
