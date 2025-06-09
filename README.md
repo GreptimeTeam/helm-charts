@@ -62,7 +62,10 @@ If you want to deploy the GreptimeDB cluster, you can use the following commands
      -n etcd-cluster
    ```
 
-   You can also use `oci://greptime-registry.cn-hangzhou.cr.aliyuncs.com/charts/etcd:10.2.12`.
+   You can also use `oci://greptime-registry.cn-hangzhou.cr.aliyuncs.com/charts/etcd:11.3.4`.
+
+   For detailed operations (backup, restore, monitoring, defrag), refer to the [etcd management guide](https://docs.greptime.com/user-guide/administration/manage-etcd).
+
 
 2. **Deploy GreptimeDB operator**
 

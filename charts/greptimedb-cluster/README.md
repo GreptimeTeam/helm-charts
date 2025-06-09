@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.4](https://img.shields.io/badge/AppVersion-0.14.4-informational?style=flat-square)
+![Version: 0.5.1](https://img.shields.io/badge/Version-0.5.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.4](https://img.shields.io/badge/AppVersion-0.14.4-informational?style=flat-square)
 
 ## Source Code
 
@@ -155,9 +155,9 @@ helm uninstall mycluster -n default
 | datanode.storage.storageClassName | string | `nil` | Storage class for datanode persistent volume |
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
 | datanode.storage.storageSize | string | `"20Gi"` | Storage size for datanode persistent volume |
-| debugPod | object | `{"enabled":false,"image":{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250421-94c4b8d"},"resources":{"limits":{"cpu":"200m","memory":"256Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}}` | Configure to the debug pod |
+| debugPod | object | `{"enabled":false,"image":{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250606-04e3c7d"},"resources":{"limits":{"cpu":"200m","memory":"256Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}}` | Configure to the debug pod |
 | debugPod.enabled | bool | `false` | Enable debug pod, for more information see: "../../docker/debug-pod/README.md". |
-| debugPod.image | object | `{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250421-94c4b8d"}` | The debug pod image |
+| debugPod.image | object | `{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250606-04e3c7d"}` | The debug pod image |
 | debugPod.resources | object | `{"limits":{"cpu":"200m","memory":"256Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | The debug pod resource |
 | dedicatedWAL | object | `{"enabled":false,"raftEngine":{"fs":{"mountPath":"/wal","name":"wal","storageClassName":null,"storageSize":"20Gi"}}}` | Configure to dedicated wal |
 | dedicatedWAL.enabled | bool | `false` | Enable dedicated wal |
