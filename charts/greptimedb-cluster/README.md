@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.5.1](https://img.shields.io/badge/Version-0.5.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.4](https://img.shields.io/badge/AppVersion-0.14.4-informational?style=flat-square)
+![Version: 0.5.2](https://img.shields.io/badge/Version-0.5.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.4](https://img.shields.io/badge/AppVersion-0.14.4-informational?style=flat-square)
 
 ## Source Code
 
@@ -42,7 +42,7 @@ The default installation will use the local storage:
 ```console
 helm upgrade \
   --install mycluster \
-  --set meta.etcdEndpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
+  --set meta.backendStorage.etcd.endpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
   greptime/greptimedb-cluster \
   -n default
 ```
@@ -54,7 +54,7 @@ Before installation, you must create the AWS S3 bucket, and the cluster will use
 ```console
 helm upgrade \
   --install mycluster \
-  --set meta.etcdEndpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
+  --set meta.backendStorage.etcd.endpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
   --set objectStorage.s3.bucket="your-bucket" \
   --set objectStorage.s3.region="region-of-bucket" \
   --set objectStorage.s3.root="root-directory-of-data" \
