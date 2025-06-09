@@ -8,6 +8,19 @@ image:
   # -- The image pull secrets
   pullSecrets: []
 
+# -- Custom image registry
+customImageRegistry:
+  # -- Whether to enable custom image registry and generate a pull secret in the release namespace
+  enabled: false
+  # -- The name of the pull secret. You can use the name in `image.pullSecrets`.
+  secretName: greptimedb-custom-image-pull-secret
+  # -- The registry of the custom image
+  registry: ""
+  # -- The username of the custom image
+  username: ""
+  # -- The password of the custom image
+  password: ""
+
 # -- additional labels to add to all resources
 additionalLabels: {}
 

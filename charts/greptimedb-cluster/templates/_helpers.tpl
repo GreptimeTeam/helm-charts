@@ -66,3 +66,10 @@ Selector labels
 app.kubernetes.io/name: {{ include "greptimedb-cluster.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Generate docker config json
+*/}}
+{{- define "dockerConfigJSON" -}}
+{{- printf "{\"auths\":{\"%s\":{\"username\":\"%s\",\"password\":\"%s\",\"auth\":\"%s\"}}}" .Values.customImageRegistry.registry .Values.customImageRegistry.username .Values.customImageRegistry.password (printf "%s:%s" .Values.customImageRegistry.username .Values.customImageRegistry.password | b64enc) -}}
+{{- end -}}

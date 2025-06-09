@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.5.2](https://img.shields.io/badge/Version-0.5.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.4](https://img.shields.io/badge/AppVersion-0.14.4-informational?style=flat-square)
+![Version: 0.5.3](https://img.shields.io/badge/Version-0.5.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.4](https://img.shields.io/badge/AppVersion-0.14.4-informational?style=flat-square)
 
 ## Source Code
 
@@ -114,6 +114,12 @@ helm uninstall mycluster -n default
 | base.podTemplate.serviceAccountName | string | `""` | The global service account |
 | base.podTemplate.terminationGracePeriodSeconds | int | `30` | The termination grace period seconds |
 | base.podTemplate.tolerations | list | `[]` | The pod tolerations |
+| customImageRegistry | object | `{"enabled":false,"password":"","registry":"","secretName":"greptimedb-custom-image-pull-secret","username":""}` | Custom image registry |
+| customImageRegistry.enabled | bool | `false` | Whether to enable custom image registry and generate a pull secret in the release namespace |
+| customImageRegistry.password | string | `""` | The password of the custom image |
+| customImageRegistry.registry | string | `""` | The registry of the custom image |
+| customImageRegistry.secretName | string | `"greptimedb-custom-image-pull-secret"` | The name of the pull secret. You can use the name in `image.pullSecrets`. |
+| customImageRegistry.username | string | `""` | The username of the custom image |
 | dashboards | object | `{"annotations":{},"enabled":false,"extraLabels":{},"label":"grafana_dashboard","labelValue":"1","namespace":""}` | Deploy grafana dashboards for the grafana dashboard sidecar. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards |
 | dashboards.annotations | object | `{}` | Additional annotation for the configmap |
 | dashboards.enabled | bool | `false` | Enable the grafana dashboards sidecar. |
