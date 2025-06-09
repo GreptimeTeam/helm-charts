@@ -41,7 +41,7 @@ The default installation will use the local storage:
 ```console
 helm upgrade \
   --install mycluster \
-  --set meta.etcdEndpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
+  --set meta.backendStorage.etcd.endpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
   greptime/greptimedb-cluster \
   -n default
 ```
@@ -53,7 +53,7 @@ Before installation, you must create the AWS S3 bucket, and the cluster will use
 ```console
 helm upgrade \
   --install mycluster \
-  --set meta.etcdEndpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
+  --set meta.backendStorage.etcd.endpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
   --set objectStorage.s3.bucket="your-bucket" \
   --set objectStorage.s3.region="region-of-bucket" \
   --set objectStorage.s3.root="root-directory-of-data" \

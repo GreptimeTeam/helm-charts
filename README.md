@@ -90,7 +90,7 @@ If you want to deploy the GreptimeDB cluster, you can use the following commands
       ```console
       helm upgrade \
         --install mycluster \
-        --set meta.etcdEndpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
+        --set meta.backendStorage.etcd.endpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
         greptime/greptimedb-cluster \
         -n default
       ```
@@ -102,7 +102,7 @@ If you want to deploy the GreptimeDB cluster, you can use the following commands
       ```console
       helm upgrade \
         --install mycluster \
-        --set meta.etcdEndpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
+        --set meta.backendStorage.etcd.endpoints=etcd.etcd-cluster.svc.cluster.local:2379 \
         --set objectStorage.s3.bucket="your-bucket" \
         --set objectStorage.s3.region="region-of-bucket" \
         --set objectStorage.s3.root="root-directory-of-data" \
