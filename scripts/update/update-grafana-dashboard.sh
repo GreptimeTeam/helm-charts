@@ -40,7 +40,7 @@ update_grafana_dashboard() {
 
     # Commit the changes.
     git add charts/greptimedb-cluster
-    git commit -m "ci: update Grafana dashboard from upstream"
+    git commit -s -m "ci: update Grafana dashboard from upstream"
     git push origin $BRANCH_NAME
 
     # Create a Pull Request.
