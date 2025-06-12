@@ -30,10 +30,6 @@ SelectDataSQL="SELECT * FROM %s"
 DropTableSQL="DROP TABLE %s"
 TestRowIDNum=1
 
-# Trap for clean exit
-trap 'cleanup; exit 1' INT TERM ERR
-trap 'cleanup; exit 0' EXIT
-
 function log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
 }
