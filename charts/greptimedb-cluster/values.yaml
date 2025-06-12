@@ -1029,7 +1029,7 @@ ingress: {}
  #     hosts:
  #       - ingress.example.com
 
-# -- The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/deployments/authentication/static).
+# -- The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/deployments-administration/authentication/static).
 auth:
   # -- Enable static auth
   enabled: false
