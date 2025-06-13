@@ -1,0 +1,11 @@
+greptimedb-cluster:
+  - changed-files:
+      - any-glob-to-any-file: charts/greptimedb-cluster/**
+
+greptimedb-operator:
+  - changed-files:
+      - any-glob-to-any-file: charts/greptimedb-operator/**
+
+greptimedb-standalone:
+  - changed-files:
+      - any-glob-to-any-file: charts/greptimedb-standalone/**
