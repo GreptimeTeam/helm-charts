@@ -30,7 +30,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.3.1
+  tag: v0.4.0
 
 base:
   # -- The pod template for base
@@ -448,6 +448,9 @@ meta:
       # database: "metasrv"
       # # -- PostgreSQL table
       # table: "greptime_metakv"
+      # # -- PostgreSQL Advisory lock id used for election, shouldn't be used in other clusters or applications.
+      # electionLockID: 1
+
       # # -- PostgreSQL credentials
       # credentials:
       #   # -- PostgreSQL credentials secret name
@@ -488,6 +491,8 @@ meta:
 
 # -- Datanode configure
 datanode:
+  enabled: true
+
   # -- Datanode replicas
   replicas: 1
 
@@ -792,7 +797,7 @@ flownode:
 
 # -- Frontend instance groups configure
 frontendGroups: []
-  # -- Custom frontend name
+#  # -- Custom frontend name
 #  - name: read
 #    replicas: 1
 #
@@ -802,8 +807,8 @@ frontendGroups: []
 #
 #      [http]
 #      timeout = "10s"
-
-    # -- The pod template for frontend
+#
+#    # -- The pod template for frontend
 #    template:
 #      main:
 #        resources:
@@ -813,8 +818,8 @@ frontendGroups: []
 #          limits:
 #            cpu: 2000m
 #            memory: 2048Mi
-
-  # -- Custom frontend name
+#
+#  # -- Custom frontend name
 #  - name: write
 #    replicas: 1
 #
@@ -824,8 +829,8 @@ frontendGroups: []
 #
 #      [http]
 #      timeout = "10s"
-
-    # -- The pod template for frontend
+#
+#    # -- The pod template for frontend
 #    template:
 #      main:
 #        resources:
@@ -909,6 +914,52 @@ prometheusRule:
 #        summary: "GreptimeDB compaction failures"
 #        description: "GreptimeDB compaction failures have increased by more than {{ $value }} in the last hour"
 
+# -- datanode instance groups configure
+datanodeGroups: []
+#  # -- Custom datanode name
+#  - name: read
+#    replicas: 1
+#
+#    # -- Extra raw toml config data of datanode.
+#    config: |
+#      [[region_engine]]
+#      [region_engine.mito]
+#      # Number of region workers
+#      num_workers = 3
+#
+#    # -- The pod template for datanode
+#    template:
+#      main:
+#        resources:
+#          requests:
+#            cpu: 2048Mi
+#            memory: 2048Mi
+#          limits:
+#            cpu: 2000m
+#            memory: 2048Mi
+#
+#  # -- Custom datanode name
+#  - name: write
+#    replicas: 1
+#
+#    # -- Extra raw toml config data of datanode.
+#    config: |
+#      [[region_engine]]
+#      [region_engine.mito]
+#      # Number of region workers
+#      num_workers = 4
+#
+#    # -- The pod template for datanode
+#    template:
+#      main:
+#        resources:
+#          requests:
+#            cpu: 2000m
+#            memory: 2048Mi
+#          limits:
+#            cpu: 2000m
+#            memory: 2048Mi
+
 # -- Configure to object storage
 objectStorage:
 #  credentials:
@@ -968,7 +1019,16 @@ objectStorage:
 
   # Configure to object storage cache.
   cache: {}
-  #  cacheCapacity: "10GiB"
+  #  cacheCapacity: "20GiB"
+  #  fs:
+  #    # -- The storage class name
+  #    storageClassName: null
+  #    # -- The name of the wal
+  #    name: cache
+  #    # -- The storage size
+  #    storageSize: 20Gi
+  #    # -- The mount path
+  #    mountPath: /cache
 
 # -- Configure to remote wal
 remoteWal:

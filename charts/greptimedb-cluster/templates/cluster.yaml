@@ -242,6 +242,7 @@ spec:
         port: {{ .Values.meta.backendStorage.postgresql.port }}
         database: {{ .Values.meta.backendStorage.postgresql.database }}
         table: {{ .Values.meta.backendStorage.postgresql.table }}
+        electionLockID: {{ .Values.meta.backendStorage.postgresql.electionLockID }}
         {{- if .Values.meta.backendStorage.postgresql.credentials.existingSecretName }}
         credentialsSecretName: {{ .Values.meta.backendStorage.postgresql.credentials.existingSecretName }}
         {{- else }}
@@ -329,6 +330,7 @@ spec:
       {{- if .Values.meta.podTemplate.terminationGracePeriodSeconds }}
       terminationGracePeriodSeconds: {{ .Values.meta.podTemplate.terminationGracePeriodSeconds }}
       {{- end }}
+  {{- if and .Values.datanode .Values.datanode.enabled }}
   datanode:
     replicas: {{ .Values.datanode.replicas }}
 {{- if or .Values.datanode.configFile .Values.datanode.configData }}
@@ -432,6 +434,7 @@ spec:
         {{- if .Values.datanode.storage.annotations }}
         annotations: {{ .Values.datanode.storage.annotations | toYaml | nindent 10 }}
         {{- end }}
+  {{- end }}
   {{- if .Values.flownode.enabled }}
   flownode:
     replicas: {{ .Values.flownode.replicas }}
@@ -530,6 +533,9 @@ spec:
   {{- if (and .Values.prometheusMonitor (eq .Values.prometheusMonitor.enabled true ))}}
   prometheusMonitor: {{- toYaml .Values.prometheusMonitor | nindent 4 }}
   {{- end }}
+  {{- if .Values.datanodeGroups }}
+  datanodeGroups: {{ toYaml .Values.datanodeGroups | nindent 2 }}
+  {{- end }}
   httpPort: {{ .Values.httpServicePort }}
   rpcPort: {{ .Values.grpcServicePort }}
   mysqlPort: {{ .Values.mysqlServicePort }}
@@ -577,8 +583,7 @@ spec:
       {{- end }}
     {{- end }}
     {{- if $objectStorage.cache }}
-    cache:
-      cacheCapacity: {{ $objectStorage.cache.cacheCapacity }}
+    cache: {{- toYaml $objectStorage.cache | nindent 6 }}
     {{- end }}
   {{- end }}
   {{- if or .Values.remoteWal.enabled .Values.dedicatedWAL.enabled }}

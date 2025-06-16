@@ -6,7 +6,9 @@
 
 Installed components:
 * greptimedb-meta
+{{- if or .Values.datanode.enabled .Values.datanodeGroups }}
 * greptimedb-datanode
+{{- end }}
 {{- if or .Values.frontend.enabled .Values.frontendGroups }}
 * greptimedb-frontend
 {{- end }}
