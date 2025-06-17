@@ -30,7 +30,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.4.0
+  tag: v0.4.1
 
 base:
   # -- The pod template for base
@@ -914,7 +914,7 @@ prometheusRule:
 #        summary: "GreptimeDB compaction failures"
 #        description: "GreptimeDB compaction failures have increased by more than {{ $value }} in the last hour"
 
-# -- datanode instance groups configure
+# -- datanode instance groups configure, 'spec.datanode' and 'spec.datanodeGroups' cannot be set at the same time.
 datanodeGroups: []
 #  # -- Custom datanode name
 #  - name: read
@@ -932,7 +932,7 @@ datanodeGroups: []
 #      main:
 #        resources:
 #          requests:
-#            cpu: 2048Mi
+#            cpu: 2000m
 #            memory: 2048Mi
 #          limits:
 #            cpu: 2000m

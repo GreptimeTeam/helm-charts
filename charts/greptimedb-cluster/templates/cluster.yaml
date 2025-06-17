@@ -1,3 +1,4 @@
+{{- include "validateDatanodeConfig" . }}
 apiVersion: greptime.io/v1alpha1
 kind: GreptimeDBCluster
 metadata:
