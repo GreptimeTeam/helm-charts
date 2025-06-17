@@ -73,3 +73,12 @@ Generate docker config json
 {{- define "dockerConfigJSON" -}}
 {{- printf "{\"auths\":{\"%s\":{\"username\":\"%s\",\"password\":\"%s\",\"auth\":\"%s\"}}}" .Values.customImageRegistry.registry .Values.customImageRegistry.username .Values.customImageRegistry.password (printf "%s:%s" .Values.customImageRegistry.username .Values.customImageRegistry.password | b64enc) -}}
 {{- end -}}
+
+{{/*
+Validate datanode config
+*/}}
+{{- define "validateDatanodeConfig" -}}
+  {{- if and .Values.datanode.enabled .Values.datanodeGroups }}
+    {{- fail "datanode and datanodeGroups cannot be set at the same time" }}
+  {{- end }}
+{{- end }}
