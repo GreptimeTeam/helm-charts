@@ -72,28 +72,28 @@ Create the name of the service account to use
 {{- $bucket := "" }}
 {{- $root := "" }}
 {{- $container := "" }}
-{{- $cache_capacity := "" }}
+{{- $cacheCapacity := "" }}
 
 {{- if .Values.objectStorage.s3 }}
   {{- $provider = "S3" }}
   {{- $bucket = .Values.objectStorage.s3.bucket }}
   {{- $root = .Values.objectStorage.s3.root }}
-  {{- $cache_capacity = .Values.objectStorage.s3.cache_capacity }}
+  {{- $cacheCapacity = .Values.objectStorage.s3.cacheCapacity }}
 {{- else if .Values.objectStorage.oss }}
   {{- $provider = "Oss" }}
   {{- $bucket = .Values.objectStorage.oss.bucket }}
   {{- $root = .Values.objectStorage.oss.root }}
-  {{- $cache_capacity = .Values.objectStorage.oss.cache_capacity }}
+  {{- $cacheCapacity = .Values.objectStorage.oss.cacheCapacity }}
 {{- else if .Values.objectStorage.gcs }}
   {{- $provider = "Gcs" }}
   {{- $bucket = .Values.objectStorage.gcs.bucket }}
   {{- $root = .Values.objectStorage.gcs.root }}
-  {{- $cache_capacity = .Values.objectStorage.gcs.cache_capacity }}
+  {{- $cacheCapacity = .Values.objectStorage.gcs.cacheCapacity }}
 {{- else if .Values.objectStorage.azblob }}
   {{- $provider = "Azblob" }}
   {{- $container = .Values.objectStorage.azblob.container }}
   {{- $root = .Values.objectStorage.azblob.root }}
-  {{- $cache_capacity = .Values.objectStorage.azblob.cache_capacity }}
+  {{- $cacheCapacity = .Values.objectStorage.azblob.cacheCapacity }}
 {{- end }}
 
 {{- if $provider }}
@@ -114,9 +114,9 @@ Create the name of the service account to use
   # Root path within the bucket
   root = "{{ $root }}"
 
-  {{- if $cache_capacity }}
+  {{- if $cacheCapacity }}
   # The cache capacity
-  cache_capacity = "{{ $cache_capacity }}"
+  cache_capacity = "{{ $cacheCapacity }}"
   {{- end }}
 
 {{- if .Values.objectStorage.s3 }}
