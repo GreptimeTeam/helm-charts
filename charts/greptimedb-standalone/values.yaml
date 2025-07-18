@@ -73,8 +73,8 @@ objectStorage:
   #  root: "greptimedb-standalone"
   #  endpoint: ""  # See more detail: https://docs.aws.amazon.com/general/latest/gr/s3.html
 
-  #  The cache capacity
-  #  cache_capacity = ""
+  #  # The cache capacity. If your disk space is sufficient, it is recommended to set it larger.
+  #  cacheCapacity: "10GiB"
 
   # configure to use oss storage
   oss: {}
@@ -85,8 +85,8 @@ objectStorage:
   #  root: "greptimedb-standalone"
   #  endpoint: "oss-cn-hangzhou.aliyuncs.com"
 
-  #  The cache capacity
-  #  cache_capacity = ""
+  #  # The cache capacity. If your disk space is sufficient, it is recommended to set it larger.
+  #  cacheCapacity: "10GiB"
 
   # configure to use gcs storage
   gcs: {}
@@ -97,8 +97,8 @@ objectStorage:
   #  root: "greptimedb-standalone"
   #  endpoint: "https://storage.googleapis.com"
 
-  #  The cache capacity
-  #  cache_capacity = ""
+  #  # The cache capacity. If your disk space is sufficient, it is recommended to set it larger.
+  #  cacheCapacity: "10GiB"
 
   # configure to use azblob storage
   azblob: {}
@@ -106,8 +106,8 @@ objectStorage:
   #  endpoint: ""
   #  root: "greptimedb-standalone"
 
-  #  The cache capacity
-  #  cache_capacity = ""
+  #  # The cache capacity. If your disk space is sufficient, it is recommended to set it larger.
+  #  cacheCapacity: "10GiB"
 
 # -- Environment variables
 env: {}
