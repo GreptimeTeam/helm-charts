@@ -63,12 +63,13 @@ spec:
           command:
           {{- if .Values.command }}
             {{- toYaml .Values.command | nindent 12 }}
-          {{- else }}
-            - "greptime"
-            - "standalone"
-            - "start"
           {{- end }}
           args:
+            {{- if .Values.args }}
+              {{- toYaml .Values.args | nindent 12 }}
+            {{- else }}
+            - "standalone"
+            - "start"
             - "--http-addr"
             - "0.0.0.0:{{ .Values.httpServicePort }}"
             - "--rpc-bind-addr"
@@ -85,9 +86,7 @@ spec:
             - "--data-home"
             - {{ .Values.dataHome }}
             {{- end }}
-          {{- if .Values.args }}
-            {{- toYaml .Values.args | nindent 12 }}
-          {{- end }}
+            {{- end }}
           ports:
             - containerPort: {{ .Values.httpServicePort }}
               name: http
