@@ -5065,6 +5065,29 @@ entries:
   greptimedb-standalone:
   - apiVersion: v2
     appVersion: 0.15.2
+    created: "2025-07-18T08:49:27.240436029Z"
+    description: A Helm chart for deploying standalone greptimedb
+    digest: 9c7a869ad3e67925f52f98c4d7284a15d608fedc56b1ffdd833484ffc927703b
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - database
+    - greptimedb
+    maintainers:
+    - email: liyang@greptime.com
+      name: liyang
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-standalone
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.2.6/greptimedb-standalone-0.2.6.tgz
+    version: 0.2.6
+  - apiVersion: v2
+    appVersion: 0.15.2
     created: "2025-07-11T02:15:45.985269371Z"
     description: A Helm chart for deploying standalone greptimedb
     digest: 40f09278472b801d7d70c74efaa4aab7918d5fe51b5ce3a1cf652790f7c31c38
@@ -6333,4 +6356,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2025-07-18T02:59:14.561548535Z"
+generated: "2025-07-18T08:49:27.241066265Z"
