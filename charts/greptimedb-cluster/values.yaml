@@ -993,6 +993,11 @@ objectStorage:
 #    root: "mycluster"
 #    endpoint: "s3.us-west-2.amazonaws.com"   # See more detail: https://docs.aws.amazon.com/general/latest/gr/s3.html
 
+#    # Enable virtual host style so that OpenDAL will send API requests in virtual host style instead of path style.
+#    # By default, OpenDAL will send API to 'https://s3.${region}.amazonaws.com/${BUCKET_NAME}'.
+#	 # If enableVirtualHostStyle is true, OpenDAL will send API to 'https://${BUCKET_NAME}.s3.${region}.amazonaws.com'.
+#    enableVirtualHostStyle: false
+
   # Configure to use oss storage.
   oss: {}
 #    bucket: "bucket-name"
