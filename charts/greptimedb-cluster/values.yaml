@@ -995,7 +995,7 @@ objectStorage:
 
 #    # Enable virtual host style so that OpenDAL will send API requests in virtual host style instead of path style.
 #    # By default, OpenDAL will send API to 'https://s3.${region}.amazonaws.com/${BUCKET_NAME}'.
-#	 # If enableVirtualHostStyle is true, OpenDAL will send API to 'https://${BUCKET_NAME}.s3.${region}.amazonaws.com'.
+#    # If enableVirtualHostStyle is true, OpenDAL will send API to 'https://${BUCKET_NAME}.s3.${region}.amazonaws.com'.
 #    enableVirtualHostStyle: false
 
   # Configure to use oss storage.
