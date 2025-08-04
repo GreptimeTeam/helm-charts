@@ -4,7 +4,7 @@ image:
   # -- The image repository
   repository: greptime/greptimedb
   # -- The image tag
-  tag: "v0.15.3"
+  tag: "v0.15.4"
   # -- The image pull secrets
   pullSecrets: []
 
