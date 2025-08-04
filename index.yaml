@@ -173,6 +173,38 @@ entries:
     version: 0.1.1-alpha.1
   greptimedb-cluster:
   - apiVersion: v2
+    appVersion: 0.15.4
+    created: "2025-08-04T23:41:20.866608977Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 8.5.8
+    - condition: jaeger-all-in-one.enabled
+      name: jaeger-all-in-one
+      repository: https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts
+      version: 0.1.12
+    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes.
+    digest: 48f18bf49bf6751ae23feeab8aea204173779907f4ccf0508440a253c45a0d6d
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - database
+    - greptimedb
+    maintainers:
+    - email: liyang@greptime.com
+      name: liyang
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-cluster
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-cluster-0.6.11/greptimedb-cluster-0.6.11.tgz
+    version: 0.6.11
+  - apiVersion: v2
     appVersion: 0.15.3
     created: "2025-08-04T02:25:05.912269885Z"
     dependencies:
@@ -5192,6 +5224,29 @@ entries:
     version: 0.1.1-alpha.1
   greptimedb-standalone:
   - apiVersion: v2
+    appVersion: 0.15.4
+    created: "2025-08-04T23:41:21.089059826Z"
+    description: A Helm chart for deploying standalone greptimedb
+    digest: 4c436db4353e8246435006ac59c0373fba2e14a4c6411fece8265ed58600507c
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - database
+    - greptimedb
+    maintainers:
+    - email: liyang@greptime.com
+      name: liyang
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-standalone
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.2.9/greptimedb-standalone-0.2.9.tgz
+    version: 0.2.9
+  - apiVersion: v2
     appVersion: 0.15.3
     created: "2025-07-24T09:37:57.594823473Z"
     description: A Helm chart for deploying standalone greptimedb
@@ -6530,4 +6585,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2025-08-04T02:25:05.913273214Z"
+generated: "2025-08-04T23:41:21.089794333Z"
