@@ -1,0 +1,103 @@
+{{- if .Values.remoteCompaction.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "greptimedb-cluster.fullname" . }}-compactor
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "greptimedb-cluster.labels" . | nindent 4 }}
+    app: {{ include "greptimedb-cluster.fullname" . }}-compactor
+    {{- with .Values.remoteCompaction.compactor.podLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.remoteCompaction.compactor.replicas }}
+  selector:
+    matchLabels:
+      app: {{ include "greptimedb-cluster.fullname" . }}-compactor
+  template:
+    metadata:
+      {{- with .Values.remoteCompaction.compactor.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{ include "greptimedb-cluster.fullname" . }}-compactor
+        {{- with .Values.remoteCompaction.compactor.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if or .Values.remoteCompaction.compactor.image.pullSecret .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- if .Values.remoteCompaction.compactor.image.pullSecret }}
+        - name: {{ .Values.remoteCompaction.compactor.image.pullSecret }}
+        {{- end }}
+        {{- range .Values.image.pullSecrets }}
+        - name: {{ . }}
+        {{- end }}
+      {{- end }}
+      {{- if .Values.remoteCompaction.compactor.podTemplate.serviceAccount.create }}
+      serviceAccountName: {{ .Release.Name }}-compactor
+      {{- end }}
+      containers:
+        - name: compactor
+          image: "{{ .Values.remoteCompaction.compactor.image.registry }}/{{ .Values.remoteCompaction.compactor.image.repository }}:{{ .Values.remoteCompaction.compactor.image.tag }}"
+          imagePullPolicy: {{ .Values.remoteCompaction.compactor.image.pullPolicy }}
+          {{- if .Values.remoteCompaction.compactor.command }}
+          command: {{ .Values.remoteCompaction.compactor.command | toYaml | nindent 12 }}
+          {{- else }}
+          command:
+            - "greptime-ent-cloud"
+          {{- end }}
+          {{- if .Values.remoteCompaction.compactor.args }}
+          args: {{ .Values.remoteCompaction.compactor.args | toYaml | nindent 12 }}
+          {{- else }}
+          args:
+            - "compactor"
+            - "start"
+            - "--rpc-bind-addr=0.0.0.0:19071"
+            - "--rpc-server-addr=$(POD_IP):19071"
+            - "--config-file=/etc/greptimedb/config.toml"
+          {{- end }}
+          {{- if .Values.remoteCompaction.compactor.resources }}
+          resources: {{ .Values.remoteCompaction.compactor.resources | toYaml | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: grpc
+              containerPort: 19071
+              protocol: TCP
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          {{- with .Values.remoteCompaction.compactor.env }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: compactor-config
+              mountPath: /etc/greptimedb/config.toml
+              subPath: config.toml
+            {{- if .Values.remoteCompaction.compactor.volumeMounts }}
+            {{- toYaml .Values.remoteCompaction.compactor.volumeMounts | nindent 12 }}
+            {{- end }}
+      {{- with .Values.remoteCompaction.compactor.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.remoteCompaction.compactor.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.remoteCompaction.compactor.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: compactor-config
+          configMap:
+            name: {{ include "greptimedb-cluster.fullname" . }}-compactor
+        {{- if .Values.remoteCompaction.compactor.volumes }}
+        {{- toYaml .Values.remoteCompaction.compactor.volumes | nindent 8 }}
+        {{- end }}
+{{- end }}
