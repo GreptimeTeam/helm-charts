@@ -1960,6 +1960,10 @@ spec:
                               - name
                             type: object
                           type: array
+                        extraArgs:
+                          items:
+                            type: string
+                          type: array
                         image:
                           type: string
                         imagePullPolicy:
@@ -3434,6 +3438,8 @@ spec:
                             storageSize:
                               pattern: (^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$)
                               type: string
+                            useEmptyDir:
+                              type: boolean
                           type: object
                       type: object
                     template:
@@ -5337,6 +5343,10 @@ spec:
                                   - name
                                 type: object
                               type: array
+                            extraArgs:
+                              items:
+                                type: string
+                              type: array
                             image:
                               type: string
                             imagePullPolicy:
@@ -6727,6 +6737,15 @@ spec:
                             type: object
                           type: array
                       type: object
+                    tracing:
+                      properties:
+                        enabled:
+                          type: boolean
+                        endpoint:
+                          type: string
+                        sampleRatio:
+                          type: string
+                      type: object
                   type: object
                 datanodeGroups:
                   items:
@@ -6813,6 +6832,8 @@ spec:
                               storageSize:
                                 pattern: (^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$)
                                 type: string
+                              useEmptyDir:
+                                type: boolean
                             type: object
                         type: object
                       template:
@@ -8716,6 +8737,10 @@ spec:
                                     - name
                                   type: object
                                 type: array
+                              extraArgs:
+                                items:
+                                  type: string
+                                type: array
                               image:
                                 type: string
                               imagePullPolicy:
@@ -10105,6 +10130,15 @@ spec:
                                 - name
                               type: object
                             type: array
+                        type: object
+                      tracing:
+                        properties:
+                          enabled:
+                            type: boolean
+                          endpoint:
+                            type: string
+                          sampleRatio:
+                            type: string
                         type: object
                     type: object
                   type: array
@@ -12063,6 +12097,10 @@ spec:
                                   - name
                                 type: object
                               type: array
+                            extraArgs:
+                              items:
+                                type: string
+                              type: array
                             image:
                               type: string
                             imagePullPolicy:
@@ -13452,6 +13490,15 @@ spec:
                               - name
                             type: object
                           type: array
+                      type: object
+                    tracing:
+                      properties:
+                        enabled:
+                          type: boolean
+                        endpoint:
+                          type: string
+                        sampleRatio:
+                          type: string
                       type: object
                   type: object
                 frontend:
@@ -15454,6 +15501,10 @@ spec:
                                   - name
                                 type: object
                               type: array
+                            extraArgs:
+                              items:
+                                type: string
+                              type: array
                             image:
                               type: string
                             imagePullPolicy:
@@ -16850,6 +16901,15 @@ spec:
                           type: string
                       required:
                         - secretName
+                      type: object
+                    tracing:
+                      properties:
+                        enabled:
+                          type: boolean
+                        endpoint:
+                          type: string
+                        sampleRatio:
+                          type: string
                       type: object
                   type: object
                 frontendGroups:
@@ -18853,6 +18913,10 @@ spec:
                                     - name
                                   type: object
                                 type: array
+                              extraArgs:
+                                items:
+                                  type: string
+                                type: array
                               image:
                                 type: string
                               imagePullPolicy:
@@ -20249,6 +20313,15 @@ spec:
                             type: string
                         required:
                           - secretName
+                        type: object
+                      tracing:
+                        properties:
+                          enabled:
+                            type: boolean
+                          endpoint:
+                            type: string
+                          sampleRatio:
+                            type: string
                         type: object
                     type: object
                   type: array
@@ -22356,6 +22429,10 @@ spec:
                                   - name
                                 type: object
                               type: array
+                            extraArgs:
+                              items:
+                                type: string
+                              type: array
                             image:
                               type: string
                             imagePullPolicy:
@@ -23745,6 +23822,15 @@ spec:
                               - name
                             type: object
                           type: array
+                      type: object
+                    tracing:
+                      properties:
+                        enabled:
+                          type: boolean
+                        endpoint:
+                          type: string
+                        sampleRatio:
+                          type: string
                       type: object
                   type: object
                 monitoring:
@@ -25662,6 +25748,10 @@ spec:
                                       - name
                                     type: object
                                   type: array
+                                extraArgs:
+                                  items:
+                                    type: string
+                                  type: array
                                 image:
                                   type: string
                                 imagePullPolicy:
@@ -27082,6 +27172,8 @@ spec:
                                 storageSize:
                                   pattern: (^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$)
                                   type: string
+                                useEmptyDir:
+                                  type: boolean
                               type: object
                           type: object
                         httpPort:
@@ -27168,6 +27260,8 @@ spec:
                                     storageSize:
                                       pattern: (^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$)
                                       type: string
+                                    useEmptyDir:
+                                      type: boolean
                                   type: object
                               type: object
                             gcs:
@@ -27295,6 +27389,15 @@ spec:
                           required:
                             - secretName
                           type: object
+                        tracing:
+                          properties:
+                            enabled:
+                              type: boolean
+                            endpoint:
+                              type: string
+                            sampleRatio:
+                              type: string
+                          type: object
                         version:
                           type: string
                         wal:
@@ -27334,6 +27437,8 @@ spec:
                                     storageSize:
                                       pattern: (^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$)
                                       type: string
+                                    useEmptyDir:
+                                      type: boolean
                                   type: object
                               type: object
                           type: object
@@ -27428,6 +27533,8 @@ spec:
                             storageSize:
                               pattern: (^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$)
                               type: string
+                            useEmptyDir:
+                              type: boolean
                           type: object
                       type: object
                     gcs:
@@ -27506,6 +27613,15 @@ spec:
                   maximum: 65535
                   minimum: 0
                   type: integer
+                tracing:
+                  properties:
+                    enabled:
+                      type: boolean
+                    endpoint:
+                      type: string
+                    sampleRatio:
+                      type: string
+                  type: object
                 version:
                   type: string
                 wal:
@@ -27545,6 +27661,8 @@ spec:
                             storageSize:
                               pattern: (^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$)
                               type: string
+                            useEmptyDir:
+                              type: boolean
                           type: object
                       type: object
                   type: object
