@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-remote-job-scheduler
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "greptimedb-remote-compaction.labels" . | nindent 4 }}
+    app: {{ include "greptimedb-remote-compaction.fullname" . }}-remote-job-scheduler
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ include "greptimedb-remote-compaction.fullname" . }}-remote-job-scheduler
+  ports:
+    - name: scheduler
+      port: 10099
+      targetPort: 10099
+      protocol: TCP

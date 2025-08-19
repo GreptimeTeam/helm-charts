@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-remote-job-scheduler
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "greptimedb-remote-compaction.labels" . | nindent 4 }}
+    app: {{ include "greptimedb-remote-compaction.fullname" . }}-remote-job-scheduler
+    {{- with .Values.scheduler.podLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.scheduler.replicas }}
+  selector:
+    matchLabels:
+      app: {{ include "greptimedb-remote-compaction.fullname" . }}-remote-job-scheduler
+  template:
+    metadata:
+      annotations:
+        app.greptime.io/config-hash: {{ include (print $.Template.BasePath "/scheduler/configmap.yaml") . | sha256sum }}
+        {{- with .Values.scheduler.podAnnotations }}
+        {{- toYaml . | nindent 8 }} 
+        {{- end }}
+      labels:
+        app: {{ include "greptimedb-remote-compaction.fullname" . }}-remote-job-scheduler
+        {{- with .Values.scheduler.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.scheduler.image.pullSecrets }}
+      imagePullSecrets:
+        {{- range .Values.scheduler.image.pullSecrets }}
+        - name: {{ . }}
+        {{- end }}
+      {{- end }}
+      {{- if .Values.scheduler.serviceAccount.create }}
+      serviceAccountName: {{ .Release.Name }}-remote-job-scheduler
+      {{- end }}
+      containers:
+        - name: scheduler
+          image: "{{ .Values.scheduler.image.registry }}/{{ .Values.scheduler.image.repository }}:{{ .Values.scheduler.image.tag }}"
+          imagePullPolicy: {{ .Values.scheduler.image.pullPolicy }}
+          {{- if .Values.scheduler.command }}
+          command: {{ .Values.scheduler.command | toYaml | nindent 12 }}
+          {{- else }}
+          command:
+            - "remote-job-scheduler"
+          {{- end }}
+          {{- if .Values.scheduler.args }}
+          args: {{ .Values.scheduler.args | toYaml | nindent 12 }}
+          {{- else }}
+          args:
+            - "--config=/etc/remote-job-scheduler/config.yaml"
+          {{- end }}
+          {{- if .Values.scheduler.resources }}
+          resources: {{ .Values.scheduler.resources | toYaml | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: control
+              containerPort: 10099
+              protocol: TCP
+          volumeMounts:
+            - name: scheduler-config
+              mountPath: /etc/remote-job-scheduler/config.yaml
+              subPath: config.yaml
+      {{- with .Values.scheduler.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scheduler.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scheduler.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: scheduler-config
+          configMap:
+            name: {{ .Release.Name }}-remote-job-scheduler

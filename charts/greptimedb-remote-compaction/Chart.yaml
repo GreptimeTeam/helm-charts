@@ -1,0 +1,19 @@
+apiVersion: v2
+name: greptimedb-remote-compaction
+description: Remote compaction components (scheduler, compactor) for GreptimeDB Enterprise.
+type: application
+version: 0.1.0
+appVersion: 0.1.0
+home: https://github.com/GreptimeTeam/greptimedb
+sources:
+  - https://github.com/GreptimeTeam/greptimedb
+keywords:
+  - greptimedb
+  - remote-compaction
+maintainers:
+  - name: liyang
+    email: liyang@greptime.com
+    url: https://github.com/daviderli614
+  - name: zyy17
+    email: zyy@greptime.com
+    url: https://github.com/zyy17

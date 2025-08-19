@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-remote-job-scheduler
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "greptimedb-remote-compaction.labels" . | nindent 4 }}
+  annotations:
+    {{- with .Values.scheduler.configMapAnnotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+data:
+  config.yaml: |
+    {{- if .Values.scheduler.servicePort }}
+    servicePort: {{ .Values.scheduler.servicePort }}
+    {{- end }}
+    {{- if .Values.scheduler.logLevel }}
+    logLevel: "{{ .Values.scheduler.logLevel }}"
+    {{- end }}
+    {{- if .Values.scheduler.extraConfigData }}
+    {{- .Values.scheduler.extraConfigData | nindent 4 }}
+    {{- end }}

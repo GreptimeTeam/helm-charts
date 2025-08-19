@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-compactor
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "greptimedb-remote-compaction.labels" . | nindent 4 }}
+    app: {{ include "greptimedb-remote-compaction.fullname" . }}-compactor
+    {{- with .Values.compactor.podLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.compactor.replicas }}
+  selector:
+    matchLabels:
+      app: {{ include "greptimedb-remote-compaction.fullname" . }}-compactor
+  template:
+    metadata:
+      annotations:
+        app.greptime.io/config-hash: {{ include (print $.Template.BasePath "/compactor/configmap.yaml") . | sha256sum }}
+        {{- with .Values.compactor.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        app: {{ include "greptimedb-remote-compaction.fullname" . }}-compactor
+        {{- with .Values.compactor.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.compactor.image.pullSecrets }}
+      imagePullSecrets:
+        {{- range .Values.compactor.image.pullSecrets }}
+        - name: {{ . }}
+        {{- end }}
+      {{- end }}
+      {{- if .Values.compactor.serviceAccount.create }}
+      serviceAccountName: {{ .Release.Name }}-compactor
+      {{- end }}
+      containers:
+        - name: compactor
+          image: "{{ .Values.compactor.image.registry }}/{{ .Values.compactor.image.repository }}:{{ .Values.compactor.image.tag }}"
+          imagePullPolicy: {{ .Values.compactor.image.pullPolicy }}
+          {{- if .Values.compactor.command }}
+          command: {{ .Values.compactor.command | toYaml | nindent 12 }}
+          {{- else }}
+          command:
+            - "greptime-ent-cloud"
+          {{- end }}
+          {{- if .Values.compactor.args }}
+          args: {{ .Values.compactor.args | toYaml | nindent 12 }}
+          {{- else }}
+          args:
+            - "--license-file=/greptime/license/current"
+            - "compactor"
+            - "start"
+            - "--rpc-bind-addr=0.0.0.0:19071"
+            - "--rpc-server-addr=$(POD_IP):19071"
+            - "--control-plane-addr={{ .Release.Name }}-remote-job-scheduler.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.scheduler.servicePort }}"
+            - "--config-file=/etc/greptimedb/config.toml"
+          {{- end }}
+          {{- if .Values.compactor.resources }}
+          resources: {{ .Values.compactor.resources | toYaml | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: grpc
+              containerPort: 19071
+              protocol: TCP
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          {{- with .Values.compactor.env }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: compactor-config
+              mountPath: /etc/greptimedb/config.toml
+              subPath: config.toml
+            {{- if .Values.compactor.volumeMounts }}
+            {{- toYaml .Values.compactor.volumeMounts | nindent 12 }}
+            {{- end }}
+      {{- with .Values.compactor.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.compactor.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.compactor.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: compactor-config
+          configMap:
+            name: {{ .Release.Name }}-compactor
+        {{- if .Values.compactor.volumes }}
+        {{- toYaml .Values.compactor.volumes | nindent 8 }}
+        {{- end }}
