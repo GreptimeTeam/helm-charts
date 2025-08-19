@@ -1298,7 +1298,9 @@ dashboards:
   # -- Extra labels for the configmap
   extraLabels: {}
 
-# -- Deploy grafana for monitoring.
+# -------------------------------------------------
+# Configuration for `grafana` child chart
+# -------------------------------------------------
 grafana:
   # -- Enable grafana deployment. It needs to enable monitoring `monitoring.enabled: true` first.
   enabled: false
@@ -1377,7 +1379,9 @@ grafana:
     # -- The annotations for the grafana service.
     annotations: {}
 
-# -- Deploy jaeger-all-in-one for development purpose.
+# -------------------------------------------------
+# Configuration for `jaeger-all-in-one` child chart
+# -------------------------------------------------
 jaeger-all-in-one:
   # -- Enable jaeger-all-in-one deployment.
   enabled: false
