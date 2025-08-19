@@ -1948,6 +1948,10 @@ spec:
                               - name
                             type: object
                           type: array
+                        extraArgs:
+                          items:
+                            type: string
+                          type: array
                         image:
                           type: string
                         imagePullPolicy:
@@ -3368,6 +3372,8 @@ spec:
                         storageSize:
                           pattern: (^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$)
                           type: string
+                        useEmptyDir:
+                          type: boolean
                       type: object
                   type: object
                 httpPort:
@@ -3454,6 +3460,8 @@ spec:
                             storageSize:
                               pattern: (^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$)
                               type: string
+                            useEmptyDir:
+                              type: boolean
                           type: object
                       type: object
                     gcs:
@@ -3581,6 +3589,15 @@ spec:
                   required:
                     - secretName
                   type: object
+                tracing:
+                  properties:
+                    enabled:
+                      type: boolean
+                    endpoint:
+                      type: string
+                    sampleRatio:
+                      type: string
+                  type: object
                 version:
                   type: string
                 wal:
@@ -3620,6 +3637,8 @@ spec:
                             storageSize:
                               pattern: (^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$)
                               type: string
+                            useEmptyDir:
+                              type: boolean
                           type: object
                       type: object
                   type: object
