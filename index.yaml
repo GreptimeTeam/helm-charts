@@ -3868,6 +3868,30 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-cluster-0.1.0/greptimedb-cluster-0.1.0.tgz
     version: 0.1.0
+  greptimedb-enterprise-dashboard:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2025-08-20T17:56:10.168392172Z"
+    description: The Helm chart for deploying GreptimeDB Enterprise Dashboard.
+    digest: 8d850ac6c5b66fab43c208a9daa4d56e98f570969e4b42d445271e3dd9dcf42b
+    home: https://greptime.com/product/enterprise
+    keywords:
+    - dashboard
+    - greptimedb
+    - enterprise
+    kubeVersion: '>=1.18.0-0'
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-enterprise-dashboard
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-enterprise-dashboard-0.1.0/greptimedb-enterprise-dashboard-0.1.0.tgz
+    version: 0.1.0
   greptimedb-operator:
   - apiVersion: v2
     appVersion: 0.4.2
@@ -6753,4 +6777,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2025-08-20T17:36:40.34896374Z"
+generated: "2025-08-20T17:56:10.168948776Z"
