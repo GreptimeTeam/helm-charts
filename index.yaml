@@ -5342,6 +5342,31 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-operator-0.1.1-alpha.1/greptimedb-operator-0.1.1-alpha.1.tgz
     version: 0.1.1-alpha.1
+  greptimedb-remote-compaction:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2025-08-20T17:36:40.348082082Z"
+    description: Remote compaction components (scheduler, compactor) for GreptimeDB
+      Enterprise.
+    digest: 557e3bdbe25940d1ef1395359e61e777f4e67f9647ba60972c11ed355b767e41
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - greptimedb
+    - remote-compaction
+    maintainers:
+    - email: liyang@greptime.com
+      name: liyang
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-remote-compaction
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-remote-compaction-0.1.0/greptimedb-remote-compaction-0.1.0.tgz
+    version: 0.1.0
   greptimedb-standalone:
   - apiVersion: v2
     appVersion: 0.16.0
@@ -6728,4 +6753,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2025-08-19T22:50:59.3712681Z"
+generated: "2025-08-20T17:36:40.34896374Z"
