@@ -1,0 +1,19 @@
+apiVersion: v2
+kubeVersion: ">=1.18.0-0"
+description: The Helm chart for deploying GreptimeDB Enterprise Dashboard.
+name: greptimedb-enterprise-dashboard
+appVersion: 0.1.0
+version: 0.1.0
+type: application
+home: https://greptime.com/product/enterprise
+keywords:
+  - dashboard
+  - greptimedb
+  - enterprise
+maintainers:
+  - name: daviderli614
+    email: liyang@greptime.com
+    url: https://github.com/daviderli614
+  - name: zyy17
+    email: zyy@greptime.com
+    url: https://github.com/zyy17
