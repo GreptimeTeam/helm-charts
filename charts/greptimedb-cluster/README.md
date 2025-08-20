@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.6.14](https://img.shields.io/badge/Version-0.6.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.16.0](https://img.shields.io/badge/AppVersion-0.16.0-informational?style=flat-square)
+![Version: 0.6.15](https://img.shields.io/badge/Version-0.6.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.16.0](https://img.shields.io/badge/AppVersion-0.16.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -83,6 +83,7 @@ helm uninstall mycluster -n default
 | Repository | Name | Version |
 |------------|------|---------|
 | https://grafana.github.io/helm-charts | grafana | 8.5.8 |
+| https://greptimeteam.github.io/helm-charts/ | greptimedb-remote-compaction | 0.1.0 |
 | https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts | jaeger-all-in-one | 0.1.12 |
 
 ## Values
@@ -346,6 +347,51 @@ helm uninstall mycluster -n default
 | prometheusRule.labels | object | `{}` | Additional labels for the rules PrometheusRule resource |
 | prometheusRule.namespace | string | `""` | The namespace of prometheus rules |
 | prometheusRule.rules | list | `[]` | The prometheus rules |
+| remoteCompaction.compactor | object | `{"affinity":{},"args":[],"command":[],"extraConfigData":"# The storage options.\n[storage]\n# The object store type.\ntype = \"S3\"\n# The bucket of the object store.\nbucket = \"testbucket\"\n# The root of the object store.\nroot = \"testroot\"\n# The endpoint of the object store.\nendpoint = \"http://localhost:9000\"\n# The access key of the object store.\naccess_key_id = \"testkey\"\n# The secret key of the object store.\nsecret_access_key = \"testsecret\"\n# The region of the object store.\nregion = \"us-east-1\"\n\n# The logging options.\n[logging]\n# The directory of the log files.\ndir = \"\"\n# The level of the log.\nlevel = \"info\"\n# The format of the log.\nformat = \"text\"\n","heartbeatInterval":"5s","image":{"pullPolicy":"IfNotPresent","pullSecret":"","registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"},"maxBackgroundJobs":4,"nodeSelector":{},"podAnnotations":{},"podLabels":{},"replicas":1,"resources":{"limits":{"cpu":"4","memory":"8Gi"},"requests":{"cpu":"500m","memory":"256Mi"}},"serviceAccount":{"annotations":{},"create":true},"tolerations":[]}` | The compactor configuration. |
+| remoteCompaction.compactor.affinity | object | `{}` | The compactor affinity. |
+| remoteCompaction.compactor.args | list | `[]` | The compactor args. It's used to override the default args. |
+| remoteCompaction.compactor.command | list | `[]` | The compactor command. It's used to override the default command. |
+| remoteCompaction.compactor.extraConfigData | string | `"# The storage options.\n[storage]\n# The object store type.\ntype = \"S3\"\n# The bucket of the object store.\nbucket = \"testbucket\"\n# The root of the object store.\nroot = \"testroot\"\n# The endpoint of the object store.\nendpoint = \"http://localhost:9000\"\n# The access key of the object store.\naccess_key_id = \"testkey\"\n# The secret key of the object store.\nsecret_access_key = \"testsecret\"\n# The region of the object store.\nregion = \"us-east-1\"\n\n# The logging options.\n[logging]\n# The directory of the log files.\ndir = \"\"\n# The level of the log.\nlevel = \"info\"\n# The format of the log.\nformat = \"text\"\n"` | The compactor config data. |
+| remoteCompaction.compactor.heartbeatInterval | string | `"5s"` | The compactor heartbeat interval. |
+| remoteCompaction.compactor.image | object | `{"pullPolicy":"IfNotPresent","pullSecret":"","registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"}` | The compactor image. |
+| remoteCompaction.compactor.image.pullPolicy | string | `"IfNotPresent"` | The compactor image pull policy. |
+| remoteCompaction.compactor.image.pullSecret | string | `""` | The compactor image pull secret. |
+| remoteCompaction.compactor.image.registry | string | `"Please set the registry"` | The compactor image registry. |
+| remoteCompaction.compactor.image.repository | string | `"Please set the repository"` | The compactor image repository. |
+| remoteCompaction.compactor.image.tag | string | `"Please set the tag"` | The compactor image tag. |
+| remoteCompaction.compactor.maxBackgroundJobs | int | `4` | The compactor max background jobs. |
+| remoteCompaction.compactor.nodeSelector | object | `{}` | The compactor node selector. |
+| remoteCompaction.compactor.podAnnotations | object | `{}` | The compactor pod annotations. |
+| remoteCompaction.compactor.podLabels | object | `{}` | The compactor pod labels. |
+| remoteCompaction.compactor.replicas | int | `1` | The compactor replicas. |
+| remoteCompaction.compactor.resources | object | `{"limits":{"cpu":"4","memory":"8Gi"},"requests":{"cpu":"500m","memory":"256Mi"}}` | The compactor resources. |
+| remoteCompaction.compactor.serviceAccount | object | `{"annotations":{},"create":true}` | The compactor service account. |
+| remoteCompaction.compactor.serviceAccount.annotations | object | `{}` | The annotations for compactor service account |
+| remoteCompaction.compactor.serviceAccount.create | bool | `true` | Create a service account for compactor |
+| remoteCompaction.compactor.tolerations | list | `[]` | The compactor tolerations. |
+| remoteCompaction.enabled | bool | `false` | Enable remote compaction. |
+| remoteCompaction.scheduler | object | `{"affinity":{},"args":[],"command":[],"extraConfigData":"executorManager:\n  removeInactiveExecutorsInterval: \"2s\"\n  expiration: \"5s\"\n","image":{"pullPolicy":"IfNotPresent","pullSecret":"","registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"},"logLevel":"info","nodeSelector":{},"podAnnotations":{},"podLabels":{},"replicas":1,"resources":{"limits":{"cpu":"4","memory":"8Gi"},"requests":{"cpu":"500m","memory":"256Mi"}},"serviceAccount":{"annotations":{},"create":true},"servicePort":10099,"tolerations":[]}` | The scheduler configuration. |
+| remoteCompaction.scheduler.affinity | object | `{}` | The scheduler affinity. |
+| remoteCompaction.scheduler.args | list | `[]` | The scheduler args. It's used to override the default args. |
+| remoteCompaction.scheduler.command | list | `[]` | The scheduler command. It's used to override the default command. |
+| remoteCompaction.scheduler.extraConfigData | string | `"executorManager:\n  removeInactiveExecutorsInterval: \"2s\"\n  expiration: \"5s\"\n"` | The scheduler extra config data. |
+| remoteCompaction.scheduler.image | object | `{"pullPolicy":"IfNotPresent","pullSecret":"","registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"}` | The scheduler image. |
+| remoteCompaction.scheduler.image.pullPolicy | string | `"IfNotPresent"` | The scheduler image pull policy. |
+| remoteCompaction.scheduler.image.pullSecret | string | `""` | The scheduler image pull secret. |
+| remoteCompaction.scheduler.image.registry | string | `"Please set the registry"` | The scheduler image registry. |
+| remoteCompaction.scheduler.image.repository | string | `"Please set the repository"` | The scheduler image repository. |
+| remoteCompaction.scheduler.image.tag | string | `"Please set the tag"` | The scheduler image tag. |
+| remoteCompaction.scheduler.logLevel | string | `"info"` | The scheduler log level. |
+| remoteCompaction.scheduler.nodeSelector | object | `{}` | The scheduler node selector. |
+| remoteCompaction.scheduler.podAnnotations | object | `{}` | The scheduler pod annotations. |
+| remoteCompaction.scheduler.podLabels | object | `{}` | The scheduler pod labels. |
+| remoteCompaction.scheduler.replicas | int | `1` | The scheduler replicas. |
+| remoteCompaction.scheduler.resources | object | `{"limits":{"cpu":"4","memory":"8Gi"},"requests":{"cpu":"500m","memory":"256Mi"}}` | The scheduler resources. |
+| remoteCompaction.scheduler.serviceAccount | object | `{"annotations":{},"create":true}` | The scheduler service account. |
+| remoteCompaction.scheduler.serviceAccount.annotations | object | `{}` | The annotations for scheduler service account |
+| remoteCompaction.scheduler.serviceAccount.create | bool | `true` | Create a service account for scheduler |
+| remoteCompaction.scheduler.servicePort | int | `10099` | The scheduler service port. |
+| remoteCompaction.scheduler.tolerations | list | `[]` | The scheduler tolerations. |
 | remoteWal | object | `{"enabled":false,"kafka":{"brokerEndpoints":[]}}` | Configure to remote wal |
 | remoteWal.enabled | bool | `false` | Enable remote wal |
 | remoteWal.kafka | object | `{"brokerEndpoints":[]}` | The remote wal type, only support kafka now. |

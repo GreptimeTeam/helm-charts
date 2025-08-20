@@ -14,6 +14,7 @@ for dir in "$CHARTS_DIR"/*; do
       # Use the OCI registry URL as the repository in the Chart.yaml file.
       sed -i 's|https://grafana.github.io/helm-charts|oci://greptime-registry.cn-hangzhou.cr.aliyuncs.com/charts|g' "$dir/Chart.yaml"
       sed -i 's|https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts|oci://greptime-registry.cn-hangzhou.cr.aliyuncs.com/charts|g' "$dir/Chart.yaml"
+      sed -i 's|https://greptimeteam.github.io/helm-charts|oci://greptime-registry.cn-hangzhou.cr.aliyuncs.com/charts|g' "$dir/Chart.yaml"
 
       # Update the dependencies.
       helm dependency update "$dir"

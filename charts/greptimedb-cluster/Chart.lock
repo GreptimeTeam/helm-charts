@@ -5,5 +5,8 @@ dependencies:
 - name: jaeger-all-in-one
   repository: https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts
   version: 0.1.12
-digest: sha256:e260d018c3781656e59282e609718348d11d82d9d8b3126f57761974b8c9b70f
-generated: "2024-11-28T10:39:55.943979+08:00"
+- name: greptimedb-remote-compaction
+  repository: https://greptimeteam.github.io/helm-charts/
+  version: 0.1.0
+digest: sha256:4511ce078d9cc966a06c7b70842d35c7a6dcb1bbf405ee52a260ad502f46a2b9
+generated: "2025-08-20T10:44:51.991871-07:00"

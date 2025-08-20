@@ -1427,3 +1427,166 @@ jaeger-all-in-one:
 #    requests:
 #     cpu: 100m
 #     memory: 128Mi
+
+##############################################################
+# Configuration for `greptimedb-remote-compaction` child chart
+##############################################################
+remoteCompaction:
+  # -- Enable remote compaction.
+  enabled: false
+
+  # -- The scheduler configuration.
+  scheduler:
+    # -- The scheduler image.
+    image:
+      # -- The scheduler image registry.
+      registry: "Please set the registry"
+      # -- The scheduler image repository.
+      repository: "Please set the repository"
+      # -- The scheduler image tag.
+      tag: "Please set the tag"
+      # -- The scheduler image pull policy.
+      pullPolicy: IfNotPresent
+      # -- The scheduler image pull secret.
+      pullSecret: ""
+
+    # -- The scheduler replicas.
+    replicas: 1
+
+    # -- The scheduler command. It's used to override the default command.
+    command: []
+
+    # -- The scheduler args. It's used to override the default args.
+    args: []
+
+    # -- The scheduler resources.
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "256Mi"
+      limits:
+        cpu: "4"
+        memory: "8Gi"
+
+    # -- The scheduler node selector.
+    nodeSelector: {}
+
+    # -- The scheduler affinity.
+    affinity: {}
+
+    # -- The scheduler tolerations.
+    tolerations: []
+
+    # -- The scheduler pod annotations.
+    podAnnotations: {}
+
+    # -- The scheduler pod labels.
+    podLabels: {}
+
+    # -- The scheduler service port.
+    servicePort: 10099
+
+    # -- The scheduler log level.
+    logLevel: "info"
+
+    # -- The scheduler service account.
+    serviceAccount:
+      # -- Create a service account for scheduler
+      create: true
+      # -- The annotations for scheduler service account
+      annotations: {}
+
+    # -- The scheduler extra config data.
+    extraConfigData: |
+      executorManager:
+        removeInactiveExecutorsInterval: "2s"
+        expiration: "5s"
+
+  # -- The compactor configuration.
+  compactor:
+    # -- The compactor image.
+    image:
+      # -- The compactor image registry.
+      registry: "Please set the registry"
+      # -- The compactor image repository.
+      repository: "Please set the repository"
+      # -- The compactor image tag.
+      tag: "Please set the tag"
+      # -- The compactor image pull policy.
+      pullPolicy: IfNotPresent
+      # -- The compactor image pull secret.
+      pullSecret: ""
+
+    # -- The compactor replicas.
+    replicas: 1
+
+    # -- The compactor command. It's used to override the default command.
+    command: []
+
+    # -- The compactor args. It's used to override the default args.
+    args: []
+
+    # -- The compactor resources.
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "256Mi"
+      limits:
+        cpu: "4"
+        memory: "8Gi"
+
+    # -- The compactor node selector.
+    nodeSelector: {}
+
+    # -- The compactor affinity.
+    affinity: {}
+
+    # -- The compactor tolerations.
+    tolerations: []
+
+    # -- The compactor pod annotations.
+    podAnnotations: {}
+
+    # -- The compactor pod labels.
+    podLabels: {}
+
+    # -- The compactor service account.
+    serviceAccount:
+      # -- Create a service account for compactor
+      create: true
+      # -- The annotations for compactor service account
+      annotations: {}
+
+    # -- The compactor max background jobs.
+    maxBackgroundJobs: 4
+
+    # -- The compactor heartbeat interval.
+    heartbeatInterval: "5s"
+
+    # -- The compactor config data.
+    extraConfigData: |
+      # The storage options.
+      [storage]
+      # The object store type.
+      type = "S3"
+      # The bucket of the object store.
+      bucket = "testbucket"
+      # The root of the object store.
+      root = "testroot"
+      # The endpoint of the object store.
+      endpoint = "http://localhost:9000"
+      # The access key of the object store.
+      access_key_id = "testkey"
+      # The secret key of the object store.
+      secret_access_key = "testsecret"
+      # The region of the object store.
+      region = "us-east-1"
+
+      # The logging options.
+      [logging]
+      # The directory of the log files.
+      dir = ""
+      # The level of the log.
+      level = "info"
+      # The format of the log.
+      format = "text"
