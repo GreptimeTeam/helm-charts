@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.6.16](https://img.shields.io/badge/Version-0.6.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.16.0](https://img.shields.io/badge/AppVersion-0.16.0-informational?style=flat-square)
+![Version: 0.6.17](https://img.shields.io/badge/Version-0.6.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.16.0](https://img.shields.io/badge/AppVersion-0.16.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -83,6 +83,7 @@ helm uninstall mycluster -n default
 | Repository | Name | Version |
 |------------|------|---------|
 | https://grafana.github.io/helm-charts | grafana | 8.5.8 |
+| https://greptimeteam.github.io/helm-charts/ | greptimedb-enterprise-dashboard | 0.1.0 |
 | https://greptimeteam.github.io/helm-charts/ | greptimedb-remote-compaction | 0.1.0 |
 | https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts | jaeger-all-in-one | 0.1.12 |
 
@@ -253,6 +254,30 @@ helm uninstall mycluster -n default
 | grafana.service.enabled | bool | `true` | Whether to create the service for grafana. |
 | grafana.service.type | string | `"ClusterIP"` | The type of the service. |
 | grafana.sidecar | object | `{"dashboards":{"enabled":true,"provider":{"allowUiUpdates":true},"searchNamespace":"ALL"}}` | The grafana sidecar settings to import dashboards |
+| greptimedb-enterprise-dashboard.affinity | object | `{}` |  |
+| greptimedb-enterprise-dashboard.args[0] | string | `"--config=/etc/dashboard-apiserver/config.yaml"` |  |
+| greptimedb-enterprise-dashboard.config | string | `"servicePort: 19095\nlogLevel: info\nprovisionedInstances:\n- name: mycluster\n  namespace: default\n  type: cluster\n  url: http://mycluster-frontend.default.svc.cluster.local:4000\n  monitoring:\n    greptimedb:\n      url: http://mycluster-monitor-standalone.default.svc.cluster.local:4000\n"` |  |
+| greptimedb-enterprise-dashboard.enabled | bool | `false` | Enable greptimedb-enterprise-dashboard deployment. |
+| greptimedb-enterprise-dashboard.fullnameOverride | string | `""` |  |
+| greptimedb-enterprise-dashboard.image.pullPolicy | string | `"IfNotPresent"` |  |
+| greptimedb-enterprise-dashboard.image.repository | string | `"Please set the image repository"` |  |
+| greptimedb-enterprise-dashboard.image.tag | string | `"Please set the image repository"` |  |
+| greptimedb-enterprise-dashboard.imagePullSecrets | list | `[]` |  |
+| greptimedb-enterprise-dashboard.nameOverride | string | `""` |  |
+| greptimedb-enterprise-dashboard.nodeSelector | object | `{}` |  |
+| greptimedb-enterprise-dashboard.podAnnotations | object | `{}` |  |
+| greptimedb-enterprise-dashboard.podSecurityContext | object | `{}` |  |
+| greptimedb-enterprise-dashboard.replicaCount | int | `1` |  |
+| greptimedb-enterprise-dashboard.resources | object | `{}` |  |
+| greptimedb-enterprise-dashboard.securityContext | object | `{}` |  |
+| greptimedb-enterprise-dashboard.service.annotations | object | `{}` |  |
+| greptimedb-enterprise-dashboard.service.port | int | `19095` |  |
+| greptimedb-enterprise-dashboard.service.type | string | `"ClusterIP"` |  |
+| greptimedb-enterprise-dashboard.serviceAccount.annotations | object | `{}` |  |
+| greptimedb-enterprise-dashboard.serviceAccount.create | bool | `true` |  |
+| greptimedb-enterprise-dashboard.serviceAccount.name | string | `""` |  |
+| greptimedb-enterprise-dashboard.servicePort | int | `19095` |  |
+| greptimedb-enterprise-dashboard.tolerations | list | `[]` |  |
 | greptimedb-remote-compaction.compactor | object | `{"affinity":{},"args":[],"command":[],"extraConfigData":"# The storage options.\n[storage]\n# The object store type.\ntype = \"S3\"\n# The bucket of the object store.\nbucket = \"testbucket\"\n# The root of the object store.\nroot = \"testroot\"\n# The endpoint of the object store.\nendpoint = \"http://localhost:9000\"\n# The access key of the object store.\naccess_key_id = \"testkey\"\n# The secret key of the object store.\nsecret_access_key = \"testsecret\"\n# The region of the object store.\nregion = \"us-east-1\"\n\n# The logging options.\n[logging]\n# The directory of the log files.\ndir = \"\"\n# The level of the log.\nlevel = \"info\"\n# The format of the log.\nformat = \"text\"\n","heartbeatInterval":"5s","image":{"pullPolicy":"IfNotPresent","pullSecret":"","registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"},"maxBackgroundJobs":4,"nodeSelector":{},"podAnnotations":{},"podLabels":{},"replicas":1,"resources":{"limits":{"cpu":"4","memory":"8Gi"},"requests":{"cpu":"500m","memory":"256Mi"}},"serviceAccount":{"annotations":{},"create":true},"tolerations":[]}` | The compactor configuration. |
 | greptimedb-remote-compaction.compactor.affinity | object | `{}` | The compactor affinity. |
 | greptimedb-remote-compaction.compactor.args | list | `[]` | The compactor args. It's used to override the default args. |
