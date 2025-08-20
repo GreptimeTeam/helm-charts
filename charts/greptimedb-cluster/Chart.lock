@@ -8,5 +8,5 @@ dependencies:
 - name: greptimedb-remote-compaction
   repository: https://greptimeteam.github.io/helm-charts/
   version: 0.1.0
-digest: sha256:4511ce078d9cc966a06c7b70842d35c7a6dcb1bbf405ee52a260ad502f46a2b9
-generated: "2025-08-20T10:44:51.991871-07:00"
+digest: sha256:7addc2b1ffdb5d9317122690e2266e4f406d72b02ba65c3884ee689365fba88a
+generated: "2025-08-20T12:15:47.767752-07:00"

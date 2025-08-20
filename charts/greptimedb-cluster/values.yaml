@@ -1431,7 +1431,7 @@ jaeger-all-in-one:
 ##############################################################
 # Configuration for `greptimedb-remote-compaction` child chart
 ##############################################################
-remoteCompaction:
+greptimedb-remote-compaction:
   # -- Enable remote compaction.
   enabled: false
 
