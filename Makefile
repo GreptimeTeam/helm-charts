@@ -16,6 +16,7 @@ docs: install-helm-docs ## Run helm-docs
 	$(GOBIN)/helm-docs -c charts/greptimedb-cluster --chart-search-root=charts/greptimedb-cluster --template-files=README.md.gotmpl
 	$(GOBIN)/helm-docs -c charts/greptimedb-operator --chart-search-root=charts/greptimedb-operator --template-files=README.md.gotmpl
 	$(GOBIN)/helm-docs -c charts/greptimedb-standalone --chart-search-root=charts/greptimedb-standalone --template-files=README.md.gotmpl
+	$(GOBIN)/helm-docs -c charts/greptimedb-remote-compaction --chart-search-root=charts/greptimedb-remote-compaction --template-files=README.md.gotmpl
 
 .PHONY: check-docs
 check-docs: docs ## Check docs

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-compactor
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "greptimedb-remote-compaction.labels" . | nindent 4 }}
+data:
+  config.toml: |
+    {{- if .Values.compactor.controlPlaneAddr }}
+    control_plane_addr = "{{ .Values.compactor.controlPlaneAddr }}"
+    {{- end }}
+    {{- if .Values.compactor.maxBackgroundJobs }}
+    max_background_jobs = {{ .Values.compactor.maxBackgroundJobs }}
+    {{- end }}
+    {{- if .Values.compactor.heartbeatInterval }}
+    heartbeat_interval = "{{ .Values.compactor.heartbeatInterval }}"
+    {{- end }}
+
+    {{- if .Values.compactor.extraConfigData }}
+    {{- .Values.compactor.extraConfigData | nindent 4 }}
+    {{- end }}
