@@ -54,6 +54,7 @@ function main() {
   release_charts_to_s3 greptime greptimedb-standalone
   release_charts_to_s3 greptime greptimedb-cluster
   release_charts_to_s3 greptime greptimedb-remote-compaction
+  release_charts_to_s3 greptime greptimedb-enterprise-dashboard
   release_charts_to_s3 oci://registry-1.docker.io/bitnamicharts etcd
 }
 
