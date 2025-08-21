@@ -9,3 +9,11 @@ greptimedb-operator:
 greptimedb-standalone:
   - changed-files:
       - any-glob-to-any-file: charts/greptimedb-standalone/**
+
+greptimedb-enterprise-dashboard:
+  - changed-files:
+      - any-glob-to-any-file: charts/greptimedb-enterprise-dashboard/**
+
+greptimedb-remote-compaction:
+  - changed-files:
+      - any-glob-to-any-file: charts/greptimedb-remote-compaction/**
