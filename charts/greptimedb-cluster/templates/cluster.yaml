@@ -19,6 +19,9 @@ spec:
       {{- if .Values.base.podTemplate.main.args }}
       args: {{ .Values.base.podTemplate.main.args | toYaml | nindent 8 }}
       {{- end }}
+      {{- if .Values.base.podTemplate.main.extraArgs }}
+      extraArgs: {{ .Values.base.podTemplate.main.extraArgs | toYaml | nindent 8 }}
+      {{- end }}
       {{- if .Values.base.podTemplate.main.env }}
       env: {{- toYaml .Values.base.podTemplate.main.env | nindent 8 }}
       {{- end }}
@@ -93,6 +96,9 @@ spec:
         {{- end }}
         {{- if .Values.frontend.podTemplate.main.args }}
         args: {{ .Values.frontend.podTemplate.main.args | toYaml | nindent 8 }}
+        {{- end }}
+        {{- if .Values.frontend.podTemplate.main.extraArgs }}
+        extraArgs: {{ .Values.frontend.podTemplate.main.extraArgs | toYaml | nindent 8 }}
         {{- end }}
         {{- if or .Values.auth.enabled .Values.frontend.podTemplate.main.env }}
         env:
@@ -283,6 +289,9 @@ spec:
         {{- if .Values.meta.podTemplate.main.args }}
         args: {{ .Values.meta.podTemplate.main.args | toYaml | nindent 8 }}
         {{- end }}
+        {{- if .Values.meta.podTemplate.main.extraArgs }}
+        extraArgs: {{ .Values.meta.podTemplate.main.extraArgs | toYaml | nindent 8 }}
+        {{- end }}
         {{- if .Values.meta.podTemplate.main.env }}
         env: {{- toYaml .Values.meta.podTemplate.main.env | nindent 8 }}
         {{- end }}
@@ -352,6 +361,9 @@ spec:
         {{- end }}
         {{- if .Values.datanode.podTemplate.main.args }}
         args: {{ .Values.datanode.podTemplate.main.args | toYaml | nindent 8 }}
+        {{- end }}
+        {{- if .Values.datanode.podTemplate.main.extraArgs }}
+        extraArgs: {{ .Values.datanode.podTemplate.main.extraArgs | toYaml | nindent 8 }}
         {{- end }}
         {{- if .Values.datanode.podTemplate.main.env }}
         env: {{- toYaml .Values.datanode.podTemplate.main.env | nindent 8 }}
@@ -435,6 +447,7 @@ spec:
         {{- if .Values.datanode.storage.annotations }}
         annotations: {{ .Values.datanode.storage.annotations | toYaml | nindent 10 }}
         {{- end }}
+        useEmptyDir: {{ .Values.datanode.storage.useEmptyDir }}
   {{- end }}
   {{- if .Values.flownode.enabled }}
   flownode:
@@ -457,6 +470,9 @@ spec:
         {{- end }}
         {{- if .Values.flownode.podTemplate.main.args }}
         args: {{ .Values.flownode.podTemplate.main.args | toYaml | nindent 8 }}
+        {{- end }}
+        {{- if .Values.flownode.podTemplate.main.extraArgs }}
+        extraArgs: {{ .Values.flownode.podTemplate.main.extraArgs | toYaml | nindent 8 }}
         {{- end }}
         {{- if or .Values.auth.enabled .Values.flownode.podTemplate.main.env }}
         env:
