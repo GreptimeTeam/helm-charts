@@ -57,6 +57,9 @@ base:
       # -- The arguments to be passed to the command
       args: []
 
+      # -- The ExtraArgs specifies additional command-line arguments for the container entrypoint
+      extraArgs: []
+
       # -- The config for startup probe of the main container
       startupProbe: {}
 #        httpGet:
@@ -170,6 +173,9 @@ frontend:
 
       # -- The arguments to be passed to the command
       args: []
+
+      # -- The ExtraArgs specifies additional command-line arguments for the container entrypoint
+      extraArgs: []
 
       # -- The pod volumeMounts
       volumeMounts: []
@@ -320,6 +326,9 @@ meta:
 
       # -- The arguments to be passed to the command
       args: []
+
+      # -- The ExtraArgs specifies additional command-line arguments for the container entrypoint
+      extraArgs: []
 
       # -- The pod volumeMounts
       volumeMounts: []
@@ -529,6 +538,9 @@ datanode:
       # -- The arguments to be passed to the command
       args: []
 
+      # -- The ExtraArgs specifies additional command-line arguments for the container entrypoint
+      extraArgs: []
+
       # -- The pod volumeMounts
       volumeMounts: []
       # -- The config for startup probe of the main container
@@ -628,6 +640,8 @@ datanode:
     labels: {}
     # -- The annotations for the PVC that will be created
     annotations: {}
+    # -- The useEmptyDir is a flag to indicate whether to use an empty dir. If true, the PVC will not be created and the whole storage of datanode will be cleaned up when the datanode restarts.
+    useEmptyDir: false
 
   # -- Logging configuration for datanode, if not set, it will use the global logging configuration.
   logging: {}
@@ -709,6 +723,9 @@ flownode:
 
       # -- The arguments to be passed to the command
       args: []
+
+      # -- The ExtraArgs specifies additional command-line arguments for the container entrypoint
+      extraArgs: []
 
       # -- The pod volumeMounts
       volumeMounts: []
@@ -1339,6 +1356,13 @@ grafana:
           access: proxy
           isDefault: true
 
+        # Query the cluster traces.
+        - name: traces
+          type: jaeger
+          url: http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/jaeger
+          access: proxy
+          isDefault: true
+
         # Query the cluster logs and slow queries.
         - name: logs
           type: mysql
@@ -1374,6 +1398,8 @@ grafana:
   service:
     # -- Whether to create the service for grafana.
     enabled: true
+    # -- The grafana service port.
+    port: 80
     # -- The type of the service.
     type: ClusterIP
     # -- The annotations for the grafana service.
