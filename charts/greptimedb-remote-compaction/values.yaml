@@ -130,7 +130,7 @@ compactor:
     # credentials:
     #   # AWS or AliCloud cloudProvider accessKeyID
     #   accessKeyId: ""
-  
+
     #   # AWS cloudProvider secretAccessKey
     #   secretAccessKey: ""
 
