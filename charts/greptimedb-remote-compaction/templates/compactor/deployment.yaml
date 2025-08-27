@@ -70,6 +70,17 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+          {{- if .Values.compactor.objectStorage }}
+          {{- if .Values.compactor.objectStorage.credentials }}
+          envFrom:
+            - secretRef:
+                {{- if .Values.compactor.objectStorage.credentials.existingSecretName }}
+                name: {{ .Values.compactor.objectStorage.credentials.existingSecretName }}
+                {{- else }}
+                name: {{ include "greptimedb-remote-compaction.fullname" . }}-secret
+                {{- end }}
+          {{- end }}
+          {{- end }}
           {{- with .Values.compactor.env }}
           {{- toYaml . | nindent 12 }}
           {{- end }}
