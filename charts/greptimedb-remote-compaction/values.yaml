@@ -10,7 +10,7 @@ scheduler:
     # -- The scheduler image pull policy.
     pullPolicy: IfNotPresent
     # -- The scheduler image pull secret.
-    pullSecret: ""
+    pullSecret: []
 
   # -- The scheduler replicas.
   replicas: 1
@@ -77,7 +77,7 @@ compactor:
     # -- The compactor image pull policy.
     pullPolicy: IfNotPresent
     # -- The compactor image pull secret.
-    pullSecret: ""
+    pullSecret: []
 
   # -- The compactor replicas.
   replicas: 1
@@ -130,15 +130,19 @@ compactor:
     # credentials:
     #   # AWS or AliCloud cloudProvider accessKeyID
     #   accessKeyId: ""
+  
     #   # AWS cloudProvider secretAccessKey
     #   secretAccessKey: ""
 
+    #   # AliCloud cloudProvider secretAccessKey
+    #   accessKeySecret: ""
+
     #   Azure cloudProvider accountName and accountKey
-    #   accountName: "you-should-set-the-account-name-here"
-    #   accountKey: "you-should-set-the-account-key-here"
+    #   accountName: ""
+    #   accountKey: ""
 
     #   GCP cloudProvider serviceAccountKey JSON-formatted base64 value
-    #   serviceAccountKey: "you-should-set-the-base64-service-account-key-here"
+    #   serviceAccountKey: ""
 
     #   # Set the existing secret to get the key's of cloudProvider
     #   existingSecretName: ""
@@ -152,27 +156,27 @@ compactor:
 
     # configure to use oss storage
     oss: {}
-    #  bucket: "bucket-name"
-    #  region: "cn-hangzhou"
+    #  bucket: ""
+    #  region: ""
 
     #  # The data directory in OSS will be: 'oss://<bucket>/<root>/data/...'.
-    #  root: "greptimedb-standalone"
-    #  endpoint: "oss-cn-hangzhou.aliyuncs.com"
+    #  root: ""
+    #  endpoint: ""
 
     # configure to use gcs storage
     gcs: {}
-    #  bucket: "bucket-name"
+    #  bucket: ""
     #  scope: "" # example: "https://www.googleapis.com/auth/devstorage.read_write"
 
     #  # The data directory in gcs will be: 'gcs://<bucket>/<root>/data/...'.
-    #  root: "greptimedb-standalone"
+    #  root: ""
     #  endpoint: "https://storage.googleapis.com"
 
     # configure to use azblob storage
     azblob: {}
     #  container: ""
     #  endpoint: ""
-    #  root: "greptimedb-standalone"
+    #  root: ""
 
   logging:
     # The level of the log.

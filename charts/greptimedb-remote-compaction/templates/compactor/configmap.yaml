@@ -18,6 +18,8 @@ data:
     {{- end }}
 
     [storage]
+    data_home = "/data/greptimedb"
+    
     {{- if .Values.compactor.objectStorage }}
     {{- if .Values.compactor.objectStorage.s3 }}
     type = "S3"
@@ -82,7 +84,7 @@ data:
 
     {{- if .Values.compactor.logging }}
     [logging]
-    dir = ""
+    dir = "/data/greptimedb/logs"
     {{- if .Values.compactor.logging.level }}
     level = "{{ .Values.compactor.logging.level }}"
     {{- end }}

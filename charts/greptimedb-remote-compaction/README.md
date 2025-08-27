@@ -12,15 +12,15 @@ This chart is used to deploy the remote compaction components (remote-job-schedu
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| compactor | object | `{"affinity":{},"args":[],"command":[],"extraConfigData":"","heartbeatInterval":"5s","image":{"pullPolicy":"IfNotPresent","pullSecret":"","registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"},"logging":{"format":"text","level":"info"},"maxBackgroundJobs":4,"nodeSelector":{},"objectStorage":{"azblob":{},"gcs":{},"oss":{},"s3":{}},"podAnnotations":{},"podLabels":{},"replicas":1,"resources":{"limits":{"cpu":"4","memory":"8Gi"},"requests":{"cpu":"500m","memory":"256Mi"}},"serviceAccount":{"annotations":{},"create":true},"tolerations":[]}` | The compactor configuration. |
+| compactor | object | `{"affinity":{},"args":[],"command":[],"extraConfigData":"","heartbeatInterval":"5s","image":{"pullPolicy":"IfNotPresent","pullSecret":[],"registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"},"logging":{"format":"text","level":"info"},"maxBackgroundJobs":4,"nodeSelector":{},"objectStorage":{"azblob":{},"gcs":{},"oss":{},"s3":{}},"podAnnotations":{},"podLabels":{},"replicas":1,"resources":{"limits":{"cpu":"4","memory":"8Gi"},"requests":{"cpu":"500m","memory":"256Mi"}},"serviceAccount":{"annotations":{},"create":true},"tolerations":[]}` | The compactor configuration. |
 | compactor.affinity | object | `{}` | The compactor affinity. |
 | compactor.args | list | `[]` | The compactor args. It's used to override the default args. |
 | compactor.command | list | `[]` | The compactor command. It's used to override the default command. |
 | compactor.extraConfigData | string | `""` | The compactor config data. |
 | compactor.heartbeatInterval | string | `"5s"` | The compactor heartbeat interval. |
-| compactor.image | object | `{"pullPolicy":"IfNotPresent","pullSecret":"","registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"}` | The compactor image. |
+| compactor.image | object | `{"pullPolicy":"IfNotPresent","pullSecret":[],"registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"}` | The compactor image. |
 | compactor.image.pullPolicy | string | `"IfNotPresent"` | The compactor image pull policy. |
-| compactor.image.pullSecret | string | `""` | The compactor image pull secret. |
+| compactor.image.pullSecret | list | `[]` | The compactor image pull secret. |
 | compactor.image.registry | string | `"Please set the registry"` | The compactor image registry. |
 | compactor.image.repository | string | `"Please set the repository"` | The compactor image repository. |
 | compactor.image.tag | string | `"Please set the tag"` | The compactor image tag. |
@@ -39,9 +39,9 @@ This chart is used to deploy the remote compaction components (remote-job-schedu
 | scheduler.args | list | `[]` | The scheduler args. It's used to override the default args. |
 | scheduler.command | list | `[]` | The scheduler command. It's used to override the default command. |
 | scheduler.extraConfigData | string | `"executorManager:\n  removeInactiveExecutorsInterval: \"2s\"\n  expiration: \"5s\"\n"` | The scheduler extra config data. |
-| scheduler.image | object | `{"pullPolicy":"IfNotPresent","pullSecret":"","registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"}` | The scheduler image. |
+| scheduler.image | object | `{"pullPolicy":"IfNotPresent","pullSecret":[],"registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"}` | The scheduler image. |
 | scheduler.image.pullPolicy | string | `"IfNotPresent"` | The scheduler image pull policy. |
-| scheduler.image.pullSecret | string | `""` | The scheduler image pull secret. |
+| scheduler.image.pullSecret | list | `[]` | The scheduler image pull secret. |
 | scheduler.image.registry | string | `"Please set the registry"` | The scheduler image registry. |
 | scheduler.image.repository | string | `"Please set the repository"` | The scheduler image repository. |
 | scheduler.image.tag | string | `"Please set the tag"` | The scheduler image tag. |
