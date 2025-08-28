@@ -134,7 +134,7 @@ compactor:
     #   # AWS cloudProvider secretAccessKey
     #   secretAccessKey: ""
 
-    #   # AliCloud cloudProvider secretAccessKey
+    #   # AliCloud cloudProvider accessKeySecret
     #   accessKeySecret: ""
 
     #   Azure cloudProvider accountName and accountKey
@@ -179,9 +179,9 @@ compactor:
     #  root: ""
 
   logging:
-    # The level of the log.
+    # The level of the log. Only support "debug", "info", "warn", "error".
     level: "info"
-    # The format of the log.
+    # The format of the log. Only support "text", "json".
     format: "text"
 
   # -- The compactor config data.

@@ -19,6 +19,7 @@ data:
 
     [storage]
     data_home = "/data/greptimedb"
+    cache_path = ""
     
     {{- if .Values.compactor.objectStorage }}
     {{- if .Values.compactor.objectStorage.s3 }}
