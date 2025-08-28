@@ -5601,6 +5601,30 @@ entries:
   greptimedb-remote-compaction:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2025-08-28T17:42:42.781060541Z"
+    description: Remote compaction components (scheduler, compactor) for GreptimeDB
+      Enterprise.
+    digest: 6540cb24705747d08bfdb5b883b78d44ad2627edddcaebe62f27535cfb20557c
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - greptimedb
+    - remote-compaction
+    maintainers:
+    - email: liyang@greptime.com
+      name: liyang
+      url: https://github.com/daviderli614
+    - email: zyy@greptime.com
+      name: zyy17
+      url: https://github.com/zyy17
+    name: greptimedb-remote-compaction
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-remote-compaction-0.1.1/greptimedb-remote-compaction-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2025-08-20T17:36:40.348082082Z"
     description: Remote compaction components (scheduler, compactor) for GreptimeDB
       Enterprise.
@@ -7009,4 +7033,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2025-08-28T17:06:42.049389503Z"
+generated: "2025-08-28T17:42:42.781486913Z"
