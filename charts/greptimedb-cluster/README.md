@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.6.19](https://img.shields.io/badge/Version-0.6.19-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.16.0](https://img.shields.io/badge/AppVersion-0.16.0-informational?style=flat-square)
+![Version: 0.6.20](https://img.shields.io/badge/Version-0.6.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.16.0](https://img.shields.io/badge/AppVersion-0.16.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -32,6 +32,11 @@ Each row in the following matrix represents a version combination, indicating th
     --set auth.rbac.create=false \
     --set auth.rbac.token.enabled=false \
     --create-namespace \
+    --version 12.0.8 \
+    --set global.security.allowInsecureImages=true \
+    --set image.registry=public.ecr.aws/i8k6a5e1 \
+    --set image.repository=bitnami/etcd \
+    --set image.tag=3.6.1-debian-12-r3 \
     -n etcd-cluster
    ```
 
