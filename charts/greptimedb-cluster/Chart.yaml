@@ -2,8 +2,8 @@ apiVersion: v2
 name: greptimedb-cluster
 description: A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 type: application
-version: 0.6.19
-appVersion: 0.16.0
+version: 0.6.20
+appVersion: 0.12.2
 home: https://github.com/GreptimeTeam/greptimedb
 sources:
   - https://github.com/GreptimeTeam/greptimedb
