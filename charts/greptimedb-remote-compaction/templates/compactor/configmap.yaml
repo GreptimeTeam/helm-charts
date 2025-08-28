@@ -17,6 +17,84 @@ data:
     heartbeat_interval = "{{ .Values.compactor.heartbeatInterval }}"
     {{- end }}
 
+    [storage]
+    data_home = "/data/greptimedb"
+    cache_path = ""
+    
+    {{- if .Values.compactor.objectStorage }}
+    {{- if .Values.compactor.objectStorage.s3 }}
+    type = "S3"
+    {{- if .Values.compactor.objectStorage.s3.bucket }}
+    bucket = "{{ .Values.compactor.objectStorage.s3.bucket }}"
+    {{- end }}
+    {{- if .Values.compactor.objectStorage.s3.region }}
+    region = "{{ .Values.compactor.objectStorage.s3.region }}"
+    {{- end }}
+    {{- if .Values.compactor.objectStorage.s3.root }}
+    root = "{{ .Values.compactor.objectStorage.s3.root }}"
+    {{- end }}
+    {{- if .Values.compactor.objectStorage.s3.endpoint }}
+    endpoint = "{{ .Values.compactor.objectStorage.s3.endpoint }}"
+    {{- end }}
+    {{- end }}
+
+    {{- if .Values.compactor.objectStorage.oss }}
+    type = "Oss"
+    {{- if .Values.compactor.objectStorage.oss.bucket }}
+    bucket = "{{ .Values.compactor.objectStorage.oss.bucket }}"
+    {{- end }}
+    {{- if .Values.compactor.objectStorage.oss.region }}
+    region = "{{ .Values.compactor.objectStorage.oss.region }}"
+    {{- end }}
+    {{- if .Values.compactor.objectStorage.oss.root }}
+    root = "{{ .Values.compactor.objectStorage.oss.root }}"
+    {{- end }}
+    {{- if .Values.compactor.objectStorage.oss.endpoint }}
+    endpoint = "{{ .Values.compactor.objectStorage.oss.endpoint }}"
+    {{- end }}
+    {{- end }}
+
+    {{- if .Values.compactor.objectStorage.gcs }}
+    type = "Gcs"
+    {{- if .Values.compactor.objectStorage.gcs.bucket }}
+    bucket = "{{ .Values.compactor.objectStorage.gcs.bucket }}"
+    {{- end }}
+    {{- if .Values.compactor.objectStorage.gcs.scope }}
+    scope = "{{ .Values.compactor.objectStorage.gcs.scope }}"
+    {{- end }}
+    {{- if .Values.compactor.objectStorage.gcs.root }}
+    root = "{{ .Values.compactor.objectStorage.gcs.root }}"
+    {{- end }}
+    {{- if .Values.compactor.objectStorage.gcs.endpoint }}
+    endpoint = "{{ .Values.compactor.objectStorage.gcs.endpoint }}"
+    {{- end }}
+    {{- end }}
+
+    {{- if .Values.compactor.objectStorage.azblob }}
+    type = "Azblob"
+    {{- if .Values.compactor.objectStorage.azblob.container }}
+    container = "{{ .Values.compactor.objectStorage.azblob.container }}"
+    {{- end }}
+    {{- if .Values.compactor.objectStorage.azblob.endpoint }}
+    endpoint = "{{ .Values.compactor.objectStorage.azblob.endpoint }}"
+    {{- end }}
+    {{- if .Values.compactor.objectStorage.azblob.root }}
+    root = "{{ .Values.compactor.objectStorage.azblob.root }}"
+    {{- end }}
+    {{- end }}
+
+    {{- if .Values.compactor.logging }}
+    [logging]
+    dir = "/data/greptimedb/logs"
+    {{- if .Values.compactor.logging.level }}
+    level = "{{ .Values.compactor.logging.level }}"
+    {{- end }}
+    {{- if .Values.compactor.logging.format }}
+    format = "{{ .Values.compactor.logging.format }}"
+    {{- end }}
+    {{- end }}
+    {{- end }}
+
     {{- if .Values.compactor.extraConfigData }}
     {{- .Values.compactor.extraConfigData | nindent 4 }}
     {{- end }}

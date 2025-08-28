@@ -2,7 +2,7 @@ apiVersion: v2
 name: greptimedb-remote-compaction
 description: Remote compaction components (scheduler, compactor) for GreptimeDB Enterprise.
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: 0.1.0
 home: https://github.com/GreptimeTeam/greptimedb
 sources:

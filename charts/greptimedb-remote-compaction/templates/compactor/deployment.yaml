@@ -70,6 +70,17 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+          {{- if .Values.compactor.objectStorage }}
+          {{- if .Values.compactor.objectStorage.credentials }}
+          envFrom:
+            - secretRef:
+                {{- if .Values.compactor.objectStorage.credentials.existingSecretName }}
+                name: {{ .Values.compactor.objectStorage.credentials.existingSecretName }}
+                {{- else }}
+                name: {{ include "greptimedb-remote-compaction.fullname" . }}-secret
+                {{- end }}
+          {{- end }}
+          {{- end }}
           {{- with .Values.compactor.env }}
           {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -77,6 +88,8 @@ spec:
             - name: compactor-config
               mountPath: /etc/greptimedb/config.toml
               subPath: config.toml
+            - name: temp-data
+              mountPath: /data/greptimedb
             {{- if .Values.compactor.volumeMounts }}
             {{- toYaml .Values.compactor.volumeMounts | nindent 12 }}
             {{- end }}
@@ -96,6 +109,8 @@ spec:
         - name: compactor-config
           configMap:
             name: {{ .Release.Name }}-compactor
+        - name: temp-data
+          emptyDir: {}
         {{- if .Values.compactor.volumes }}
         {{- toYaml .Values.compactor.volumes | nindent 8 }}
         {{- end }}
