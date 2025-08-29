@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.6.20](https://img.shields.io/badge/Version-0.6.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.16.0](https://img.shields.io/badge/AppVersion-0.16.0-informational?style=flat-square)
+![Version: 0.6.21](https://img.shields.io/badge/Version-0.6.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.16.0](https://img.shields.io/badge/AppVersion-0.16.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -89,7 +89,7 @@ helm uninstall mycluster -n default
 |------------|------|---------|
 | https://grafana.github.io/helm-charts | grafana | 8.5.8 |
 | https://greptimeteam.github.io/helm-charts/ | greptimedb-enterprise-dashboard | 0.1.0 |
-| https://greptimeteam.github.io/helm-charts/ | greptimedb-remote-compaction | 0.1.0 |
+| https://greptimeteam.github.io/helm-charts/ | greptimedb-remote-compaction | 0.1.1 |
 | https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts | jaeger-all-in-one | 0.1.12 |
 
 ## Values
@@ -292,20 +292,21 @@ helm uninstall mycluster -n default
 | greptimedb-enterprise-dashboard.serviceAccount.name | string | `""` |  |
 | greptimedb-enterprise-dashboard.servicePort | int | `19095` |  |
 | greptimedb-enterprise-dashboard.tolerations | list | `[]` |  |
-| greptimedb-remote-compaction.compactor | object | `{"affinity":{},"args":[],"command":[],"extraConfigData":"# The storage options.\n[storage]\n# The object store type.\ntype = \"S3\"\n# The bucket of the object store.\nbucket = \"testbucket\"\n# The root of the object store.\nroot = \"testroot\"\n# The endpoint of the object store.\nendpoint = \"http://localhost:9000\"\n# The access key of the object store.\naccess_key_id = \"testkey\"\n# The secret key of the object store.\nsecret_access_key = \"testsecret\"\n# The region of the object store.\nregion = \"us-east-1\"\n\n# The logging options.\n[logging]\n# The directory of the log files.\ndir = \"\"\n# The level of the log.\nlevel = \"info\"\n# The format of the log.\nformat = \"text\"\n","heartbeatInterval":"5s","image":{"pullPolicy":"IfNotPresent","pullSecret":"","registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"},"maxBackgroundJobs":4,"nodeSelector":{},"podAnnotations":{},"podLabels":{},"replicas":1,"resources":{"limits":{"cpu":"4","memory":"8Gi"},"requests":{"cpu":"500m","memory":"256Mi"}},"serviceAccount":{"annotations":{},"create":true},"tolerations":[]}` | The compactor configuration. |
+| greptimedb-remote-compaction.compactor | object | `{"affinity":{},"args":[],"command":[],"extraConfigData":"","heartbeatInterval":"5s","image":{"pullPolicy":"IfNotPresent","pullSecret":[],"registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"},"logging":{"format":"text","level":"info"},"maxBackgroundJobs":4,"nodeSelector":{},"objectStorage":{"azblob":{},"gcs":{},"oss":{},"s3":{}},"podAnnotations":{},"podLabels":{},"replicas":1,"resources":{"limits":{"cpu":"4","memory":"8Gi"},"requests":{"cpu":"500m","memory":"256Mi"}},"serviceAccount":{"annotations":{},"create":true},"tolerations":[]}` | The compactor configuration. |
 | greptimedb-remote-compaction.compactor.affinity | object | `{}` | The compactor affinity. |
 | greptimedb-remote-compaction.compactor.args | list | `[]` | The compactor args. It's used to override the default args. |
 | greptimedb-remote-compaction.compactor.command | list | `[]` | The compactor command. It's used to override the default command. |
-| greptimedb-remote-compaction.compactor.extraConfigData | string | `"# The storage options.\n[storage]\n# The object store type.\ntype = \"S3\"\n# The bucket of the object store.\nbucket = \"testbucket\"\n# The root of the object store.\nroot = \"testroot\"\n# The endpoint of the object store.\nendpoint = \"http://localhost:9000\"\n# The access key of the object store.\naccess_key_id = \"testkey\"\n# The secret key of the object store.\nsecret_access_key = \"testsecret\"\n# The region of the object store.\nregion = \"us-east-1\"\n\n# The logging options.\n[logging]\n# The directory of the log files.\ndir = \"\"\n# The level of the log.\nlevel = \"info\"\n# The format of the log.\nformat = \"text\"\n"` | The compactor config data. |
+| greptimedb-remote-compaction.compactor.extraConfigData | string | `""` | The compactor config data. |
 | greptimedb-remote-compaction.compactor.heartbeatInterval | string | `"5s"` | The compactor heartbeat interval. |
-| greptimedb-remote-compaction.compactor.image | object | `{"pullPolicy":"IfNotPresent","pullSecret":"","registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"}` | The compactor image. |
+| greptimedb-remote-compaction.compactor.image | object | `{"pullPolicy":"IfNotPresent","pullSecret":[],"registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"}` | The compactor image. |
 | greptimedb-remote-compaction.compactor.image.pullPolicy | string | `"IfNotPresent"` | The compactor image pull policy. |
-| greptimedb-remote-compaction.compactor.image.pullSecret | string | `""` | The compactor image pull secret. |
+| greptimedb-remote-compaction.compactor.image.pullSecret | list | `[]` | The compactor image pull secret. |
 | greptimedb-remote-compaction.compactor.image.registry | string | `"Please set the registry"` | The compactor image registry. |
 | greptimedb-remote-compaction.compactor.image.repository | string | `"Please set the repository"` | The compactor image repository. |
 | greptimedb-remote-compaction.compactor.image.tag | string | `"Please set the tag"` | The compactor image tag. |
 | greptimedb-remote-compaction.compactor.maxBackgroundJobs | int | `4` | The compactor max background jobs. |
 | greptimedb-remote-compaction.compactor.nodeSelector | object | `{}` | The compactor node selector. |
+| greptimedb-remote-compaction.compactor.objectStorage | object | `{"azblob":{},"gcs":{},"oss":{},"s3":{}}` | Configure to object storage |
 | greptimedb-remote-compaction.compactor.podAnnotations | object | `{}` | The compactor pod annotations. |
 | greptimedb-remote-compaction.compactor.podLabels | object | `{}` | The compactor pod labels. |
 | greptimedb-remote-compaction.compactor.replicas | int | `1` | The compactor replicas. |
@@ -315,14 +316,13 @@ helm uninstall mycluster -n default
 | greptimedb-remote-compaction.compactor.serviceAccount.create | bool | `true` | Create a service account for compactor |
 | greptimedb-remote-compaction.compactor.tolerations | list | `[]` | The compactor tolerations. |
 | greptimedb-remote-compaction.enabled | bool | `false` | Enable remote compaction. |
-| greptimedb-remote-compaction.scheduler | object | `{"affinity":{},"args":[],"command":[],"extraConfigData":"executorManager:\n  removeInactiveExecutorsInterval: \"2s\"\n  expiration: \"5s\"\n","image":{"pullPolicy":"IfNotPresent","pullSecret":"","registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"},"logLevel":"info","nodeSelector":{},"podAnnotations":{},"podLabels":{},"replicas":1,"resources":{"limits":{"cpu":"4","memory":"8Gi"},"requests":{"cpu":"500m","memory":"256Mi"}},"serviceAccount":{"annotations":{},"create":true},"servicePort":10099,"tolerations":[]}` | The scheduler configuration. |
 | greptimedb-remote-compaction.scheduler.affinity | object | `{}` | The scheduler affinity. |
 | greptimedb-remote-compaction.scheduler.args | list | `[]` | The scheduler args. It's used to override the default args. |
 | greptimedb-remote-compaction.scheduler.command | list | `[]` | The scheduler command. It's used to override the default command. |
 | greptimedb-remote-compaction.scheduler.extraConfigData | string | `"executorManager:\n  removeInactiveExecutorsInterval: \"2s\"\n  expiration: \"5s\"\n"` | The scheduler extra config data. |
-| greptimedb-remote-compaction.scheduler.image | object | `{"pullPolicy":"IfNotPresent","pullSecret":"","registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"}` | The scheduler image. |
+| greptimedb-remote-compaction.scheduler.image | object | `{"pullPolicy":"IfNotPresent","pullSecret":[],"registry":"Please set the registry","repository":"Please set the repository","tag":"Please set the tag"}` | The scheduler image. |
 | greptimedb-remote-compaction.scheduler.image.pullPolicy | string | `"IfNotPresent"` | The scheduler image pull policy. |
-| greptimedb-remote-compaction.scheduler.image.pullSecret | string | `""` | The scheduler image pull secret. |
+| greptimedb-remote-compaction.scheduler.image.pullSecret | list | `[]` | The scheduler image pull secret. |
 | greptimedb-remote-compaction.scheduler.image.registry | string | `"Please set the registry"` | The scheduler image registry. |
 | greptimedb-remote-compaction.scheduler.image.repository | string | `"Please set the repository"` | The scheduler image repository. |
 | greptimedb-remote-compaction.scheduler.image.tag | string | `"Please set the tag"` | The scheduler image tag. |

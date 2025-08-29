@@ -1471,7 +1471,6 @@ greptimedb-remote-compaction:
   # -- Enable remote compaction.
   enabled: false
 
-  # -- The scheduler configuration.
   scheduler:
     # -- The scheduler image.
     image:
@@ -1484,7 +1483,7 @@ greptimedb-remote-compaction:
       # -- The scheduler image pull policy.
       pullPolicy: IfNotPresent
       # -- The scheduler image pull secret.
-      pullSecret: ""
+      pullSecret: []
 
     # -- The scheduler replicas.
     replicas: 1
@@ -1551,7 +1550,7 @@ greptimedb-remote-compaction:
       # -- The compactor image pull policy.
       pullPolicy: IfNotPresent
       # -- The compactor image pull secret.
-      pullSecret: ""
+      pullSecret: []
 
     # -- The compactor replicas.
     replicas: 1
@@ -1599,37 +1598,71 @@ greptimedb-remote-compaction:
     # -- The compactor heartbeat interval.
     heartbeatInterval: "5s"
 
+    # -- Configure to object storage
+    objectStorage:
+      # credentials:
+      #   # AWS or AliCloud cloudProvider accessKeyID
+      #   accessKeyId: ""
+
+      #   # AWS cloudProvider secretAccessKey
+      #   secretAccessKey: ""
+
+      #   # AliCloud cloudProvider accessKeySecret
+      #   accessKeySecret: ""
+
+      #   Azure cloudProvider accountName and accountKey
+      #   accountName: ""
+      #   accountKey: ""
+
+      #   GCP cloudProvider serviceAccountKey JSON-formatted base64 value
+      #   serviceAccountKey: ""
+
+      #   # Set the existing secret to get the key's of cloudProvider
+      #   existingSecretName: ""
+
+      # configure to use s3 storage
+      s3: {}
+        # bucket: ""
+        # region: ""
+        # root: ""
+        # endpoint: ""
+
+      # configure to use oss storage
+      oss: {}
+      #  bucket: ""
+      #  region: ""
+
+      #  # The data directory in OSS will be: 'oss://<bucket>/<root>/data/...'.
+      #  root: ""
+      #  endpoint: ""
+
+      # configure to use gcs storage
+      gcs: {}
+      #  bucket: ""
+      #  scope: "" # example: "https://www.googleapis.com/auth/devstorage.read_write"
+
+      #  # The data directory in gcs will be: 'gcs://<bucket>/<root>/data/...'.
+      #  root: ""
+      #  endpoint: "https://storage.googleapis.com"
+
+      # configure to use azblob storage
+      azblob: {}
+      #  container: ""
+      #  endpoint: ""
+      #  root: ""
+
+    logging:
+      # The level of the log. Only support "debug", "info", "warn", "error".
+      level: "info"
+      # The format of the log. Only support "text", "json".
+      format: "text"
+
     # -- The compactor config data.
-    extraConfigData: |
-      # The storage options.
-      [storage]
-      # The object store type.
-      type = "S3"
-      # The bucket of the object store.
-      bucket = "testbucket"
-      # The root of the object store.
-      root = "testroot"
-      # The endpoint of the object store.
-      endpoint = "http://localhost:9000"
-      # The access key of the object store.
-      access_key_id = "testkey"
-      # The secret key of the object store.
-      secret_access_key = "testsecret"
-      # The region of the object store.
-      region = "us-east-1"
+    extraConfigData: ""
 
-      # The logging options.
-      [logging]
-      # The directory of the log files.
-      dir = ""
-      # The level of the log.
-      level = "info"
-      # The format of the log.
-      format = "text"
-
-#############################################################
+#################################################################
 # Configuration for `greptimedb-enterprise-dashboard` child chart
-#############################################################
+#################################################################
 greptimedb-enterprise-dashboard:
   # -- Enable greptimedb-enterprise-dashboard deployment.
   enabled: false
