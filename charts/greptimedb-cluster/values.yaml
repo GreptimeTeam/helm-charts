@@ -998,7 +998,7 @@ objectStorage:
 #    # AWS cloudProvider secretAccessKey
 #    secretAccessKey: "you-should-set-the-secret-access-key-here"
 
-#    # AliCloud cloudProvider secretAccessKey
+#    # AliCloud cloudProvider accessKeySecret
 #    accessKeySecret: "you-should-set-the-access-key-secret-here"
 
 #    # Azure cloudProvider accountName and accountKey
