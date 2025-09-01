@@ -61,8 +61,8 @@ If you want to deploy the GreptimeDB cluster, you can use the following commands
      --create-namespace \
      --version 12.0.8 \
      --set global.security.allowInsecureImages=true \
-     --set image.registry=public.ecr.aws/i8k6a5e1 \
-     --set image.repository=bitnami/etcd \
+     --set image.registry=docker.io \
+     --set image.repository=greptime/etcd \
      --set image.tag=3.6.1-debian-12-r3 \
      -n etcd-cluster
    ```
