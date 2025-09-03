@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.6.24](https://img.shields.io/badge/Version-0.6.24-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.16.0](https://img.shields.io/badge/AppVersion-0.16.0-informational?style=flat-square)
+![Version: 0.6.25](https://img.shields.io/badge/Version-0.6.25-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.16.0](https://img.shields.io/badge/AppVersion-0.16.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -88,8 +88,8 @@ helm uninstall mycluster -n default
 | Repository | Name | Version |
 |------------|------|---------|
 | https://grafana.github.io/helm-charts | grafana | 8.5.8 |
-| https://greptimeteam.github.io/helm-charts/ | greptimedb-enterprise-dashboard | 0.1.0 |
-| https://greptimeteam.github.io/helm-charts/ | greptimedb-remote-compaction | 0.1.1 |
+| https://greptimeteam.github.io/helm-charts | greptimedb-enterprise-dashboard | 0.1.0 |
+| https://greptimeteam.github.io/helm-charts | greptimedb-remote-compaction | 0.1.1 |
 | https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts | jaeger-all-in-one | 0.1.12 |
 
 ## Values
