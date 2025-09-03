@@ -11,5 +11,5 @@ dependencies:
 - name: greptimedb-enterprise-dashboard
   repository: https://greptimeteam.github.io/helm-charts
   version: 0.1.0
-digest: sha256:dd5db09b565bc2e3b0d9c38823c97c1efd4db867c772dd3c2192ec8378fafaea
-generated: "2025-08-28T14:32:03.449556-07:00"
+digest: sha256:f75022443bc606c0de6efad0fa8c8d1944e4d85e06063fe283ba7d5a0ee2969e
+generated: "2025-09-03T13:00:01.585574+08:00"
