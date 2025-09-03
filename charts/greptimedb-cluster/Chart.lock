@@ -6,10 +6,10 @@ dependencies:
   repository: https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts
   version: 0.1.12
 - name: greptimedb-remote-compaction
-  repository: https://greptimeteam.github.io/helm-charts/
+  repository: https://greptimeteam.github.io/helm-charts
   version: 0.1.1
 - name: greptimedb-enterprise-dashboard
-  repository: https://greptimeteam.github.io/helm-charts/
+  repository: https://greptimeteam.github.io/helm-charts
   version: 0.1.0
 digest: sha256:dd5db09b565bc2e3b0d9c38823c97c1efd4db867c772dd3c2192ec8378fafaea
 generated: "2025-08-28T14:32:03.449556-07:00"

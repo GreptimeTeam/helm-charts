@@ -30,9 +30,9 @@ dependencies:
     condition: jaeger-all-in-one.enabled
   - name: greptimedb-remote-compaction
     version: 0.1.1
-    repository: https://greptimeteam.github.io/helm-charts/
+    repository: https://greptimeteam.github.io/helm-charts
     condition: greptimedb-remote-compaction.enabled
   - name: greptimedb-enterprise-dashboard
     version: 0.1.0
-    repository: https://greptimeteam.github.io/helm-charts/
+    repository: https://greptimeteam.github.io/helm-charts
     condition: greptimedb-enterprise-dashboard.enabled
