@@ -3354,6 +3354,8 @@ spec:
                         type: object
                       type: array
                   type: object
+                configMergeStrategy:
+                  type: string
                 datanode:
                   properties:
                     config:
@@ -13510,6 +13512,11 @@ spec:
                       maximum: 65535
                       minimum: 0
                       type: integer
+                    internalPort:
+                      format: int32
+                      maximum: 65535
+                      minimum: 0
+                      type: integer
                     logging:
                       properties:
                         filters:
@@ -16918,6 +16925,11 @@ spec:
                       config:
                         type: string
                       httpPort:
+                        format: int32
+                        maximum: 65535
+                        minimum: 0
+                        type: integer
+                      internalPort:
                         format: int32
                         maximum: 65535
                         minimum: 0
@@ -27143,6 +27155,8 @@ spec:
                               type: array
                           type: object
                         config:
+                          type: string
+                        configMergeStrategy:
                           type: string
                         datanodeStorage:
                           properties:
