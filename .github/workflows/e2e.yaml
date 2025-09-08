@@ -30,7 +30,7 @@ jobs:
         uses: helm/kind-action@v1
         with:
           wait: 120s
-          version: v0.32.0
+          version: v0.29.0
           kubectl_version: v1.32.0
 
       - name: Deploy greptimedb-cluster
