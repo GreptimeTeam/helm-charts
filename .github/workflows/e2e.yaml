@@ -32,6 +32,7 @@ jobs:
           wait: 120s
           version: v0.29.0
           kubectl_version: v1.32.0
+          node_image: kindest/node:v1.32.0
 
       - name: Deploy greptimedb-cluster
         if: ${{ github.event_name == 'schedule' || github.event.inputs.chart == 'greptimedb-cluster' }}
