@@ -1190,7 +1190,7 @@ monitoring:
 
   # -- Configure the standalone instance for storing monitoring data
   standalone: {}
-#     base:
+#    base:
 #      main:
 #        # -- The standalone image, if not set, it will use the cluster image.
 #        image: ""
@@ -1217,6 +1217,10 @@ monitoring:
 
 #      # -- The annotations to be created to the pod for monitoring
 #      annotations: {}
+
+#      # -- The standalone instance image pull secrets
+#      imagePullSecrets: []
+#        - name: "image-pull-secret"
 
 #      # -- The labels to be created to the pod for monitoring
 #      labels: {}
