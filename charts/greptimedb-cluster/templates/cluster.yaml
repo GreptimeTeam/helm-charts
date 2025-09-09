@@ -170,8 +170,8 @@ spec:
       {{- if .Values.frontend.podTemplate.securityContext }}
       securityContext: {{ .Values.frontend.podTemplate.securityContext | toYaml | nindent 8 }}
       {{- end }}
-    {{- if and .Values.frontend.internal .Values.frontend.internal.enabled }}
-    internal: {{ .Values.frontend.internal | toYaml | nindent 6 }}
+    {{- if .Values.frontend.internalPort }}
+    internalPort: {{ .Values.frontend.internalPort }}
     {{- end }}
     {{- if .Values.frontend.logging }}
     logging:

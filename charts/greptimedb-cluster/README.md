@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.6.28](https://img.shields.io/badge/Version-0.6.28-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.17.0](https://img.shields.io/badge/AppVersion-0.17.0-informational?style=flat-square)
+![Version: 0.6.29](https://img.shields.io/badge/Version-0.6.29-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.17.0](https://img.shields.io/badge/AppVersion-0.17.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -213,12 +213,9 @@ helm uninstall mycluster -n default
 | flownode.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | flownode.podTemplate.volumes | list | `[]` | The pod volumes |
 | flownode.replicas | int | `1` | Flownode replicas |
-| frontend | object | `{"configData":"","configFile":"","enabled":true,"internal":{"enabled":false,"rpcPort":4010},"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{}}` | Frontend configure |
+| frontend | object | `{"configData":"","configFile":"","enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{}}` | Frontend configure |
 | frontend.configData | string | `""` | Extra raw toml config data of frontend. Skip if the `configFile` is used. |
 | frontend.configFile | string | `""` | Extra toml file of frontend. |
-| frontend.internal | object | `{"enabled":false,"rpcPort":4010}` | The frontend internal configuration. **Experimental**: This feature is experimental and may change in future releases. **Not Recommended**: This feature is not recommended for use in the current version. Full support will be available in newer versions. |
-| frontend.internal.enabled | bool | `false` | Enable frontend internal configuration. |
-| frontend.internal.rpcPort | int | `4010` | The frontend internal gRPC port. |
 | frontend.logging | object | `{}` | Logging configuration for frontend, if not set, it will use the global logging configuration. |
 | frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{"limits":{},"requests":{}},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
 | frontend.podTemplate.affinity | object | `{}` | The pod affinity |
