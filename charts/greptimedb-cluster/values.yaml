@@ -269,6 +269,9 @@ frontend:
   tls: {}
 #    secretName: greptimedb-frontend-tls
 
+  # -- Frontend internal port.
+  # internalPort: 4010
+
   # -- Logging configuration for frontend, if not set, it will use the global logging configuration.
   logging: {}
 #    # -- The log level for greptimedb, only support "debug", "info", "warn", "debug"
@@ -289,15 +292,6 @@ frontend:
 #    # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
 #    filters: []
 
-  # -- The frontend internal configuration.
-  # **Experimental**: This feature is experimental and may change in future releases.
-  # **Not Recommended**: This feature is not recommended for use in the current version.
-  # Full support will be available in newer versions.
-  internal:
-    # -- Enable frontend internal configuration.
-    enabled: false
-    # -- The frontend internal gRPC port.
-    rpcPort: 4010
 
 # -- Meta configure
 meta:
