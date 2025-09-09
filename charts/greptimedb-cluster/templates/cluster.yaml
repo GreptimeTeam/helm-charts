@@ -292,14 +292,29 @@ spec:
         {{- if .Values.meta.podTemplate.main.args }}
         args: {{ .Values.meta.podTemplate.main.args | toYaml | nindent 8 }}
         {{- end }}
+        {{- if or .Values.license.enabled .Values.meta.podTemplate.main.extraArgs }}
+        extraArgs:
+        {{- if .Values.license.enabled }}
+        - "--license-file"
+        - {{ .Values.license.mountPath }}/{{ .Values.license.mountFileName }}
+        {{- end }}
         {{- if .Values.meta.podTemplate.main.extraArgs }}
-        extraArgs: {{ .Values.meta.podTemplate.main.extraArgs | toYaml | nindent 8 }}
+        {{- toYaml .Values.meta.podTemplate.main.extraArgs | nindent 8 }}
+        {{- end }}
         {{- end }}
         {{- if .Values.meta.podTemplate.main.env }}
         env: {{- toYaml .Values.meta.podTemplate.main.env | nindent 8 }}
         {{- end }}
+        {{- if or .Values.license.enabled .Values.meta.podTemplate.main.volumeMounts }}
+        volumeMounts:
         {{- if .Values.meta.podTemplate.main.volumeMounts }}
-        volumeMounts: {{- toYaml .Values.meta.podTemplate.main.volumeMounts | nindent 8 }}
+        {{- toYaml .Values.meta.podTemplate.main.volumeMounts | nindent 8 }}
+        {{- end }}
+        {{- if .Values.license.enabled }}
+        - name: license-secret
+          mountPath: {{ .Values.license.mountPath }}
+          readOnly: true
+        {{- end }}
         {{- end }}
         resources:
           requests: {{ .Values.meta.podTemplate.main.resources.requests | toYaml | nindent 12 }}
@@ -334,8 +349,20 @@ spec:
       {{- if .Values.meta.podTemplate.nodeSelector }}
       nodeSelector: {{ .Values.meta.podTemplate.nodeSelector | toYaml | nindent 8 }}
       {{- end }}
-      {{- if .Values.meta.podTemplate.volumes}}
-      volumes: {{ .Values.meta.podTemplate.volumes | toYaml | nindent 8 }}
+      {{- if or .Values.license.enabled .Values.meta.podTemplate.volumes }}
+      volumes:
+      {{- if .Values.meta.podTemplate.volumes }}
+      {{- toYaml .Values.meta.podTemplate.volumes | nindent 6 }}
+      {{- end }}
+      {{- if .Values.license.enabled }}
+      - name: license-secret
+        secret:
+          {{- if .Values.license.existingSecretName }}
+          secretName: {{ .Values.license.existingSecretName }}
+          {{- else }}
+          secretName: {{ default (printf "%s-license" .Release.Name) .Values.license.secretName }}
+          {{- end }}
+      {{- end }}
       {{- end }}
       {{- if .Values.meta.podTemplate.securityContext }}
       securityContext: {{ .Values.meta.podTemplate.securityContext | toYaml | nindent 8 }}
