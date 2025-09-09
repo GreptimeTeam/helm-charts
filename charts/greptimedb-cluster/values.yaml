@@ -1308,6 +1308,21 @@ slowQuery:
   # -- The TTL of slow query system table.
   ttl: "30d"
 
+## -- The license configuration for enterprise features.
+license:
+  # -- Enable enterprise features.
+  enabled: false
+  # -- The secret name to store the license. If not set, it will use the ${release-name}-license.
+  secretName: ""
+  # -- The existing secret name to get the license.
+  existingSecretName: ""
+  # -- The license file path to store the license info.
+  mountPath: "/etc/greptimedb/license"
+  # -- The license file name.
+  mountFileName: "current"
+  # -- The license data. You can use `--set-file license.data=./license.txt` to set the license data.
+  data: ""
+
 # -- Deploy grafana dashboards for the grafana dashboard sidecar. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards
 dashboards:
   # -- Enable the grafana dashboards sidecar.

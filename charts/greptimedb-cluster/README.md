@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.6.29](https://img.shields.io/badge/Version-0.6.29-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.17.0](https://img.shields.io/badge/AppVersion-0.17.0-informational?style=flat-square)
+![Version: 0.6.30](https://img.shields.io/badge/Version-0.6.30-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.17.0](https://img.shields.io/badge/AppVersion-0.17.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -360,6 +360,12 @@ helm uninstall mycluster -n default
 | jaeger-all-in-one.volume.className | string | `""` | The storageclass for the jaeger-all-in-one. |
 | jaeger-all-in-one.volume.enabled | bool | `true` | Whether to enable the persistence for jaeger-all-in-one. |
 | jaeger-all-in-one.volume.size | string | `"3Gi"` | The storage size for the jaeger-all-in-one. |
+| license.data | string | `""` | The license data. You can use `--set-file license.data=./license.txt` to set the license data. |
+| license.enabled | bool | `false` | Enable enterprise features. |
+| license.existingSecretName | string | `""` | The existing secret name to get the license. |
+| license.mountFileName | string | `"current"` | The license file name. |
+| license.mountPath | string | `"/etc/greptimedb/license"` | The license file path to store the license info. |
+| license.secretName | string | `""` | The secret name to store the license. If not set, it will use the ${release-name}-license. |
 | logging | object | `{"filters":[],"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false,"persistentWithData":false}` | Global logging configuration |
 | logging.filters | list | `[]` | The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs. |
 | logging.format | string | `"text"` | The log format for greptimedb, only support "json" and "text" |
