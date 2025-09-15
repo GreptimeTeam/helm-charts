@@ -46,6 +46,23 @@ jobs:
           CR_GENERATE_RELEASE_NOTES: true
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
+      - name: Login to GHCR
+        uses: docker/login-action@v3.2.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push chart to GHCR
+        run: |
+          shopt -s nullglob
+          for pkg in .cr-release-packages/*.tgz; do
+            if [ -z "${pkg:-}" ]; then
+              break
+            fi
+            helm push "${pkg}" "oci://ghcr.io/${GITHUB_REPOSITORY_OWNER}/helm-charts"
+          done
+
   release-charts-to-acr:
     runs-on: ubuntu-latest
     if: ${{ github.repository == 'GreptimeTeam/helm-charts' && (inputs.release-charts-to-acr == 'true' || github.event_name == 'push') }}
