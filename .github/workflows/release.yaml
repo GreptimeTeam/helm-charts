@@ -58,10 +58,7 @@ jobs:
         run: |
           shopt -s nullglob
           for pkg in .cr-release-packages/*.tgz; do
-            if [ -z "${pkg:-}" ]; then
-              break
-            fi
-            helm push "${pkg}" "oci://ghcr.io/${GITHUB_REPOSITORY_OWNER}/helm-charts"
+            helm push "$pkg" "oci://ghcr.io/${GITHUB_REPOSITORY_OWNER}/helm-charts"
           done
 
   release-charts-to-acr:
