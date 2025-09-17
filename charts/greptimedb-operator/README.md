@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.4.3](https://img.shields.io/badge/Version-0.4.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.3](https://img.shields.io/badge/AppVersion-0.4.3-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.0](https://img.shields.io/badge/AppVersion-0.5.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -114,11 +114,6 @@ Kubernetes: `>=1.18.0-0`
 | admissionWebhook.failurePolicy | string | `"Fail"` | Valid values: Fail, Ignore, IgnoreOnInstallOnly |
 | admissionWebhook.port | int | `8082` | The port for the admission webhook |
 | affinity | object | `{}` | The pod affinity |
-| apiServer | object | `{"enabled":false,"podMetrics":{"enabled":false},"port":8081}` | The configuration for the operator API server |
-| apiServer.enabled | bool | `false` | Whether to enable the API server |
-| apiServer.podMetrics | object | `{"enabled":false}` | The configuration for getting PodMetrics from metrics-server. |
-| apiServer.podMetrics.enabled | bool | `false` | Whether to enable to get PodMetrics from metrics-server. |
-| apiServer.port | int | `8081` | The port for the API server |
 | crds.additionalLabels | object | `{}` | Addtional labels to be added to all CRDs |
 | crds.annotations | object | `{}` | Annotations to be added to all CRDs |
 | crds.install | bool | `true` | Install and upgrade CRDs |
