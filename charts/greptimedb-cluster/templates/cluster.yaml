@@ -194,6 +194,12 @@ spec:
       filters: {{ .Values.frontend.logging.filters | toYaml | nindent 6 }}
       {{- end }}
     {{- end }}
+    {{- if .Values.frontend.tracing.enabled}}
+    tracing:
+      enabled: true
+      endpoint: {{ .Values.frontend.tracing.endpoint }}
+      sampleRatio: {{ .Values.frontend.tracing.sampleRatio | quote }}
+    {{- end }}
     {{- if .Values.slowQuery }}
     slowQuery:
       enabled: {{ .Values.slowQuery.enabled }}
@@ -280,6 +286,12 @@ spec:
       {{- if .Values.meta.logging.filters }}
       filters: {{ .Values.meta.logging.filters | toYaml | nindent 6 }}
       {{- end }}
+    {{- end }}
+    {{- if .Values.meta.tracing.enabled}}
+    tracing:
+      enabled: true
+      endpoint: {{ .Values.meta.tracing.endpoint }}
+      sampleRatio: {{ .Values.meta.tracing.sampleRatio | quote }}
     {{- end }}
     template:
       main:
@@ -464,6 +476,12 @@ spec:
       filters: {{ .Values.datanode.logging.filters | toYaml | nindent 6 }}
       {{- end }}
     {{- end }}
+    {{- if .Values.datanode.tracing.enabled}}
+    tracing:
+      enabled: true
+      endpoint: {{ .Values.datanode.tracing.endpoint }}
+      sampleRatio: {{ .Values.datanode.tracing.sampleRatio | quote }}
+    {{- end }}
     storage:
       dataHome: {{ .Values.datanode.storage.dataHome }}
       fs:
@@ -595,6 +613,12 @@ spec:
       filters: {{ .Values.flownode.logging.filters | toYaml | nindent 6 }}
       {{- end }}
     {{- end }}
+    {{- if .Values.flownode.tracing.enabled}}
+    tracing:
+      enabled: true
+      endpoint: {{ .Values.flownode.tracing.endpoint }}
+      sampleRatio: {{ .Values.flownode.tracing.sampleRatio | quote }}
+    {{- end }}
   {{- end }}
   {{- if .Values.frontendGroups }}
   frontendGroups:{{ toYaml .Values.frontendGroups | nindent 2 }}
@@ -722,4 +746,10 @@ spec:
     {{- if .Values.logging.filters }}
     filters: {{ .Values.logging.filters | toYaml | nindent 4 }}
     {{- end }}
+  {{- end }}
+  {{- if .Values.tracing.enabled}}
+  tracing:
+    enabled: true
+    endpoint: {{ .Values.tracing.endpoint }}
+    sampleRatio: {{ .Values.tracing.sampleRatio | quote }}
   {{- end }}
