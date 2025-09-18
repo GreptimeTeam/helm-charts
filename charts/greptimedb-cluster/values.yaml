@@ -292,6 +292,17 @@ frontend:
 #    # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
 #    filters: []
 
+  # -- Tracing configuration for frontend, if not set, it will use the global logging configuration.
+  tracing:
+    # -- Enable tracing.
+    enabled: false
+
+    # -- The OTLP tracing endpoint.
+    endpoint: "http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"
+
+    # -- SampleRatio is the percentage of tracing will be sampled and exported.
+    # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
+    sampleRatio: "1.0"
 
 # -- Meta configure
 meta:
@@ -502,6 +513,18 @@ meta:
 #    # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
 #    filters: []
 
+  # -- Tracing configuration for meta, if not set, it will use the global logging configuration.
+  tracing:
+    # -- Enable tracing.
+    enabled: false
+
+    # -- The OTLP tracing endpoint.
+    endpoint: "http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"
+
+    # -- SampleRatio is the percentage of tracing will be sampled and exported.
+    # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
+    sampleRatio: "1.0"
+
 # -- Datanode configure
 datanode:
   enabled: true
@@ -667,6 +690,18 @@ datanode:
 #    # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
 #    filters: []
 
+  # -- Tracing configuration for datanode, if not set, it will use the global logging configuration.
+  tracing:
+    # -- Enable tracing.
+    enabled: false
+
+    # -- The OTLP tracing endpoint.
+    endpoint: "http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"
+
+    # -- SampleRatio is the percentage of tracing will be sampled and exported.
+    # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
+    sampleRatio: "1.0"
+
 # -- Flownode configure.
 flownode:
   # -- Enable flownode
@@ -700,6 +735,18 @@ flownode:
 #
 #      # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
 #      filters: []
+
+  # -- Tracing configuration for flownode, if not set, it will use the global logging configuration.
+  tracing:
+    # -- Enable tracing.
+    enabled: false
+
+    # -- The OTLP tracing endpoint.
+    endpoint: "http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"
+
+    # -- SampleRatio is the percentage of tracing will be sampled and exported.
+    # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
+    sampleRatio: "1.0"
 
   # -- The pod template for frontend
   podTemplate:
@@ -1290,6 +1337,18 @@ logging:
 
   # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
   filters: []
+
+# -- Global tracing configuration
+tracing:
+  # -- Enable tracing.
+  enabled: false
+
+  # -- The OTLP tracing endpoint.
+  endpoint: "http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"
+
+  # -- SampleRatio is the percentage of tracing will be sampled and exported.
+  # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
+  sampleRatio: "1.0"
 
 # -- The slow query log configuration.
 slowQuery:
