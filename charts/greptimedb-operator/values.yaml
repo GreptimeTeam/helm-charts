@@ -112,16 +112,3 @@ admissionWebhook:
     admissionCert:
       # default to be 1 year
       duration: ""  # 8760h0m0s
-
-# -- The configuration for the operator API server
-apiServer:
-  # -- Whether to enable the API server
-  enabled: false
-
-  # -- The port for the API server
-  port: 8081
-
-  # -- The configuration for getting PodMetrics from metrics-server.
-  podMetrics:
-    # -- Whether to enable to get PodMetrics from metrics-server.
-    enabled: false

@@ -61,13 +61,6 @@ spec:
         {{- end }}
         args:
           - --enable-leader-election
-          {{- if .Values.apiServer.enabled }}
-          - --enable-apiserver
-          - --apiserver-port={{ .Values.apiServer.port }}
-          {{- if .Values.apiServer.podMetrics.enabled }}
-          - --enable-pod-metrics
-          {{- end }}
-          {{- end }}
           {{- if .Values.admissionWebhook.enabled }}
           - --enable-admission-webhook
           - --admission-webhook-port={{ .Values.admissionWebhook.port }}
