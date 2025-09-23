@@ -47,18 +47,15 @@ jobs:
           CR_GENERATE_RELEASE_NOTES: true
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Login to GHCR
-        uses: docker/login-action@v3.2.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push chart to GHCR
+      - name: Push charts to DockerHub OCI registry
+        shell: bash
         run: |
+          set -e
+          echo '${{ secrets.DOCKERHUB_TOKEN }}' | helm registry login registry-1.docker.io -u greptime --password-stdin
           shopt -s nullglob
           for pkg in .cr-release-packages/*.tgz; do
-            helm push "$pkg" "oci://ghcr.io/${GITHUB_REPOSITORY_OWNER}/helm-charts"
+            echo "Pushing chart '$pkg' to oci://registry-1.docker.io/greptime"
+            helm push "$pkg" "oci://registry-1.docker.io/greptime"
           done
 
   release-charts-to-acr:
