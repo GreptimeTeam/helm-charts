@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.2.13](https://img.shields.io/badge/Version-0.2.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.17.1](https://img.shields.io/badge/AppVersion-0.17.1-informational?style=flat-square)
+![Version: 0.2.14](https://img.shields.io/badge/Version-0.2.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.17.1](https://img.shields.io/badge/AppVersion-0.17.1-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -106,3 +106,7 @@ helm uninstall greptimedb-standalone -n default
 | serviceAccount.name | string | `""` | Service account name |
 | terminationGracePeriodSeconds | int | `30` | Grace period to allow the single binary to shut down before it is killed |
 | tolerations | object | `{}` | Tolerations to apply pod |
+| tracing | object | `{"enabled":false,"endpoint":"http://service.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | The tracing configuration for greptimedb |
+| tracing.enabled | bool | `false` | Enable tracing. |
+| tracing.endpoint | string | `"http://service.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
+| tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |

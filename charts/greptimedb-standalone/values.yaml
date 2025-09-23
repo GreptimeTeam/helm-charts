@@ -250,3 +250,15 @@ logging:
   logsDir: "/data/greptimedb/logs"
   # -- Whether to log to stdout only. If `true`, it will ignore the `logsDir` options.
   onlyLogToStdout: false
+
+# -- The tracing configuration for greptimedb
+tracing:
+  # -- Enable tracing.
+  enabled: false
+
+  # -- The OTLP tracing endpoint.
+  endpoint: "http://service.default:4000/v1/otlp/v1/traces"
+
+  # -- SampleRatio is the percentage of tracing will be sampled and exported.
+  # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
+  sampleRatio: "1.0"
