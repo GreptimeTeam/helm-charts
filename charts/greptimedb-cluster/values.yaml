@@ -37,16 +37,16 @@ base:
   podTemplate:
     # -- The base spec of main container
     main:
-      resources:
-        # -- The requested resources for the container
-        requests: {}
-        #  cpu: 500m
-        #  memory: 512Mi
+      resources: {}
+      # -- The requested resources for the container
+      #  requests:
+      #    cpu: 500m
+      #    memory: 512Mi
 
-        # -- The resources limits for the container
-        limits: {}
-        #  cpu: "1"
-        #  memory: "1Gi"
+      # -- The resources limits for the container
+      #  limits:
+      #    cpu: '1'
+      #    memory: "1Gi"
 
       # -- The environment variables for the container
       env: []
@@ -154,16 +154,16 @@ frontend:
       # -- The frontend image.
       image: ""
 
-      resources:
-        # -- The requested resources for the container
-        requests: {}
-        #  cpu: "1"
-        #  memory: "2Gi"
+      resources: {}
+      # -- The requested resources for the container
+      #  requests:
+      #    cpu: '1'
+      #    memory: "2Gi"
 
-        # -- The resources limits for the container
-        limits: {}
-        #  cpu: "1"
-        #  memory: "2Gi"
+      # -- The resources limits for the container
+      #  limits:
+      #    cpu: '1'
+      #    memory: "2Gi"
 
       # -- The environment variables for the container
       env: []
@@ -322,16 +322,16 @@ meta:
       # -- The meta image.
       image: ""
 
-      resources:
-        # -- The requested resources for the container
-        requests: {}
-        #  cpu: "1"
-        #  memory: "2Gi"
+      resources: {}
+      # -- The requested resources for the container
+      #  requests:
+      #    cpu: '1'
+      #    memory: "2Gi"
 
-        # -- The resources limits for the container
-        limits: {}
-        #  cpu: "1"
-        #  memory: "2Gi"
+      # -- The resources limits for the container
+      #  limits:
+      #    cpu: '1'
+      #    memory: "2Gi"
 
       # -- The environment variables for the container
       env: []
@@ -545,16 +545,16 @@ datanode:
       # -- The datanode image.
       image: ""
 
-      resources:
-        # -- The requested resources for the container
-        requests: {}
-        #  cpu: "1"
-        #  memory: "2Gi"
+      resources: {}
+      # -- The requested resources for the container
+      #  requests:
+      #    cpu: '1'
+      #    memory: "2Gi"
 
-        # -- The resources limits for the container
-        limits: {}
-        #  cpu: "1"
-        #  memory: "2Gi"
+      # -- The resources limits for the container
+      #  limits:
+      #    cpu: '1'
+      #    memory: "2Gi"
 
       # -- The environment variables for the container
       env: []
@@ -755,16 +755,16 @@ flownode:
       # -- The flownode image.
       image: ""
 
-      resources:
-        # -- The requested resources for the container
-        requests: {}
-        #  cpu: "1"
-        #  memory: "2Gi"
+      resources: {}
+      # -- The requested resources for the container
+      #  requests:
+      #    cpu: '1'
+      #    memory: "2Gi"
 
-        # -- The resources limits for the container
-        limits: {}
-        #  cpu: "1"
-        #  memory: "2Gi"
+      # -- The resources limits for the container
+      #  limits:
+      #    cpu: '1'
+      #    memory: "2Gi"
 
       # -- The environment variables for the container
       env: []

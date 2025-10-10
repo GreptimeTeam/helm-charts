@@ -120,9 +120,7 @@ spec:
           mountPath: {{ .Values.auth.mountPath }}
         {{- end }}
         {{- end }}
-        resources:
-          requests: {{ .Values.frontend.podTemplate.main.resources.requests | toYaml | nindent 12 }}
-          limits: {{ .Values.frontend.podTemplate.main.resources.limits | toYaml | nindent 12 }}
+        resources: {{- toYaml .Values.frontend.podTemplate.main.resources | nindent 10 }}
         {{- if .Values.frontend.podTemplate.main.startupProbe }}
         startupProbe: {{- toYaml .Values.frontend.podTemplate.main.startupProbe | nindent 10 }}
         {{- end }}
@@ -328,9 +326,7 @@ spec:
           readOnly: true
         {{- end }}
         {{- end }}
-        resources:
-          requests: {{ .Values.meta.podTemplate.main.resources.requests | toYaml | nindent 12 }}
-          limits: {{ .Values.meta.podTemplate.main.resources.limits | toYaml | nindent 12 }}
+        resources: {{- toYaml .Values.meta.podTemplate.main.resources | nindent 10 }}
         {{- if .Values.meta.podTemplate.main.startupProbe }}
         startupProbe: {{- toYaml .Values.meta.podTemplate.main.startupProbe | nindent 10 }}
         {{- end }}
@@ -413,9 +409,7 @@ spec:
         {{- if .Values.datanode.podTemplate.main.volumeMounts }}
         volumeMounts: {{- toYaml .Values.datanode.podTemplate.main.volumeMounts | nindent 8 }}
         {{- end }}
-        resources:
-          requests: {{ .Values.datanode.podTemplate.main.resources.requests | toYaml | nindent 12 }}
-          limits: {{ .Values.datanode.podTemplate.main.resources.limits | toYaml | nindent 12 }}
+        resources: {{- toYaml .Values.datanode.podTemplate.main.resources | nindent 10 }}
         {{- if .Values.datanode.podTemplate.main.startupProbe }}
         startupProbe: {{- toYaml .Values.datanode.podTemplate.main.startupProbe | nindent 10 }}
         {{- end }}
@@ -542,9 +536,7 @@ spec:
           mountPath: {{ .Values.auth.mountPath }}
         {{- end }}
         {{- end }}
-        resources:
-          requests: {{ .Values.flownode.podTemplate.main.resources.requests | toYaml | nindent 12 }}
-          limits: {{ .Values.flownode.podTemplate.main.resources.limits | toYaml | nindent 12 }}
+        resources: {{- toYaml .Values.flownode.podTemplate.main.resources | nindent 10 }}
         {{- if .Values.flownode.podTemplate.main.startupProbe }}
         startupProbe: {{- toYaml .Values.flownode.podTemplate.main.startupProbe | nindent 10 }}
         {{- end }}
