@@ -206,9 +206,6 @@ spec:
       sampleRatio: {{ .Values.slowQuery.sampleRatio | quote }}
       ttl: {{ .Values.slowQuery.ttl }}
     {{- end }}
-    {{- if .Values.frontend.enableObjectStorage }}
-    enableObjectStorage: {{ .Values.frontend.enableObjectStorage }}
-    {{- end }}
   {{- end }}
   {{- end }}
   meta:
