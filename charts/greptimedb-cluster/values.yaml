@@ -141,6 +141,9 @@ frontend:
   # -- Frontend replicas
   replicas: 1
 
+  # -- Whether to enable object storage for frontend.
+  enableObjectStorage: false
+  
   # -- Extra toml file of frontend.
   configFile: ""
 
