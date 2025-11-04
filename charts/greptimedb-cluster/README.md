@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.6.37](https://img.shields.io/badge/Version-0.6.37-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.17.2](https://img.shields.io/badge/AppVersion-0.17.2-informational?style=flat-square)
+![Version: 0.6.38](https://img.shields.io/badge/Version-0.6.38-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.17.2](https://img.shields.io/badge/AppVersion-0.17.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -14,8 +14,9 @@ Each row in the following matrix represents a version combination, indicating th
 
 | `greptimedb-cluster` Chart Version | `greptimedb-operator` Chart Version |
 |----------------------------------|----------------------------------------------|
-| ≥ `0.4.0`                        | ≥ `0.3.0` with GreptimeDB Operator ≥ `v0.3.0` |
-| < `0.4.0`                        | < `0.3.0` with GreptimeDB Operator < `v0.3.0` |
+| < `0.4.0`                        | < `0.3.0` with GreptimeDB Operator Tag < `v0.3.0` |
+| ≥ `0.4.0`                        | ≥ `0.3.0` with GreptimeDB Operator Tag ≥ `v0.3.0` |
+| ≥ `0.6.38`                       | ≥ `0.5.3` with GreptimeDB Operator Tag ≥ `v0.5.2` |
 
 ## How to install
 
@@ -347,7 +348,7 @@ helm uninstall mycluster -n default
 | ingress | object | `{}` | Configure to frontend ingress |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.5.1"` | Initializer image tag |
+| initializer.tag | string | `"v0.5.2"` | Initializer image tag |
 | jaeger-all-in-one.enableHttpOpenTelemetryCollector | bool | `true` | Enable the opentelemetry collector for jaeger-all-in-one and listen on port 4317. |
 | jaeger-all-in-one.enableHttpZipkinCollector | bool | `true` | Enable the zipkin collector for jaeger-all-in-one and listen on port 9411. |
 | jaeger-all-in-one.enabled | bool | `false` | Enable jaeger-all-in-one deployment. |
