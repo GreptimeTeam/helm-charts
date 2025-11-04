@@ -44,6 +44,10 @@ helm upgrade \
 
 The chart name and version will remain consistent with the GitHub chart repo.
 
+### Compatibility Matrix
+
+For detailed compatibility information of each chart, please refer to the chart [documentation](https://github.com/GreptimeTeam/helm-charts/blob/main/charts/greptimedb-cluster/README.md#compatibility-matrix).
+
 ### Install the GreptimeDB Cluster
 
 If you want to deploy the GreptimeDB cluster, you can use the following commands:
