@@ -304,6 +304,9 @@ frontend:
     # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
     sampleRatio: "1.0"
 
+  # -- Whether to enable object storage on frontend.
+  enableObjectStorage: false
+
 # -- Meta configure
 meta:
   # -- Meta replicas
