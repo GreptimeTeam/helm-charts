@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.6.38](https://img.shields.io/badge/Version-0.6.38-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.17.2](https://img.shields.io/badge/AppVersion-0.17.2-informational?style=flat-square)
+![Version: 0.6.40](https://img.shields.io/badge/Version-0.6.40-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.17.2](https://img.shields.io/badge/AppVersion-0.17.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -216,9 +216,10 @@ helm uninstall mycluster -n default
 | flownode.tracing.enabled | bool | `false` | Enable tracing. |
 | flownode.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
 | flownode.tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |
-| frontend | object | `{"configData":"","configFile":"","enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{},"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Frontend configure |
+| frontend | object | `{"configData":"","configFile":"","enableObjectStorage":false,"enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{},"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Frontend configure |
 | frontend.configData | string | `""` | Extra raw toml config data of frontend. Skip if the `configFile` is used. |
 | frontend.configFile | string | `""` | Extra toml file of frontend. |
+| frontend.enableObjectStorage | bool | `false` | Whether to enable object storage on frontend. |
 | frontend.logging | object | `{}` | Logging configuration for frontend, if not set, it will use the global logging configuration. |
 | frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
 | frontend.podTemplate.affinity | object | `{}` | The pod affinity |
@@ -348,7 +349,7 @@ helm uninstall mycluster -n default
 | ingress | object | `{}` | Configure to frontend ingress |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.5.2"` | Initializer image tag |
+| initializer.tag | string | `"v0.5.3"` | Initializer image tag |
 | jaeger-all-in-one.enableHttpOpenTelemetryCollector | bool | `true` | Enable the opentelemetry collector for jaeger-all-in-one and listen on port 4317. |
 | jaeger-all-in-one.enableHttpZipkinCollector | bool | `true` | Enable the zipkin collector for jaeger-all-in-one and listen on port 9411. |
 | jaeger-all-in-one.enabled | bool | `false` | Enable jaeger-all-in-one deployment. |

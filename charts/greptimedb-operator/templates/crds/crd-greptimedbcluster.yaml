@@ -13507,6 +13507,8 @@ spec:
                   properties:
                     config:
                       type: string
+                    enableObjectStorage:
+                      type: boolean
                     httpPort:
                       format: int32
                       maximum: 65535
@@ -16924,6 +16926,8 @@ spec:
                     properties:
                       config:
                         type: string
+                      enableObjectStorage:
+                        type: boolean
                       httpPort:
                         format: int32
                         maximum: 65535

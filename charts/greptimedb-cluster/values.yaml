@@ -30,7 +30,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.5.2
+  tag: v0.5.3
 
 base:
   # -- The pod template for base
@@ -303,6 +303,9 @@ frontend:
     # -- SampleRatio is the percentage of tracing will be sampled and exported.
     # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
     sampleRatio: "1.0"
+
+  # -- Whether to enable object storage on frontend.
+  enableObjectStorage: false
 
 # -- Meta configure
 meta:
