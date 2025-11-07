@@ -349,7 +349,7 @@ helm uninstall mycluster -n default
 | ingress | object | `{}` | Configure to frontend ingress |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.5.2"` | Initializer image tag |
+| initializer.tag | string | `"v0.5.3"` | Initializer image tag |
 | jaeger-all-in-one.enableHttpOpenTelemetryCollector | bool | `true` | Enable the opentelemetry collector for jaeger-all-in-one and listen on port 4317. |
 | jaeger-all-in-one.enableHttpZipkinCollector | bool | `true` | Enable the zipkin collector for jaeger-all-in-one and listen on port 9411. |
 | jaeger-all-in-one.enabled | bool | `false` | Enable jaeger-all-in-one deployment. |
