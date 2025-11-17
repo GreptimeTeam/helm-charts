@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.6.41](https://img.shields.io/badge/Version-0.6.41-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-beta.1](https://img.shields.io/badge/AppVersion-1.0.0--beta.1-informational?style=flat-square)
+![Version: 0.6.42](https://img.shields.io/badge/Version-0.6.42-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-beta.1](https://img.shields.io/badge/AppVersion-1.0.0--beta.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -379,7 +379,7 @@ helm uninstall mycluster -n default
 | logging.logsDir | string | `"/data/greptimedb/logs"` | The logs directory for greptimedb |
 | logging.onlyLogToStdout | bool | `false` | Whether to log to stdout only |
 | logging.persistentWithData | bool | `false` | indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component. |
-| meta | object | `{"backendStorage":{"etcd":{},"mysql":{},"postgresql":{}},"configData":"","configFile":"","enableRegionFailover":false,"etcdEndpoints":"etcd.etcd-cluster.svc.cluster.local:2379","logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storeKeyPrefix":"","tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Meta configure |
+| meta | object | `{"backendStorage":{"etcd":{},"mysql":{},"postgresql":{}},"configData":"","configFile":"","enableRegionFailover":false,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Meta configure |
 | meta.backendStorage | object | `{"etcd":{},"mysql":{},"postgresql":{}}` | Meta Backend storage configuration |
 | meta.backendStorage.etcd | object | `{}` | Etcd backend storage configuration |
 | meta.backendStorage.mysql | object | `{}` | MySQL backend storage configuration |
@@ -387,7 +387,6 @@ helm uninstall mycluster -n default
 | meta.configData | string | `""` | Extra raw toml config data of meta. Skip if the `configFile` is used. |
 | meta.configFile | string | `""` | Extra toml file of meta. |
 | meta.enableRegionFailover | bool | `false` | Whether to enable region failover |
-| meta.etcdEndpoints | string | `"etcd.etcd-cluster.svc.cluster.local:2379"` | Deprecated: Meta etcd endpoints, use `backendStorage.etcd.etcdEndpoints` instead |
 | meta.logging | object | `{}` | Logging configuration for meta, if not set, it will use the global logging configuration. |
 | meta.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for meta |
 | meta.podTemplate.affinity | object | `{}` | The pod affinity |
@@ -411,7 +410,6 @@ helm uninstall mycluster -n default
 | meta.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | meta.podTemplate.volumes | list | `[]` | The pod volumes |
 | meta.replicas | int | `1` | Meta replicas |
-| meta.storeKeyPrefix | string | `""` | Deprecated: Meta will store data with this key prefix |
 | meta.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for meta, if not set, it will use the global logging configuration. |
 | meta.tracing.enabled | bool | `false` | Enable tracing. |
 | meta.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |

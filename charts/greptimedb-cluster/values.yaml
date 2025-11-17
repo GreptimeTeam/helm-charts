@@ -433,12 +433,6 @@ meta:
     # -- The termination grace period seconds
     # terminationGracePeriodSeconds: 30
 
-  # -- Deprecated: Meta etcd endpoints, use `backendStorage.etcd.etcdEndpoints` instead
-  etcdEndpoints: "etcd.etcd-cluster.svc.cluster.local:2379"
-
-  # -- Deprecated: Meta will store data with this key prefix
-  storeKeyPrefix: ""
-
   # -- Whether to enable region failover
   enableRegionFailover: false
 

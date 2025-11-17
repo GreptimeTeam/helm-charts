@@ -224,21 +224,16 @@ spec:
     {{- if .Values.meta.enableRegionFailover }}
     enableRegionFailover: {{ .Values.meta.enableRegionFailover }}
     {{- end }}
-    {{- if or .Values.meta.backendStorage.mysql .Values.meta.backendStorage.postgresql .Values.meta.etcdEndpoints .Values.meta.etcd }}
+    {{- if or .Values.meta.backendStorage.mysql .Values.meta.backendStorage.postgresql .Values.meta.backendStorage.etcd }}
     backendStorage:
-      {{- if or .Values.meta.backendStorage.etcd .Values.meta.etcdEndpoints }}
+      {{- if .Values.meta.backendStorage.etcd }}
       etcd:
         {{- if .Values.meta.backendStorage.etcd.endpoints }}
         endpoints:
           - {{ .Values.meta.backendStorage.etcd.endpoints }}
-        {{- else if .Values.meta.etcdEndpoints }}
-        endpoints:
-          - {{ .Values.meta.etcdEndpoints }}
         {{- end }}
         {{- if .Values.meta.backendStorage.etcd.storeKeyPrefix }}
         storeKeyPrefix: {{ .Values.meta.backendStorage.etcd.storeKeyPrefix }}
-        {{- else if .Values.meta.storeKeyPrefix }}
-        storeKeyPrefix: {{ .Values.meta.storeKeyPrefix }}
         {{- end }}
       {{- end }}
       {{- if .Values.meta.backendStorage.mysql }}

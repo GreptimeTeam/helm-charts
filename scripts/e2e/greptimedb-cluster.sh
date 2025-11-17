@@ -131,7 +131,8 @@ function deploy_greptimedb_cluster() {
     fi
 
     log "Deploying GreptimeDB Cluster..."
-    if ! helm upgrade --install mycluster charts/greptimedb-cluster -n default; then
+    if ! helm upgrade --install mycluster charts/greptimedb-cluster -n default \
+           --set meta.backendStorage.etcd.endpoints=etcd.etcd-cluster.svc.cluster.local:2379; then
         log "Failed to deploy greptimedb-cluster"
         exit 1
     fi
