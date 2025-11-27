@@ -102,7 +102,7 @@ helm uninstall mycluster -n default
 | auth.enabled | bool | `false` | Enable static auth |
 | auth.fileName | string | `"passwd"` | The auth file name, the full path is `${mountPath}/${fileName}` |
 | auth.mountPath | string | `"/etc/greptimedb/auth"` | The auth file path to store the auth info |
-| auth.users | list | `[{"password":"admin","username":"admin"}]` | The users to be created in the auth file |
+| auth.users | list | `[{"password":"admin","username":"admin"}]` | The users to be created in the auth file. Each user can have an optional `permission` field with values: `readwrite`, `readonly`, or `writeonly`. |
 | base.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"extraArgs":[],"livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{}},"nodeSelector":{},"securityContext":{},"serviceAccountName":"","terminationGracePeriodSeconds":30,"tolerations":[]}` | The pod template for base |
 | base.podTemplate.affinity | object | `{}` | The pod affinity |
 | base.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |

@@ -58,7 +58,7 @@ helm uninstall greptimedb-standalone -n default
 | auth.enabled | bool | `false` | Enable static auth |
 | auth.fileName | string | `"passwd"` | The auth file name, the full path is `${mountPath}/${fileName}` |
 | auth.mountPath | string | `"/etc/greptimedb/auth"` | The auth file path to store the auth info |
-| auth.users | list | `[{"password":"admin","username":"admin"}]` | The users to be created in the auth file |
+| auth.users | list | `[{"password":"admin","username":"admin"}]` | The users to be created in the auth file. Each user can have an optional `permission` field with values: `readwrite`, `readonly`, or `writeonly`. |
 | command | list | `[]` | The container command |
 | configToml | string | `"mode = 'standalone'\n"` | The extra configuration for greptimedb |
 | dataHome | string | `"/data/greptimedb/"` | Storage root directory |
