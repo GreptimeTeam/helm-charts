@@ -40,6 +40,32 @@ Version numbers follow [semantic versioning](https://semver.org/). When making c
   * Documentation improvements.
   * Minor clarifications or corrections.
   
+### Development Setup
+
+Install the required tools:
+
+```shell
+# Install helm-unittest plugin
+helm plugin install https://github.com/helm-unittest/helm-unittest.git
+
+# Install helm-docs (for documentation generation)
+# macOS
+brew install norwoodj/tap/helm-docs
+# or download from https://github.com/norwoodj/helm-docs/releases
+```
+
+### Running Tests
+
+```shell
+# Run unit tests for a specific chart
+helm unittest charts/greptimedb-cluster
+helm unittest charts/greptimedb-standalone
+
+# Run all checks (docs and CRDs)
+make check-docs
+make check-crds
+```
+
 ### Generate documentation
 
 Documentation for charts is automatically generated from the following sources:

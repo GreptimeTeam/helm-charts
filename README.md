@@ -177,6 +177,10 @@ kubectl delete crds greptimedbstandalones.greptime.io
 - [greptimedb-remote-compaction](./charts/greptimedb-remote-compaction/README.md)
 - [greptimedb-enterprise-dashboard](./charts/greptimedb-enterprise-dashboard/README.md)
 
+## Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+
 ## License
 
 helm-charts uses the [Apache 2.0 license](./LICENSE) to strike a balance between open contributions and allowing you to use the software however you want.
