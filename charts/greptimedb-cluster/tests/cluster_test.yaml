@@ -1,0 +1,247 @@
+suite: cluster tests
+templates:
+  - cluster.yaml
+tests:
+  - it: should create GreptimeDBCluster with default values
+    release:
+      name: mycluster
+    asserts:
+      - isKind:
+          of: GreptimeDBCluster
+      - equal:
+          path: metadata.name
+          value: mycluster
+      - equal:
+          path: spec.frontend.replicas
+          value: 1
+      - equal:
+          path: spec.meta.replicas
+          value: 1
+      - equal:
+          path: spec.datanode.replicas
+          value: 1
+
+  - it: should set correct image
+    set:
+      image:
+        registry: docker.io
+        repository: greptime/greptimedb
+        tag: v1.0.0
+    asserts:
+      - equal:
+          path: spec.base.main.image
+          value: "docker.io/greptime/greptimedb:v1.0.0"
+
+  - it: should configure auth environment variable when auth is enabled
+    set:
+      auth:
+        enabled: true
+        mountPath: /etc/greptimedb/auth
+        fileName: passwd
+    asserts:
+      - contains:
+          path: spec.frontend.template.main.env
+          content:
+            name: GREPTIMEDB_FRONTEND__USER_PROVIDER
+            value: "static_user_provider:file:/etc/greptimedb/auth/passwd"
+
+  - it: should mount auth volume when auth is enabled
+    release:
+      name: mycluster
+    set:
+      auth:
+        enabled: true
+        mountPath: /etc/greptimedb/auth
+    asserts:
+      - contains:
+          path: spec.frontend.template.main.volumeMounts
+          content:
+            name: auth
+            mountPath: /etc/greptimedb/auth
+      - contains:
+          path: spec.frontend.template.volumes
+          content:
+            name: auth
+            secret:
+              secretName: mycluster-users-auth
+
+  - it: should configure etcd backend storage
+    set:
+      meta:
+        backendStorage:
+          etcd:
+            endpoints: etcd.default.svc.cluster.local:2379
+    asserts:
+      - equal:
+          path: spec.meta.backendStorage.etcd.endpoints[0]
+          value: etcd.default.svc.cluster.local:2379
+
+  - it: should configure MySQL backend storage
+    set:
+      meta:
+        backendStorage:
+          mysql:
+            host: mysql.default.svc.cluster.local
+            port: 3306
+            database: metasrv
+            table: greptime_metakv
+            credentials:
+              secretName: meta-mysql-credentials
+              username: root
+              password: test
+    asserts:
+      - equal:
+          path: spec.meta.backendStorage.mysql.host
+          value: mysql.default.svc.cluster.local
+      - equal:
+          path: spec.meta.backendStorage.mysql.port
+          value: 3306
+      - equal:
+          path: spec.meta.backendStorage.mysql.credentialsSecretName
+          value: meta-mysql-credentials
+
+  - it: should configure S3 object storage
+    set:
+      objectStorage:
+        s3:
+          bucket: my-bucket
+          region: us-west-2
+          root: mydata
+        credentials:
+          accessKeyId: my-key
+          secretAccessKey: my-secret
+    asserts:
+      - equal:
+          path: spec.objectStorage.s3.bucket
+          value: my-bucket
+      - equal:
+          path: spec.objectStorage.s3.region
+          value: us-west-2
+      - equal:
+          path: spec.objectStorage.s3.secretName
+          value: storage-credentials
+
+  - it: should configure license for meta component
+    release:
+      name: mycluster
+    set:
+      license:
+        enabled: true
+        mountPath: /etc/greptimedb/license
+        mountFileName: current
+    asserts:
+      - contains:
+          path: spec.meta.template.main.extraArgs
+          content: "--license-file"
+      - contains:
+          path: spec.meta.template.main.extraArgs
+          content: "/etc/greptimedb/license/current"
+      - contains:
+          path: spec.meta.template.main.volumeMounts
+          content:
+            name: license-secret
+            mountPath: /etc/greptimedb/license
+            readOnly: true
+
+  - it: should configure remote WAL with kafka
+    set:
+      remoteWal:
+        enabled: true
+        kafka:
+          brokerEndpoints:
+            - kafka-0.kafka.svc.cluster.local:9092
+            - kafka-1.kafka.svc.cluster.local:9092
+    asserts:
+      - equal:
+          path: spec.wal.kafka.brokerEndpoints[0]
+          value: kafka-0.kafka.svc.cluster.local:9092
+
+  - it: should configure monitoring when enabled
+    set:
+      monitoring:
+        enabled: true
+        vector:
+          registry: docker.io
+          repository: timberio/vector
+          tag: 0.46.1-debian
+    asserts:
+      - equal:
+          path: spec.monitoring.enabled
+          value: true
+      - equal:
+          path: spec.monitoring.vector.image
+          value: "docker.io/timberio/vector:0.46.1-debian"
+
+  - it: should configure service ports
+    set:
+      httpServicePort: 4000
+      grpcServicePort: 4001
+      mysqlServicePort: 4002
+      postgresServicePort: 4003
+    asserts:
+      - equal:
+          path: spec.httpPort
+          value: 4000
+      - equal:
+          path: spec.rpcPort
+          value: 4001
+      - equal:
+          path: spec.mysqlPort
+          value: 4002
+      - equal:
+          path: spec.postgreSQLPort
+          value: 4003
+
+  - it: should disable frontend when frontend.enabled is false
+    set:
+      frontend:
+        enabled: false
+    asserts:
+      - isNull:
+          path: spec.frontend
+
+  - it: should disable flownode when flownode.enabled is false
+    set:
+      flownode:
+        enabled: false
+    asserts:
+      - isNull:
+          path: spec.flownode
+
+  - it: should configure global logging
+    set:
+      logging:
+        level: debug
+        format: json
+        logsDir: /var/log/greptimedb
+        onlyLogToStdout: true
+    asserts:
+      - equal:
+          path: spec.logging.level
+          value: debug
+      - equal:
+          path: spec.logging.format
+          value: json
+      - equal:
+          path: spec.logging.logsDir
+          value: /var/log/greptimedb
+      - equal:
+          path: spec.logging.onlyLogToStdout
+          value: true
+
+  - it: should configure tracing when enabled
+    set:
+      tracing:
+        enabled: true
+        endpoint: http://jaeger:4317
+        sampleRatio: "0.5"
+    asserts:
+      - equal:
+          path: spec.tracing.enabled
+          value: true
+      - equal:
+          path: spec.tracing.endpoint
+          value: http://jaeger:4317
+      - equal:
+          path: spec.tracing.sampleRatio
+          value: "0.5"
