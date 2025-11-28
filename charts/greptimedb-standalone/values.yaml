@@ -240,7 +240,13 @@ auth:
     - username: "admin"
       password: "admin"
       # -- The permission for the user. Optional. Valid values: `readwrite`, `readonly`, `writeonly`.
-      # permission: "readwrite"
+      permission: "readwrite"
+    - username: "grafana"
+      password: "grafana_pwd"
+      permission: "readonly"
+    - username: "telegraf"
+      password: "telegraf_pwd"
+      permission: "writeonly"
 
 # -- Logging configuration for greptimedb
 logging:
