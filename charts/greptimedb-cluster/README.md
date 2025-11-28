@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.6.42](https://img.shields.io/badge/Version-0.6.42-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-beta.1](https://img.shields.io/badge/AppVersion-1.0.0--beta.1-informational?style=flat-square)
+![Version: 0.6.43](https://img.shields.io/badge/Version-0.6.43-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-beta.1](https://img.shields.io/badge/AppVersion-1.0.0--beta.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -102,7 +102,7 @@ helm uninstall mycluster -n default
 | auth.enabled | bool | `false` | Enable static auth |
 | auth.fileName | string | `"passwd"` | The auth file name, the full path is `${mountPath}/${fileName}` |
 | auth.mountPath | string | `"/etc/greptimedb/auth"` | The auth file path to store the auth info |
-| auth.users | list | `[{"password":"admin","username":"admin"}]` | The users to be created in the auth file |
+| auth.users | list | `[{"password":"admin","username":"admin"}]` | The users to be created in the auth file. Each user can have an optional `permission` field with values: `readwrite`, `readonly`, or `writeonly`. |
 | base.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"extraArgs":[],"livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{}},"nodeSelector":{},"securityContext":{},"serviceAccountName":"","terminationGracePeriodSeconds":30,"tolerations":[]}` | The pod template for base |
 | base.podTemplate.affinity | object | `{}` | The pod affinity |
 | base.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |

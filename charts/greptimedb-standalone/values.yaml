@@ -235,10 +235,12 @@ auth:
   mountPath: "/etc/greptimedb/auth"
   # -- The auth file name, the full path is `${mountPath}/${fileName}`
   fileName: "passwd"
-  # -- The users to be created in the auth file
+  # -- The users to be created in the auth file. Each user can have an optional `permission` field with values: `readwrite`, `readonly`, or `writeonly`.
   users:
     - username: "admin"
       password: "admin"
+      # -- The permission for the user. Optional. Valid values: `readwrite`, `readonly`, `writeonly`.
+      # permission: "readwrite"
 
 # -- Logging configuration for greptimedb
 logging:

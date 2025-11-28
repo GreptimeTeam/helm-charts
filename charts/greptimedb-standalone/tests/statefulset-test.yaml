@@ -1,0 +1,272 @@
+suite: statefulset tests
+templates:
+  - statefulset.yaml
+  - configmap.yaml
+  - secret.yaml
+  - users-auth-secret.yaml
+tests:
+  - it: should create StatefulSet with default values
+    release:
+      name: mystandalone
+    asserts:
+      - isKind:
+          of: StatefulSet
+        template: statefulset.yaml
+      - equal:
+          path: metadata.name
+          value: mystandalone-greptimedb-standalone
+        template: statefulset.yaml
+      - equal:
+          path: spec.replicas
+          value: 1
+        template: statefulset.yaml
+
+  - it: should set correct image
+    set:
+      image:
+        registry: docker.io
+        repository: greptime/greptimedb
+        tag: v1.0.0
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: "docker.io/greptime/greptimedb:v1.0.0"
+        template: statefulset.yaml
+
+  - it: should configure auth environment variable when auth is enabled
+    set:
+      auth:
+        enabled: true
+        mountPath: /etc/greptimedb/auth
+        fileName: passwd
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: GREPTIMEDB_STANDALONE__USER_PROVIDER
+            value: "static_user_provider:file:/etc/greptimedb/auth/passwd"
+        template: statefulset.yaml
+
+  - it: should mount auth volume when auth is enabled
+    release:
+      name: mystandalone
+    set:
+      auth:
+        enabled: true
+        mountPath: /etc/greptimedb/auth
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].volumeMounts
+          content:
+            name: auth
+            mountPath: /etc/greptimedb/auth
+            readOnly: true
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.volumes
+          content:
+            name: auth
+            secret:
+              secretName: mystandalone-greptimedb-standalone-users-auth
+        template: statefulset.yaml
+
+  - it: should configure object storage credentials via envFrom
+    release:
+      name: mystandalone
+    set:
+      objectStorage:
+        s3:
+          bucket: my-bucket
+        credentials:
+          accessKeyId: my-key
+          secretAccessKey: my-secret
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].envFrom
+          content:
+            secretRef:
+              name: mystandalone-greptimedb-standalone-secret
+        template: statefulset.yaml
+
+  - it: should use existingSecretName for object storage when provided
+    set:
+      objectStorage:
+        s3:
+          bucket: my-bucket
+        credentials:
+          existingSecretName: my-existing-secret
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].envFrom
+          content:
+            secretRef:
+              name: my-existing-secret
+        template: statefulset.yaml
+
+  - it: should configure persistence with PVC
+    set:
+      persistence:
+        enabled: true
+        size: 50Gi
+        storageClass: fast-ssd
+    asserts:
+      - equal:
+          path: spec.volumeClaimTemplates[0].spec.resources.requests.storage
+          value: "50Gi"
+        template: statefulset.yaml
+      - equal:
+          path: spec.volumeClaimTemplates[0].spec.storageClassName
+          value: fast-ssd
+        template: statefulset.yaml
+
+  - it: should use emptyDir when persistence is disabled
+    set:
+      persistence:
+        enabled: false
+    asserts:
+      - contains:
+          path: spec.template.spec.volumes
+          content:
+            name: data
+            emptyDir: {}
+        template: statefulset.yaml
+
+  - it: should configure service ports in container args
+    set:
+      httpServicePort: 4000
+      grpcServicePort: 4001
+      mysqlServicePort: 4002
+      postgresServicePort: 4003
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: "0.0.0.0:4000"
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: "0.0.0.0:4001"
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: "0.0.0.0:4002"
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: "0.0.0.0:4003"
+        template: statefulset.yaml
+
+  - it: should mount config when configToml is provided
+    release:
+      name: mystandalone
+    set:
+      configToml: |
+        mode = 'standalone'
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].volumeMounts
+          content:
+            name: config
+            mountPath: /etc/greptimedb/config
+            readOnly: true
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.volumes
+          content:
+            name: config
+            configMap:
+              name: mystandalone-greptimedb-standalone-config
+        template: statefulset.yaml
+
+  - it: should set dataHome in args
+    set:
+      dataHome: /custom/data/path
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: "--data-home"
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: /custom/data/path
+        template: statefulset.yaml
+
+  - it: should configure resources when specified
+    set:
+      resources:
+        requests:
+          cpu: 500m
+          memory: 1Gi
+        limits:
+          cpu: 2
+          memory: 4Gi
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].resources.requests.cpu
+          value: 500m
+        template: statefulset.yaml
+      - equal:
+          path: spec.template.spec.containers[0].resources.requests.memory
+          value: 1Gi
+        template: statefulset.yaml
+      - equal:
+          path: spec.template.spec.containers[0].resources.limits.cpu
+          value: 2
+        template: statefulset.yaml
+      - equal:
+          path: spec.template.spec.containers[0].resources.limits.memory
+          value: 4Gi
+        template: statefulset.yaml
+
+  - it: should configure nodeSelector when specified
+    set:
+      nodeSelector:
+        disktype: ssd
+    asserts:
+      - equal:
+          path: spec.template.spec.nodeSelector.disktype
+          value: ssd
+        template: statefulset.yaml
+
+  - it: should configure tolerations when specified
+    set:
+      tolerations:
+        - key: "dedicated"
+          operator: "Equal"
+          value: "greptimedb"
+          effect: "NoSchedule"
+    asserts:
+      - contains:
+          path: spec.template.spec.tolerations
+          content:
+            key: "dedicated"
+            operator: "Equal"
+            value: "greptimedb"
+            effect: "NoSchedule"
+        template: statefulset.yaml
+
+  - it: should configure affinity when specified
+    set:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: topology.kubernetes.io/zone
+                    operator: In
+                    values:
+                      - us-west-2a
+    asserts:
+      - isNotNull:
+          path: spec.template.spec.affinity.nodeAffinity
+        template: statefulset.yaml
+
+  - it: should use custom service account when specified
+    set:
+      serviceAccount:
+        create: true
+        name: custom-sa
+    asserts:
+      - equal:
+          path: spec.template.spec.serviceAccountName
+          value: custom-sa
+        template: statefulset.yaml

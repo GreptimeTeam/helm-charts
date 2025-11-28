@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.2.17](https://img.shields.io/badge/Version-0.2.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-beta.1](https://img.shields.io/badge/AppVersion-1.0.0--beta.1-informational?style=flat-square)
+![Version: 0.2.18](https://img.shields.io/badge/Version-0.2.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-beta.1](https://img.shields.io/badge/AppVersion-1.0.0--beta.1-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -58,7 +58,7 @@ helm uninstall greptimedb-standalone -n default
 | auth.enabled | bool | `false` | Enable static auth |
 | auth.fileName | string | `"passwd"` | The auth file name, the full path is `${mountPath}/${fileName}` |
 | auth.mountPath | string | `"/etc/greptimedb/auth"` | The auth file path to store the auth info |
-| auth.users | list | `[{"password":"admin","username":"admin"}]` | The users to be created in the auth file |
+| auth.users | list | `[{"password":"admin","username":"admin"}]` | The users to be created in the auth file. Each user can have an optional `permission` field with values: `readwrite`, `readonly`, or `writeonly`. |
 | command | list | `[]` | The container command |
 | configToml | string | `"mode = 'standalone'\n"` | The extra configuration for greptimedb |
 | dataHome | string | `"/data/greptimedb/"` | Storage root directory |
