@@ -230,7 +230,9 @@ spec:
       etcd:
         {{- if .Values.meta.backendStorage.etcd.endpoints }}
         endpoints:
-          - {{ .Values.meta.backendStorage.etcd.endpoints }}
+        {{- range .Values.meta.backendStorage.etcd.endpoints }}
+        - {{ . }}
+        {{- end }}
         {{- end }}
         {{- if .Values.meta.backendStorage.etcd.storeKeyPrefix }}
         storeKeyPrefix: {{ .Values.meta.backendStorage.etcd.storeKeyPrefix }}
