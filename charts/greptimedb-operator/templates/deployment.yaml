@@ -56,6 +56,12 @@ spec:
             port: 9494
           initialDelaySeconds: 5
           periodSeconds: 10
+        {{- with .Values.env }}
+        env: {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.envFrom }}
+        envFrom: {{- toYaml . | nindent 10 }}
+        {{- end }}
         {{- if .Values.VolumeMounts }}
         volumeMounts: {{ toYaml .Values.VolumeMounts | nindent 10 }}
         {{- end }}
