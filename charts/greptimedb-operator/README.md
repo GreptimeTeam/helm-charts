@@ -118,8 +118,8 @@ Kubernetes: `>=1.18.0-0`
 | crds.annotations | object | `{}` | Annotations to be added to all CRDs |
 | crds.install | bool | `true` | Install and upgrade CRDs |
 | crds.keep | bool | `true` | Keep CRDs on chart uninstall |
-| env | list | `[]` | [Environment variables](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) for the `external-dns` container. |
-| envFrom | list | `[]` | Environment variables from secrets or configmaps to add to the pod. |
+| env | list | `[]` | [Environment variables](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) for the container. |
+| envFrom | list | `[]` | Environment variables from secrets or configmaps to add to the container. |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
 | image.imagePullPolicy | string | `"IfNotPresent"` | The image pull policy for the controller |
 | image.pullSecrets | list | `[]` | The image pull secrets |
