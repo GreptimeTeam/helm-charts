@@ -38,6 +38,12 @@ crds:
 # -- Number of replicas for the greptimedb operator
 replicas: 1
 
+# -- [Environment variables](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) for the container.
+env: []
+
+# -- Environment variables from secrets or configmaps to add to the container.
+envFrom: []
+
 # -- Default resources for greptimedb operator
 resources:
   limits:

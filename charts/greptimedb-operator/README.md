@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.5.4](https://img.shields.io/badge/Version-0.5.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.3](https://img.shields.io/badge/AppVersion-0.5.3-informational?style=flat-square)
+![Version: 0.5.5](https://img.shields.io/badge/Version-0.5.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.3](https://img.shields.io/badge/AppVersion-0.5.3-informational?style=flat-square)
 
 ## Source Code
 
@@ -118,6 +118,8 @@ Kubernetes: `>=1.18.0-0`
 | crds.annotations | object | `{}` | Annotations to be added to all CRDs |
 | crds.install | bool | `true` | Install and upgrade CRDs |
 | crds.keep | bool | `true` | Keep CRDs on chart uninstall |
+| env | list | `[]` | [Environment variables](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) for the container. |
+| envFrom | list | `[]` | Environment variables from secrets or configmaps to add to the container. |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
 | image.imagePullPolicy | string | `"IfNotPresent"` | The image pull policy for the controller |
 | image.pullSecrets | list | `[]` | The image pull secrets |
