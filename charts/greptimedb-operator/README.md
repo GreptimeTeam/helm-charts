@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.5.5](https://img.shields.io/badge/Version-0.5.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.3](https://img.shields.io/badge/AppVersion-0.5.3-informational?style=flat-square)
+![Version: 0.5.6](https://img.shields.io/badge/Version-0.5.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.3](https://img.shields.io/badge/AppVersion-0.5.3-informational?style=flat-square)
 
 ## Source Code
 
@@ -120,18 +120,23 @@ Kubernetes: `>=1.18.0-0`
 | crds.keep | bool | `true` | Keep CRDs on chart uninstall |
 | env | list | `[]` | [Environment variables](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) for the container. |
 | envFrom | list | `[]` | Environment variables from secrets or configmaps to add to the container. |
+| extraArgs | list | `[]` | The ExtraArgs specifies additional command-line arguments for the container entrypoint |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
 | image.imagePullPolicy | string | `"IfNotPresent"` | The image pull policy for the controller |
 | image.pullSecrets | list | `[]` | The image pull secrets |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb-operator"` | The image repository |
 | image.tag | string | `"v0.5.3"` | The image tag |
+| leaderElection | object | `{"enabled":true}` | Enable leader election for greptimedb operator. |
+| livenessProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":15,"periodSeconds":30,"successThreshold":1,"timeoutSeconds":5}` | Configure options for liveness probe |
 | nameOverride | string | `""` | String to partially override release template name |
 | nodeSelector | object | `{}` | The operator node selector |
 | rbac.create | bool | `true` | Install role based access control |
+| readinessProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":5,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Configure options for readiness probe |
 | replicas | int | `1` | Number of replicas for the greptimedb operator |
-| resources | object | `{"limits":{"cpu":"200m","memory":"256Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}` | Default resources for greptimedb operator |
+| resources | object | `{}` | Default resources for greptimedb operator |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| startupProbe | object | `{"enabled":true,"failureThreshold":30,"initialDelaySeconds":0,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Configure options for startup probe |
 | tolerations | list | `[]` | The pod tolerations |

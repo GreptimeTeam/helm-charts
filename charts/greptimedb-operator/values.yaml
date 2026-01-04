@@ -12,6 +12,12 @@ image:
   # -- The image pull secrets
   pullSecrets: []
 
+# -- String to partially override release template name
+nameOverride: ""
+
+# -- Provide a name to substitute for the full names of resources
+fullnameOverride: ""
+
 # -- additional labels to add to all resources
 additionalLabels: {}
 
@@ -45,23 +51,17 @@ env: []
 envFrom: []
 
 # -- Default resources for greptimedb operator
-resources:
-  limits:
-    cpu: 200m
-    memory: 256Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
+resources: {}
+#  limits:
+#    cpu: 500m
+#    memory: 512Mi
+#  requests:
+#    cpu: 250m
+#    memory: 256Mi
 
 rbac:
   # -- Install role based access control
   create: true
-
-# -- String to partially override release template name
-nameOverride: ""
-
-# -- Provide a name to substitute for the full names of resources
-fullnameOverride: ""
 
 # -- The operator node selector
 nodeSelector: {}
@@ -71,6 +71,41 @@ tolerations: []
 
 # -- The pod affinity
 affinity: {}
+
+# -- Configure options for liveness probe
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 15
+  periodSeconds: 30
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 5
+
+# -- Configure options for readiness probe
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 5
+
+# -- Configure options for startup probe
+startupProbe:
+  enabled: true
+  initialDelaySeconds: 0
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 30
+
+# -- Enable leader election for greptimedb operator.
+leaderElection:
+  enabled: true
+
+# -- The ExtraArgs specifies additional command-line arguments for the container entrypoint
+extraArgs: []
+#  - --v=2
 
 # -- Volume mounts to add to the pod
 VolumeMounts: []
