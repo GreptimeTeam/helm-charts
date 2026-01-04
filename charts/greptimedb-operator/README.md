@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.5.6](https://img.shields.io/badge/Version-0.5.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.3](https://img.shields.io/badge/AppVersion-0.5.3-informational?style=flat-square)
+![Version: 0.5.7](https://img.shields.io/badge/Version-0.5.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.3](https://img.shields.io/badge/AppVersion-0.5.3-informational?style=flat-square)
 
 ## Source Code
 
@@ -114,6 +114,7 @@ Kubernetes: `>=1.18.0-0`
 | admissionWebhook.failurePolicy | string | `"Fail"` | Valid values: Fail, Ignore, IgnoreOnInstallOnly |
 | admissionWebhook.port | int | `8082` | The port for the admission webhook |
 | affinity | object | `{}` | The pod affinity |
+| annotations | object | `{}` | The deployment annotations |
 | crds.additionalLabels | object | `{}` | Addtional labels to be added to all CRDs |
 | crds.annotations | object | `{}` | Annotations to be added to all CRDs |
 | crds.install | bool | `true` | Install and upgrade CRDs |
@@ -131,6 +132,8 @@ Kubernetes: `>=1.18.0-0`
 | livenessProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":15,"periodSeconds":30,"successThreshold":1,"timeoutSeconds":5}` | Configure options for liveness probe |
 | nameOverride | string | `""` | String to partially override release template name |
 | nodeSelector | object | `{}` | The operator node selector |
+| podAnnotations | object | `{}` | Extra pod annotations to add |
+| podLabels | object | `{}` | Extra pod labels to add |
 | rbac.create | bool | `true` | Install role based access control |
 | readinessProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":5,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Configure options for readiness probe |
 | replicas | int | `1` | Number of replicas for the greptimedb operator |

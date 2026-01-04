@@ -5,6 +5,12 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "greptimedb-operator.labels" . | nindent 4 }}
+  {{- if not (empty .Values.annotations) }}
+  annotations:
+    {{- with .Values.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- end }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
@@ -12,10 +18,17 @@ spec:
       {{- include "greptimedb-operator.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- if not (empty .Values.podAnnotations) }}
       annotations:
-        {{- include "greptimedb-operator.selectorLabels" . | nindent 8 }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- end }}
       labels:
         {{- include "greptimedb-operator.selectorLabels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
     spec:
       {{- if .Values.image.pullSecrets }}
       imagePullSecrets:
