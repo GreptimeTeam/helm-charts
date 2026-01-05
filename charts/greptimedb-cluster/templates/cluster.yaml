@@ -6,6 +6,12 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "greptimedb-cluster.labels" . | nindent 4 }}
+  {{- if not (empty .Values.annotations) }}
+  annotations:
+    {{- with .Values.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- end }}
 spec:
   base:
     main:

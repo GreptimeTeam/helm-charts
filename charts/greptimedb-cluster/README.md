@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.7.4](https://img.shields.io/badge/Version-0.7.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-beta.4](https://img.shields.io/badge/AppVersion-1.0.0--beta.4-informational?style=flat-square)
+![Version: 0.7.5](https://img.shields.io/badge/Version-0.7.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-beta.4](https://img.shields.io/badge/AppVersion-1.0.0--beta.4-informational?style=flat-square)
 
 ## Source Code
 
@@ -98,6 +98,7 @@ helm uninstall mycluster -n default
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | additionalLabels | object | `{}` | additional labels to add to all resources |
+| annotations | object | `{}` | The greptimedb cluster annotations |
 | auth | object | `{"enabled":false,"fileName":"passwd","mountPath":"/etc/greptimedb/auth","users":[{"password":"admin","permission":"readwrite","username":"admin"},{"password":"grafana_pwd","permission":"readonly","username":"grafana"},{"password":"telegraf_pwd","permission":"writeonly","username":"telegraf"}]}` | The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/deployments-administration/authentication/static). |
 | auth.enabled | bool | `false` | Enable static auth |
 | auth.fileName | string | `"passwd"` | The auth file name, the full path is `${mountPath}/${fileName}` |
