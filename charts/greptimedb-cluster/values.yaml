@@ -24,6 +24,9 @@ customImageRegistry:
 # -- additional labels to add to all resources
 additionalLabels: {}
 
+# -- The greptimedb cluster annotations
+annotations: {}
+
 initializer:
   # -- Initializer image registry
   registry: docker.io
