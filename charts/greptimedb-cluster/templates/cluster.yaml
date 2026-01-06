@@ -163,7 +163,7 @@ spec:
       {{- if or .Values.auth.enabled .Values.frontend.podTemplate.volumes }}
       volumes:
       {{- if .Values.frontend.podTemplate.volumes }}
-      {{- toYaml .Values.frontend.podTemplate.volumes | nindent 8 }}
+      {{- toYaml .Values.frontend.podTemplate.volumes | nindent 6 }}
       {{- end }}
       {{- if .Values.auth.enabled }}
       - name: auth
@@ -576,7 +576,7 @@ spec:
       {{- if or .Values.auth.enabled .Values.flownode.podTemplate.volumes }}
       volumes:
       {{- if .Values.flownode.podTemplate.volumes }}
-      {{- toYaml .Values.flownode.podTemplate.volumes | nindent 8 }}
+      {{- toYaml .Values.flownode.podTemplate.volumes | nindent 6 }}
       {{- end }}
       {{- if .Values.auth.enabled }}
       - name: auth
