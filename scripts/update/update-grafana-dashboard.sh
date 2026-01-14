@@ -49,8 +49,9 @@ update_grafana_dashboard() {
       --body "This PR updates the Grafana dashboard from the upstream repository." \
       --base main \
       --head $BRANCH_NAME \
-      --reviewer zyy17 \
-      --reviewer daviderli614
+      --reviewer sunng87 \
+      --reviewer daviderli614 \
+      --reviewer killme2008
   else
     exit 0
   fi
