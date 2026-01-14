@@ -33,7 +33,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.5.3
+  tag: v0.5.4
 
 base:
   # -- The pod template for base
@@ -538,6 +538,9 @@ datanode:
   # -- Extra raw toml config data of datanode. Skip if the `configFile` is used.
   configData: ""
 
+  # -- StartNodeID is the start node id of the datanode.
+  # startNodeID: 0
+
   # -- The pod template for datanode
   podTemplate:
     # -- The spec of main container
@@ -715,6 +718,9 @@ flownode:
 
   # -- Extra raw toml config data of flownode. Skip if the `configFile` is used.
   configData: ""
+
+  # -- StartNodeID is the start node id of the flownode.
+  # startNodeID: 0
 
   # -- Logging configuration for flownode, if not set, it will use the global logging configuration.
   logging: {}

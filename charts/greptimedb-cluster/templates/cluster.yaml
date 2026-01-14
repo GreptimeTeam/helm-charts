@@ -395,6 +395,9 @@ spec:
 {{ .Values.datanode.configData | indent 6 }}
 {{- end }}
 {{- end }}
+    {{- if .Values.datanode.startNodeID }}
+    startNodeID: {{ .Values.datanode.startNodeID }}
+    {{- end }}
     template:
       main:
         {{- if .Values.datanode.podTemplate.main.image }}
@@ -508,6 +511,9 @@ spec:
 {{ .Values.flownode.configData | indent 6 }}
 {{- end }}
 {{- end }}
+    {{- if .Values.flownode.startNodeID }}
+    startNodeID: {{ .Values.flownode.startNodeID }}
+    {{- end }}
     template:
       main:
         {{- if .Values.flownode.podTemplate.main.image }}
