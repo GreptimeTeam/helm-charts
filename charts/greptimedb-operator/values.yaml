@@ -8,7 +8,7 @@ image:
   # -- The image pull policy for the controller
   imagePullPolicy: IfNotPresent
   # -- The image tag
-  tag: v0.5.3
+  tag: v0.5.4
   # -- The image pull secrets
   pullSecrets: []
 
@@ -111,6 +111,14 @@ startupProbe:
 # -- Enable leader election for greptimedb operator.
 leaderElection:
   enabled: true
+  # -- LeaseDuration is the duration that non-leader candidates will wait to force acquire leadership.
+  leaseDuration: 15s
+
+  # -- RenewDeadline is the duration that the acting controlplane will retry refreshing leadership before giving up.
+  renewDeadline: 10s
+
+  # -- RetryPeriod is the duration the LeaderElector clients should wait between tries of actions.
+  retryPeriod: 2s
 
 # -- The ExtraArgs specifies additional command-line arguments for the container entrypoint
 extraArgs: []

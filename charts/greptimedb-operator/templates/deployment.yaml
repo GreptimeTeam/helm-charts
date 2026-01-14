@@ -105,6 +105,9 @@ spec:
         args:
           {{- if .Values.leaderElection.enabled }}
           - --enable-leader-election
+          - --leader-election-lease-duration={{ .Values.leaderElection.leaseDuration }}
+          - --leader-election-renew-deadline={{ .Values.leaderElection.renewDeadline }}
+          - --leader-election-retry-period={{ .Values.leaderElection.retryPeriod }}
           {{- end }}
           {{- if .Values.admissionWebhook.enabled }}
           - --enable-admission-webhook
