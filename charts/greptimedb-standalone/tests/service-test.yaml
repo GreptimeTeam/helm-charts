@@ -1,0 +1,23 @@
+suite: service tests
+templates:
+  - service.yaml
+tests:
+  - it: should create service with default namespace
+    release:
+      name: mystandalone
+      namespace: default
+    asserts:
+      - isKind:
+          of: Service
+      - equal:
+          path: metadata.namespace
+          value: default
+
+  - it: should create service with custom namespace
+    release:
+      name: mystandalone
+      namespace: my-namespace
+    asserts:
+      - equal:
+          path: metadata.namespace
+          value: my-namespace
