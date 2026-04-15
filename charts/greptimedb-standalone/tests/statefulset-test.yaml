@@ -44,6 +44,21 @@ tests:
           path: spec.template.spec.containers[0].env
           content:
             name: GREPTIMEDB_STANDALONE__USER_PROVIDER
+            value: "greptime_ee_user_provider:/etc/greptimedb/auth/passwd"
+        template: statefulset.yaml
+
+  - it: should configure static auth provider when useBuiltIn is disabled
+    set:
+      auth:
+        enabled: true
+        useBuiltIn: false
+        mountPath: /etc/greptimedb/auth
+        fileName: passwd
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: GREPTIMEDB_STANDALONE__USER_PROVIDER
             value: "static_user_provider:file:/etc/greptimedb/auth/passwd"
         template: statefulset.yaml
 
