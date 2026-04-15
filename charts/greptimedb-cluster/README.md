@@ -99,10 +99,11 @@ helm uninstall mycluster -n default
 |-----|------|---------|-------------|
 | additionalLabels | object | `{}` | additional labels to add to all resources |
 | annotations | object | `{}` | The greptimedb cluster annotations |
-| auth | object | `{"enabled":false,"fileName":"passwd","mountPath":"/etc/greptimedb/auth","users":[{"password":"admin","permission":"readwrite","username":"admin"},{"password":"grafana_pwd","permission":"readonly","username":"grafana"},{"password":"telegraf_pwd","permission":"writeonly","username":"telegraf"}]}` | The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/deployments-administration/authentication/static). |
+| auth | object | `{"enabled":false,"fileName":"passwd","mountPath":"/etc/greptimedb/auth","useBuiltIn":false,"users":[{"password":"admin","permission":"readwrite","username":"admin"},{"password":"grafana_pwd","permission":"readonly","username":"grafana"},{"password":"telegraf_pwd","permission":"writeonly","username":"telegraf"}]}` | The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/deployments-administration/authentication/static). |
 | auth.enabled | bool | `false` | Enable static auth |
 | auth.fileName | string | `"passwd"` | The auth file name, the full path is `${mountPath}/${fileName}` |
 | auth.mountPath | string | `"/etc/greptimedb/auth"` | The auth file path to store the auth info |
+| auth.useBuiltIn | bool | `false` | Whether to use GreptimeDB built-in auth provider for user file. |
 | auth.users | list | `[{"password":"admin","permission":"readwrite","username":"admin"},{"password":"grafana_pwd","permission":"readonly","username":"grafana"},{"password":"telegraf_pwd","permission":"writeonly","username":"telegraf"}]` | The users to be created in the auth file. Each user can have an optional `permission` field with values: `readwrite`, `readonly`, or `writeonly`. |
 | auth.users[0].permission | string | `"readwrite"` | The permission for the user. Optional. Valid values: `readwrite`, `readonly`, `writeonly`. |
 | base.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"extraArgs":[],"livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{}},"nodeSelector":{},"securityContext":{},"serviceAccountName":"","terminationGracePeriodSeconds":30,"tolerations":[]}` | The pod template for base |
