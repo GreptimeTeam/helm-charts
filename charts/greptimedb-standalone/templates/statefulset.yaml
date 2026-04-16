@@ -108,7 +108,7 @@ spec:
             {{- end }}
             {{- if .Values.auth.enabled }}
             - name: GREPTIMEDB_STANDALONE__USER_PROVIDER
-              value: "static_user_provider:file:{{ .Values.auth.mountPath }}/{{ .Values.auth.fileName }}"
+              value: '{{ ternary "greptime_ee_user_provider" "static_user_provider:file" .Values.auth.useBuiltIn }}:{{ .Values.auth.mountPath }}/{{ .Values.auth.fileName }}'
             {{- end }}
           {{- end }}
           {{- if .Values.objectStorage }}

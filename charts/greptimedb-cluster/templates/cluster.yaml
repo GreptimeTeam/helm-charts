@@ -110,7 +110,7 @@ spec:
         env:
         {{- if .Values.auth.enabled }}
         - name: GREPTIMEDB_FRONTEND__USER_PROVIDER
-          value: "static_user_provider:file:{{ .Values.auth.mountPath }}/{{ .Values.auth.fileName }}"
+          value: '{{ ternary "greptime_ee_user_provider" "static_user_provider:file" .Values.auth.useBuiltIn }}:{{ .Values.auth.mountPath }}/{{ .Values.auth.fileName }}'
         {{- end }}
         {{- if .Values.frontend.podTemplate.main.env }}
         {{- toYaml .Values.frontend.podTemplate.main.env | nindent 8 }}
@@ -532,7 +532,7 @@ spec:
         env:
         {{- if .Values.auth.enabled }}
         - name: GREPTIMEDB_FLOWNODE__USER_PROVIDER
-          value: "static_user_provider:file:{{ .Values.auth.mountPath }}/{{ .Values.auth.fileName }}"
+          value: '{{ ternary "greptime_ee_user_provider" "static_user_provider:file" .Values.auth.useBuiltIn }}:{{ .Values.auth.mountPath }}/{{ .Values.auth.fileName }}'
         {{- end }}
         {{- if .Values.flownode.podTemplate.main.env }}
         {{- toYaml .Values.flownode.podTemplate.main.env | nindent 8 }}

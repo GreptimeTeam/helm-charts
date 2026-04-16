@@ -43,6 +43,20 @@ tests:
           path: spec.frontend.template.main.env
           content:
             name: GREPTIMEDB_FRONTEND__USER_PROVIDER
+            value: "greptime_ee_user_provider:/etc/greptimedb/auth/passwd"
+
+  - it: should configure static auth provider when useBuiltIn is disabled
+    set:
+      auth:
+        enabled: true
+        useBuiltIn: false
+        mountPath: /etc/greptimedb/auth
+        fileName: passwd
+    asserts:
+      - contains:
+          path: spec.frontend.template.main.env
+          content:
+            name: GREPTIMEDB_FRONTEND__USER_PROVIDER
             value: "static_user_provider:file:/etc/greptimedb/auth/passwd"
 
   - it: should mount auth volume when auth is enabled

@@ -1172,6 +1172,8 @@ ingress: {}
 auth:
   # -- Enable static auth
   enabled: false
+  # -- Whether to use GreptimeDB built-in auth provider for user file.
+  useBuiltIn: false
   # -- The auth file path to store the auth info
   mountPath: "/etc/greptimedb/auth"
   # -- The auth file name, the full path is `${mountPath}/${fileName}`
