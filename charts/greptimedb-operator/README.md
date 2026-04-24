@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.5.8](https://img.shields.io/badge/Version-0.5.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.4](https://img.shields.io/badge/AppVersion-0.5.4-informational?style=flat-square)
+![Version: 0.5.9](https://img.shields.io/badge/Version-0.5.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.5](https://img.shields.io/badge/AppVersion-0.5.5-informational?style=flat-square)
 
 ## Source Code
 
@@ -127,7 +127,7 @@ Kubernetes: `>=1.18.0-0`
 | image.pullSecrets | list | `[]` | The image pull secrets |
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb-operator"` | The image repository |
-| image.tag | string | `"v0.5.4"` | The image tag |
+| image.tag | string | `"v0.5.5"` | The image tag |
 | leaderElection | object | `{"enabled":true,"leaseDuration":"15s","renewDeadline":"10s","retryPeriod":"2s"}` | Enable leader election for greptimedb operator. |
 | leaderElection.leaseDuration | string | `"15s"` | LeaseDuration is the duration that non-leader candidates will wait to force acquire leadership. |
 | leaderElection.renewDeadline | string | `"10s"` | RenewDeadline is the duration that the acting controlplane will retry refreshing leadership before giving up. |
