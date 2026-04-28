@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.8.3](https://img.shields.io/badge/Version-0.8.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
+![Version: 0.8.4](https://img.shields.io/badge/Version-0.8.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -255,7 +255,7 @@ helm uninstall mycluster -n default
 | frontendGroups | list | `[]` | Frontend instance groups configure |
 | grafana.adminPassword | string | `"gt-operator"` | The default admin password for grafana. |
 | grafana.adminUser | string | `"admin"` | The default admin username for grafana. |
-| grafana.datasources | object | `{"datasources.yaml":{"datasources":[{"access":"proxy","isDefault":true,"name":"metrics","type":"prometheus","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus"},{"access":"proxy","isDefault":true,"name":"traces","type":"jaeger","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/jaeger"},{"access":"proxy","database":"public","name":"logs","type":"mysql","url":"mycluster-monitor-standalone.default.svc.cluster.local:4002"},{"access":"proxy","database":"information_schema","name":"information_schema","type":"mysql","url":"mycluster-frontend.default.svc.cluster.local:4002"}]}}` | The grafana datasources. |
+| grafana.datasources | object | `{"datasources.yaml":{"datasources":[{"access":"proxy","name":"metrics","type":"prometheus","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus"},{"access":"proxy","name":"traces","type":"jaeger","url":"http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/jaeger"},{"access":"proxy","database":"public","name":"logs","type":"mysql","url":"mycluster-monitor-standalone.default.svc.cluster.local:4002"},{"access":"proxy","database":"information_schema","name":"information_schema","type":"mysql","url":"mycluster-frontend.default.svc.cluster.local:4002"}]}}` | The grafana datasources. |
 | grafana.enabled | bool | `false` | Enable grafana deployment. It needs to enable monitoring `monitoring.enabled: true` first. |
 | grafana.image | object | `{"registry":"docker.io","repository":"grafana/grafana","tag":"11.6.0"}` | The grafana image. |
 | grafana.image.registry | string | `"docker.io"` | The grafana image registry. |

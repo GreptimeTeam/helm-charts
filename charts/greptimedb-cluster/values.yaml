@@ -1452,14 +1452,12 @@ grafana:
           type: prometheus
           url: http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/prometheus
           access: proxy
-          isDefault: true
 
         # Query the cluster traces.
         - name: traces
           type: jaeger
           url: http://mycluster-monitor-standalone.default.svc.cluster.local:4000/v1/jaeger
           access: proxy
-          isDefault: true
 
         # Query the cluster logs and slow queries.
         - name: logs
