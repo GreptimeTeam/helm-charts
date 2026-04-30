@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.8.4](https://img.shields.io/badge/Version-0.8.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
+![Version: 0.8.5](https://img.shields.io/badge/Version-0.8.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -373,7 +373,7 @@ helm uninstall mycluster -n default
 | license.enabled | bool | `false` | Enable enterprise features. |
 | license.existingSecretName | string | `""` | The existing secret name to get the license. |
 | license.mountFileName | string | `"current"` | The license file name. |
-| license.mountPath | string | `"/etc/greptimedb/license"` | The license file path to store the license info. |
+| license.mountPath | string | `"/greptime/license"` | The license file path to store the license info. |
 | license.secretName | string | `""` | The secret name to store the license. If not set, it will use the ${release-name}-license. |
 | logging | object | `{"filters":[],"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false,"persistentWithData":false}` | Global logging configuration |
 | logging.filters | list | `[]` | The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs. |

@@ -1392,7 +1392,7 @@ license:
   # -- The existing secret name to get the license.
   existingSecretName: ""
   # -- The license file path to store the license info.
-  mountPath: "/etc/greptimedb/license"
+  mountPath: "/greptime/license"
   # -- The license file name.
   mountFileName: "current"
   # -- The license data. You can use `--set-file license.data=./license.txt` to set the license data.
