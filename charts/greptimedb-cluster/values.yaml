@@ -1309,6 +1309,8 @@ monitoring:
 #         labels: {}
 #         # -- The annotations for the PVC that will be created
 #         annotations: {}
+#         # -- The useEmptyDir is a flag to indicate whether to use an empty dir.
+#         useEmptyDir: false
 
   # -- Configure the logs collection
   logsCollection:
