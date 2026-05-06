@@ -1203,42 +1203,13 @@ debugPod:
     tag: "20250606-04e3c7d"
 
   # -- The debug pod resource
-  resources:
-    requests:
-      memory: 64Mi
-      cpu: 50m
-    limits:
-      memory: 256Mi
-      cpu: 200m
-
-# -- Configure to the pre-check runner
-preCheck:
-  # -- Enable the pre-check runner
-  enabled: false
-
-  # -- The pre-check runner image
-  image:
-    registry: docker.io
-    repository: greptime/greptime-tool
-    tag: "20250421-94c4b8d"
-
-  case:
-    disk:
-      enabled: false
-      storageClass: null
-      size: 20Gi
-    s3:
-      enabled: false
-      bucket: "bucket-name"
-      region: "s3-region"
-      accessKeyID: "your-access-key-id"
-      secretAccessKey: "your-secret-access-key"
-    kafka:
-      enabled: false
-      endpoint: "your-kafka-endpoint"
-
-  # -- Environment variables
-  env: {}
+#  resources:
+#    requests:
+#      memory: 64Mi
+#      cpu: 50m
+#    limits:
+#      memory: 256Mi
+#      cpu: 200m
 
 # -- The monitoring bootstrap configuration
 monitoring:
