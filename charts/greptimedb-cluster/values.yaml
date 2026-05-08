@@ -33,7 +33,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.5.5
+  tag: v0.5.6
 
 base:
   # -- The pod template for base
@@ -56,6 +56,9 @@ base:
 
       # -- The command to be executed in the container
       command: []
+
+      # -- Environment variables from secrets or configmaps to add to the pod
+      envFrom: []
 
       # -- The arguments to be passed to the command
       args: []
@@ -173,6 +176,9 @@ frontend:
 
       # -- The command to be executed in the container
       command: []
+
+      # -- Environment variables from secrets or configmaps to add to the pod
+      envFrom: []
 
       # -- The arguments to be passed to the command
       args: []
@@ -344,6 +350,9 @@ meta:
 
       # -- The command to be executed in the container
       command: []
+
+      # -- Environment variables from secrets or configmaps to add to the pod
+      envFrom: []
 
       # -- The arguments to be passed to the command
       args: []
@@ -565,6 +574,9 @@ datanode:
       # -- The command to be executed in the container
       command: []
 
+      # -- Environment variables from secrets or configmaps to add to the pod
+      envFrom: []
+
       # -- The arguments to be passed to the command
       args: []
 
@@ -774,6 +786,9 @@ flownode:
 
       # -- The environment variables for the container
       env: []
+
+      # -- Environment variables from secrets or configmaps to add to the pod
+      envFrom: []
 
       # -- The command to be executed in the container
       command: []
