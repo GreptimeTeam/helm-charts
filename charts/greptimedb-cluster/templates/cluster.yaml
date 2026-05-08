@@ -31,6 +31,9 @@ spec:
       {{- if .Values.base.podTemplate.main.env }}
       env: {{- toYaml .Values.base.podTemplate.main.env | nindent 8 }}
       {{- end }}
+      {{- if .Values.base.podTemplate.main.envFrom }}
+      envFrom: {{- toYaml .Values.base.podTemplate.main.envFrom | nindent 8 }}
+      {{- end }}
       {{- if .Values.base.podTemplate.main.startupProbe }}
       startupProbe: {{- toYaml .Values.base.podTemplate.main.startupProbe | nindent 8 }}
       {{- end }}
@@ -115,6 +118,9 @@ spec:
         {{- if .Values.frontend.podTemplate.main.env }}
         {{- toYaml .Values.frontend.podTemplate.main.env | nindent 8 }}
         {{- end }}
+        {{- end }}
+        {{- if .Values.frontend.podTemplate.main.envFrom }}
+        envFrom: {{- toYaml .Values.frontend.podTemplate.main.envFrom | nindent 8 }}
         {{- end }}
         {{- if or .Values.auth.enabled .Values.frontend.podTemplate.main.volumeMounts }}
         volumeMounts:
@@ -318,6 +324,9 @@ spec:
         {{- toYaml .Values.meta.podTemplate.main.extraArgs | nindent 8 }}
         {{- end }}
         {{- end }}
+        {{- if .Values.meta.podTemplate.main.envFrom }}
+        envFrom: {{- toYaml .Values.meta.podTemplate.main.envFrom | nindent 8 }}
+        {{- end }}
         {{- if .Values.meta.podTemplate.main.env }}
         env: {{- toYaml .Values.meta.podTemplate.main.env | nindent 8 }}
         {{- end }}
@@ -414,6 +423,9 @@ spec:
         {{- end }}
         {{- if .Values.datanode.podTemplate.main.env }}
         env: {{- toYaml .Values.datanode.podTemplate.main.env | nindent 8 }}
+        {{- end }}
+        {{- if .Values.datanode.podTemplate.main.envFrom }}
+        envFrom: {{- toYaml .Values.datanode.podTemplate.main.envFrom | nindent 8 }}
         {{- end }}
         {{- if .Values.datanode.podTemplate.main.volumeMounts }}
         volumeMounts: {{- toYaml .Values.datanode.podTemplate.main.volumeMounts | nindent 8 }}
@@ -527,6 +539,9 @@ spec:
         {{- end }}
         {{- if .Values.flownode.podTemplate.main.extraArgs }}
         extraArgs: {{ .Values.flownode.podTemplate.main.extraArgs | toYaml | nindent 8 }}
+        {{- end }}
+        {{- if .Values.flownode.podTemplate.main.envFrom }}
+        envFrom: {{- toYaml .Values.flownode.podTemplate.main.envFrom | nindent 8 }}
         {{- end }}
         {{- if or .Values.auth.enabled .Values.flownode.podTemplate.main.env }}
         env:
