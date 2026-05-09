@@ -301,7 +301,7 @@ frontend:
 #    # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
 #    filters: []
 
-  # -- Tracing configuration for frontend, if not set, it will use the global logging configuration.
+  # -- Tracing configuration for frontend, if not set, it will use the global tracing configuration.
   tracing:
     # -- Enable tracing.
     enabled: false
@@ -522,7 +522,7 @@ meta:
 #    # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
 #    filters: []
 
-  # -- Tracing configuration for meta, if not set, it will use the global logging configuration.
+  # -- Tracing configuration for meta, if not set, it will use the global tracing configuration.
   tracing:
     # -- Enable tracing.
     enabled: false
@@ -705,7 +705,7 @@ datanode:
 #    # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
 #    filters: []
 
-  # -- Tracing configuration for datanode, if not set, it will use the global logging configuration.
+  # -- Tracing configuration for datanode, if not set, it will use the global tracing configuration.
   tracing:
     # -- Enable tracing.
     enabled: false
@@ -754,7 +754,7 @@ flownode:
 #      # -- The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs.
 #      filters: []
 
-  # -- Tracing configuration for flownode, if not set, it will use the global logging configuration.
+  # -- Tracing configuration for flownode, if not set, it will use the global tracing configuration.
   tracing:
     # -- Enable tracing.
     enabled: false
