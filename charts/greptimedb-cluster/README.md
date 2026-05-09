@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.8.8](https://img.shields.io/badge/Version-0.8.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
+![Version: 0.8.9](https://img.shields.io/badge/Version-0.8.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -173,7 +173,7 @@ helm uninstall mycluster -n default
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
 | datanode.storage.storageSize | string | `"20Gi"` | Storage size for datanode persistent volume |
 | datanode.storage.useEmptyDir | bool | `false` | The useEmptyDir is a flag to indicate whether to use an empty dir. If true, the PVC will not be created and the whole storage of datanode will be cleaned up when the datanode restarts. |
-| datanode.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for datanode, if not set, it will use the global logging configuration. |
+| datanode.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for datanode, if not set, it will use the global tracing configuration. |
 | datanode.tracing.enabled | bool | `false` | Enable tracing. |
 | datanode.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
 | datanode.tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |
@@ -217,7 +217,7 @@ helm uninstall mycluster -n default
 | flownode.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | flownode.podTemplate.volumes | list | `[]` | The pod volumes |
 | flownode.replicas | int | `1` | Flownode replicas |
-| flownode.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for flownode, if not set, it will use the global logging configuration. |
+| flownode.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for flownode, if not set, it will use the global tracing configuration. |
 | flownode.tracing.enabled | bool | `false` | Enable tracing. |
 | flownode.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
 | flownode.tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |
@@ -251,7 +251,7 @@ helm uninstall mycluster -n default
 | frontend.replicas | int | `1` | Frontend replicas |
 | frontend.service | object | `{}` | Frontend service |
 | frontend.tls | object | `{}` | Frontend tls configure |
-| frontend.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for frontend, if not set, it will use the global logging configuration. |
+| frontend.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for frontend, if not set, it will use the global tracing configuration. |
 | frontend.tracing.enabled | bool | `false` | Enable tracing. |
 | frontend.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
 | frontend.tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |
@@ -417,7 +417,7 @@ helm uninstall mycluster -n default
 | meta.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | meta.podTemplate.volumes | list | `[]` | The pod volumes |
 | meta.replicas | int | `1` | Meta replicas |
-| meta.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for meta, if not set, it will use the global logging configuration. |
+| meta.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for meta, if not set, it will use the global tracing configuration. |
 | meta.tracing.enabled | bool | `false` | Enable tracing. |
 | meta.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
 | meta.tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |
