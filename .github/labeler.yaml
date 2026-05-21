@@ -17,3 +17,7 @@ greptimedb-enterprise-dashboard:
 greptimedb-remote-compaction:
   - changed-files:
       - any-glob-to-any-file: charts/greptimedb-remote-compaction/**
+
+greptimedb-infra-test:
+  - changed-files:
+      - any-glob-to-any-file: charts/greptimedb-infra-test/**
