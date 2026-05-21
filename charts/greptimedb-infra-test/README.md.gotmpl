@@ -9,4 +9,12 @@ The GreptimeDB infra test is a testing tool used to verify the performance and c
 
 {{ template "chart.requirementsSection" . }}
 
+## How to install
+```console
+helm upgrade \
+  --install greptimedb-infra-test \
+  greptime/greptimedb-infra-test \
+  -n default
+```
+
 {{ template "chart.valuesSection" . }}

@@ -4,7 +4,7 @@ image:
   # -- The image repository
   repository: greptime/greptime-tool
   # -- The image tag
-  tag: "20250606-04e3c7d"
+  tag: "20260521-c19a702"
   # -- The image pull secrets
   pullSecrets: []
 
@@ -12,7 +12,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 # -- Environment variables
-env: {}
+env: []
 
 # -- Configure to the tests
 case:

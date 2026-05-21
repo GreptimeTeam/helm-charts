@@ -36,6 +36,18 @@ spec:
             - name: KAFKA_ENDPOINT
               value: {{ .Values.case.kafka.endpoint }}
             {{- end }}
+            {{- if .Values.case.rds.enabled }}
+            - name: RDS_HOST
+              value: {{ .Values.case.rds.host }}
+            - name: RDS_PORT
+              value: {{ .Values.case.rds.port | quote }}
+            - name: RDS_DATABASE
+              value: {{ .Values.case.rds.database }}
+            - name: RDS_USERNAME
+              value: {{ .Values.case.rds.username }}
+            - name: RDS_PASSWORD
+              value: {{ .Values.case.rds.password }}
+            {{- end }}
           volumeMounts:
             - name: script
               mountPath: /scripts

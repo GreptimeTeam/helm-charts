@@ -1,0 +1,10 @@
+***********************************************************************
+ Welcome to use greptimedb-infra-test
+ Chart version: {{ .Chart.Version }}
+ GreptimeDB Cluster version: {{ .Chart.AppVersion }}
+***********************************************************************
+
+Installed components:
+* greptimedb-infra-test
+
+The greptimedb-infra-test is starting, use `kubectl get pods -n {{ .Release.Namespace }}` to check its status.

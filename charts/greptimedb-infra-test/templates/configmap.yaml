@@ -21,6 +21,11 @@ data:
     {{ .Files.Get "scripts/cpu.sh" | nindent 4 }}
     {{- end }}
 
+    {{- if .Values.case.rds.enabled }}
+    # Run RDS tests
+    {{ .Files.Get "scripts/rds.sh" | nindent 4 }}
+    {{- end }}
+
     {{- if .Values.case.s3.enabled }}
     # Run S3 tests
     {{ .Files.Get "scripts/s3.sh" | nindent 4 }}

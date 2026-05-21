@@ -8,10 +8,7 @@ type: application
 keywords:
   - infra
   - greptimedb
-  - s3-benchmark
-  - rds-latency
-  - disk-fio
-  - cpu-info
+  - test
 maintainers:
   - name: daviderli614
     email: liyang@greptime.com
