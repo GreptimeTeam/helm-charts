@@ -22,7 +22,8 @@ RUN apt-get update && apt-get install -y \
     netcat-openbsd \
     fio \
     iperf3 \
-    openjdk-11-jdk
+    openjdk-11-jdk \
+    bc
 
 # ETCD CLI Install
 RUN ARCH=$(dpkg --print-architecture) && \
