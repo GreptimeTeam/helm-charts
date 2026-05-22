@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-scripts
+  namespace: {{ .Release.Namespace }}
+data:
+  testing.sh: |
+    #!/bin/sh
+
+    set -ue
+
+    echo "================== Starting testing... =================="
+
+    {{- if .Values.case.disk.enabled }}
+    # Run Disk tests
+    {{ .Files.Get "scripts/disk.sh" | nindent 4 }}
+    {{- end }}
+
+    {{- if .Values.case.cpu.enabled }}
+    # Run CPU tests
+    {{ .Files.Get "scripts/cpu.sh" | nindent 4 }}
+    {{- end }}
+
+    {{- if .Values.case.rds.enabled }}
+    # Run RDS tests
+    {{ .Files.Get "scripts/rds.sh" | nindent 4 }}
+    {{- end }}
+
+    {{- if .Values.case.s3.enabled }}
+    # Run S3 tests
+    {{ .Files.Get "scripts/s3.sh" | nindent 4 }}
+    {{- end }}
+
+    {{- if .Values.case.kafka.enabled }}
+    # Run Kafka tests
+    {{ .Files.Get "scripts/kafka.sh" | nindent 4 }}
+    {{- end }}
+
+    echo "\n================== All tests completed! =================="

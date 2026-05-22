@@ -1,0 +1,44 @@
+image:
+  # -- The image registry
+  registry: docker.io
+  # -- The image repository
+  repository: greptime/greptime-tool
+  # -- The image tag
+  tag: "20260521-c19a702"
+  # -- The image pull secrets
+  pullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+# -- Environment variables
+env: []
+
+# -- Configure to the tests
+case:
+  disk:
+    enabled: true
+    storageClass: null
+    size: 20Gi
+
+  cpu:
+    enabled: true
+
+  rds:
+    enabled: true
+    host: "your-rds-host"
+    port: 3306
+    database: "test"
+    username: "your-rds-username"
+    password: "your-rds-password"
+
+  s3:
+    enabled: true
+    bucket: "bucket-name"
+    region: "s3-region"
+    accessKeyID: "your-access-key-id"
+    secretAccessKey: "your-secret-access-key"
+
+  kafka:
+    enabled: true
+    endpoint: "your-kafka-endpoint"

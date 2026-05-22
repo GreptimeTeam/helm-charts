@@ -1,0 +1,14 @@
+{{- if .Values.case.disk.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-data
+  namespace: {{ .Release.Namespace }}
+spec:
+  storageClassName: {{ .Values.case.disk.storageClass }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.case.disk.size }}
+{{- end }}
