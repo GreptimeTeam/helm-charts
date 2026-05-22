@@ -5964,6 +5964,26 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-enterprise-dashboard-0.1.0/greptimedb-enterprise-dashboard-0.1.0.tgz
     version: 0.1.0
+  greptimedb-infra-test:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2026-05-22T02:54:57.858993945Z"
+    description: The Helm chart for deploying GreptimeDB infra test.
+    digest: 55a1f4e53ac7f68b3bc1dade67287ee7d820c252ded6a956d69d92885c69bc6f
+    keywords:
+    - infra
+    - greptimedb
+    - test
+    kubeVersion: '>=1.18.0-0'
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+      url: https://github.com/daviderli614
+    name: greptimedb-infra-test
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-infra-test-0.1.0/greptimedb-infra-test-0.1.0.tgz
+    version: 0.1.0
   greptimedb-operator:
   - apiVersion: v2
     appVersion: 0.5.6
@@ -9622,4 +9642,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2026-05-15T04:31:49.515222451Z"
+generated: "2026-05-22T02:54:57.859616325Z"
