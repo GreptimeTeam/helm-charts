@@ -170,6 +170,36 @@ tests:
           path: spec.wal.kafka.brokerEndpoints[0]
           value: kafka-0.kafka.svc.cluster.local:9092
 
+  - it: should configure remote WAL kafka authentication and TLS
+    set:
+      remoteWal:
+        enabled: true
+        kafka:
+          brokerEndpoints:
+            - kafka-0.kafka.svc.cluster.local:9096
+          sasl:
+            type: SCRAM-SHA-512
+            username: greptime
+            password: secret
+          tls:
+            serverCaCertPath: /etc/kafka-tls/ca.crt
+            clientCertPath: /etc/kafka-tls/client.crt
+            clientKeyPath: /etc/kafka-tls/client.key
+    asserts:
+      - equal:
+          path: spec.wal.kafka.brokerEndpoints[0]
+          value: kafka-0.kafka.svc.cluster.local:9096
+      - equal:
+          path: spec.wal.kafka.sasl.type
+          value: SCRAM-SHA-512
+      - equal:
+          path: spec.wal.kafka.tls.serverCaCertPath
+          value: /etc/kafka-tls/ca.crt
+      - isNull:
+          path: spec.meta.config
+      - isNull:
+          path: spec.datanode.config
+
   - it: should configure monitoring when enabled
     set:
       monitoring:
