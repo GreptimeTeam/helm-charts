@@ -448,7 +448,7 @@ helm uninstall mycluster -n default
 | remoteWal.enabled | bool | `false` | Enable remote wal |
 | remoteWal.kafka | object | `{"brokerEndpoints":[],"sasl":null,"tls":null}` | The remote wal type, only support kafka now. |
 | remoteWal.kafka.brokerEndpoints | list | `[]` | The kafka broker endpoints |
-| remoteWal.kafka.sasl | string | `nil` | The kafka SASL authentication settings. Supports type, username and password. |
+| remoteWal.kafka.sasl | string | `nil` | The kafka SASL authentication settings. Store username/password in a Secret and reference its keys. |
 | remoteWal.kafka.tls | string | `nil` | The kafka TLS settings. Set to {} to use system CA certificates. |
 | slowQuery | object | `{"enabled":true,"recordType":"system_table","sampleRatio":"1.0","threshold":"30s","ttl":"30d"}` | The slow query log configuration. |
 | slowQuery.enabled | bool | `true` | Enable slow query log. |

@@ -179,8 +179,10 @@ tests:
             - kafka-0.kafka.svc.cluster.local:9096
           sasl:
             type: SCRAM-SHA-512
-            username: greptime
-            password: secret
+            secretRef:
+              name: kafka-sasl
+              usernameKey: username
+              passwordKey: password
           tls:
             serverCaCertPath: /etc/kafka-tls/ca.crt
             clientCertPath: /etc/kafka-tls/client.crt
@@ -192,6 +194,15 @@ tests:
       - equal:
           path: spec.wal.kafka.sasl.type
           value: SCRAM-SHA-512
+      - equal:
+          path: spec.wal.kafka.sasl.secretRef.name
+          value: kafka-sasl
+      - equal:
+          path: spec.wal.kafka.sasl.secretRef.usernameKey
+          value: username
+      - equal:
+          path: spec.wal.kafka.sasl.secretRef.passwordKey
+          value: password
       - equal:
           path: spec.wal.kafka.tls.serverCaCertPath
           value: /etc/kafka-tls/ca.crt

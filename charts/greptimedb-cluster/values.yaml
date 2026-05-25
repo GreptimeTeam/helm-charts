@@ -1132,11 +1132,13 @@ remoteWal:
   kafka:
     # -- The kafka broker endpoints
     brokerEndpoints: []
-    # -- The kafka SASL authentication settings. Supports type, username and password.
+    # -- The kafka SASL authentication settings. Store username/password in a Secret and reference its keys.
     sasl: null
     #  type: SCRAM-SHA-512
-    #  username: user
-    #  password: secret
+    #  secretRef:
+    #    name: kafka-sasl
+    #    usernameKey: username
+    #    passwordKey: password
     # -- The kafka TLS settings. Set to {} to use system CA certificates.
     tls: null
     #  serverCaCertPath: /path/to/server.crt
