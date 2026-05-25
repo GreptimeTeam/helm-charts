@@ -169,6 +169,10 @@ tests:
       - equal:
           path: spec.wal.kafka.brokerEndpoints[0]
           value: kafka-0.kafka.svc.cluster.local:9092
+      - isNullOrMissing:
+          path: spec.wal.kafka.sasl
+      - isNullOrMissing:
+          path: spec.wal.kafka.tls
 
   - it: should configure remote WAL kafka authentication and TLS
     set:
