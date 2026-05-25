@@ -444,12 +444,12 @@ helm uninstall mycluster -n default
 | prometheusRule.labels | object | `{}` | Additional labels for the rules PrometheusRule resource |
 | prometheusRule.namespace | string | `""` | The namespace of prometheus rules |
 | prometheusRule.rules | list | `[]` | The prometheus rules |
-| remoteWal | object | `{"enabled":false,"kafka":{"brokerEndpoints":[],"sasl":null,"tls":null}}` | Configure to remote wal |
+| remoteWal | object | `{"enabled":false,"kafka":{"brokerEndpoints":[],"sasl":{},"tls":{}}}` | Configure to remote wal |
 | remoteWal.enabled | bool | `false` | Enable remote wal |
-| remoteWal.kafka | object | `{"brokerEndpoints":[],"sasl":null,"tls":null}` | The remote wal type, only support kafka now. |
+| remoteWal.kafka | object | `{"brokerEndpoints":[],"sasl":{},"tls":{}}` | The remote wal type, only support kafka now. |
 | remoteWal.kafka.brokerEndpoints | list | `[]` | The kafka broker endpoints |
-| remoteWal.kafka.sasl | string | `nil` | The kafka SASL authentication settings. Supports plaintext username/password or SecretRef. SecretRef takes precedence when both are set. |
-| remoteWal.kafka.tls | string | `nil` | The kafka TLS settings. Set to {} to use system CA certificates. |
+| remoteWal.kafka.sasl | object | `{}` | The kafka SASL authentication settings. Supports plaintext username/password or SecretRef. SecretRef takes precedence when both are set. |
+| remoteWal.kafka.tls | object | `{}` | The kafka TLS settings. Set to {} to use system CA certificates. |
 | slowQuery | object | `{"enabled":true,"recordType":"system_table","sampleRatio":"1.0","threshold":"30s","ttl":"30d"}` | The slow query log configuration. |
 | slowQuery.enabled | bool | `true` | Enable slow query log. |
 | slowQuery.recordType | string | `"system_table"` | The record type of slow query log. |
