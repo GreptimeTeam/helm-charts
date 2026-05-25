@@ -211,6 +211,30 @@ tests:
       - isNull:
           path: spec.datanode.config
 
+  - it: should configure remote WAL kafka plaintext authentication
+    set:
+      remoteWal:
+        enabled: true
+        kafka:
+          brokerEndpoints:
+            - kafka-0.kafka.svc.cluster.local:9096
+          sasl:
+            type: SCRAM-SHA-512
+            username: greptime
+            password: secret
+    asserts:
+      - equal:
+          path: spec.wal.kafka.sasl.type
+          value: SCRAM-SHA-512
+      - equal:
+          path: spec.wal.kafka.sasl.username
+          value: greptime
+      - equal:
+          path: spec.wal.kafka.sasl.password
+          value: secret
+      - isNull:
+          path: spec.wal.kafka.sasl.secretRef
+
   - it: should configure monitoring when enabled
     set:
       monitoring:

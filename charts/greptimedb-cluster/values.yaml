@@ -1132,9 +1132,11 @@ remoteWal:
   kafka:
     # -- The kafka broker endpoints
     brokerEndpoints: []
-    # -- The kafka SASL authentication settings. Store username/password in a Secret and reference its keys.
+    # -- The kafka SASL authentication settings. Supports plaintext username/password or SecretRef. SecretRef takes precedence when both are set.
     sasl: null
     #  type: SCRAM-SHA-512
+    #  username: user
+    #  password: secret
     #  secretRef:
     #    name: kafka-sasl
     #    usernameKey: username
