@@ -1132,6 +1132,22 @@ remoteWal:
   kafka:
     # -- The kafka broker endpoints
     brokerEndpoints: []
+    # -- The kafka SASL authentication settings. Use either plaintext username/password or secretRef.
+    sasl: {}
+    #  type: SCRAM-SHA-512
+    #  # Plaintext credentials:
+    #  username: user
+    #  password: secret
+    #  # Or reference an existing Secret instead of setting username/password:
+    #  secretRef:
+    #    name: kafka-sasl
+    #    usernameKey: username
+    #    passwordKey: password
+    # -- The kafka TLS settings. Set to {} to use system CA certificates.
+    tls: {}
+    #  serverCaCertPath: /path/to/server.crt
+    #  clientCertPath: /path/to/client.crt
+    #  clientKeyPath: /path/to/client.key
 
 # -- Configure to dedicated wal
 dedicatedWAL:

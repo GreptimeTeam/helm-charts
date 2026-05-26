@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.8.11](https://img.shields.io/badge/Version-0.8.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
+![Version: 0.8.12](https://img.shields.io/badge/Version-0.8.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -444,10 +444,12 @@ helm uninstall mycluster -n default
 | prometheusRule.labels | object | `{}` | Additional labels for the rules PrometheusRule resource |
 | prometheusRule.namespace | string | `""` | The namespace of prometheus rules |
 | prometheusRule.rules | list | `[]` | The prometheus rules |
-| remoteWal | object | `{"enabled":false,"kafka":{"brokerEndpoints":[]}}` | Configure to remote wal |
+| remoteWal | object | `{"enabled":false,"kafka":{"brokerEndpoints":[],"sasl":{},"tls":{}}}` | Configure to remote wal |
 | remoteWal.enabled | bool | `false` | Enable remote wal |
-| remoteWal.kafka | object | `{"brokerEndpoints":[]}` | The remote wal type, only support kafka now. |
+| remoteWal.kafka | object | `{"brokerEndpoints":[],"sasl":{},"tls":{}}` | The remote wal type, only support kafka now. |
 | remoteWal.kafka.brokerEndpoints | list | `[]` | The kafka broker endpoints |
+| remoteWal.kafka.sasl | object | `{}` | The kafka SASL authentication settings. Use either plaintext username/password or secretRef. |
+| remoteWal.kafka.tls | object | `{}` | The kafka TLS settings. Set to {} to use system CA certificates. |
 | slowQuery | object | `{"enabled":true,"recordType":"system_table","sampleRatio":"1.0","threshold":"30s","ttl":"30d"}` | The slow query log configuration. |
 | slowQuery.enabled | bool | `true` | Enable slow query log. |
 | slowQuery.recordType | string | `"system_table"` | The record type of slow query log. |
