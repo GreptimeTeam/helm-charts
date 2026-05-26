@@ -701,14 +701,7 @@ spec:
   {{- if or .Values.remoteWal.enabled .Values.dedicatedWAL.enabled }}
   wal:
   {{- if .Values.remoteWal.enabled }}
-    {{- $kafka := omit .Values.remoteWal.kafka "sasl" "tls" }}
-    {{- if .Values.remoteWal.kafka.sasl }}
-    {{- $_ := set $kafka "sasl" .Values.remoteWal.kafka.sasl }}
-    {{- end }}
-    {{- if .Values.remoteWal.kafka.tls }}
-    {{- $_ := set $kafka "tls" .Values.remoteWal.kafka.tls }}
-    {{- end }}
-    kafka: {{- toYaml $kafka | nindent 6 }}
+    kafka: {{- toYaml .Values.remoteWal.kafka | nindent 6 }}
   {{- end }}
   {{- if .Values.dedicatedWAL.enabled }}
     raftEngine: {{- toYaml .Values.dedicatedWAL.raftEngine | nindent 6 }}
