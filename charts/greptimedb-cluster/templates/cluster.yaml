@@ -543,24 +543,16 @@ spec:
         {{- if .Values.flownode.podTemplate.main.envFrom }}
         envFrom: {{- toYaml .Values.flownode.podTemplate.main.envFrom | nindent 8 }}
         {{- end }}
-        {{- if or .Values.auth.enabled .Values.flownode.podTemplate.main.env }}
+        {{- if .Values.flownode.podTemplate.main.env }}
         env:
-        {{- if .Values.auth.enabled }}
-        - name: GREPTIMEDB_FLOWNODE__USER_PROVIDER
-          value: "static_user_provider:file:{{ .Values.auth.mountPath }}/{{ .Values.auth.fileName }}"
-        {{- end }}
         {{- if .Values.flownode.podTemplate.main.env }}
         {{- toYaml .Values.flownode.podTemplate.main.env | nindent 8 }}
         {{- end }}
         {{- end }}
-        {{- if or .Values.auth.enabled .Values.flownode.podTemplate.main.volumeMounts }}
+        {{- if .Values.flownode.podTemplate.main.volumeMounts }}
         volumeMounts:
         {{- if .Values.flownode.podTemplate.main.volumeMounts }}
         {{- toYaml .Values.flownode.podTemplate.main.volumeMounts | nindent 8 }}
-        {{- end }}
-        {{- if .Values.auth.enabled }}
-        - name: auth
-          mountPath: {{ .Values.auth.mountPath }}
         {{- end }}
         {{- end }}
         resources: {{- toYaml .Values.flownode.podTemplate.main.resources | nindent 10 }}
@@ -594,15 +586,10 @@ spec:
       {{- if .Values.flownode.podTemplate.nodeSelector }}
       nodeSelector: {{ .Values.flownode.podTemplate.nodeSelector | toYaml | nindent 8 }}
       {{- end }}
-      {{- if or .Values.auth.enabled .Values.flownode.podTemplate.volumes }}
+      {{- if .Values.flownode.podTemplate.volumes }}
       volumes:
       {{- if .Values.flownode.podTemplate.volumes }}
       {{- toYaml .Values.flownode.podTemplate.volumes | nindent 6 }}
-      {{- end }}
-      {{- if .Values.auth.enabled }}
-      - name: auth
-        secret:
-          secretName: {{ .Release.Name }}-users-auth
       {{- end }}
       {{- end }}
       {{- if .Values.flownode.podTemplate.securityContext }}
