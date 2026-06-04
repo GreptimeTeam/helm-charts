@@ -6798,6 +6798,10 @@ spec:
                           type: boolean
                         endpoint:
                           type: string
+                        headers:
+                          additionalProperties:
+                            type: string
+                          type: object
                         sampleRatio:
                           type: string
                       type: object
@@ -10220,11 +10224,18 @@ spec:
                             type: boolean
                           endpoint:
                             type: string
+                          headers:
+                            additionalProperties:
+                              type: string
+                            type: object
                           sampleRatio:
                             type: string
                         type: object
                     type: object
                   type: array
+                enableIPv6:
+                  default: false
+                  type: boolean
                 flownode:
                   properties:
                     config:
@@ -13608,6 +13619,10 @@ spec:
                           type: boolean
                         endpoint:
                           type: string
+                        headers:
+                          additionalProperties:
+                            type: string
+                          type: object
                         sampleRatio:
                           type: string
                       type: object
@@ -17051,6 +17066,10 @@ spec:
                           type: boolean
                         endpoint:
                           type: string
+                        headers:
+                          additionalProperties:
+                            type: string
+                          type: object
                         sampleRatio:
                           type: string
                       type: object
@@ -20495,6 +20514,10 @@ spec:
                             type: boolean
                           endpoint:
                             type: string
+                          headers:
+                            additionalProperties:
+                              type: string
+                            type: object
                           sampleRatio:
                             type: string
                         type: object
@@ -24021,6 +24044,10 @@ spec:
                           type: boolean
                         endpoint:
                           type: string
+                        headers:
+                          additionalProperties:
+                            type: string
+                          type: object
                         sampleRatio:
                           type: string
                       type: object
@@ -27395,6 +27422,9 @@ spec:
                                   type: boolean
                               type: object
                           type: object
+                        enableIPv6:
+                          default: false
+                          type: boolean
                         httpPort:
                           format: int32
                           maximum: 65535
@@ -27620,6 +27650,10 @@ spec:
                               type: boolean
                             endpoint:
                               type: string
+                            headers:
+                              additionalProperties:
+                                type: string
+                              type: object
                             sampleRatio:
                               type: string
                           type: object
@@ -27633,6 +27667,41 @@ spec:
                                   items:
                                     type: string
                                   type: array
+                                sasl:
+                                  properties:
+                                    password:
+                                      type: string
+                                    secretRef:
+                                      properties:
+                                        name:
+                                          type: string
+                                        passwordKey:
+                                          type: string
+                                        usernameKey:
+                                          type: string
+                                      required:
+                                        - name
+                                        - passwordKey
+                                        - usernameKey
+                                      type: object
+                                    type:
+                                      enum:
+                                        - PLAIN
+                                        - SCRAM-SHA-256
+                                        - SCRAM-SHA-512
+                                      type: string
+                                    username:
+                                      type: string
+                                  type: object
+                                tls:
+                                  properties:
+                                    clientCertPath:
+                                      type: string
+                                    clientKeyPath:
+                                      type: string
+                                    serverCaCertPath:
+                                      type: string
+                                  type: object
                               required:
                                 - brokerEndpoints
                               type: object
@@ -27668,6 +27737,9 @@ spec:
                               type: object
                           type: object
                       type: object
+                    ttl:
+                      pattern: ^([0-9]+(\.[0-9]+)?(ns|us|µs|ms|s|m|h|d))+$
+                      type: string
                     vector:
                       properties:
                         image:
@@ -27844,6 +27916,10 @@ spec:
                       type: boolean
                     endpoint:
                       type: string
+                    headers:
+                      additionalProperties:
+                        type: string
+                      type: object
                     sampleRatio:
                       type: string
                   type: object
@@ -27857,6 +27933,41 @@ spec:
                           items:
                             type: string
                           type: array
+                        sasl:
+                          properties:
+                            password:
+                              type: string
+                            secretRef:
+                              properties:
+                                name:
+                                  type: string
+                                passwordKey:
+                                  type: string
+                                usernameKey:
+                                  type: string
+                              required:
+                                - name
+                                - passwordKey
+                                - usernameKey
+                              type: object
+                            type:
+                              enum:
+                                - PLAIN
+                                - SCRAM-SHA-256
+                                - SCRAM-SHA-512
+                              type: string
+                            username:
+                              type: string
+                          type: object
+                        tls:
+                          properties:
+                            clientCertPath:
+                              type: string
+                            clientKeyPath:
+                              type: string
+                            serverCaCertPath:
+                              type: string
+                          type: object
                       required:
                         - brokerEndpoints
                       type: object
