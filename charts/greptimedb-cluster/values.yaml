@@ -73,15 +73,15 @@ base:
 #          path: /health
 #          # -- Name or number of the port to access on the container
 #          port: 4000
-#        # -- The initial delay seconds for the readiness probe.
+#        # -- The initial delay seconds for the startup probe.
 #        initialDelaySeconds: 5
-#        # -- The timeout seconds for the readiness probe
+#        # -- The timeout seconds for the startup probe
 #        timeoutSeconds: 1
-#        # -- The period seconds for the readiness probe
+#        # -- The period seconds for the startup probe
 #        periodSeconds: 10
-#        # -- The success threshold for the readiness probe
+#        # -- The success threshold for the startup probe
 #        successThreshold: 1
-#        # -- The failure threshold for the readiness probe
+#        # -- The failure threshold for the startup probe
 #        failureThreshold: 3
 
       # -- The config for readiness probe of the main container
@@ -196,15 +196,15 @@ frontend:
 #          path: /health
 #          # -- Name or number of the port to access on the container
 #          port: 4000
-#        # -- The initial delay seconds for the readiness probe.
+#        # -- The initial delay seconds for the startup probe.
 #        initialDelaySeconds: 5
-#        # -- The timeout seconds for the readiness probe
+#        # -- The timeout seconds for the startup probe
 #        timeoutSeconds: 1
-#        # -- The period seconds for the readiness probe
+#        # -- The period seconds for the startup probe
 #        periodSeconds: 10
-#        # -- The success threshold for the readiness probe
+#        # -- The success threshold for the startup probe
 #        successThreshold: 1
-#        # -- The failure threshold for the readiness probe
+#        # -- The failure threshold for the startup probe
 #        failureThreshold: 3
 
       # -- The config for readiness probe of the main container
@@ -370,15 +370,15 @@ meta:
 #          path: /health
 #          # -- Name or number of the port to access on the container
 #          port: 4000
-#        # -- The initial delay seconds for the readiness probe.
+#        # -- The initial delay seconds for the startup probe.
 #        initialDelaySeconds: 5
-#        # -- The timeout seconds for the readiness probe
+#        # -- The timeout seconds for the startup probe
 #        timeoutSeconds: 1
-#        # -- The period seconds for the readiness probe
+#        # -- The period seconds for the startup probe
 #        periodSeconds: 10
-#        # -- The success threshold for the readiness probe
+#        # -- The success threshold for the startup probe
 #        successThreshold: 1
-#        # -- The failure threshold for the readiness probe
+#        # -- The failure threshold for the startup probe
 #        failureThreshold: 3
 
       # -- The config for readiness probe of the main container
@@ -592,15 +592,15 @@ datanode:
 #          path: /health
 #          # -- Name or number of the port to access on the container
 #          port: 4000
-#        # -- The initial delay seconds for the readiness probe.
+#        # -- The initial delay seconds for the startup probe.
 #        initialDelaySeconds: 5
-#        # -- The timeout seconds for the readiness probe
+#        # -- The timeout seconds for the startup probe
 #        timeoutSeconds: 1
-#        # -- The period seconds for the readiness probe
+#        # -- The period seconds for the startup probe
 #        periodSeconds: 10
-#        # -- The success threshold for the readiness probe
+#        # -- The success threshold for the startup probe
 #        successThreshold: 1
-#        # -- The failure threshold for the readiness probe
+#        # -- The failure threshold for the startup probe
 #        failureThreshold: 3
 
       # -- The config for readiness probe of the main container
@@ -809,15 +809,15 @@ flownode:
 #          path: /health
 #          # -- Name or number of the port to access on the container
 #          port: 4000
-#        # -- The initial delay seconds for the readiness probe.
+#        # -- The initial delay seconds for the startup probe.
 #        initialDelaySeconds: 5
-#        # -- The timeout seconds for the readiness probe
+#        # -- The timeout seconds for the startup probe
 #        timeoutSeconds: 1
-#        # -- The period seconds for the readiness probe
+#        # -- The period seconds for the startup probe
 #        periodSeconds: 10
-#        # -- The success threshold for the readiness probe
+#        # -- The success threshold for the startup probe
 #        successThreshold: 1
-#        # -- The failure threshold for the readiness probe
+#        # -- The failure threshold for the startup probe
 #        failureThreshold: 3
 
       # -- The config for readiness probe of the main container
