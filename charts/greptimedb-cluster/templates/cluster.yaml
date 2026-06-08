@@ -639,6 +639,10 @@ spec:
   rpcPort: {{ .Values.grpcServicePort }}
   mysqlPort: {{ .Values.mysqlServicePort }}
   postgreSQLPort: {{ .Values.postgresServicePort }}
+  configMergeStrategy: {{ .Values.configMergeStrategy }}
+  {{- if .Values.enableIPv6 }}
+  enableIPv6: {{ .Values.enableIPv6 }}
+  {{- end }}
   initializer:
     image: '{{ .Values.initializer.registry }}/{{ .Values.initializer.repository }}:{{ .Values.initializer.tag }}'
   {{- $objectStorage := .Values.objectStorage }}
@@ -697,6 +701,7 @@ spec:
   {{- if .Values.monitoring.enabled }}
   monitoring:
     enabled: {{ .Values.monitoring.enabled }}
+    ttl: {{ .Values.monitoring.ttl }}
     {{- if .Values.monitoring.standalone }}
     standalone: {{ .Values.monitoring.standalone | toYaml | nindent 6 }}
     {{- end }}
