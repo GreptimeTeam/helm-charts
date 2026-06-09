@@ -534,6 +534,10 @@ meta:
     # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
     sampleRatio: "1.0"
 
+  # -- Install role based access control
+  rbac:
+    create: false
+
 # -- Datanode configure
 datanode:
   enabled: true
