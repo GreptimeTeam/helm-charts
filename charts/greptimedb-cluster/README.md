@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.8.16](https://img.shields.io/badge/Version-0.8.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
+![Version: 0.8.17](https://img.shields.io/badge/Version-0.8.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -422,17 +422,16 @@ helm uninstall mycluster -n default
 | meta.tracing.enabled | bool | `false` | Enable tracing. |
 | meta.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
 | meta.tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |
-| monitoring | object | `{"enabled":false,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"ttl":"30d","vector":{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"500m","memory":"256Mi"}},"tag":"0.46.1-debian"}}` | The monitoring bootstrap configuration |
+| monitoring | object | `{"enabled":false,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"ttl":"30d","vector":{"registry":"docker.io","repository":"timberio/vector","tag":"0.49.0-debian"}}` | The monitoring bootstrap configuration |
 | monitoring.enabled | bool | `false` | Enable monitoring |
 | monitoring.logsCollection | object | `{"pipeline":{"data":""}}` | Configure the logs collection |
 | monitoring.logsCollection.pipeline | object | `{"data":""}` | The greptimedb pipeline for logs collection |
 | monitoring.standalone | object | `{}` | Configure the standalone instance for storing monitoring data |
 | monitoring.ttl | string | `"30d"` | The default retention time for monitoring data |
-| monitoring.vector | object | `{"registry":"docker.io","repository":"timberio/vector","resources":{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"500m","memory":"256Mi"}},"tag":"0.46.1-debian"}` | Configure vector for logs and metrics collection. |
+| monitoring.vector | object | `{"registry":"docker.io","repository":"timberio/vector","tag":"0.49.0-debian"}` | Configure vector for logs and metrics collection. |
 | monitoring.vector.registry | string | `"docker.io"` | vector image registry |
 | monitoring.vector.repository | string | `"timberio/vector"` | vector image repository |
-| monitoring.vector.resources | object | `{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"500m","memory":"256Mi"}}` | vector resource |
-| monitoring.vector.tag | string | `"0.46.1-debian"` | vector image tag |
+| monitoring.vector.tag | string | `"0.49.0-debian"` | vector image tag |
 | mysqlServicePort | int | `4002` | GreptimeDB mysql service port |
 | objectStorage | object | `{"azblob":{},"cache":{},"gcs":{},"oss":{},"s3":{}}` | Configure to object storage |
 | postgresServicePort | int | `4003` | GreptimeDB postgres service port |

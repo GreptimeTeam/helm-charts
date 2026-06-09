@@ -1346,16 +1346,16 @@ monitoring:
     # -- vector image repository
     repository: timberio/vector
     # -- vector image tag
-    tag: 0.46.1-debian
+    tag: 0.49.0-debian
 
     # -- vector resource
-    resources:
-      requests:
-        cpu: "500m"
-        memory: "256Mi"
-      limits:
-        cpu: "500m"
-        memory: "256Mi"
+#    resources:
+#      requests:
+#        cpu: "500m"
+#        memory: "256Mi"
+#      limits:
+#        cpu: "500m"
+#        memory: "256Mi"
 
 # -- Global logging configuration
 logging:
