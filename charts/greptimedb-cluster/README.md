@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.8.17](https://img.shields.io/badge/Version-0.8.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
+![Version: 0.8.18](https://img.shields.io/badge/Version-0.8.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -386,7 +386,7 @@ helm uninstall mycluster -n default
 | logging.logsDir | string | `"/data/greptimedb/logs"` | The logs directory for greptimedb |
 | logging.onlyLogToStdout | bool | `false` | Whether to log to stdout only |
 | logging.persistentWithData | bool | `false` | indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component. |
-| meta | object | `{"backendStorage":{"etcd":{},"mysql":{},"postgresql":{}},"configData":"","configFile":"","enableRegionFailover":false,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Meta configure |
+| meta | object | `{"backendStorage":{"etcd":{},"mysql":{},"postgresql":{}},"configData":"","configFile":"","enableRegionFailover":false,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"rbac":{"create":false},"replicas":1,"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Meta configure |
 | meta.backendStorage | object | `{"etcd":{},"mysql":{},"postgresql":{}}` | Meta Backend storage configuration |
 | meta.backendStorage.etcd | object | `{}` | Etcd backend storage configuration |
 | meta.backendStorage.mysql | object | `{}` | MySQL backend storage configuration |
@@ -417,6 +417,7 @@ helm uninstall mycluster -n default
 | meta.podTemplate.serviceAccount.create | bool | `false` | Create a service account |
 | meta.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | meta.podTemplate.volumes | list | `[]` | The pod volumes |
+| meta.rbac | object | `{"create":false}` | Install role based access control |
 | meta.replicas | int | `1` | Meta replicas |
 | meta.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for meta, if not set, it will use the global tracing configuration. |
 | meta.tracing.enabled | bool | `false` | Enable tracing. |
