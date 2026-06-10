@@ -11,6 +11,16 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+# -- Create a service account
+serviceAccount:
+  create: true
+  # -- The annotations for meta serviceaccount
+  annotations: {}
+
+# -- Install role based access control
+rbac:
+  create: true
+
 # -- Environment variables
 env: []
 
