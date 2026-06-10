@@ -6247,6 +6247,25 @@ entries:
   greptimedb-infra-test:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2026-06-10T06:11:51.870152405Z"
+    description: The Helm chart for deploying GreptimeDB infra test.
+    digest: c61c5328ccae713aeafd8a290a674125c2369380193baa9eb309038210b19092
+    keywords:
+    - infra
+    - greptimedb
+    - test
+    kubeVersion: '>=1.18.0-0'
+    maintainers:
+    - email: liyang@greptime.com
+      name: daviderli614
+      url: https://github.com/daviderli614
+    name: greptimedb-infra-test
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-infra-test-0.1.1/greptimedb-infra-test-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2026-05-22T02:54:57.858993945Z"
     description: The Helm chart for deploying GreptimeDB infra test.
     digest: 55a1f4e53ac7f68b3bc1dade67287ee7d820c252ded6a956d69d92885c69bc6f
@@ -9946,4 +9965,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2026-06-10T02:10:40.714582219Z"
+generated: "2026-06-10T06:11:51.870775796Z"
