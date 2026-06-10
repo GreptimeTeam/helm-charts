@@ -11,6 +11,8 @@ data:
 
     echo "================== Starting testing... =================="
 
+    {{ .Files.Get "scripts/uuid.sh" | nindent 4 }}
+
     {{- if .Values.case.disk.enabled }}
     # Run Disk tests
     {{ .Files.Get "scripts/disk.sh" | nindent 4 }}

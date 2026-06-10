@@ -2,7 +2,7 @@
 
 The Helm chart for deploying GreptimeDB infra test.
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0](https://img.shields.io/badge/AppVersion-0.1.0-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0](https://img.shields.io/badge/AppVersion-0.1.0-informational?style=flat-square)
 
 ## Overview
 
@@ -32,3 +32,6 @@ helm upgrade \
 | image.repository | string | `"greptime/greptime-tool"` | The image repository |
 | image.tag | string | `"20260521-c19a702"` | The image tag |
 | nameOverride | string | `""` |  |
+| rbac | object | `{"create":true}` | Install role based access control |
+| serviceAccount | object | `{"annotations":{},"create":true}` | Create a service account |
+| serviceAccount.annotations | object | `{}` | The annotations for meta serviceaccount |

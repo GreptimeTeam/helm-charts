@@ -12,6 +12,9 @@ spec:
         - name: {{ . }}
       {{- end }}
       {{- end }}
+      {{- if .Values.serviceAccount.create }}
+      serviceAccountName: {{ .Release.Name }}
+      {{- end }}
       containers:
         - name: {{ .Release.Name }}
           image: {{ printf "%s/%s:%s" .Values.image.registry .Values.image.repository .Values.image.tag }}

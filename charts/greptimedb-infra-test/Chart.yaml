@@ -3,7 +3,7 @@ kubeVersion: ">=1.18.0-0"
 description: The Helm chart for deploying GreptimeDB infra test.
 name: greptimedb-infra-test
 appVersion: 0.1.0
-version: 0.1.0
+version: 0.1.1
 type: application
 keywords:
   - infra
