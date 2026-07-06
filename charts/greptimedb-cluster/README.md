@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.8.23](https://img.shields.io/badge/Version-0.8.23-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.2](https://img.shields.io/badge/AppVersion-1.1.2-informational?style=flat-square)
+![Version: 0.8.24](https://img.shields.io/badge/Version-0.8.24-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.2](https://img.shields.io/badge/AppVersion-1.1.2-informational?style=flat-square)
 
 ## Source Code
 
@@ -106,9 +106,10 @@ helm uninstall mycluster -n default
 | auth.useBuiltIn | bool | `false` | Whether to use GreptimeDB built-in auth provider for user file. |
 | auth.users | list | `[{"password":"admin","permission":"readwrite","username":"admin"},{"password":"grafana_pwd","permission":"readonly","username":"grafana"},{"password":"telegraf_pwd","permission":"writeonly","username":"telegraf"}]` | The users to be created in the auth file. Each user can have an optional `permission` field with values: `readwrite`, `readonly`, or `writeonly`. |
 | auth.users[0].permission | string | `"readwrite"` | The permission for the user. Optional. Valid values: `readwrite`, `readonly`, `writeonly`. |
-| base.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{}},"nodeSelector":{},"securityContext":{},"serviceAccountName":"","terminationGracePeriodSeconds":30,"tolerations":[]}` | The pod template for base |
+| base.podTemplate | object | `{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{}},"nodeSelector":{},"securityContext":{},"serviceAccountName":"","terminationGracePeriodSeconds":30,"tolerations":[]}` | The pod template for base |
 | base.podTemplate.affinity | object | `{}` | The pod affinity |
 | base.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
+| base.podTemplate.hostNetwork | bool | `false` | Enable hostNetwork for the pod |
 | base.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
 | base.podTemplate.main | object | `{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{}}` | The base spec of main container |
 | base.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
@@ -139,13 +140,14 @@ helm uninstall mycluster -n default
 | dashboards.label | string | `"grafana_dashboard"` | The label as defined in the grafana helmchart. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards |
 | dashboards.labelValue | string | `"1"` | The label value as defined in the grafana helmchart. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards |
 | dashboards.namespace | string | `""` | The namespace in which the grafana dashboard configmaps are installed |
-| datanode | object | `{"configData":"","configFile":"","enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storage":{"annotations":{},"dataHome":"/data/greptimedb","labels":{},"mountPath":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"20Gi","useEmptyDir":false},"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Datanode configure |
+| datanode | object | `{"configData":"","configFile":"","enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storage":{"annotations":{},"dataHome":"/data/greptimedb","labels":{},"mountPath":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"20Gi","useEmptyDir":false},"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Datanode configure |
 | datanode.configData | string | `""` | Extra raw toml config data of datanode. Skip if the `configFile` is used. |
 | datanode.configFile | string | `""` | Extra toml file of datanode. |
 | datanode.logging | object | `{}` | Logging configuration for datanode, if not set, it will use the global logging configuration. |
-| datanode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for datanode |
+| datanode.podTemplate | object | `{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for datanode |
 | datanode.podTemplate.affinity | object | `{}` | The pod affinity |
 | datanode.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
+| datanode.podTemplate.hostNetwork | bool | `false` | Enable hostNetwork for the pod |
 | datanode.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
 | datanode.podTemplate.main | object | `{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]}` | The spec of main container |
 | datanode.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
@@ -190,14 +192,15 @@ helm uninstall mycluster -n default
 | dedicatedWAL.raftEngine.fs.name | string | `"wal"` | The name of the wal |
 | dedicatedWAL.raftEngine.fs.storageClassName | string | `nil` | The storage class name |
 | dedicatedWAL.raftEngine.fs.storageSize | string | `"20Gi"` | The storage size |
-| flownode | object | `{"configData":"","configFile":"","enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Flownode configure. |
+| flownode | object | `{"configData":"","configFile":"","enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Flownode configure. |
 | flownode.configData | string | `""` | Extra raw toml config data of flownode. Skip if the `configFile` is used. |
 | flownode.configFile | string | `""` | Extra toml file of flownode. |
 | flownode.enabled | bool | `true` | Enable flownode |
 | flownode.logging | object | `{}` | Logging configuration for flownode, if not set, it will use the global logging configuration. |
-| flownode.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
+| flownode.podTemplate | object | `{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
 | flownode.podTemplate.affinity | object | `{}` | The pod affinity |
 | flownode.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
+| flownode.podTemplate.hostNetwork | bool | `false` | Enable hostNetwork for the pod |
 | flownode.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
 | flownode.podTemplate.main | object | `{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]}` | The spec of main container |
 | flownode.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
@@ -222,14 +225,15 @@ helm uninstall mycluster -n default
 | flownode.tracing.enabled | bool | `false` | Enable tracing. |
 | flownode.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
 | flownode.tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |
-| frontend | object | `{"configData":"","configFile":"","enableObjectStorage":false,"enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{},"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Frontend configure |
+| frontend | object | `{"configData":"","configFile":"","enableObjectStorage":false,"enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{},"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Frontend configure |
 | frontend.configData | string | `""` | Extra raw toml config data of frontend. Skip if the `configFile` is used. |
 | frontend.configFile | string | `""` | Extra toml file of frontend. |
 | frontend.enableObjectStorage | bool | `false` | Whether to enable object storage on frontend. |
 | frontend.logging | object | `{}` | Logging configuration for frontend, if not set, it will use the global logging configuration. |
-| frontend.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
+| frontend.podTemplate | object | `{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
 | frontend.podTemplate.affinity | object | `{}` | The pod affinity |
 | frontend.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
+| frontend.podTemplate.hostNetwork | bool | `false` | Enable hostNetwork for the pod |
 | frontend.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
 | frontend.podTemplate.main | object | `{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]}` | The spec of main container |
 | frontend.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |
@@ -386,7 +390,7 @@ helm uninstall mycluster -n default
 | logging.logsDir | string | `"/data/greptimedb/logs"` | The logs directory for greptimedb |
 | logging.onlyLogToStdout | bool | `false` | Whether to log to stdout only |
 | logging.persistentWithData | bool | `false` | indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component. |
-| meta | object | `{"backendStorage":{"etcd":{},"mysql":{},"postgresql":{}},"configData":"","configFile":"","enableRegionFailover":false,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"rbac":{"create":false},"replicas":1,"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Meta configure |
+| meta | object | `{"backendStorage":{"etcd":{},"mysql":{},"postgresql":{}},"configData":"","configFile":"","enableRegionFailover":false,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"rbac":{"create":false},"replicas":1,"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Meta configure |
 | meta.backendStorage | object | `{"etcd":{},"mysql":{},"postgresql":{}}` | Meta Backend storage configuration |
 | meta.backendStorage.etcd | object | `{}` | Etcd backend storage configuration |
 | meta.backendStorage.mysql | object | `{}` | MySQL backend storage configuration |
@@ -395,9 +399,10 @@ helm uninstall mycluster -n default
 | meta.configFile | string | `""` | Extra toml file of meta. |
 | meta.enableRegionFailover | bool | `false` | Whether to enable region failover |
 | meta.logging | object | `{}` | Logging configuration for meta, if not set, it will use the global logging configuration. |
-| meta.podTemplate | object | `{"affinity":{},"annotations":{},"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for meta |
+| meta.podTemplate | object | `{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for meta |
 | meta.podTemplate.affinity | object | `{}` | The pod affinity |
 | meta.podTemplate.annotations | object | `{}` | The annotations to be created to the pod. |
+| meta.podTemplate.hostNetwork | bool | `false` | Enable hostNetwork for the pod |
 | meta.podTemplate.labels | object | `{}` | The labels to be created to the pod. |
 | meta.podTemplate.main | object | `{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]}` | The spec of main container |
 | meta.podTemplate.main.args | list | `[]` | The arguments to be passed to the command |

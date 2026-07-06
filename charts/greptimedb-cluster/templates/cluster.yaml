@@ -55,6 +55,9 @@ spec:
     {{- if .Values.base.podTemplate.serviceAccountName }}
     serviceAccountName: {{ .Values.base.podTemplate.serviceAccountName }}
     {{- end }}
+    {{- if .Values.base.podTemplate.hostNetwork }}
+    hostNetwork: {{ .Values.base.podTemplate.hostNetwork }}
+    {{- end }}
     {{- if .Values.base.podTemplate.tolerations }}
     tolerations: {{ .Values.base.podTemplate.tolerations | toYaml | nindent 6 }}
     {{- end }}
@@ -153,6 +156,9 @@ spec:
       {{- end }}
       {{- if .Values.frontend.podTemplate.serviceAccount.create }}
       serviceAccountName: {{ .Release.Name }}-frontend
+      {{- end }}
+      {{- if .Values.frontend.podTemplate.hostNetwork }}
+      hostNetwork: {{ .Values.frontend.podTemplate.hostNetwork }}
       {{- end }}
       {{- if .Values.frontend.podTemplate.tolerations }}
       tolerations: {{ .Values.frontend.podTemplate.tolerations | toYaml | nindent 8 }}
@@ -363,6 +369,9 @@ spec:
       {{- if .Values.meta.podTemplate.serviceAccount.create }}
       serviceAccountName: {{ .Release.Name }}-meta
       {{- end }}
+      {{- if .Values.meta.podTemplate.hostNetwork }}
+      hostNetwork: {{ .Values.meta.podTemplate.hostNetwork }}
+      {{- end }}
       {{- if .Values.meta.podTemplate.tolerations }}
       tolerations: {{ .Values.meta.podTemplate.tolerations | toYaml | nindent 8 }}
       {{- end }}
@@ -451,6 +460,9 @@ spec:
       {{- end }}
       {{- if .Values.datanode.podTemplate.serviceAccount.create }}
       serviceAccountName: {{ .Release.Name }}-datanode
+      {{- end }}
+      {{- if .Values.datanode.podTemplate.hostNetwork }}
+      hostNetwork: {{ .Values.datanode.podTemplate.hostNetwork }}
       {{- end }}
       {{- if .Values.datanode.podTemplate.tolerations }}
       tolerations: {{ .Values.datanode.podTemplate.tolerations | toYaml | nindent 8 }}
@@ -576,6 +588,9 @@ spec:
       {{- end }}
       {{- if .Values.flownode.podTemplate.serviceAccount.create }}
       serviceAccountName: {{ .Release.Name }}-flownode
+      {{- end }}
+      {{- if .Values.flownode.podTemplate.hostNetwork }}
+      hostNetwork: {{ .Values.flownode.podTemplate.hostNetwork }}
       {{- end }}
       {{- if .Values.flownode.podTemplate.tolerations }}
       tolerations: {{ .Values.flownode.podTemplate.tolerations | toYaml | nindent 8 }}

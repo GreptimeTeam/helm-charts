@@ -135,6 +135,8 @@ base:
     affinity: {}
     # -- The global service account
     serviceAccountName: ""
+    # -- Enable hostNetwork for the pod
+    hostNetwork: false
     # -- The configurations for pod security context.
     securityContext: {}
     # -- The termination grace period seconds
@@ -258,6 +260,8 @@ frontend:
     affinity: {}
     # -- The pod volumes
     volumes: []
+    # -- Enable hostNetwork for the pod
+    hostNetwork: false
 
     serviceAccount:
       # -- Create a service account
@@ -432,6 +436,8 @@ meta:
     affinity: {}
     # -- The pod volumes
     volumes: []
+    # -- Enable hostNetwork for the pod
+    hostNetwork: false
 
     serviceAccount:
       # -- Create a service account
@@ -658,6 +664,8 @@ datanode:
     affinity: {}
     # -- The pod volumes
     volumes: []
+    # -- Enable hostNetwork for the pod
+    hostNetwork: false
 
     serviceAccount:
       # -- Create a service account
@@ -875,6 +883,8 @@ flownode:
     affinity: {}
     # -- The pod volumes
     volumes: []
+    # -- Enable hostNetwork for the pod
+    hostNetwork: false
 
     serviceAccount:
       # -- Create a service account
@@ -1318,6 +1328,9 @@ monitoring:
 
 #      # -- The global service account for monitoring
 #      serviceAccountName: ""
+#      # -- Enable hostNetwork for the pod
+#      hostNetwork: false
+
 #     datanodeStorage:
 #       fs:
 #         # -- Storage class for datanode persistent volume

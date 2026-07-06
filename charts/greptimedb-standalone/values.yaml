@@ -35,6 +35,9 @@ command: []
 # -- The container args
 args: []
 
+# -- Enable hostNetwork for the pod
+hostNetwork: false
+
 # -- The extra configuration for greptimedb
 configToml: |
   mode = 'standalone'

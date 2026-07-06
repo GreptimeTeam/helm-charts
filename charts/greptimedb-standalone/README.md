@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.4.6](https://img.shields.io/badge/Version-0.4.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.2](https://img.shields.io/badge/AppVersion-1.1.2-informational?style=flat-square)
+![Version: 0.4.7](https://img.shields.io/badge/Version-0.4.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.2](https://img.shields.io/badge/AppVersion-1.1.2-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -69,6 +69,7 @@ helm uninstall greptimedb-standalone -n default
 | extraVolumes | list | `[]` | Volumes to add to the pods |
 | fullnameOverride | string | `""` | Provide a name to substitute for the full names of resources |
 | grpcServicePort | int | `4001` | GreptimeDB grpc service port |
+| hostNetwork | bool | `false` | Enable hostNetwork for the pod |
 | httpServicePort | int | `4000` | GreptimeDB http service port |
 | image.pullPolicy | string | `"IfNotPresent"` | The image pull policy for the controller |
 | image.pullSecrets | list | `[]` | The image pull secrets. |
