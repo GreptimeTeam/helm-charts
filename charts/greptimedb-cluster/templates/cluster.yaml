@@ -717,9 +717,14 @@ spec:
   monitoring:
     enabled: {{ .Values.monitoring.enabled }}
     ttl: {{ .Values.monitoring.ttl }}
-    {{- if .Values.monitoring.standalone }}
-    standalone: {{ .Values.monitoring.standalone | toYaml | nindent 6 }}
-    {{- end }}
+    {{- $standaloneImage := printf "%s/%s:%s" .Values.image.registry .Values.image.repository .Values.image.tag }}
+    {{- $standalone := deepCopy (default (dict) .Values.monitoring.standalone) }}
+    {{- $standaloneBase := deepCopy (default (dict) (get $standalone "base")) }}
+    {{- $standaloneMain := deepCopy (default (dict) (get $standaloneBase "main")) }}
+    {{- $_ := set $standaloneMain "image" (default $standaloneImage (get $standaloneMain "image")) }}
+    {{- $_ = set $standaloneBase "main" $standaloneMain }}
+    {{- $_ = set $standalone "base" $standaloneBase }}
+    standalone: {{ $standalone | toYaml | nindent 6 }}
     {{- if .Values.monitoring.logsCollection.pipeline.data }}
     logsCollection:
       pipeline:
