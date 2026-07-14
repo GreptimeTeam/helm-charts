@@ -2,7 +2,7 @@
 
 The greptimedb-operator Helm chart for Kubernetes.
 
-![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
+![Version: 0.6.1](https://img.shields.io/badge/Version-0.6.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -134,6 +134,7 @@ Kubernetes: `>=1.18.0-0`
 | leaderElection.retryPeriod | string | `"2s"` | RetryPeriod is the duration the LeaderElector clients should wait between tries of actions. |
 | livenessProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":15,"periodSeconds":30,"successThreshold":1,"timeoutSeconds":5}` | Configure options for liveness probe |
 | nameOverride | string | `""` | String to partially override release template name |
+| namespaced | bool | `false` | if `true`, operator will run in a namespaced scope (`Role` and `Rolebinding` will be namespaced too). |
 | nodeSelector | object | `{}` | The operator node selector |
 | podAnnotations | object | `{}` | Extra pod annotations to add |
 | podLabels | object | `{}` | Extra pod labels to add |

@@ -1,13 +1,13 @@
 {{- if .Values.rbac.create }}
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+kind: {{ .Values.namespaced | ternary "RoleBinding" "ClusterRoleBinding" }}
 metadata:
   name: {{ include "greptimedb-operator.fullname" . }}-rolebinding
   labels:
     {{- include "greptimedb-operator.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
+  kind: {{ .Values.namespaced | ternary "Role" "ClusterRole" }}
   name: {{ include "greptimedb-operator.fullname" . }}-role
 subjects:
   - kind: ServiceAccount

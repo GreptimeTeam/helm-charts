@@ -47,6 +47,9 @@ replicas: 1
 # -- The deployment annotations
 annotations: {}
 
+# -- if `true`, operator will run in a namespaced scope (`Role` and `Rolebinding` will be namespaced too).
+namespaced: false
+
 # -- [Environment variables](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) for the container.
 env: []
 
