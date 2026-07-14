@@ -1,0 +1,70 @@
+suite: monitoring standalone image tests
+templates:
+  - cluster.yaml
+tests:
+  - it: should use the cluster image for monitoring standalone by default
+    set:
+      image:
+        registry: quay.io
+        repository: greptime/greptimedb
+        tag: v1.2.3
+      monitoring:
+        enabled: true
+    asserts:
+      - equal:
+          path: spec.monitoring.standalone.base.main.image
+          value: "quay.io/greptime/greptimedb:v1.2.3"
+
+  - it: should use the explicit monitoring standalone image
+    set:
+      image:
+        registry: quay.io
+        repository: greptime/greptimedb
+        tag: v1.2.3
+      monitoring:
+        enabled: true
+        standalone:
+          base:
+            labels:
+              purpose: monitoring
+            main:
+              image: "example.com/greptime/greptimedb:monitoring"
+    asserts:
+      - equal:
+          path: spec.monitoring.standalone.base.main.image
+          value: "example.com/greptime/greptimedb:monitoring"
+      - equal:
+          path: spec.monitoring.standalone.base.labels.purpose
+          value: monitoring
+
+  - it: should use the cluster image when monitoring standalone image is empty
+    set:
+      image:
+        registry: quay.io
+        repository: greptime/greptimedb
+        tag: v1.2.3
+      monitoring:
+        enabled: true
+        standalone:
+          base:
+            main:
+              image: ""
+    asserts:
+      - equal:
+          path: spec.monitoring.standalone.base.main.image
+          value: "quay.io/greptime/greptimedb:v1.2.3"
+
+  - it: should use the cluster image when monitoring standalone base is null
+    set:
+      image:
+        registry: quay.io
+        repository: greptime/greptimedb
+        tag: v1.2.3
+      monitoring:
+        enabled: true
+        standalone:
+          base: null
+    asserts:
+      - equal:
+          path: spec.monitoring.standalone.base.main.image
+          value: "quay.io/greptime/greptimedb:v1.2.3"
