@@ -1290,13 +1290,13 @@ monitoring:
 #        resources:
 #          # -- The requested resources for monitoring
 #          requests: {}
-# #            cpu: 500m
-# #            memory: 512Mi
+#            cpu: 500m
+#            memory: 512Mi
 
 #          # -- The resources limits for monitoring
 #          limits: {}
-# #            cpu: "1"
-# #            memory: "1Gi"
+#            cpu: "1"
+#            memory: "1Gi"
 
 #        # -- The environment variables for the container
 #        env: []
