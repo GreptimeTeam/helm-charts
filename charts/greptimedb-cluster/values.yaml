@@ -1427,7 +1427,7 @@ slowQuery:
 # This configuration use for GreptimeDB Enterprise, please do not enable it in OSS versions.
 # Audit logs record operations executed on the database, helping monitor user activity,
 # detect suspicious operations, and ensure compliance.
-# see https://docs.greptime.cn/enterprise/deployments-administration/monitoring/audit-logging/
+# see https://docs.greptime.com/enterprise/deployments-administration/monitoring/audit-logging/
 auditLog:
   # -- Enable the audit log plugin. Default: false.
   enabled: false
