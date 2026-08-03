@@ -216,6 +216,16 @@ spec:
       endpoint: {{ .Values.frontend.tracing.endpoint }}
       sampleRatio: {{ .Values.frontend.tracing.sampleRatio | quote }}
     {{- end }}
+    {{- if .Values.auditLog.enabled}}
+    auditLog:
+      enabled: true
+      dir: {{ .Values.auditLog.dir }}
+      sources: {{ .Values.auditLog.sources }}
+      classes: {{ .Values.auditLog.classes }}
+      commands: {{ .Values.auditLog.commands }}
+      objectTypes: {{ .Values.auditLog.objectTypes }}
+      maxLogFiles: {{ .Values.auditLog.maxLogFiles }}
+    {{- end }}
     {{- if .Values.slowQuery }}
     slowQuery:
       enabled: {{ .Values.slowQuery.enabled }}
