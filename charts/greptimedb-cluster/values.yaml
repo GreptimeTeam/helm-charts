@@ -1432,34 +1432,30 @@ auditLog:
   # -- Enable the audit log plugin. Default: false.
   enabled: false
 
-  # -- Directory to store audit log files. A new audit log file is generated daily.
+  # -- Directory to store audit log files.
   # Default: "/data/greptimedb/audit-logs".
   dir: /data/greptimedb/audit-logs
 
-  # -- Allowed sources for auditing. This option acts as a filter: if a statement does not
-  # come from one of these configured sources, it will not be recorded in the audit log.
+  # -- Allowed sources for auditing. This option acts as a filter.
   # Multiple sources are separated by commas (",").
   # Available sources: "unknown", "http", "grpc", "mysql", "postgres".
   # A special value "all" (default) means all sources.
   sources: "all"
 
-  # -- Allowed statement classes for auditing. This option acts as a filter: if a statement's
-  # class does not match one of these configured values, it will not be recorded.
+  # -- Allowed statement classes for auditing. This option acts as a filter.
   # Multiple classes are separated by commas (",").
   # Available classes: "read", "write", "admin", "ddl", "misc".
   # A special value "all" means all classes. Default: "ddl,admin".
   classes: "ddl,admin"
 
-  # -- Allowed statement commands for auditing. This option acts as a filter: if a statement's
-  # command does not match one of these configured values, it will not be recorded.
+  # -- Allowed statement commands for auditing. This option acts as a filter.
   # Multiple commands are separated by commas (",").
   # Available commands: "promql", "select", "copy", "insert", "delete", "create",
   # "alter", "truncate", "drop", "admin", "misc".
   # A special value "all" (default) means all commands.
   commands: "all"
 
-  # -- Allowed object types for auditing. This option acts as a filter: if the target object
-  # of a statement does not match one of these configured values, it will not be recorded.
+  # -- Allowed object types for auditing. This option acts as a filter.
   # Multiple object types are separated by commas (",").
   # Available object types: "database", "table", "view", "flow", "index", "misc", "trigger".
   # A special value "all" (default) means all object types.
