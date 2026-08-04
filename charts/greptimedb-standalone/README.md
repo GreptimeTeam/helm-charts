@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.4.9](https://img.shields.io/badge/Version-0.4.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0-beta.1](https://img.shields.io/badge/AppVersion-1.2.0-beta.1-informational?style=flat-square)
+![Version: 0.4.10](https://img.shields.io/badge/Version-0.4.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0-beta.1](https://img.shields.io/badge/AppVersion-1.2.0-beta.1-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
