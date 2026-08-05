@@ -1,0 +1,25 @@
+charts/greptimedb-cluster/Chart.yaml
+  s_306f4789794052::t_c2860ff263dbfd 5
+charts/greptimedb-cluster/README.md
+  s_306f4789794052::t_ee4d486deb2716 5
+charts/greptimedb-cluster/dashboards/greptimedb-cluster-events.json
+  s_306f4789794052::t_e973d6830698c7 1-1325
+scripts/update/update-grafana-dashboard.sh
+  s_306f4789794052::t_70a1979798c7dc 5-9,22-40,43-71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.17",
+  "base_commit_sha": "7a8cd109814486bb73750245c13bcd6a6dc57365",
+  "prompts": {},
+  "sessions": {
+    "s_306f4789794052": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fd1ad-d5e7-70b3-9159-2f11043ecba4",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "WenyXu <wenymedia@gmail.com>"
+    }
+  }
+}
