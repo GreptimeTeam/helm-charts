@@ -33,7 +33,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.6.0
+  tag: v0.6.1
 
 base:
   # -- The pod template for base
@@ -1195,39 +1195,6 @@ dedicatedWAL:
       storageSize: 20Gi
       # -- The mount path
       mountPath: /wal
-
-# -- Configure to frontend ingress
-ingress: {}
- # -- Ingress annotations to apply to the ingress resource
- # annotations: {}
- #   example: frontend-ingress
-
- # -- Labels to apply to the ingress resource
- # labels: {}
- #   example: frontend-ingress
-
- # -- Specify the IngressClassName to use for the ingress
- # ingressClassName: nginx
-
- # -- The rules for routing traffic to the frontend service
- # rules:
- #   - host: ingress.example.com
- #     backends:
- #       - path: /
- #         pathType: Prefix  # Support to 'Prefix', 'ImplementationSpecific', 'Exact'.
-
- #       - name: read        # Specify the read frontend name if it exists.
- #         path: /
- #         pathType: Prefix
- #       - name: write       # Specify the write frontend name if it exists.
- #         path: /v1/sql
- #         pathType: Prefix
-
- # -- TLS configuration for securing the ingress traffic
- # tls:
- #   - secretName: frontend-ingress-tls
- #     hosts:
- #       - ingress.example.com
 
 # -- The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/deployments-administration/authentication/static).
 auth:

@@ -748,25 +748,6 @@ spec:
       {{- end }}
     {{- end }}
   {{- end }}
-  {{- $ingress := .Values.ingress }}
-  {{- if $ingress }}
-  ingress:
-    {{- if $ingress.annotations }}
-    annotations: {{- toYaml $ingress.annotations | nindent 6 }}
-    {{- end }}
-    {{- if $ingress.labels }}
-    labels: {{- toYaml $ingress.labels | nindent 6 }}
-    {{- end }}
-    {{- if $ingress.ingressClassName }}
-    ingressClassName: {{ $ingress.ingressClassName }}
-    {{- end }}
-    {{- if $ingress.rules }}
-    rules: {{- toYaml $ingress.rules | nindent 6 }}
-    {{- end }}
-    {{- if $ingress.tls }}
-    tls: {{- toYaml $ingress.tls | nindent 6 }}
-    {{- end }}
-  {{- end }}
   {{- if .Values.logging}}
   logging:
     {{- if .Values.logging.level }}
