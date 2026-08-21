@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.8.30](https://img.shields.io/badge/Version-0.8.30-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0-beta.1](https://img.shields.io/badge/AppVersion-1.2.0--beta.1-informational?style=flat-square)
+![Version: 0.8.31](https://img.shields.io/badge/Version-0.8.31-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0-beta.1](https://img.shields.io/badge/AppVersion-1.2.0--beta.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -365,10 +365,9 @@ helm uninstall mycluster -n default
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
 | image.tag | string | `"v1.2.0-beta.1"` | The image tag |
-| ingress | object | `{}` | Configure to frontend ingress |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.6.0"` | Initializer image tag |
+| initializer.tag | string | `"v0.6.1"` | Initializer image tag |
 | jaeger-all-in-one.enableHttpOpenTelemetryCollector | bool | `true` | Enable the opentelemetry collector for jaeger-all-in-one and listen on port 4317. |
 | jaeger-all-in-one.enableHttpZipkinCollector | bool | `true` | Enable the zipkin collector for jaeger-all-in-one and listen on port 9411. |
 | jaeger-all-in-one.enabled | bool | `false` | Enable jaeger-all-in-one deployment. |

@@ -13629,6 +13629,24 @@ spec:
                   type: object
                 frontend:
                   properties:
+                    auditLog:
+                      properties:
+                        classes:
+                          type: string
+                        commands:
+                          type: string
+                        dir:
+                          type: string
+                        enabled:
+                          type: boolean
+                        maxLogFiles:
+                          format: int32
+                          type: integer
+                        objectTypes:
+                          type: string
+                        sources:
+                          type: string
+                      type: object
                     config:
                       type: string
                     enableObjectStorage:
@@ -13714,6 +13732,31 @@ spec:
                           type: object
                         loadBalancerClass:
                           type: string
+                        ports:
+                          items:
+                            properties:
+                              appProtocol:
+                                type: string
+                              name:
+                                type: string
+                              nodePort:
+                                format: int32
+                                type: integer
+                              port:
+                                format: int32
+                                type: integer
+                              protocol:
+                                default: TCP
+                                type: string
+                              targetPort:
+                                anyOf:
+                                  - type: integer
+                                  - type: string
+                                x-kubernetes-int-or-string: true
+                            required:
+                              - port
+                            type: object
+                          type: array
                         type:
                           type: string
                       type: object
@@ -17077,6 +17120,24 @@ spec:
                 frontendGroups:
                   items:
                     properties:
+                      auditLog:
+                        properties:
+                          classes:
+                            type: string
+                          commands:
+                            type: string
+                          dir:
+                            type: string
+                          enabled:
+                            type: boolean
+                          maxLogFiles:
+                            format: int32
+                            type: integer
+                          objectTypes:
+                            type: string
+                          sources:
+                            type: string
+                        type: object
                       config:
                         type: string
                       enableObjectStorage:
@@ -17162,6 +17223,31 @@ spec:
                             type: object
                           loadBalancerClass:
                             type: string
+                          ports:
+                            items:
+                              properties:
+                                appProtocol:
+                                  type: string
+                                name:
+                                  type: string
+                                nodePort:
+                                  format: int32
+                                  type: integer
+                                port:
+                                  format: int32
+                                  type: integer
+                                protocol:
+                                  default: TCP
+                                  type: string
+                                targetPort:
+                                  anyOf:
+                                    - type: integer
+                                    - type: string
+                                  x-kubernetes-int-or-string: true
+                              required:
+                                - port
+                              type: object
+                            type: array
                           type:
                             type: string
                         type: object
@@ -20528,49 +20614,6 @@ spec:
                   maximum: 65535
                   minimum: 0
                   type: integer
-                ingress:
-                  properties:
-                    annotations:
-                      additionalProperties:
-                        type: string
-                      type: object
-                    ingressClassName:
-                      type: string
-                    labels:
-                      additionalProperties:
-                        type: string
-                      type: object
-                    rules:
-                      items:
-                        properties:
-                          backends:
-                            items:
-                              properties:
-                                name:
-                                  type: string
-                                path:
-                                  type: string
-                                pathType:
-                                  type: string
-                              type: object
-                            type: array
-                          host:
-                            type: string
-                        type: object
-                      type: array
-                    tls:
-                      items:
-                        properties:
-                          hosts:
-                            items:
-                              type: string
-                            type: array
-                            x-kubernetes-list-type: atomic
-                          secretName:
-                            type: string
-                        type: object
-                      type: array
-                  type: object
                 initializer:
                   properties:
                     image:
@@ -27618,6 +27661,31 @@ spec:
                               type: object
                             loadBalancerClass:
                               type: string
+                            ports:
+                              items:
+                                properties:
+                                  appProtocol:
+                                    type: string
+                                  name:
+                                    type: string
+                                  nodePort:
+                                    format: int32
+                                    type: integer
+                                  port:
+                                    format: int32
+                                    type: integer
+                                  protocol:
+                                    default: TCP
+                                    type: string
+                                  targetPort:
+                                    anyOf:
+                                      - type: integer
+                                      - type: string
+                                    x-kubernetes-int-or-string: true
+                                required:
+                                  - port
+                                type: object
+                              type: array
                             type:
                               type: string
                           type: object
