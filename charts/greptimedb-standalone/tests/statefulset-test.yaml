@@ -85,6 +85,23 @@ tests:
               secretName: mystandalone-greptimedb-standalone-users-auth
         template: statefulset.yaml
 
+  - it: should use existingSecretName for auth volume when set
+    release:
+      name: mystandalone
+    set:
+      auth:
+        enabled: true
+        existingSecretName: my-existing-auth-secret
+        mountPath: /etc/greptimedb/auth
+    asserts:
+      - contains:
+          path: spec.template.spec.volumes
+          content:
+            name: auth
+            secret:
+              secretName: my-existing-auth-secret
+        template: statefulset.yaml
+
   - it: should configure object storage credentials via envFrom
     release:
       name: mystandalone

@@ -79,6 +79,22 @@ tests:
             secret:
               secretName: mycluster-users-auth
 
+  - it: should use existingSecretName for auth volume when set
+    release:
+      name: mycluster
+    set:
+      auth:
+        enabled: true
+        existingSecretName: my-existing-auth-secret
+        mountPath: /etc/greptimedb/auth
+    asserts:
+      - contains:
+          path: spec.frontend.template.volumes
+          content:
+            name: auth
+            secret:
+              secretName: my-existing-auth-secret
+
   - it: should configure etcd backend storage
     set:
       meta:

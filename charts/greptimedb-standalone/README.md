@@ -2,7 +2,7 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.4.10](https://img.shields.io/badge/Version-0.4.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0-beta.1](https://img.shields.io/badge/AppVersion-1.2.0--beta.1-informational?style=flat-square)
+![Version: 0.4.11](https://img.shields.io/badge/Version-0.4.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0-beta.1](https://img.shields.io/badge/AppVersion-1.2.0--beta.1-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
@@ -54,8 +54,9 @@ helm uninstall greptimedb-standalone -n default
 | affinity | object | `{}` | Affinity configuration for pod |
 | annotations | object | `{}` | The annotations |
 | args | list | `[]` | The container args |
-| auth | object | `{"enabled":false,"fileName":"passwd","mountPath":"/etc/greptimedb/auth","useBuiltIn":false,"users":[{"password":"admin","permission":"readwrite","username":"admin"},{"password":"grafana_pwd","permission":"readonly","username":"grafana"},{"password":"telegraf_pwd","permission":"writeonly","username":"telegraf"}]}` | The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/deployments-administration/authentication/static). |
+| auth | object | `{"enabled":false,"existingSecretName":"","fileName":"passwd","mountPath":"/etc/greptimedb/auth","useBuiltIn":false,"users":[{"password":"admin","permission":"readwrite","username":"admin"},{"password":"grafana_pwd","permission":"readonly","username":"grafana"},{"password":"telegraf_pwd","permission":"writeonly","username":"telegraf"}]}` | The static auth for greptimedb, only support one user now(https://docs.greptime.com/user-guide/deployments-administration/authentication/static). |
 | auth.enabled | bool | `false` | Enable static auth |
+| auth.existingSecretName | string | `""` | The name of an existing Secret containing the auth file. If set, the `users-auth-secret.yaml` will not be created and the existing Secret will be used instead. |
 | auth.fileName | string | `"passwd"` | The auth file name, the full path is `${mountPath}/${fileName}` |
 | auth.mountPath | string | `"/etc/greptimedb/auth"` | The auth file path to store the auth info |
 | auth.useBuiltIn | bool | `false` | Whether to use GreptimeDB built-in auth provider for user file. |

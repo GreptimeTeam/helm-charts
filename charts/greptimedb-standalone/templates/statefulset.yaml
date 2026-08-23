@@ -162,7 +162,7 @@ spec:
         {{- if .Values.auth.enabled }}
         - name: auth
           secret:
-            secretName: {{ include "greptimedb-standalone.fullname" . }}-users-auth
+            secretName: {{ .Values.auth.existingSecretName | default (printf "%s-users-auth" (include "greptimedb-standalone.fullname" .)) }}
         {{- end }}
         {{- with .Values.extraVolumes }}
             {{- toYaml . | nindent 8 }}
