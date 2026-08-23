@@ -180,7 +180,7 @@ spec:
       {{- if .Values.auth.enabled }}
       - name: auth
         secret:
-          secretName: {{ .Release.Name }}-users-auth
+          secretName: {{ .Values.auth.existingSecretName | default (printf "%s-users-auth" .Release.Name) }}
       {{- end }}
       {{- end }}
       {{- if .Values.frontend.podTemplate.securityContext }}
