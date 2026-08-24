@@ -2,7 +2,7 @@ apiVersion: v2
 kubeVersion: ">=1.18.0-0"
 description: The greptimedb-operator Helm chart for Kubernetes.
 name: greptimedb-operator
-version: 0.6.2
+version: 0.6.3
 appVersion: 0.6.1
 type: application
 home: https://github.com/GreptimeTeam/greptimedb-operator
@@ -12,9 +12,12 @@ keywords:
   - operator
   - greptimedb
 maintainers:
-  - name: daviderli614
+  - name: liyang
     email: liyang@greptime.com
     url: https://github.com/daviderli614
-  - name: zyy17
-    email: zyy@greptime.com
-    url: https://github.com/zyy17
+  - name: dennis
+    email: xzhuang@greptime.com
+    url: https://github.com/killme2008
+  - name: sunning
+    email: sunning@greptime.cloud
+    url: https://github.com/sunng87
