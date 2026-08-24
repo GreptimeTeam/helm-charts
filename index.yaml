@@ -174,6 +174,49 @@ entries:
   greptimedb-cluster:
   - apiVersion: v2
     appVersion: 1.2.0-beta.1
+    created: "2026-08-24T02:03:09.704398102Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 8.5.8
+    - condition: jaeger-all-in-one.enabled
+      name: jaeger-all-in-one
+      repository: https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts
+      version: 0.1.12
+    - condition: greptimedb-remote-compaction.enabled
+      name: greptimedb-remote-compaction
+      repository: https://greptimeteam.github.io/helm-charts
+      version: 0.1.1
+    - condition: greptimedb-enterprise-dashboard.enabled
+      name: greptimedb-enterprise-dashboard
+      repository: https://greptimeteam.github.io/helm-charts
+      version: 0.1.0
+    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes.
+    digest: 888589534bdc3389ea0dbdb595528a430507299ea4ba440c8cb9c3bc186f9289
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - database
+    - greptimedb
+    maintainers:
+    - email: liyang@greptime.com
+      name: liyang
+      url: https://github.com/daviderli614
+    - email: xzhuang@greptime.com
+      name: dennis
+      url: https://github.com/killme2008
+    - email: sunning@greptime.cloud
+      name: sunning
+      url: https://github.com/sunng87
+    name: greptimedb-cluster
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-cluster-0.8.33/greptimedb-cluster-0.8.33.tgz
+    version: 0.8.33
+  - apiVersion: v2
+    appVersion: 1.2.0-beta.1
     created: "2026-08-23T12:41:39.83781463Z"
     dependencies:
     - condition: grafana.enabled
@@ -6783,6 +6826,32 @@ entries:
   greptimedb-enterprise-dashboard:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2026-08-24T02:03:09.819533616Z"
+    description: The Helm chart for deploying GreptimeDB Enterprise Dashboard.
+    digest: a6864ed4525271ed7f2b9554405b46d53573ddb66a7e81e455642068f3f52581
+    home: https://greptime.com/product/enterprise
+    keywords:
+    - dashboard
+    - greptimedb
+    - enterprise
+    kubeVersion: '>=1.18.0-0'
+    maintainers:
+    - email: liyang@greptime.com
+      name: liyang
+      url: https://github.com/daviderli614
+    - email: xzhuang@greptime.com
+      name: dennis
+      url: https://github.com/killme2008
+    - email: sunning@greptime.cloud
+      name: sunning
+      url: https://github.com/sunng87
+    name: greptimedb-enterprise-dashboard
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-enterprise-dashboard-0.1.1/greptimedb-enterprise-dashboard-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2025-08-20T17:56:10.168392172Z"
     description: The Helm chart for deploying GreptimeDB Enterprise Dashboard.
     digest: 8d850ac6c5b66fab43c208a9daa4d56e98f570969e4b42d445271e3dd9dcf42b
@@ -6805,6 +6874,31 @@ entries:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-enterprise-dashboard-0.1.0/greptimedb-enterprise-dashboard-0.1.0.tgz
     version: 0.1.0
   greptimedb-infra-test:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2026-08-24T02:03:09.918096211Z"
+    description: The Helm chart for deploying GreptimeDB infra test.
+    digest: 9a8bc132906c70560b65610c6ebedb2eb1344f827f33bd3a5dd2a543f5fd1ced
+    keywords:
+    - infra
+    - greptimedb
+    - test
+    kubeVersion: '>=1.18.0-0'
+    maintainers:
+    - email: liyang@greptime.com
+      name: liyang
+      url: https://github.com/daviderli614
+    - email: xzhuang@greptime.com
+      name: dennis
+      url: https://github.com/killme2008
+    - email: sunning@greptime.cloud
+      name: sunning
+      url: https://github.com/sunng87
+    name: greptimedb-infra-test
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-infra-test-0.1.2/greptimedb-infra-test-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
     created: "2026-06-10T06:11:51.870152405Z"
@@ -6844,6 +6938,33 @@ entries:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-infra-test-0.1.0/greptimedb-infra-test-0.1.0.tgz
     version: 0.1.0
   greptimedb-operator:
+  - apiVersion: v2
+    appVersion: 0.6.1
+    created: "2026-08-24T02:03:10.060945623Z"
+    description: The greptimedb-operator Helm chart for Kubernetes.
+    digest: 120ca96aaf785aa80d0c162463d305f4d46a6719dc6b0974768b9674e274b224
+    home: https://github.com/GreptimeTeam/greptimedb-operator
+    keywords:
+    - operator
+    - greptimedb
+    kubeVersion: '>=1.18.0-0'
+    maintainers:
+    - email: liyang@greptime.com
+      name: liyang
+      url: https://github.com/daviderli614
+    - email: xzhuang@greptime.com
+      name: dennis
+      url: https://github.com/killme2008
+    - email: sunning@greptime.cloud
+      name: sunning
+      url: https://github.com/sunng87
+    name: greptimedb-operator
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb-operator
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-operator-0.6.3/greptimedb-operator-0.6.3.tgz
+    version: 0.6.3
   - apiVersion: v2
     appVersion: 0.6.1
     created: "2026-08-21T07:55:03.966537348Z"
@@ -8704,6 +8825,33 @@ entries:
   greptimedb-remote-compaction:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2026-08-24T02:03:10.172808449Z"
+    description: Remote compaction components (scheduler, compactor) for GreptimeDB
+      Enterprise.
+    digest: 837308b334e3610e7e12187a2a9c5a215b5bf8d53b44a817ae2fdab0b2009ce4
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - greptimedb
+    - remote-compaction
+    maintainers:
+    - email: liyang@greptime.com
+      name: liyang
+      url: https://github.com/daviderli614
+    - email: xzhuang@greptime.com
+      name: dennis
+      url: https://github.com/killme2008
+    - email: sunning@greptime.cloud
+      name: sunning
+      url: https://github.com/sunng87
+    name: greptimedb-remote-compaction
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-remote-compaction-0.1.2/greptimedb-remote-compaction-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2025-08-28T17:42:42.781060541Z"
     description: Remote compaction components (scheduler, compactor) for GreptimeDB
       Enterprise.
@@ -8751,6 +8899,32 @@ entries:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-remote-compaction-0.1.0/greptimedb-remote-compaction-0.1.0.tgz
     version: 0.1.0
   greptimedb-standalone:
+  - apiVersion: v2
+    appVersion: 1.2.0-beta.1
+    created: "2026-08-24T02:03:10.324204831Z"
+    description: A Helm chart for deploying standalone greptimedb
+    digest: d5473148f550708809ddcf78f92e90d3a2c0aa44f472ae59a181770ad90f8037
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - database
+    - greptimedb
+    maintainers:
+    - email: liyang@greptime.com
+      name: liyang
+      url: https://github.com/daviderli614
+    - email: xzhuang@greptime.com
+      name: dennis
+      url: https://github.com/killme2008
+    - email: sunning@greptime.cloud
+      name: sunning
+      url: https://github.com/sunng87
+    name: greptimedb-standalone
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.4.12/greptimedb-standalone-0.4.12.tgz
+    version: 0.4.12
   - apiVersion: v2
     appVersion: 1.2.0-beta.1
     created: "2026-08-23T12:41:40.016283436Z"
@@ -10757,4 +10931,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2026-08-23T12:41:40.0180651Z"
+generated: "2026-08-24T02:03:10.32645952Z"
