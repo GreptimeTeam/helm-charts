@@ -174,6 +174,49 @@ entries:
   greptimedb-cluster:
   - apiVersion: v2
     appVersion: 1.2.1
+    created: "2026-09-29T01:36:52.670371794Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 8.5.8
+    - condition: jaeger-all-in-one.enabled
+      name: jaeger-all-in-one
+      repository: https://raw.githubusercontent.com/hansehe/jaeger-all-in-one/master/helm/charts
+      version: 0.1.12
+    - condition: greptimedb-remote-compaction.enabled
+      name: greptimedb-remote-compaction
+      repository: https://greptimeteam.github.io/helm-charts
+      version: 0.1.1
+    - condition: greptimedb-enterprise-dashboard.enabled
+      name: greptimedb-enterprise-dashboard
+      repository: https://greptimeteam.github.io/helm-charts
+      version: 0.1.0
+    description: A Helm chart for deploying GreptimeDB cluster in Kubernetes.
+    digest: b97d3a04d8daf3415430143aa0abd51bf3f9045402825a391cdb0b5766d2dc6d
+    home: https://github.com/GreptimeTeam/greptimedb
+    keywords:
+    - database
+    - greptimedb
+    maintainers:
+    - email: liyang@greptime.com
+      name: liyang
+      url: https://github.com/daviderli614
+    - email: xzhuang@greptime.com
+      name: dennis
+      url: https://github.com/killme2008
+    - email: sunning@greptime.cloud
+      name: sunning
+      url: https://github.com/sunng87
+    name: greptimedb-cluster
+    sources:
+    - https://github.com/GreptimeTeam/greptimedb
+    type: application
+    urls:
+    - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-cluster-0.8.38/greptimedb-cluster-0.8.38.tgz
+    version: 0.8.38
+  - apiVersion: v2
+    appVersion: 1.2.1
     created: "2026-09-28T02:10:38.316033615Z"
     dependencies:
     - condition: grafana.enabled
@@ -11181,4 +11224,4 @@ entries:
     urls:
     - https://github.com/GreptimeTeam/helm-charts/releases/download/greptimedb-standalone-0.1.0-alpha.1/greptimedb-standalone-0.1.0-alpha.1.tgz
     version: 0.1.0-alpha.1
-generated: "2026-09-28T02:10:38.317817589Z"
+generated: "2026-09-29T01:36:52.671612694Z"
