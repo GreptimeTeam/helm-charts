@@ -153,6 +153,7 @@ nodeSelector: {}
 
 # -- Volume mounts to add to the pods
 extraVolumeMounts: []
+
 # -- Volumes to add to the pods
 extraVolumes: []
 
@@ -223,6 +224,8 @@ grpcServicePort: 4001
 mysqlServicePort: 4002
 # -- GreptimeDB postgres service port
 postgresServicePort: 4003
+# -- GreptimeDB http api server port
+httpApiServerPort: 4006
 
 service:
   # -- Service type

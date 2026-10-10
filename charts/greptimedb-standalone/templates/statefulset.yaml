@@ -81,10 +81,8 @@ spec:
             - "0.0.0.0:{{ .Values.mysqlServicePort }}"
             - "--postgres-addr"
             - "0.0.0.0:{{ .Values.postgresServicePort }}"
-            {{- if .Values.configToml }}
             - "--config-file"
             - "/etc/greptimedb/config/config.toml"
-            {{- end }}
             {{- if .Values.dataHome }}
             - "--data-home"
             - {{ .Values.dataHome }}
@@ -93,6 +91,9 @@ spec:
           ports:
             - containerPort: {{ .Values.httpServicePort }}
               name: http
+              protocol: TCP
+            - containerPort: {{ .Values.httpApiServerPort }}
+              name: http-api
               protocol: TCP
             - containerPort: {{ .Values.grpcServicePort }}
               name: grpc

@@ -16,7 +16,7 @@ metadata:
 spec:
   podMetricsEndpoints:
     - interval: {{ .Values.monitoring.interval }}
-      port: http
+      portNumber: {{ .Values.httpServicePort }}
       path: /metrics
   namespaceSelector:
     matchNames:
