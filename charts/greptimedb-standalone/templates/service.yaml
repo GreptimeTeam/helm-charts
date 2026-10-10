@@ -14,7 +14,7 @@ spec:
   ports:
     - name: http
       port: {{ .Values.httpServicePort }}
-      targetPort: http
+      targetPort: http-api
       protocol: TCP
     - name: grpc
       port: {{ .Values.grpcServicePort }}
