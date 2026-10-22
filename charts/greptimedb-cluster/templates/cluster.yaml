@@ -237,6 +237,8 @@ spec:
     {{- if .Values.frontend.enableObjectStorage }}
     enableObjectStorage: {{ .Values.frontend.enableObjectStorage }}
     {{- end }}
+    enableHttpApiServer: {{ .Values.frontend.enableHttpApiServer }}
+    httpApiServerPort: {{ .Values.frontend.httpApiServerPort }}
   {{- end }}
   {{- end }}
   meta:

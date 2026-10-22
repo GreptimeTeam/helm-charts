@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.8.39](https://img.shields.io/badge/Version-0.8.39-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
+![Version: 0.8.40](https://img.shields.io/badge/Version-0.8.40-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -17,6 +17,7 @@ Each row in the following matrix represents a version combination, indicating th
 | < `0.4.0`                        | < `0.3.0` with GreptimeDB Operator Tag < `v0.3.0` |
 | ≥ `0.4.0`                        | ≥ `0.3.0` with GreptimeDB Operator Tag ≥ `v0.3.0` |
 | ≥ `0.6.38`                       | ≥ `0.5.3` with GreptimeDB Operator Tag ≥ `v0.5.2` |
+| ≥ `0.8.40`                       | ≥ `0.7.0` with GreptimeDB Operator Tag ≥ `v0.7.0` |
 
 ## How to install
 
@@ -234,10 +235,12 @@ helm uninstall mycluster -n default
 | flownode.tracing.enabled | bool | `false` | Enable tracing. |
 | flownode.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
 | flownode.tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |
-| frontend | object | `{"configData":"","configFile":"","enableObjectStorage":false,"enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{},"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Frontend configure |
+| frontend | object | `{"configData":"","configFile":"","enableHttpApiServer":true,"enableObjectStorage":false,"enabled":true,"httpApiServerPort":4006,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{},"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Frontend configure |
 | frontend.configData | string | `""` | Extra raw toml config data of frontend. Skip if the `configFile` is used. |
 | frontend.configFile | string | `""` | Extra toml file of frontend. |
+| frontend.enableHttpApiServer | bool | `true` | Whether to enable the dedicated HTTP API server on frontend. Requires GreptimeDB >= v1.2.1. |
 | frontend.enableObjectStorage | bool | `false` | Whether to enable object storage on frontend. |
+| frontend.httpApiServerPort | int | `4006` | The port of the dedicated HTTP API server on frontend. |
 | frontend.logging | object | `{}` | Logging configuration for frontend, if not set, it will use the global logging configuration. |
 | frontend.podTemplate | object | `{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]}` | The pod template for frontend |
 | frontend.podTemplate.affinity | object | `{}` | The pod affinity |
@@ -368,7 +371,7 @@ helm uninstall mycluster -n default
 | image.tag | string | `"v1.2.1"` | The image tag |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.6.1"` | Initializer image tag |
+| initializer.tag | string | `"v0.7.0"` | Initializer image tag |
 | jaeger-all-in-one.enableHttpOpenTelemetryCollector | bool | `true` | Enable the opentelemetry collector for jaeger-all-in-one and listen on port 4317. |
 | jaeger-all-in-one.enableHttpZipkinCollector | bool | `true` | Enable the zipkin collector for jaeger-all-in-one and listen on port 9411. |
 | jaeger-all-in-one.enabled | bool | `false` | Enable jaeger-all-in-one deployment. |
