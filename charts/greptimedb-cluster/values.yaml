@@ -33,7 +33,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.6.1
+  tag: v0.7.0
 
 base:
   # -- The pod template for base
@@ -319,6 +319,12 @@ frontend:
 
   # -- Whether to enable object storage on frontend.
   enableObjectStorage: false
+
+  # -- Whether to enable the dedicated HTTP API server on frontend. Requires GreptimeDB >= v1.2.1.
+  enableHttpApiServer: true
+
+  # -- The port of the dedicated HTTP API server on frontend.
+  httpApiServerPort: 4006
 
 # -- Meta configure
 meta:
