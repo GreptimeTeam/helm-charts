@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.8.40](https://img.shields.io/badge/Version-0.8.40-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
+![Version: 0.9.0](https://img.shields.io/badge/Version-0.9.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
 
 ## Source Code
 
@@ -17,7 +17,7 @@ Each row in the following matrix represents a version combination, indicating th
 | < `0.4.0`                        | < `0.3.0` with GreptimeDB Operator Tag < `v0.3.0` |
 | ≥ `0.4.0`                        | ≥ `0.3.0` with GreptimeDB Operator Tag ≥ `v0.3.0` |
 | ≥ `0.6.38`                       | ≥ `0.5.3` with GreptimeDB Operator Tag ≥ `v0.5.2` |
-| ≥ `0.8.40`                       | ≥ `0.7.0` with GreptimeDB Operator Tag ≥ `v0.7.0` |
+| ≥ `0.9.0`                        | ≥ `0.7.0` with GreptimeDB Operator Tag ≥ `v0.7.0` |
 
 ## How to install
 
