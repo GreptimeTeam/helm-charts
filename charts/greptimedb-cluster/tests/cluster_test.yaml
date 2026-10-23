@@ -32,10 +32,11 @@ tests:
           path: spec.base.main.image
           value: "docker.io/greptime/greptimedb:v1.0.0"
 
-  - it: should configure auth environment variable when auth is enabled
+  - it: should configure built-in auth provider when useBuiltIn is enabled
     set:
       auth:
         enabled: true
+        useBuiltIn: true
         mountPath: /etc/greptimedb/auth
         fileName: passwd
     asserts:
@@ -100,11 +101,15 @@ tests:
       meta:
         backendStorage:
           etcd:
-            endpoints: etcd.default.svc.cluster.local:2379
+            endpoints:
+              - etcd-0.etcd.default.svc.cluster.local:2379
+              - etcd-1.etcd.default.svc.cluster.local:2379
     asserts:
       - equal:
-          path: spec.meta.backendStorage.etcd.endpoints[0]
-          value: etcd.default.svc.cluster.local:2379
+          path: spec.meta.backendStorage.etcd.endpoints
+          value:
+            - etcd-0.etcd.default.svc.cluster.local:2379
+            - etcd-1.etcd.default.svc.cluster.local:2379
 
   - it: should configure MySQL backend storage
     set:
@@ -346,3 +351,109 @@ tests:
       - equal:
           path: spec.tracing.sampleRatio
           value: "0.5"
+
+  # A null storageClassName fails the CRD's string type under server-side apply (Helm 4).
+  - it: should omit datanode storageClassName when it is not set
+    asserts:
+      - notExists:
+          path: spec.datanode.storage.fs.storageClassName
+
+  - it: should set datanode storageClassName when it is set
+    set:
+      datanode:
+        storage:
+          storageClassName: gp3
+    asserts:
+      - equal:
+          path: spec.datanode.storage.fs.storageClassName
+          value: gp3
+
+  - it: should omit dedicated WAL storageClassName when it is not set
+    set:
+      dedicatedWAL:
+        enabled: true
+    asserts:
+      - notExists:
+          path: spec.wal.raftEngine.fs.storageClassName
+      - equal:
+          path: spec.wal.raftEngine.fs.storageSize
+          value: 20Gi
+
+  - it: should set dedicated WAL storageClassName when it is set
+    set:
+      dedicatedWAL:
+        enabled: true
+        raftEngine:
+          fs:
+            storageClassName: gp3
+    asserts:
+      - equal:
+          path: spec.wal.raftEngine.fs.storageClassName
+          value: gp3
+
+  - it: should keep an explicitly empty dedicated WAL storageClassName
+    set:
+      dedicatedWAL:
+        enabled: true
+        raftEngine:
+          fs:
+            storageClassName: ""
+    asserts:
+      - equal:
+          path: spec.wal.raftEngine.fs.storageClassName
+          value: ""
+
+  - it: should keep an explicitly empty datanode storageClassName
+    set:
+      datanode:
+        storage:
+          storageClassName: ""
+    asserts:
+      - equal:
+          path: spec.datanode.storage.fs.storageClassName
+          value: ""
+
+  - it: should omit a null object storage cache storageClassName
+    set:
+      objectStorage:
+        s3:
+          bucket: my-bucket
+        cache:
+          fs:
+            storageClassName: null
+            storageSize: 10Gi
+    asserts:
+      - notExists:
+          path: spec.objectStorage.cache.fs.storageClassName
+      - equal:
+          path: spec.objectStorage.cache.fs.storageSize
+          value: 10Gi
+
+  - it: should keep an explicitly empty object storage cache storageClassName
+    set:
+      objectStorage:
+        s3:
+          bucket: my-bucket
+        cache:
+          fs:
+            storageClassName: ""
+    asserts:
+      - equal:
+          path: spec.objectStorage.cache.fs.storageClassName
+          value: ""
+
+  - it: should omit a null monitoring datanode storageClassName
+    set:
+      monitoring:
+        enabled: true
+        standalone:
+          datanodeStorage:
+            fs:
+              storageClassName: null
+              storageSize: 5Gi
+    asserts:
+      - notExists:
+          path: spec.monitoring.standalone.datanodeStorage.fs.storageClassName
+      - equal:
+          path: spec.monitoring.standalone.datanodeStorage.fs.storageSize
+          value: 5Gi
