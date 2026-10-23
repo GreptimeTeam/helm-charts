@@ -390,3 +390,15 @@ tests:
       - equal:
           path: spec.wal.raftEngine.fs.storageClassName
           value: gp3
+
+  - it: should keep an explicitly empty dedicated WAL storageClassName
+    set:
+      dedicatedWAL:
+        enabled: true
+        raftEngine:
+          fs:
+            storageClassName: ""
+    asserts:
+      - equal:
+          path: spec.wal.raftEngine.fs.storageClassName
+          value: ""

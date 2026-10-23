@@ -725,7 +725,8 @@ spec:
   {{- end }}
   {{- if .Values.dedicatedWAL.enabled }}
     {{- $raftEngine := deepCopy .Values.dedicatedWAL.raftEngine }}
-    {{- if and $raftEngine.fs (not $raftEngine.fs.storageClassName) }}
+    {{- /* Drop only a null class: an explicit "" (no storage class) is kept as written. */}}
+    {{- if and $raftEngine.fs (kindIs "invalid" $raftEngine.fs.storageClassName) }}
     {{- $_ := unset $raftEngine.fs "storageClassName" }}
     {{- end }}
     raftEngine: {{- toYaml $raftEngine | nindent 6 }}
