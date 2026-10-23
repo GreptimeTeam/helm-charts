@@ -33,10 +33,11 @@ tests:
           value: "docker.io/greptime/greptimedb:v1.0.0"
         template: statefulset.yaml
 
-  - it: should configure auth environment variable when auth is enabled
+  - it: should configure built-in auth provider when useBuiltIn is enabled
     set:
       auth:
         enabled: true
+        useBuiltIn: true
         mountPath: /etc/greptimedb/auth
         fileName: passwd
     asserts:

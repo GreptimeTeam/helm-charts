@@ -524,7 +524,9 @@ spec:
     storage:
       dataHome: {{ .Values.datanode.storage.dataHome }}
       fs:
+        {{- if .Values.datanode.storage.storageClassName }}
         storageClassName: {{ .Values.datanode.storage.storageClassName }}
+        {{- end }}
         storageSize: {{ .Values.datanode.storage.storageSize }}
         storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
         mountPath: {{ .Values.datanode.storage.mountPath }}
@@ -722,7 +724,11 @@ spec:
     kafka: {{- toYaml .Values.remoteWal.kafka | nindent 6 }}
   {{- end }}
   {{- if .Values.dedicatedWAL.enabled }}
-    raftEngine: {{- toYaml .Values.dedicatedWAL.raftEngine | nindent 6 }}
+    {{- $raftEngine := deepCopy .Values.dedicatedWAL.raftEngine }}
+    {{- if and $raftEngine.fs (not $raftEngine.fs.storageClassName) }}
+    {{- $_ := unset $raftEngine.fs "storageClassName" }}
+    {{- end }}
+    raftEngine: {{- toYaml $raftEngine | nindent 6 }}
   {{- end }}
   {{- end }}
   {{- if .Values.monitoring.enabled }}

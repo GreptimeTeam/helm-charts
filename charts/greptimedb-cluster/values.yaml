@@ -1151,8 +1151,6 @@ objectStorage:
   cache: {}
   #  cacheCapacity: "20GiB"
   #  fs:
-  #    # -- The storage class name
-  #    storageClassName: null
   #    # -- The name of the wal
   #    name: cache
   #    # -- The storage size
@@ -1308,8 +1306,6 @@ monitoring:
 
 #     datanodeStorage:
 #       fs:
-#         # -- Storage class for datanode persistent volume
-#         storageClassName: null
 #         # -- Storage size for datanode persistent volume
 #         storageSize: 50Gi
 #         # -- Storage retain policy for datanode persistent volume
