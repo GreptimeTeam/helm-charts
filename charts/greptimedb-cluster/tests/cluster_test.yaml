@@ -402,3 +402,58 @@ tests:
       - equal:
           path: spec.wal.raftEngine.fs.storageClassName
           value: ""
+
+  - it: should keep an explicitly empty datanode storageClassName
+    set:
+      datanode:
+        storage:
+          storageClassName: ""
+    asserts:
+      - equal:
+          path: spec.datanode.storage.fs.storageClassName
+          value: ""
+
+  - it: should omit a null object storage cache storageClassName
+    set:
+      objectStorage:
+        s3:
+          bucket: my-bucket
+        cache:
+          fs:
+            storageClassName: null
+            storageSize: 10Gi
+    asserts:
+      - notExists:
+          path: spec.objectStorage.cache.fs.storageClassName
+      - equal:
+          path: spec.objectStorage.cache.fs.storageSize
+          value: 10Gi
+
+  - it: should keep an explicitly empty object storage cache storageClassName
+    set:
+      objectStorage:
+        s3:
+          bucket: my-bucket
+        cache:
+          fs:
+            storageClassName: ""
+    asserts:
+      - equal:
+          path: spec.objectStorage.cache.fs.storageClassName
+          value: ""
+
+  - it: should omit a null monitoring datanode storageClassName
+    set:
+      monitoring:
+        enabled: true
+        standalone:
+          datanodeStorage:
+            fs:
+              storageClassName: null
+              storageSize: 5Gi
+    asserts:
+      - notExists:
+          path: spec.monitoring.standalone.datanodeStorage.fs.storageClassName
+      - equal:
+          path: spec.monitoring.standalone.datanodeStorage.fs.storageSize
+          value: 5Gi

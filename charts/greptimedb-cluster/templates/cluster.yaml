@@ -524,8 +524,9 @@ spec:
     storage:
       dataHome: {{ .Values.datanode.storage.dataHome }}
       fs:
-        {{- if .Values.datanode.storage.storageClassName }}
-        storageClassName: {{ .Values.datanode.storage.storageClassName }}
+        {{- /* A null class is left out so the PVC gets the default StorageClass; "" (no class) is kept. */}}
+        {{- if not (kindIs "invalid" .Values.datanode.storage.storageClassName) }}
+        storageClassName: {{ .Values.datanode.storage.storageClassName | quote }}
         {{- end }}
         storageSize: {{ .Values.datanode.storage.storageSize }}
         storageRetainPolicy: {{ .Values.datanode.storage.storageRetainPolicy }}
@@ -715,7 +716,11 @@ spec:
       {{- end }}
     {{- end }}
     {{- if $objectStorage.cache }}
-    cache: {{- toYaml $objectStorage.cache | nindent 6 }}
+    {{- $cache := deepCopy $objectStorage.cache }}
+    {{- if and $cache.fs (kindIs "invalid" $cache.fs.storageClassName) }}
+    {{- $_ := unset $cache.fs "storageClassName" }}
+    {{- end }}
+    cache: {{- toYaml $cache | nindent 6 }}
     {{- end }}
   {{- end }}
   {{- if or .Values.remoteWal.enabled .Values.dedicatedWAL.enabled }}
@@ -725,7 +730,6 @@ spec:
   {{- end }}
   {{- if .Values.dedicatedWAL.enabled }}
     {{- $raftEngine := deepCopy .Values.dedicatedWAL.raftEngine }}
-    {{- /* Drop only a null class: an explicit "" (no storage class) is kept as written. */}}
     {{- if and $raftEngine.fs (kindIs "invalid" $raftEngine.fs.storageClassName) }}
     {{- $_ := unset $raftEngine.fs "storageClassName" }}
     {{- end }}
@@ -743,6 +747,10 @@ spec:
     {{- $_ := set $standaloneMain "image" (default $standaloneImage (get $standaloneMain "image")) }}
     {{- $_ = set $standaloneBase "main" $standaloneMain }}
     {{- $_ = set $standalone "base" $standaloneBase }}
+    {{- $standaloneFs := get (default (dict) (get $standalone "datanodeStorage")) "fs" }}
+    {{- if and $standaloneFs (kindIs "invalid" $standaloneFs.storageClassName) }}
+    {{- $_ = unset $standaloneFs "storageClassName" }}
+    {{- end }}
     standalone: {{ $standalone | toYaml | nindent 6 }}
     {{- if .Values.monitoring.logsCollection.pipeline.data }}
     logsCollection:
