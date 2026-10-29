@@ -2,10 +2,19 @@
 
 A Helm chart for deploying standalone greptimedb
 
-![Version: 0.4.18](https://img.shields.io/badge/Version-0.4.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.0](https://img.shields.io/badge/AppVersion-1.3.0-informational?style=flat-square)
+![Version: 0.4.19](https://img.shields.io/badge/Version-0.4.19-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.0](https://img.shields.io/badge/AppVersion-1.3.0-informational?style=flat-square)
 
 ## Source Code
 - https://github.com/GreptimeTeam/greptimedb
+
+## Compatibility Matrix
+
+Each row in the following matrix represents a version combination, indicating the required GreptimeDB image version when installing `greptimedb-standalone` chart.
+
+| `greptimedb-standalone` Chart Version | GreptimeDB Image Version |
+|---------------------------------------|--------------------------|
+| `0.4.16` - `0.4.18`                   | ≥ `v1.2.1`, < `v1.3.0`   |
+| ≥ `0.4.19`                            | ≥ `v1.3.0`               |
 
 ## How to install
 

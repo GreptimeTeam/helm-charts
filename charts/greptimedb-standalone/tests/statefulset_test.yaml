@@ -170,7 +170,16 @@ tests:
       grpcServicePort: 4001
       mysqlServicePort: 4002
       postgresServicePort: 4003
+      httpApiServerPort: 4006
     asserts:
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: "--http-api-server-addr"
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.containers[0].args
+          content: "0.0.0.0:4006"
+        template: statefulset.yaml
       - contains:
           path: spec.template.spec.containers[0].args
           content: "0.0.0.0:4000"

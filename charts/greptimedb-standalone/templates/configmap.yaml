@@ -10,8 +10,5 @@ data:
 {{- if .Values.configToml }}
 {{ .Values.configToml | indent 4 }}
 {{- end }}
-    [http]
-    enable_api_server = true
-    api_server_addr = "0.0.0.0:{{ .Values.httpApiServerPort }}"
 {{ include "greptimedb-standalone.objectStorageConfig" . | indent 4 }}
 {{ include "greptimedb-standalone.loggingConfig" . | indent 4 }}
