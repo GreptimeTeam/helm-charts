@@ -45,7 +45,7 @@ upgrade-crds: ## Upgrade the crds in the cluster.
 .PHONY: check-crds
 check-crds: update-crds ## Check crd
 	@git diff --quiet || \
-    (echo "Need to update crds, please run 'make crds'"; \
+    (echo "Need to update crds, please run 'update-crds'"; \
 	exit 1)
 
 # For example: make update-version CHART=${CHART_NAME} VERSION=${IMAGE_TAG}
