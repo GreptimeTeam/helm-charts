@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 0.9.3](https://img.shields.io/badge/Version-0.9.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.0](https://img.shields.io/badge/AppVersion-1.3.0-informational?style=flat-square)
+![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.0](https://img.shields.io/badge/AppVersion-1.3.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -10,14 +10,19 @@ A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
 ## Compatibility Matrix
 
+The `greptimedb-cluster` chart version follows the GreptimeDB image version.
+For example, when the GreptimeDB image version is `v1.3.0`, the chart version
+should be `>= 1.3.0`.
+
 Each row in the following matrix represents a version combination, indicating the required `greptimedb-operator` chart version when installing `greptimedb-cluster` chart.
 
 | `greptimedb-cluster` Chart Version | `greptimedb-operator` Chart Version |
-|----------------------------------|----------------------------------------------|
-| < `0.4.0`                        | < `0.3.0` with GreptimeDB Operator Tag < `v0.3.0` |
-| ≥ `0.4.0`                        | ≥ `0.3.0` with GreptimeDB Operator Tag ≥ `v0.3.0` |
-| ≥ `0.6.38`                       | ≥ `0.5.3` with GreptimeDB Operator Tag ≥ `v0.5.2` |
-| ≥ `0.9.0`                        | ≥ `0.7.0` with GreptimeDB Operator Tag ≥ `v0.7.0` |
+|------------------------------------|------------------------------------------------------------------------|
+| < `0.4.0`                          | < `0.3.0` with GreptimeDB Operator Tag < `v0.3.0`                      |
+| ≥ `0.4.0`, < `0.6.38`              | ≥ `0.3.0`, < `0.5.3` with GreptimeDB Operator Tag ≥ `v0.3.0`, < v0.5.2 |
+| ≥ `0.6.38`, < `0.9.0`              | ≥ `0.5.3`, < `0.7.0` with GreptimeDB Operator Tag ≥ `v0.5.2`, < v0.7.0 |
+| ≥ `0.9.0`, < `1.3.0`               | ≥ `0.7.0`, < `1.3.0` with GreptimeDB Operator Tag ≥ `v0.7.0`, < v1.3.0 |
+| ≥ `1.3.0`                          | ≥ `1.3.0` with GreptimeDB Operator Tag ≥ `v1.3.0`                      |
 
 ## How to install
 
@@ -150,7 +155,7 @@ helm uninstall mycluster -n default
 | dashboards.label | string | `"grafana_dashboard"` | The label as defined in the grafana helmchart. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards |
 | dashboards.labelValue | string | `"1"` | The label value as defined in the grafana helmchart. https://github.com/grafana/helm-charts/tree/main/charts/grafana#sidecar-for-dashboards |
 | dashboards.namespace | string | `""` | The namespace in which the grafana dashboard configmaps are installed |
-| datanode | object | `{"configData":"","configFile":"","enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storage":{"annotations":{},"dataHome":"/data/greptimedb","labels":{},"mountPath":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"20Gi","useEmptyDir":false},"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Datanode configure |
+| datanode | object | `{"configData":"","configFile":"","enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"storage":{"annotations":{},"dataHome":"/data/greptimedb","labels":{},"mountPath":"/data/greptimedb","storageClassName":null,"storageRetainPolicy":"Retain","storageSize":"20Gi","useEmptyDir":false},"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","exportProtocol":"http","sampleRatio":"1.0"}}` | Datanode configure |
 | datanode.configData | string | `""` | Extra raw toml config data of datanode. Skip if the `configFile` is used. |
 | datanode.configFile | string | `""` | Extra toml file of datanode. |
 | datanode.logging | object | `{}` | Logging configuration for datanode, if not set, it will use the global logging configuration. |
@@ -186,9 +191,10 @@ helm uninstall mycluster -n default
 | datanode.storage.storageRetainPolicy | string | `"Retain"` | Storage retain policy for datanode persistent volume |
 | datanode.storage.storageSize | string | `"20Gi"` | Storage size for datanode persistent volume |
 | datanode.storage.useEmptyDir | bool | `false` | The useEmptyDir is a flag to indicate whether to use an empty dir. If true, the PVC will not be created and the whole storage of datanode will be cleaned up when the datanode restarts. |
-| datanode.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for datanode, if not set, it will use the global tracing configuration. |
+| datanode.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","exportProtocol":"http","sampleRatio":"1.0"}` | Tracing configuration for datanode, if not set, it will use the global tracing configuration. |
 | datanode.tracing.enabled | bool | `false` | Enable tracing. |
 | datanode.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
+| datanode.tracing.exportProtocol | string | `"http"` | The OTLP tracing export protocol, only support "http" and "grpc". |
 | datanode.tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |
 | datanodeGroups | list | `[]` | datanode instance groups configure, 'spec.datanode' and 'spec.datanodeGroups' cannot be set at the same time. |
 | debugPod | object | `{"enabled":false,"image":{"registry":"docker.io","repository":"greptime/greptime-tool","tag":"20250606-04e3c7d"}}` | Configure to the debug pod |
@@ -202,7 +208,7 @@ helm uninstall mycluster -n default
 | dedicatedWAL.raftEngine.fs.name | string | `"wal"` | The name of the wal |
 | dedicatedWAL.raftEngine.fs.storageClassName | string | `nil` | The storage class name |
 | dedicatedWAL.raftEngine.fs.storageSize | string | `"20Gi"` | The storage size |
-| flownode | object | `{"configData":"","configFile":"","enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Flownode configure. |
+| flownode | object | `{"configData":"","configFile":"","enabled":true,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","exportProtocol":"http","sampleRatio":"1.0"}}` | Flownode configure. |
 | flownode.configData | string | `""` | Extra raw toml config data of flownode. Skip if the `configFile` is used. |
 | flownode.configFile | string | `""` | Extra toml file of flownode. |
 | flownode.enabled | bool | `true` | Enable flownode |
@@ -231,11 +237,12 @@ helm uninstall mycluster -n default
 | flownode.podTemplate.tolerations | list | `[]` | The pod tolerations |
 | flownode.podTemplate.volumes | list | `[]` | The pod volumes |
 | flownode.replicas | int | `1` | Flownode replicas |
-| flownode.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for flownode, if not set, it will use the global tracing configuration. |
+| flownode.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","exportProtocol":"http","sampleRatio":"1.0"}` | Tracing configuration for flownode, if not set, it will use the global tracing configuration. |
 | flownode.tracing.enabled | bool | `false` | Enable tracing. |
 | flownode.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
+| flownode.tracing.exportProtocol | string | `"http"` | The OTLP tracing export protocol, only support "http" and "grpc". |
 | flownode.tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |
-| frontend | object | `{"configData":"","configFile":"","enableHttpApiServer":true,"enableObjectStorage":false,"enabled":true,"httpApiServerPort":4006,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{},"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Frontend configure |
+| frontend | object | `{"configData":"","configFile":"","enableHttpApiServer":true,"enableObjectStorage":false,"enabled":true,"httpApiServerPort":4006,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"replicas":1,"service":{},"tls":{},"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","exportProtocol":"http","sampleRatio":"1.0"}}` | Frontend configure |
 | frontend.configData | string | `""` | Extra raw toml config data of frontend. Skip if the `configFile` is used. |
 | frontend.configFile | string | `""` | Extra toml file of frontend. |
 | frontend.enableHttpApiServer | bool | `true` | Whether to enable the dedicated HTTP API server on frontend. Requires GreptimeDB >= v1.2.1. |
@@ -268,9 +275,10 @@ helm uninstall mycluster -n default
 | frontend.replicas | int | `1` | Frontend replicas |
 | frontend.service | object | `{}` | Frontend service |
 | frontend.tls | object | `{}` | Frontend tls configure |
-| frontend.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for frontend, if not set, it will use the global tracing configuration. |
+| frontend.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","exportProtocol":"http","sampleRatio":"1.0"}` | Tracing configuration for frontend, if not set, it will use the global tracing configuration. |
 | frontend.tracing.enabled | bool | `false` | Enable tracing. |
 | frontend.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
+| frontend.tracing.exportProtocol | string | `"http"` | The OTLP tracing export protocol, only support "http" and "grpc". |
 | frontend.tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |
 | frontendGroups | list | `[]` | Frontend instance groups configure |
 | grafana.adminPassword | string | `"gt-operator"` | The default admin password for grafana. |
@@ -371,7 +379,7 @@ helm uninstall mycluster -n default
 | image.tag | string | `"v1.3.0"` | The image tag |
 | initializer.registry | string | `"docker.io"` | Initializer image registry |
 | initializer.repository | string | `"greptime/greptimedb-initializer"` | Initializer image repository |
-| initializer.tag | string | `"v0.7.0"` | Initializer image tag |
+| initializer.tag | string | `"v1.3.0"` | Initializer image tag |
 | jaeger-all-in-one.enableHttpOpenTelemetryCollector | bool | `true` | Enable the opentelemetry collector for jaeger-all-in-one and listen on port 4317. |
 | jaeger-all-in-one.enableHttpZipkinCollector | bool | `true` | Enable the zipkin collector for jaeger-all-in-one and listen on port 9411. |
 | jaeger-all-in-one.enabled | bool | `false` | Enable jaeger-all-in-one deployment. |
@@ -394,14 +402,16 @@ helm uninstall mycluster -n default
 | license.mountFileName | string | `"current"` | The license file name. |
 | license.mountPath | string | `"/greptime/license"` | The license file path to store the license info. |
 | license.secretName | string | `""` | The secret name to store the license. If not set, it will use the ${release-name}-license. |
-| logging | object | `{"filters":[],"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false,"persistentWithData":false}` | Global logging configuration |
+| logging | object | `{"filters":[],"format":"text","level":"info","logsDir":"/data/greptimedb/logs","maxLogDirSize":"0B","maxLogFiles":720,"onlyLogToStdout":false,"persistentWithData":false}` | Global logging configuration |
 | logging.filters | list | `[]` | The log filters, use the syntax of `target[span\{field=value\}]=level` to filter the logs. |
 | logging.format | string | `"text"` | The log format for greptimedb, only support "json" and "text" |
 | logging.level | string | `"info"` | The log level for greptimedb, only support "debug", "info", "warn", "debug" |
 | logging.logsDir | string | `"/data/greptimedb/logs"` | The logs directory for greptimedb |
+| logging.maxLogDirSize | string | `"0B"` | The maximum total size of managed log files. Set to `0B` to disable. |
+| logging.maxLogFiles | int | `720` | The maximum number of log files to retain. |
 | logging.onlyLogToStdout | bool | `false` | Whether to log to stdout only |
 | logging.persistentWithData | bool | `false` | indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component. |
-| meta | object | `{"backendStorage":{"etcd":{},"mysql":{},"postgresql":{}},"configData":"","configFile":"","enableRegionFailover":false,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"rbac":{"create":false},"replicas":1,"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}}` | Meta configure |
+| meta | object | `{"backendStorage":{"etcd":{},"mysql":{},"postgresql":{}},"configData":"","configFile":"","enableRegionFailover":false,"logging":{},"podTemplate":{"affinity":{},"annotations":{},"hostNetwork":false,"labels":{},"main":{"args":[],"command":[],"env":[],"envFrom":[],"extraArgs":[],"image":"","livenessProbe":{},"readinessProbe":{},"resources":{},"securityContext":{},"startupProbe":{},"volumeMounts":[]},"nodeSelector":{},"securityContext":{},"serviceAccount":{"annotations":{},"create":false},"tolerations":[],"volumes":[]},"rbac":{"create":false},"replicas":1,"tracing":{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","exportProtocol":"http","sampleRatio":"1.0"}}` | Meta configure |
 | meta.backendStorage | object | `{"etcd":{},"mysql":{},"postgresql":{}}` | Meta Backend storage configuration |
 | meta.backendStorage.etcd | object | `{}` | Etcd backend storage configuration |
 | meta.backendStorage.mysql | object | `{}` | MySQL backend storage configuration |
@@ -435,9 +445,10 @@ helm uninstall mycluster -n default
 | meta.podTemplate.volumes | list | `[]` | The pod volumes |
 | meta.rbac | object | `{"create":false}` | Install role based access control |
 | meta.replicas | int | `1` | Meta replicas |
-| meta.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Tracing configuration for meta, if not set, it will use the global tracing configuration. |
+| meta.tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","exportProtocol":"http","sampleRatio":"1.0"}` | Tracing configuration for meta, if not set, it will use the global tracing configuration. |
 | meta.tracing.enabled | bool | `false` | Enable tracing. |
 | meta.tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
+| meta.tracing.exportProtocol | string | `"http"` | The OTLP tracing export protocol, only support "http" and "grpc". |
 | meta.tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |
 | monitoring | object | `{"enabled":false,"logsCollection":{"pipeline":{"data":""}},"standalone":{},"ttl":"30d","vector":{"registry":"docker.io","repository":"timberio/vector","tag":"0.49.0-debian"}}` | The monitoring bootstrap configuration |
 | monitoring.enabled | bool | `false` | Enable monitoring |
@@ -474,7 +485,8 @@ helm uninstall mycluster -n default
 | slowQuery.sampleRatio | string | `"1.0"` | Sample ratio of slow query log. |
 | slowQuery.threshold | string | `"30s"` | The threshold of slow query log in seconds. |
 | slowQuery.ttl | string | `"30d"` | The TTL of slow query system table. |
-| tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | Global tracing configuration |
+| tracing | object | `{"enabled":false,"endpoint":"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces","exportProtocol":"http","sampleRatio":"1.0"}` | Global tracing configuration |
 | tracing.enabled | bool | `false` | Enable tracing. |
 | tracing.endpoint | string | `"http://mycluster-monitor-standalone.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
+| tracing.exportProtocol | string | `"http"` | The OTLP tracing export protocol, only support "http" and "grpc". |
 | tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |

@@ -268,6 +268,10 @@ logging:
   logsDir: "/data/greptimedb/logs"
   # -- Whether to log to stdout only. If `true`, it will ignore the `logsDir` options.
   onlyLogToStdout: false
+  # -- The maximum number of log files to retain.
+  maxLogFiles: 720
+  # -- The maximum total size of managed log files. Set to `0B` to disable.
+  maxLogDirSize: "0B"
 
 # -- The tracing configuration for greptimedb
 tracing:
@@ -280,3 +284,6 @@ tracing:
   # -- SampleRatio is the percentage of tracing will be sampled and exported.
   # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
   sampleRatio: "1.0"
+
+  # -- The OTLP tracing export protocol, only support "http" and "grpc".
+  exportProtocol: "http"

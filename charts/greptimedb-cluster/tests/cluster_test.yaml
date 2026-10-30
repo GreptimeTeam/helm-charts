@@ -321,6 +321,8 @@ tests:
         format: json
         logsDir: /var/log/greptimedb
         onlyLogToStdout: true
+        maxLogFiles: 100
+        maxLogDirSize: "1GiB"
     asserts:
       - equal:
           path: spec.logging.level
@@ -334,6 +336,12 @@ tests:
       - equal:
           path: spec.logging.onlyLogToStdout
           value: true
+      - equal:
+          path: spec.logging.maxLogFiles
+          value: 100
+      - equal:
+          path: spec.logging.maxLogDirSize
+          value: "1GiB"
 
   - it: should configure tracing when enabled
     set:
@@ -341,6 +349,7 @@ tests:
         enabled: true
         endpoint: http://jaeger:4317
         sampleRatio: "0.5"
+        exportProtocol: grpc
     asserts:
       - equal:
           path: spec.tracing.enabled
@@ -351,6 +360,9 @@ tests:
       - equal:
           path: spec.tracing.sampleRatio
           value: "0.5"
+      - equal:
+          path: spec.tracing.exportProtocol
+          value: grpc
 
   # A null storageClassName fails the CRD's string type under server-side apply (Helm 4).
   - it: should omit datanode storageClassName when it is not set

@@ -92,10 +92,12 @@ helm uninstall greptimedb-standalone -n default
 | image.registry | string | `"docker.io"` | The image registry |
 | image.repository | string | `"greptime/greptimedb"` | The image repository |
 | image.tag | string | `"v1.3.0"` | The image tag |
-| logging | object | `{"format":"text","level":"info","logsDir":"/data/greptimedb/logs","onlyLogToStdout":false}` | Logging configuration for greptimedb |
+| logging | object | `{"format":"text","level":"info","logsDir":"/data/greptimedb/logs","maxLogDirSize":"0B","maxLogFiles":720,"onlyLogToStdout":false}` | Logging configuration for greptimedb |
 | logging.format | string | `"text"` | The log format for greptimedb, only support "json" and "text" |
 | logging.level | string | `"info"` | The log level for greptimedb, only support "debug", "info", "warn" |
 | logging.logsDir | string | `"/data/greptimedb/logs"` | The logs directory for greptimedb. It will be ignored if `onlyLogToStdout` is `true`. |
+| logging.maxLogDirSize | string | `"0B"` | The maximum total size of managed log files. Set to `0B` to disable. |
+| logging.maxLogFiles | int | `720` | The maximum number of log files to retain. |
 | logging.onlyLogToStdout | bool | `false` | Whether to log to stdout only. If `true`, it will ignore the `logsDir` options. |
 | monitoring.annotations | object | `{}` | PodMonitor annotations |
 | monitoring.enabled | bool | `false` | Enable prometheus podmonitor |
@@ -125,7 +127,8 @@ helm uninstall greptimedb-standalone -n default
 | serviceAccount.name | string | `""` | Service account name |
 | terminationGracePeriodSeconds | int | `30` | Grace period to allow the single binary to shut down before it is killed |
 | tolerations | object | `{}` | Tolerations to apply pod |
-| tracing | object | `{"enabled":false,"endpoint":"http://service.default:4000/v1/otlp/v1/traces","sampleRatio":"1.0"}` | The tracing configuration for greptimedb |
+| tracing | object | `{"enabled":false,"endpoint":"http://service.default:4000/v1/otlp/v1/traces","exportProtocol":"http","sampleRatio":"1.0"}` | The tracing configuration for greptimedb |
 | tracing.enabled | bool | `false` | Enable tracing. |
 | tracing.endpoint | string | `"http://service.default:4000/v1/otlp/v1/traces"` | The OTLP tracing endpoint. |
+| tracing.exportProtocol | string | `"http"` | The OTLP tracing export protocol, only support "http" and "grpc". |
 | tracing.sampleRatio | string | `"1.0"` | SampleRatio is the percentage of tracing will be sampled and exported. Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1. |

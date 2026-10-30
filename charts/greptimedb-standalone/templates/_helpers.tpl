@@ -149,10 +149,13 @@ Create the name of the service account to use
   dir = "{{ .Values.logging.logsDir }}"
   {{- end }}
   {{- end }}
+  max_log_files = {{ .Values.logging.maxLogFiles }}
+  max_log_dir_size = "{{ .Values.logging.maxLogDirSize }}"
   {{- if .Values.tracing.enabled }}
   enable_otlp_tracing = {{ .Values.tracing.enabled }}
   otlp_endpoint = "{{ .Values.tracing.endpoint }}"
   tracing_sample_ratio.default_ratio = {{ .Values.tracing.sampleRatio | float64 }}
+  otlp_export_protocol = "{{ .Values.tracing.exportProtocol }}"
   {{- end }}
 {{- end }}
 {{- end }}
