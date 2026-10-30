@@ -33,7 +33,7 @@ initializer:
   # -- Initializer image repository
   repository: greptime/greptimedb-initializer
   # -- Initializer image tag
-  tag: v0.7.0
+  tag: v1.3.0
 
 base:
   # -- The pod template for base
@@ -299,6 +299,12 @@ frontend:
 #    # -- Whether to log to stdout only
 #    onlyLogToStdout: false
 #
+#    # -- The maximum number of log files to retain.
+#    maxLogFiles: 720
+#
+#    # -- The maximum total size of managed log files. Set to `0B` to disable.
+#    maxLogDirSize: "0B"
+#
 #    # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
 #    persistentWithData: false
 #
@@ -316,6 +322,9 @@ frontend:
     # -- SampleRatio is the percentage of tracing will be sampled and exported.
     # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
     sampleRatio: "1.0"
+
+    # -- The OTLP tracing export protocol, only support "http" and "grpc".
+    exportProtocol: "http"
 
   # -- Whether to enable object storage on frontend.
   enableObjectStorage: false
@@ -528,6 +537,12 @@ meta:
 #    # -- Whether to log to stdout only
 #    onlyLogToStdout: false
 #
+#    # -- The maximum number of log files to retain.
+#    maxLogFiles: 720
+#
+#    # -- The maximum total size of managed log files. Set to `0B` to disable.
+#    maxLogDirSize: "0B"
+#
 #    # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
 #    persistentWithData: false
 #
@@ -545,6 +560,9 @@ meta:
     # -- SampleRatio is the percentage of tracing will be sampled and exported.
     # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
     sampleRatio: "1.0"
+
+    # -- The OTLP tracing export protocol, only support "http" and "grpc".
+    exportProtocol: "http"
 
   # -- Install role based access control
   rbac:
@@ -717,6 +735,12 @@ datanode:
 #    # -- Whether to log to stdout only
 #    onlyLogToStdout: false
 #
+#    # -- The maximum number of log files to retain.
+#    maxLogFiles: 720
+#
+#    # -- The maximum total size of managed log files. Set to `0B` to disable.
+#    maxLogDirSize: "0B"
+#
 #    # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
 #    persistentWithData: false
 #
@@ -734,6 +758,9 @@ datanode:
     # -- SampleRatio is the percentage of tracing will be sampled and exported.
     # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
     sampleRatio: "1.0"
+
+    # -- The OTLP tracing export protocol, only support "http" and "grpc".
+    exportProtocol: "http"
 
 # -- Flownode configure.
 flownode:
@@ -766,6 +793,12 @@ flownode:
 #      # -- Whether to log to stdout only
 #      onlyLogToStdout: false
 #
+#      # -- The maximum number of log files to retain.
+#      maxLogFiles: 720
+#
+#      # -- The maximum total size of managed log files. Set to `0B` to disable.
+#      maxLogDirSize: "0B"
+#
 #      # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
 #      persistentWithData: false
 #
@@ -783,6 +816,9 @@ flownode:
     # -- SampleRatio is the percentage of tracing will be sampled and exported.
     # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
     sampleRatio: "1.0"
+
+    # -- The OTLP tracing export protocol, only support "http" and "grpc".
+    exportProtocol: "http"
 
   # -- The pod template for frontend
   podTemplate:
@@ -1363,6 +1399,12 @@ logging:
   # -- Whether to log to stdout only
   onlyLogToStdout: false
 
+  # -- The maximum number of log files to retain.
+  maxLogFiles: 720
+
+  # -- The maximum total size of managed log files. Set to `0B` to disable.
+  maxLogDirSize: "0B"
+
   # -- indicates whether to persist the log with the datanode data storage. It **ONLY** works for the datanode component.
   persistentWithData: false
 
@@ -1380,6 +1422,9 @@ tracing:
   # -- SampleRatio is the percentage of tracing will be sampled and exported.
   # Valid range `[0, 1]`, 1 means all traces are sampled, 0 means all traces are not sampled, the default value is 1.
   sampleRatio: "1.0"
+
+  # -- The OTLP tracing export protocol, only support "http" and "grpc".
+  exportProtocol: "http"
 
 # -- The slow query log configuration.
 slowQuery:

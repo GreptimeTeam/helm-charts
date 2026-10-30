@@ -203,6 +203,12 @@ spec:
       {{- if .Values.frontend.logging.onlyLogToStdout }}
       onlyLogToStdout: {{ .Values.frontend.logging.onlyLogToStdout }}
       {{- end }}
+      {{- if .Values.frontend.logging.maxLogFiles }}
+      maxLogFiles: {{ .Values.frontend.logging.maxLogFiles }}
+      {{- end }}
+      {{- if .Values.frontend.logging.maxLogDirSize }}
+      maxLogDirSize: {{ .Values.frontend.logging.maxLogDirSize | quote }}
+      {{- end }}
       {{- if .Values.frontend.logging.persistentWithData }}
       persistentWithData: {{ .Values.frontend.logging.persistentWithData }}
       {{- end }}
@@ -215,6 +221,7 @@ spec:
       enabled: true
       endpoint: {{ .Values.frontend.tracing.endpoint }}
       sampleRatio: {{ .Values.frontend.tracing.sampleRatio | quote }}
+      exportProtocol: {{ .Values.frontend.tracing.exportProtocol | quote }}
     {{- end }}
     {{- if .Values.auditLog.enabled}}
     auditLog:
@@ -308,6 +315,12 @@ spec:
       {{- if .Values.meta.logging.onlyLogToStdout }}
       onlyLogToStdout: {{ .Values.meta.logging.onlyLogToStdout }}
       {{- end }}
+      {{- if .Values.meta.logging.maxLogFiles }}
+      maxLogFiles: {{ .Values.meta.logging.maxLogFiles }}
+      {{- end }}
+      {{- if .Values.meta.logging.maxLogDirSize }}
+      maxLogDirSize: {{ .Values.meta.logging.maxLogDirSize | quote }}
+      {{- end }}
       {{- if .Values.meta.logging.persistentWithData }}
       persistentWithData: {{ .Values.meta.logging.persistentWithData }}
       {{- end }}
@@ -320,6 +333,7 @@ spec:
       enabled: true
       endpoint: {{ .Values.meta.tracing.endpoint }}
       sampleRatio: {{ .Values.meta.tracing.sampleRatio | quote }}
+      exportProtocol: {{ .Values.meta.tracing.exportProtocol | quote }}
     {{- end }}
     template:
       main:
@@ -508,6 +522,12 @@ spec:
       {{- if .Values.datanode.logging.onlyLogToStdout }}
       onlyLogToStdout: {{ .Values.datanode.logging.onlyLogToStdout }}
       {{- end }}
+      {{- if .Values.datanode.logging.maxLogFiles }}
+      maxLogFiles: {{ .Values.datanode.logging.maxLogFiles }}
+      {{- end }}
+      {{- if .Values.datanode.logging.maxLogDirSize }}
+      maxLogDirSize: {{ .Values.datanode.logging.maxLogDirSize | quote }}
+      {{- end }}
       {{- if .Values.datanode.logging.persistentWithData }}
       persistentWithData: {{ .Values.datanode.logging.persistentWithData }}
       {{- end }}
@@ -520,6 +540,7 @@ spec:
       enabled: true
       endpoint: {{ .Values.datanode.tracing.endpoint }}
       sampleRatio: {{ .Values.datanode.tracing.sampleRatio | quote }}
+      exportProtocol: {{ .Values.datanode.tracing.exportProtocol | quote }}
     {{- end }}
     storage:
       dataHome: {{ .Values.datanode.storage.dataHome }}
@@ -642,6 +663,12 @@ spec:
       {{- if .Values.flownode.logging.onlyLogToStdout }}
       onlyLogToStdout: {{ .Values.flownode.logging.onlyLogToStdout }}
       {{- end }}
+      {{- if .Values.flownode.logging.maxLogFiles }}
+      maxLogFiles: {{ .Values.flownode.logging.maxLogFiles }}
+      {{- end }}
+      {{- if .Values.flownode.logging.maxLogDirSize }}
+      maxLogDirSize: {{ .Values.flownode.logging.maxLogDirSize | quote }}
+      {{- end }}
       {{- if .Values.flownode.logging.persistentWithData }}
       persistentWithData: {{ .Values.flownode.logging.persistentWithData }}
       {{- end }}
@@ -654,6 +681,7 @@ spec:
       enabled: true
       endpoint: {{ .Values.flownode.tracing.endpoint }}
       sampleRatio: {{ .Values.flownode.tracing.sampleRatio | quote }}
+      exportProtocol: {{ .Values.flownode.tracing.exportProtocol | quote }}
     {{- end }}
   {{- end }}
   {{- if .Values.frontendGroups }}
@@ -779,6 +807,12 @@ spec:
     {{- if .Values.logging.onlyLogToStdout }}
     onlyLogToStdout: {{ .Values.logging.onlyLogToStdout }}
     {{- end }}
+    {{- if .Values.logging.maxLogFiles }}
+    maxLogFiles: {{ .Values.logging.maxLogFiles }}
+    {{- end }}
+    {{- if .Values.logging.maxLogDirSize }}
+    maxLogDirSize: {{ .Values.logging.maxLogDirSize | quote }}
+    {{- end }}
     {{- if .Values.logging.persistentWithData }}
     persistentWithData: {{ .Values.logging.persistentWithData }}
     {{- end }}
@@ -791,4 +825,5 @@ spec:
     enabled: true
     endpoint: {{ .Values.tracing.endpoint }}
     sampleRatio: {{ .Values.tracing.sampleRatio | quote }}
+    exportProtocol: {{ .Values.tracing.exportProtocol | quote }}
   {{- end }}
