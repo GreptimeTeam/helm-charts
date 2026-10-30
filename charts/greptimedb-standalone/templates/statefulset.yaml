@@ -75,6 +75,8 @@ spec:
             - "start"
             - "--http-addr"
             - "0.0.0.0:{{ .Values.httpServicePort }}"
+            - "--http-api-server-addr"
+            - "0.0.0.0:{{ .Values.httpApiServerPort }}"
             - "--rpc-bind-addr"
             - "0.0.0.0:{{ .Values.grpcServicePort }}"
             - "--mysql-addr"
