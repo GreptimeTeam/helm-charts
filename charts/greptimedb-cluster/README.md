@@ -2,7 +2,7 @@
 
 A Helm chart for deploying GreptimeDB cluster in Kubernetes.
 
-![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.0](https://img.shields.io/badge/AppVersion-1.3.0-informational?style=flat-square)
+![Version: 1.3.1](https://img.shields.io/badge/Version-1.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.0](https://img.shields.io/badge/AppVersion-1.3.0-informational?style=flat-square)
 
 ## Source Code
 
@@ -17,12 +17,12 @@ should be `>= 1.3.0`.
 Each row in the following matrix represents a version combination, indicating the required `greptimedb-operator` chart version when installing `greptimedb-cluster` chart.
 
 | `greptimedb-cluster` Chart Version | `greptimedb-operator` Chart Version |
-|------------------------------------|------------------------------------------------------------------------|
-| < `0.4.0`                          | < `0.3.0` with GreptimeDB Operator Tag < `v0.3.0`                      |
-| ≥ `0.4.0`, < `0.6.38`              | ≥ `0.3.0`, < `0.5.3` with GreptimeDB Operator Tag ≥ `v0.3.0`, < v0.5.2 |
-| ≥ `0.6.38`, < `0.9.0`              | ≥ `0.5.3`, < `0.7.0` with GreptimeDB Operator Tag ≥ `v0.5.2`, < v0.7.0 |
-| ≥ `0.9.0`, < `1.3.0`               | ≥ `0.7.0`, < `1.3.0` with GreptimeDB Operator Tag ≥ `v0.7.0`, < v1.3.0 |
-| ≥ `1.3.0`                          | ≥ `1.3.0` with GreptimeDB Operator Tag ≥ `v1.3.0`                      |
+|------------------------------------|--------------------------------------------------------------------------|
+| < `0.4.0`                          | < `0.3.0` with GreptimeDB Operator Tag < `v0.3.0`                        |
+| ≥ `0.4.0`, < `0.6.38`              | ≥ `0.3.0`, < `0.5.3` with GreptimeDB Operator Tag ≥ `v0.3.0`, < `v0.5.2` |
+| ≥ `0.6.38`, < `0.9.0`              | ≥ `0.5.3`, < `0.7.0` with GreptimeDB Operator Tag ≥ `v0.5.2`, < `v0.7.0` |
+| ≥ `0.9.0`, < `1.3.0`               | ≥ `0.7.0`, < `1.3.0` with GreptimeDB Operator Tag ≥ `v0.7.0`, < `v1.3.0` |
+| ≥ `1.3.0`                          | ≥ `1.3.0` with GreptimeDB Operator Tag ≥ `v1.3.0`                        |
 
 ## How to install
 
