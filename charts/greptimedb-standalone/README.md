@@ -119,6 +119,14 @@ helm uninstall greptimedb-standalone -n default
 | podSecurityContext | object | `{}` | Security context to apply to the pod |
 | postgresServicePort | int | `4003` | GreptimeDB postgres service port |
 | resources | object | `{}` | Resource requests and limits for the container |
+| schemaInit | object | `{"database":"public","enabled":false,"image":"curlimages/curl:8.11.1","password":"demosession","sql":"","timeoutSeconds":60,"username":"greptime"}` | Optional best-effort schema initialization for demo deployments. |
+| schemaInit.database | string | `"public"` | Database used by the schema init hook. |
+| schemaInit.enabled | bool | `false` | Enable schema initialization from the main container's postStart hook. The hook starts with the GreptimeDB process, retries until the HTTP SQL API is ready, and runs asynchronously so it does not delay Pod readiness. |
+| schemaInit.image | string | `"curlimages/curl:8.11.1"` | Image containing curl. Reserved for a future Job-based initializer; the postStart hook runs inside the GreptimeDB container, which already bundles curl. |
+| schemaInit.password | string | `"demosession"` | Basic auth password used by the schema init hook. This is a public demo credential, so it is stored in values rather than a Secret. |
+| schemaInit.sql | string | `""` | SQL executed by the schema init hook. Leave empty to disable even when `enabled` is true. Statements must be idempotent (for example, `CREATE TABLE IF NOT EXISTS`) because the hook runs again on container restart. The live schema SQL is supplied by the deployment values, not this chart default. |
+| schemaInit.timeoutSeconds | int | `60` | Maximum number of seconds to keep retrying the HTTP SQL request. |
+| schemaInit.username | string | `"greptime"` | Basic auth username used by the schema init hook. |
 | securityContext | object | `{}` | Security context to apply to the container |
 | service.annotations | object | `{}` | Annotations for service |
 | service.type | string | `"ClusterIP"` | Service type |

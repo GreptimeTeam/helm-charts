@@ -106,7 +106,7 @@ spec:
             - containerPort: {{ .Values.postgresServicePort }}
               name: postgres
               protocol: TCP
-          {{- if or .Values.env .Values.auth.enabled }}
+          {{- if or .Values.env .Values.auth.enabled (and .Values.schemaInit.enabled .Values.schemaInit.sql) }}
           env:
             {{- range $key, $val := .Values.env }}
             - name: {{ $key }}
@@ -115,6 +115,20 @@ spec:
             {{- if .Values.auth.enabled }}
             - name: GREPTIMEDB_STANDALONE__USER_PROVIDER
               value: '{{ ternary "greptime_ee_user_provider" "static_user_provider:file" .Values.auth.useBuiltIn }}:{{ .Values.auth.mountPath }}/{{ .Values.auth.fileName }}'
+            {{- end }}
+            {{- if and .Values.schemaInit.enabled .Values.schemaInit.sql }}
+            - name: SCHEMA_INIT_USERNAME
+              value: {{ .Values.schemaInit.username | quote }}
+            - name: SCHEMA_INIT_PASSWORD
+              value: {{ .Values.schemaInit.password | quote }}
+            - name: SCHEMA_INIT_DATABASE
+              value: {{ .Values.schemaInit.database | quote }}
+            - name: SCHEMA_INIT_TIMEOUT_SECONDS
+              value: {{ .Values.schemaInit.timeoutSeconds | quote }}
+            - name: SCHEMA_INIT_PORT
+              value: {{ .Values.httpServicePort | quote }}
+            - name: SCHEMA_INIT_SQL
+              value: {{ .Values.schemaInit.sql | quote }}
             {{- end }}
           {{- end }}
           {{- if .Values.objectStorage }}
@@ -148,6 +162,32 @@ spec:
             {{- with .Values.extraVolumeMounts }}
                 {{- toYaml . | nindent 12 }}
             {{- end }}
+          {{- if and .Values.schemaInit.enabled .Values.schemaInit.sql }}
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - |
+                    set -eu
+                    deadline=$(( $(date +%s) + ${SCHEMA_INIT_TIMEOUT_SECONDS:-60} ))
+                    attempt=0
+                    while [ "$(date +%s)" -lt "$deadline" ]; do
+                      attempt=$((attempt + 1))
+                      if curl -fsS --connect-timeout 2 --max-time 5 \
+                        -u "$SCHEMA_INIT_USERNAME:$SCHEMA_INIT_PASSWORD" \
+                        -H 'Content-Type: application/x-www-form-urlencoded' \
+                        --data-urlencode "sql=$SCHEMA_INIT_SQL" \
+                        "http://127.0.0.1:${SCHEMA_INIT_PORT}/v1/sql?db=${SCHEMA_INIT_DATABASE}" \
+                        >/dev/null 2>&1; then
+                        exit 0
+                      fi
+                      sleep 1
+                    done
+                    echo "schema init failed after ${attempt} attempt(s)" >&2
+                    exit 1
+          {{- end }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}

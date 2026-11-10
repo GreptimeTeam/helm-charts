@@ -312,3 +312,98 @@ tests:
           path: spec.template.spec.serviceAccountName
           value: custom-sa
         template: statefulset.yaml
+
+  - it: should not render schema init by default
+    asserts:
+      - notExists:
+          path: spec.template.spec.containers[0].lifecycle
+        template: statefulset.yaml
+      - notExists:
+          path: spec.template.spec.containers[0].env
+        template: statefulset.yaml
+
+  - it: should render schema init postStart hook and env when enabled
+    set:
+      schemaInit:
+        enabled: true
+        username: greptime
+        password: demosession
+        database: public
+        timeoutSeconds: 30
+        sql: "CREATE TABLE IF NOT EXISTS demo (ts TIMESTAMP TIME INDEX);"
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].lifecycle.postStart.exec.command[0]
+          value: /bin/sh
+        template: statefulset.yaml
+      - equal:
+          path: spec.template.spec.containers[0].lifecycle.postStart.exec.command[1]
+          value: -c
+        template: statefulset.yaml
+      - matchRegex:
+          path: spec.template.spec.containers[0].lifecycle.postStart.exec.command[2]
+          pattern: "SCHEMA_INIT_SQL"
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SCHEMA_INIT_USERNAME
+            value: greptime
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SCHEMA_INIT_PASSWORD
+            value: demosession
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SCHEMA_INIT_DATABASE
+            value: public
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SCHEMA_INIT_TIMEOUT_SECONDS
+            value: "30"
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SCHEMA_INIT_PORT
+            value: "4000"
+        template: statefulset.yaml
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SCHEMA_INIT_SQL
+            value: "CREATE TABLE IF NOT EXISTS demo (ts TIMESTAMP TIME INDEX);"
+        template: statefulset.yaml
+
+  - it: should use the configured http port for schema init
+    set:
+      httpServicePort: 4400
+      schemaInit:
+        enabled: true
+        sql: "SELECT 1;"
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SCHEMA_INIT_PORT
+            value: "4400"
+        template: statefulset.yaml
+
+  - it: should not render schema init when enabled without sql
+    set:
+      schemaInit:
+        enabled: true
+        sql: ""
+    asserts:
+      - notExists:
+          path: spec.template.spec.containers[0].lifecycle
+        template: statefulset.yaml
+      - notExists:
+          path: spec.template.spec.containers[0].env
+        template: statefulset.yaml

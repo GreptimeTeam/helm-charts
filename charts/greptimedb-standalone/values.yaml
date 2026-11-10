@@ -35,6 +35,30 @@ command: []
 # -- The container args
 args: []
 
+# -- Optional best-effort schema initialization for demo deployments.
+schemaInit:
+  # -- Enable schema initialization from the main container's postStart hook. The
+  # hook starts with the GreptimeDB process, retries until the HTTP SQL API is
+  # ready, and runs asynchronously so it does not delay Pod readiness.
+  enabled: false
+  # -- Image containing curl. Reserved for a future Job-based initializer; the
+  # postStart hook runs inside the GreptimeDB container, which already bundles curl.
+  image: curlimages/curl:8.11.1
+  # -- Basic auth username used by the schema init hook.
+  username: greptime
+  # -- Basic auth password used by the schema init hook. This is a public demo
+  # credential, so it is stored in values rather than a Secret.
+  password: demosession
+  # -- Database used by the schema init hook.
+  database: public
+  # -- Maximum number of seconds to keep retrying the HTTP SQL request.
+  timeoutSeconds: 60
+  # -- SQL executed by the schema init hook. Leave empty to disable even when
+  # `enabled` is true. Statements must be idempotent (for example,
+  # `CREATE TABLE IF NOT EXISTS`) because the hook runs again on container restart.
+  # The live schema SQL is supplied by the deployment values, not this chart default.
+  sql: ""
+
 # -- Enable hostNetwork for the pod
 hostNetwork: false
 
